@@ -4,6 +4,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const user_route_1 = require("./apis/user/route/user.route");
 const test_route_1 = require("./apis/test/route/test.route");
+const register_route_1 = require("./apis/register/route/register.route");
+const login_route_1 = require("./apis/login/route/login.route");
 class Server {
     constructor() {
         /** express 설정을 위한 express 선언 */
@@ -13,6 +15,8 @@ class Server {
         /** 라우터 추가 */
         this.app.use(user_route_1.userRoutes.userRouter);
         this.app.use(test_route_1.testRoutes.testRouter);
+        this.app.use(register_route_1.registerRoutes.registerRouter);
+        this.app.use(login_route_1.loginRoutes.loginRouter);
         /** Not Found */
         this.app.use((req, res, next) => {
             /**

@@ -2,6 +2,8 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import { userRoutes } from './apis/user/route/user.route';
 import { testRoutes } from './apis/test/route/test.route';
+import {registerRoutes} from "./apis/register/route/register.route";
+import {loginRoutes} from "./apis/login/route/login.route";
 
 export class Server {
 	/** app 에 대한 타입 설정 */
@@ -14,6 +16,8 @@ export class Server {
 		/** 라우터 추가 */
 		this.app.use(userRoutes.userRouter);
 		this.app.use(testRoutes.testRouter);
+		this.app.use(registerRoutes.registerRouter);
+		this.app.use(loginRoutes.loginRouter);
 		/** Not Found */
 		this.app.use((req: express.Request, res: express.Response, next: Function) => {
 			/**
