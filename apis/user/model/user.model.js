@@ -8,13 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const mysql = require("mysql");
-const conn = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'ajs141749',
-    database: 'h6'
-});
+const mysql_resource_1 = require("../../../resource/mysql.resource");
+const conn = mysql_resource_1.mysqlResource.conn;
 conn.connect();
 class User {
     constructor() {
