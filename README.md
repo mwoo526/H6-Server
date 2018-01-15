@@ -1,6 +1,6 @@
-#H6-server
+# H6-server
 
-##install
+## install
 * git clone https://github.com/kingdom0608/H6-server
 * npm install -g typescript
 * npm install
