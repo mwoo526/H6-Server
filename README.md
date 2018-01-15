@@ -1,3 +1,8 @@
-H6-server
+#H6-server
 
-테스트 중입니다.
+##install
+* git clone https://github.com/kingdom0608/H6-server
+* npm install -g typescript
+* npm install
+* tsc --p tsconfig.json
+* sudo node server
