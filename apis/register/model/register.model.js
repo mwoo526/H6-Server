@@ -22,14 +22,14 @@ class Register {
      * @param userData
      * @returns {Promise<any>}
      */
-    createUser(userData) {
+    createRegister(registerVO) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`INSERT INTO users SET ?`, [userData], function (err) {
+            yield conn.query(`INSERT INTO users SET ?`, [registerVO], function (err) {
                 if (err) {
                     reject(err);
                 }
                 else {
-                    resolve(userData);
+                    resolve(registerVO);
                 }
             });
         }));

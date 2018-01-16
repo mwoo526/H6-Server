@@ -17,7 +17,7 @@ class RegisterRoutes {
         this.router();
     }
     router() {
-        this.registerRouter.post('/register', createUser);
+        this.registerRouter.post('/register', createRegister);
     }
 }
 exports.RegisterRoutes = RegisterRoutes;
@@ -27,11 +27,11 @@ exports.RegisterRoutes = RegisterRoutes;
  * @param res
  * @returns {Promise<void>}
  */
-function createUser(req, res) {
+function createRegister(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        let userData = new register_vo_1.RegisterVo(req.body);
+        let registerVO = new register_vo_1.RegisterVO(req.body);
         try {
-            const result = yield register_model_1.register.createUser(userData.createRegister());
+            const result = yield register_model_1.register.createRegister(registerVO.getRegister());
             res.send(result);
         }
         catch (err) {

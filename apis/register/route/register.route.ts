@@ -1,6 +1,6 @@
 import * as express from 'express';
 import {register} from '..//model/register.model';
-import {RegisterVo} from "../vo/register.vo";
+import {RegisterVO} from "../vo/register.vo";
 
 export class RegisterRoutes {
     public registerRouter: express.Router = express.Router();
@@ -10,7 +10,7 @@ export class RegisterRoutes {
     }
 
     public router() {
-        this.registerRouter.post('/register', createUser);
+        this.registerRouter.post('/register', createRegister);
     }
 }
 
@@ -20,10 +20,10 @@ export class RegisterRoutes {
  * @param res
  * @returns {Promise<void>}
  */
-async function createUser(req, res): Promise<void> {
-    let userData = new RegisterVo(req.body);
+async function createRegister(req, res): Promise<void> {
+    let registerVO = new RegisterVO(req.body);
     try {
-        const result: any = await register.createUser(userData.createRegister());
+        const result: any = await register.createRegister(registerVO.getRegister());
         res.send(result);
     } catch (err) {
         res.send(err.message);

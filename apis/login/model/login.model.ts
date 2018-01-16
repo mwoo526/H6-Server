@@ -24,6 +24,7 @@ class Login{
                     let err={
                         message:'not exist ID'
                     }
+                    
                     if(rows.length===0){
                         reject(err);
                     }else{
@@ -34,7 +35,6 @@ class Login{
                             reject(err);
                         }
                     }
-
 
                 }
             })

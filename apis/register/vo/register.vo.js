@@ -1,30 +1,96 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const pwdhash_1 = require("../../encription/pwdhash");
-class RegisterVo {
+class RegisterVO {
     constructor(registerData) {
-        this.userId = registerData.userId;
-        this.userPw = pwdhash_1.pwdhash.getHash(registerData.userPw);
-        this.userNickName = registerData.userNickName;
-        this.major = registerData.major;
-        this.minor = registerData.minor;
-        this.doubleMajor = registerData.doubleMajor;
-        this.connectedMajor = registerData.connectedMajor;
-        this.admissionYear = registerData.admissionYear;
+        this.setUserId(registerData.userId);
+        this.setUserPw(registerData.userPw);
+        this.setUserNickName(registerData.userNickName);
+        this.setMajor(registerData.major);
+        this.setMinor(registerData.minor);
+        this.setDoubleMajor(registerData.doubleMajor);
+        this.setConnectedMajor(registerData.connectedMajor);
+        this.setAdmissionYear(registerData.admissionYear);
     }
-    createRegister() {
+    getUserIndex() {
+        return this.userIndex;
+    }
+    setUserIndex(index) {
+        this.userIndex = index;
+    }
+    getUserId() {
+        return this.userId;
+    }
+    setUserId(id) {
+        this.userId = id;
+    }
+    getUserPw() {
+        return this.userPw;
+    }
+    setUserPw(pw) {
+        this.userPw = pwdhash_1.pwdhash.getHash(pw);
+    }
+    getUserNickName() {
+        return this.userNickName;
+    }
+    setUserNickName(nickname) {
+        this.userNickName = nickname;
+    }
+    getMajor() {
+        return this.major;
+    }
+    setMajor(major) {
+        this.major = major;
+    }
+    getMinor() {
+        return this.minor;
+    }
+    setMinor(minor) {
+        this.minor = minor;
+    }
+    getDoubleMajor() {
+        return this.doubleMajor;
+    }
+    setDoubleMajor(doublemajor) {
+        this.doubleMajor = doublemajor;
+    }
+    getConnectedMajor() {
+        return this.connectedMajor;
+    }
+    setConnectedMajor(connectedmajor) {
+        this.connectedMajor = connectedmajor;
+    }
+    getAdmissionYaer() {
+        return this.admissionYear;
+    }
+    setAdmissionYear(adyear) {
+        this.admissionYear = adyear;
+    }
+    getCreateAt() {
+        return this.createdAt;
+    }
+    setCreateAt(createat) {
+        this.createdAt = createat;
+    }
+    getUpdatedAt() {
+        return this.updatedAt;
+    }
+    setUpdatedAt(updateat) {
+        this.updatedAt = updateat;
+    }
+    getRegister() {
         let obj = {
-            userId: this.userId,
-            userPw: this.userPw,
-            userNickName: this.userNickName,
-            major: this.major,
-            minor: this.minor,
-            doubleMajor: this.doubleMajor,
-            connectedMajor: this.connectedMajor,
-            admissionYear: this.admissionYear
+            userId: this.getUserId(),
+            userPw: this.getUserPw(),
+            userNickName: this.getUserNickName(),
+            major: this.getMajor(),
+            minor: this.getMinor(),
+            doubleMajor: this.getDoubleMajor(),
+            connectedMajor: this.getConnectedMajor(),
+            admissionYear: this.getAdmissionYaer()
         };
         return obj;
     }
 }
-exports.RegisterVo = RegisterVo;
+exports.RegisterVO = RegisterVO;
 //# sourceMappingURL=register.vo.js.map

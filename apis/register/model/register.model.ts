@@ -14,13 +14,13 @@ class Register{
      * @param userData
      * @returns {Promise<any>}
      */
-    createUser(userData: any): Promise<any> {
+    createRegister(registerVO: any): Promise<any> {
         return new Promise(async (resolve, reject) => {
-            await conn.query(`INSERT INTO users SET ?`, [userData], function (err) {
+            await conn.query(`INSERT INTO users SET ?`, [registerVO], function (err) {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(userData);
+                    resolve(registerVO);
                 }
             })
         })
