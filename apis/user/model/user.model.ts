@@ -2,7 +2,6 @@ import { mysqlResource } from '../../../resource/mysql.resource';
 
 
 const conn = mysqlResource.conn;
-conn.connect();
 
 export class User {
 	constructor() {

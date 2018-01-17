@@ -4,7 +4,7 @@ export module mysqlResource {
 	export const conn = mysql.createConnection({
 		host     : 'localhost',
 		user     : 'root',
-		password : 'ajs141749',
+		password : '',
 		database : 'h6'
 	});
 }
