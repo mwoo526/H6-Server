@@ -2,18 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="695aa6aa-38dc-41c7-9512-080b99b82e9f" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resource/mysql.resource.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resource/mysql.resource.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resource/mysql.resource.ts" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/README.md" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apis/login/model/login.model.js.map" afterPath="$PROJECT_DIR$/apis/login/model/login.model.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apis/login/model/login.model.ts" afterPath="$PROJECT_DIR$/apis/login/model/login.model.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apis/register/model/register.model.js" afterPath="$PROJECT_DIR$/apis/register/model/register.model.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apis/register/model/register.model.js.map" afterPath="$PROJECT_DIR$/apis/register/model/register.model.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apis/register/model/register.model.ts" afterPath="$PROJECT_DIR$/apis/register/model/register.model.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apis/register/route/register.route.js" afterPath="$PROJECT_DIR$/apis/register/route/register.route.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apis/register/route/register.route.js.map" afterPath="$PROJECT_DIR$/apis/register/route/register.route.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apis/register/route/register.route.ts" afterPath="$PROJECT_DIR$/apis/register/route/register.route.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apis/register/vo/register.vo.js" afterPath="$PROJECT_DIR$/apis/register/vo/register.vo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apis/register/vo/register.vo.js.map" afterPath="$PROJECT_DIR$/apis/register/vo/register.vo.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apis/register/vo/register.vo.ts" afterPath="$PROJECT_DIR$/apis/register/vo/register.vo.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apis/user/model/user.model.js" afterPath="$PROJECT_DIR$/apis/user/model/user.model.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apis/user/model/user.model.js.map" afterPath="$PROJECT_DIR$/apis/user/model/user.model.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apis/user/model/user.model.ts" afterPath="$PROJECT_DIR$/apis/user/model/user.model.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -30,19 +26,41 @@
       <file leaf-file-name="user.model.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apis/user/model/user.model.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="7" column="3" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
+            <state relative-caret-position="-1109">
+              <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pwdhash.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apis/encription/pwdhash.ts">
+      <file leaf-file-name="mysql.resource.ts" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resource/mysql.resource.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <state relative-caret-position="19">
+              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="9" column="36" lean-forward="true" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -50,8 +68,8 @@
       <file leaf-file-name="register.vo.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apis/register/vo/register.vo.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-304">
-              <caret line="5" column="19" lean-forward="false" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+            <state relative-caret-position="225">
+              <caret line="15" column="11" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -60,7 +78,7 @@
       <file leaf-file-name="register.route.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apis/register/route/register.route.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
+            <state relative-caret-position="380">
               <caret line="22" column="53" lean-forward="false" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="53" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
@@ -82,7 +100,7 @@
       <file leaf-file-name="login.route.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apis/login/route/login.route.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
+            <state relative-caret-position="418">
               <caret line="23" column="60" lean-forward="false" selection-start-line="23" selection-start-column="60" selection-end-line="23" selection-end-column="60" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
@@ -101,34 +119,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.model.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="login.model.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apis/login/model/login.model.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
+            <state relative-caret-position="475">
               <caret line="26" column="20" lean-forward="false" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -196,10 +194,11 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="941" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="861" />
+    <option name="y" value="24" />
     <option name="width" value="985" />
-    <option name="height" value="886" />
+    <option name="height" value="836" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -227,50 +226,14 @@
             <path>
               <item name="Handam" type="b2602c69:ProjectViewProjectNode" />
               <item name="Handam" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Handam" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Handam" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="login" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Handam" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Handam" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="login" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Handam" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Handam" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="login" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="login.model.ts" type="620a8d5e:NestingTreeNode" />
-            </path>
-            <path>
-              <item name="Handam" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Handam" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="login" type="462c0819:PsiDirectoryNode" />
-              <item name="route" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Handam" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Handam" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="login" type="462c0819:PsiDirectoryNode" />
-              <item name="route" type="462c0819:PsiDirectoryNode" />
-              <item name="login.route.ts" type="620a8d5e:NestingTreeNode" />
+              <item name="resource" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -279,7 +242,7 @@
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="nodejs_interpreter_path" value="D:/nodejs/node" />
+    <property name="nodejs_interpreter_path" value="node" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -339,18 +302,21 @@
       <workItem from="1515741578286" duration="79000" />
       <workItem from="1516014658179" duration="729000" />
       <workItem from="1516087054455" duration="2205000" />
+      <workItem from="1516100423497" duration="593000" />
+      <workItem from="1516157845685" duration="56000" />
+      <workItem from="1516181794233" duration="326000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94372000" />
+    <option name="totallyTimeSpent" value="95347000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="941" y="0" width="985" height="886" extended-state="0" />
+    <frame x="861" y="24" width="985" height="836" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23116615" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23013416" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -365,7 +331,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16343284" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -401,14 +367,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/apis/test/model/test.model.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="30" column="28" lean-forward="true" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.js" />
     <entry file="file://$PROJECT_DIR$/server.ts" />
     <entry file="file://$PROJECT_DIR$/package.json">
@@ -427,15 +385,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="665">
           <caret line="35" column="74" lean-forward="true" selection-start-line="35" selection-start-column="74" selection-end-line="35" selection-end-column="74" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-            <marker date="1516014885250" expanded="true" signature="746:1395" ph="{...}" />
-            <marker date="1516014885250" expanded="true" signature="749:765" ph="/**...*/" />
-            <marker date="1516014885250" expanded="true" signature="846:1003" ph="{...}" />
-            <marker date="1516014885250" expanded="true" signature="851:920" ph="/**  Error 이라는 정의가 있지만 Error 에는 status 라는 정의가 없어서 any 설정 ...*/" />
-            <marker date="1516014885250" expanded="true" signature="1008:1020" ph="/**...*/" />
-            <marker date="1516014885250" expanded="true" signature="1095:1390" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -451,15 +400,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="589">
           <caret line="32" column="42" lean-forward="false" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-            <marker date="1516014885250" expanded="true" signature="746:1395" ph="{...}" />
-            <marker date="1516014885250" expanded="true" signature="749:765" ph="/**...*/" />
-            <marker date="1516014885250" expanded="true" signature="846:1003" ph="{...}" />
-            <marker date="1516014885250" expanded="true" signature="851:920" ph="/**  Error 이라는 정의가 있지만 Error 에는 status 라는 정의가 없어서 any 설정 ...*/" />
-            <marker date="1516014885250" expanded="true" signature="1008:1020" ph="/**...*/" />
-            <marker date="1516014885250" expanded="true" signature="1095:1390" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -483,15 +423,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="874">
           <caret line="46" column="22" lean-forward="false" selection-start-line="46" selection-start-column="22" selection-end-line="46" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-            <marker date="1516014885250" expanded="true" signature="746:1395" ph="{...}" />
-            <marker date="1516014885250" expanded="true" signature="749:765" ph="/**...*/" />
-            <marker date="1516014885250" expanded="true" signature="846:1003" ph="{...}" />
-            <marker date="1516014885250" expanded="true" signature="851:920" ph="/**  Error 이라는 정의가 있지만 Error 에는 status 라는 정의가 없어서 any 설정 ...*/" />
-            <marker date="1516014885250" expanded="true" signature="1008:1020" ph="/**...*/" />
-            <marker date="1516014885250" expanded="true" signature="1095:1390" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -521,12 +452,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js" />
     <entry file="file://$PROJECT_DIR$/apis/test/model/test.model.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="798">
           <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -543,9 +472,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#35#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -557,37 +483,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-            <marker date="1516014885250" expanded="true" signature="746:1395" ph="{...}" />
-            <marker date="1516014885250" expanded="true" signature="749:765" ph="/**...*/" />
-            <marker date="1516014885250" expanded="true" signature="846:1003" ph="{...}" />
-            <marker date="1516014885250" expanded="true" signature="851:920" ph="/**  Error 이라는 정의가 있지만 Error 에는 status 라는 정의가 없어서 any 설정 ...*/" />
-            <marker date="1516014885250" expanded="true" signature="1008:1020" ph="/**...*/" />
-            <marker date="1516014885250" expanded="true" signature="1095:1390" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apis/test/route/test.route.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="50" column="16" lean-forward="false" selection-start-line="50" selection-start-column="16" selection-end-line="50" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#35#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apis/user/model/user.model.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="3" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -607,17 +506,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apis/register/vo/register.vo.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-304">
-          <caret line="5" column="19" lean-forward="false" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apis/login/route/login.route.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
+        <state relative-caret-position="418">
           <caret line="23" column="60" lean-forward="false" selection-start-line="23" selection-start-column="60" selection-end-line="23" selection-end-column="60" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
@@ -635,7 +526,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apis/register/route/register.route.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
+        <state relative-caret-position="380">
           <caret line="22" column="53" lean-forward="false" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="53" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
@@ -645,11 +536,53 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apis/login/model/login.model.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
+        <state relative-caret-position="475">
           <caret line="26" column="20" lean-forward="false" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
           <folding>
             <element signature="e#0#30#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apis/register/vo/register.vo.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="11" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="36" lean-forward="true" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apis/user/model/user.model.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1109">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resource/mysql.resource.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
