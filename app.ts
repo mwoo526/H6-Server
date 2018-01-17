@@ -4,6 +4,8 @@ import { userRoutes } from './apis/user/route/user.route';
 import { testRoutes } from './apis/test/route/test.route';
 import {registerRoutes} from "./apis/register/route/register.route";
 import {loginRoutes} from "./apis/login/route/login.route";
+import {mysqlResource} from "./resource/mysql.resource";
+
 
 export class Server {
 	/** app 에 대한 타입 설정 */
@@ -14,6 +16,8 @@ export class Server {
 		/** bodyParser 선언 */
 		this.app.use(bodyParser.urlencoded({ extended: false }));
 		/** 라우터 추가 */
+        const conn = mysqlResource.conn;
+        conn.connect();
 		this.app.use(userRoutes.userRouter);
 		this.app.use(testRoutes.testRouter);
 		this.app.use(registerRoutes.registerRouter);

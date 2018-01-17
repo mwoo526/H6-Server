@@ -1,13 +1,9 @@
-import * as mysql from 'mysql'
-import {pwdhash} from "../../encription/pwdhash";
 
-const conn = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : '1234',
-    database : 'h6'
-});
-conn.connect();
+import {pwdhash} from "../../encription/pwdhash";
+import { mysqlResource } from '../../../resource/mysql.resource';
+
+
+const conn = mysqlResource.conn;
 
 class Login{
     /**
