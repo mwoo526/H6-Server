@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const mysql_resource_1 = require("../../../resource/mysql.resource");
 const conn = mysql_resource_1.mysqlResource.conn;
-conn.connect();
 class User {
     constructor() {
     }
@@ -52,9 +51,9 @@ class User {
      * @param {number} studentId
      * @returns {Promise<any>}
      */
-    getUser(studentId) {
+    getUser(userId) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`SELECT * FROM users WHERE studentId=?`, [studentId], function (err, rows) {
+            yield conn.query(`SELECT * FROM users WHERE userId=?`, [userId], function (err, rows) {
                 if (err) {
                     reject(err);
                 }
@@ -70,9 +69,9 @@ class User {
      * @param userData
      * @returns {Promise<any>}
      */
-    updateUser(studentId, userData) {
+    updateUser(userId, userData) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`UPDATE users SET name='${userData.name}' WHERE studentId=${studentId}`, function (err) {
+            yield conn.query(`UPDATE users SET ? WHERE userId=${userId}`, userData, function (err) {
                 if (err) {
                     reject(err);
                 }
@@ -87,9 +86,9 @@ class User {
      * @param {number} studentId
      * @returns {Promise<any>}
      */
-    deleteUser(studentId) {
+    deleteUser(userId) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`DELETE FROM users WHERE studentId=${studentId}`, function (err, rows) {
+            yield conn.query(`DELETE FROM users WHERE userId=${userId}`, function (err, rows) {
                 if (err) {
                     reject(err);
                 }

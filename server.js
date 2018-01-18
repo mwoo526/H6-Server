@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = require("./app");
-/* 따로 설정하지 않았으면 3000 port를 사용한다. */
 const port = 80;
 const app = new app_1.Server().app;
 app.set('port', port);

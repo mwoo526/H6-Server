@@ -2,8 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const bodyParser = require("body-parser");
-const user_route_1 = require("./apis/user/route/user.route");
+const signIn_route_1 = require("./apis/sign/route/signIn.route");
+const signUp_route_1 = require("./apis/sign/route/signUp.route");
 const test_route_1 = require("./apis/test/route/test.route");
+const user_route_1 = require("./apis/user/route/user.route");
 class Server {
     constructor() {
         /** express 설정을 위한 express 선언 */
@@ -11,8 +13,10 @@ class Server {
         /** bodyParser 선언 */
         this.app.use(bodyParser.urlencoded({ extended: false }));
         /** 라우터 추가 */
-        this.app.use(user_route_1.userRoutes.userRouter);
         this.app.use(test_route_1.testRoutes.testRouter);
+        this.app.use(user_route_1.userRoutes.userRouter);
+        this.app.use(signUp_route_1.signUpRoutes.signUpRouter);
+        this.app.use(signIn_route_1.signInRoutes.signInRouter);
         /** Not Found */
         this.app.use((req, res, next) => {
             /**
