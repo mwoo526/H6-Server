@@ -1,4 +1,5 @@
 import * as express from 'express';
+import { UserResource } from '../../../resource/user.resource';
 import { user } from '../model/user.model';
 
 export class UserRoutes {
@@ -11,23 +12,20 @@ export class UserRoutes {
 	public router() {
 		this.userRouter.post('/users', createUser);
 		this.userRouter.get('/users', listUser);
-		this.userRouter.get('/users/:studentId', getUser);
-		this.userRouter.put('/users/:studentId', updateUser);
-		this.userRouter.delete('/users/:studentId', deleteUser);
+		this.userRouter.get('/users/:userId', getUser);
+		this.userRouter.put('/users/:userId', updateUser);
+		this.userRouter.delete('/users/:userId', deleteUser);
 	}
 }
 
 /**
- * 라우트: user 생성
+ * route: user 생성
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
 async function createUser(req, res): Promise<void> {
-	let userData = {
-		studentId: req.body.studentId,
-		name: req.body.name
-	};
+	const userData: any = new UserResource(req.body);
 	try {
 		const result: any = await user.createUser(userData);
 		res.send(result);
@@ -37,7 +35,7 @@ async function createUser(req, res): Promise<void> {
 }
 
 /**
- * 라우트: user 리스트 조회
+ * route: user 리스트 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
@@ -52,15 +50,15 @@ async function listUser(req, res): Promise<void> {
 }
 
 /**
- * 라우트: user studentId 조회
+ * route: user studentId 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
 async function getUser(req, res): Promise<void> {
-	let studentId: number = req.params.studentId;
+	let userId: string = req.params.userId;
 	try {
-		const result: any = await user.getUser(studentId);
+		const result: any = await user.getUser(userId);
 		res.send(result);
 	} catch (err) {
 		res.send(err.message);
@@ -68,18 +66,23 @@ async function getUser(req, res): Promise<void> {
 }
 
 /**
- * 라우트: user 업데이트
+ * route: user 업데이트
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
 async function updateUser(req, res): Promise<void> {
-	let studentId: number = req.params.studentId;
+	let userId: string = req.params.userId;
 	let userData = {
-		name: req.body.name
+		userNickName: req.body.userNickName,
+		major: req.body.major,
+		minor: req.body.minor,
+		doubleMajor: req.body.doubleMajor,
+		connectedMajor: req.body.connectedMajor,
+		admissionYear: req.body.admissionYear
 	};
 	try {
-		const result: any = await user.updateUser(studentId, userData);
+		const result: any = await user.updateUser(userId, userData);
 		res.send(result);
 	} catch (err) {
 		res.send(err.message);
@@ -87,15 +90,15 @@ async function updateUser(req, res): Promise<void> {
 }
 
 /**
- * 라우트: user 삭제
+ * route: user 삭제
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
 async function deleteUser(req, res): Promise<void> {
-	let studentId: number = req.params.studentId;
+	let userId: string = req.params.userId;
 	try {
-		const result: any = await user.deleteUser(studentId);
+		const result: any = await user.deleteUser(userId);
 		res.send(result);
 	} catch (err) {
 		res.send(err.message);

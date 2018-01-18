@@ -9,27 +9,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
-const login_model_1 = require("../model/login.model");
-class LoginRoutes {
+const user_resource_1 = require("../../../resource/user.resource");
+const signUp_model_1 = require("../model/signUp.model");
+class SignUpRoutes {
     constructor() {
-        this.loginRouter = express.Router();
+        this.signUpRouter = express.Router();
         this.router();
     }
     router() {
-        this.loginRouter.post('/login', loginUser);
+        this.signUpRouter.post('/signUp', createUser);
     }
 }
-exports.LoginRoutes = LoginRoutes;
+exports.SignUpRoutes = SignUpRoutes;
 /**
- * 라우트: 회원 로그인
+ * route: 회원가입
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
-function loginUser(req, res) {
+function createUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        let userResource = new user_resource_1.UserResource(req.body);
         try {
-            const result = yield login_model_1.login.loginUser(req.body);
+            const result = yield signUp_model_1.signUp.createUser(userResource.getSignUp());
             res.send(result);
         }
         catch (err) {
@@ -37,5 +39,5 @@ function loginUser(req, res) {
         }
     });
 }
-exports.loginRoutes = new LoginRoutes();
-//# sourceMappingURL=login.route.js.map
+exports.signUpRoutes = new SignUpRoutes();
+//# sourceMappingURL=signUp.route.js.map

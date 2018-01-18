@@ -8,16 +8,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const pwdhash_1 = require("../../encription/pwdhash");
+const encryption_resource_1 = require("../../../resource/encryption.resource");
 const mysql_resource_1 = require("../../../resource/mysql.resource");
 const conn = mysql_resource_1.mysqlResource.conn;
-class Login {
+class SignIn {
     /**
-     * model: user 로그인
+     * model: 로그인
      * @param userData
      * @returns {Promise<any>}
      */
-    loginUser(userData) {
+    getUser(userData) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield conn.query(`SELECT * from users where userId=?`, [userData.userId], function (err, rows) {
                 if (err) {
@@ -25,17 +25,17 @@ class Login {
                 }
                 else {
                     let err = {
-                        message: 'not exist ID'
+                        message: 'The ID does not exist'
                     };
                     if (rows.length === 0) {
                         reject(err);
                     }
                     else {
-                        if (rows[0].userPw === pwdhash_1.pwdhash.getHash(userData.userPw)) {
+                        if (rows[0].userPw === encryption_resource_1.encriptionPw.getHash(userData.userPw)) {
                             resolve(rows);
                         }
                         else {
-                            err.message = 'password error';
+                            err.message = 'The password is incorrect';
                             reject(err);
                         }
                     }
@@ -44,5 +44,5 @@ class Login {
         }));
     }
 }
-exports.login = new Login();
-//# sourceMappingURL=login.model.js.map
+exports.signIn = new SignIn();
+//# sourceMappingURL=signIn.model.js.map
