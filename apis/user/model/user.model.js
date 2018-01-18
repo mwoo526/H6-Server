@@ -71,12 +71,30 @@ class User {
      */
     updateUser(userId, userData) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`UPDATE users SET ? WHERE userId=${userId}`, userData, function (err) {
+            yield conn.query(`UPDATE users SET ? WHERE userId=${userId}`, userData, function (err, rows) {
                 if (err) {
                     reject(err);
                 }
                 else {
-                    resolve(userData);
+                    resolve(rows);
+                }
+            });
+        }));
+    }
+    /**
+     * model: user 비밀번호 업데이트
+     * @param {string} userId
+     * @param userPw
+     * @returns {Promise<any>}
+     */
+    updateUserPassword(userId, userPw) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield conn.query(`UPDATE users SET userPw='${userPw}' WHERE userId=${userId}`, function (err, rows) {
+                if (err) {
+                    reject(err);
+                }
+                else {
+                    resolve(rows);
                 }
             });
         }));
