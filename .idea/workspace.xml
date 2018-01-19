@@ -3,15 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="695aa6aa-38dc-41c7-9512-080b99b82e9f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/apis/login/model/login.model.js" afterPath="$PROJECT_DIR$/apis/login/model/login.model.js" />
-      <change beforePath="$PROJECT_DIR$/apis/login/model/login.model.js.map" afterPath="$PROJECT_DIR$/apis/login/model/login.model.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/login/model/login.model.ts" afterPath="$PROJECT_DIR$/apis/login/model/login.model.ts" />
-      <change beforePath="$PROJECT_DIR$/apis/register/model/register.model.js" afterPath="$PROJECT_DIR$/apis/register/model/register.model.js" />
-      <change beforePath="$PROJECT_DIR$/apis/register/model/register.model.js.map" afterPath="$PROJECT_DIR$/apis/register/model/register.model.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/register/model/register.model.ts" afterPath="$PROJECT_DIR$/apis/register/model/register.model.ts" />
-      <change beforePath="$PROJECT_DIR$/apis/user/model/user.model.js" afterPath="$PROJECT_DIR$/apis/user/model/user.model.js" />
-      <change beforePath="$PROJECT_DIR$/apis/user/model/user.model.js.map" afterPath="$PROJECT_DIR$/apis/user/model/user.model.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/user/model/user.model.ts" afterPath="$PROJECT_DIR$/apis/user/model/user.model.ts" />
       <change beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
       <change beforePath="$PROJECT_DIR$/app.js.map" afterPath="$PROJECT_DIR$/app.js.map" />
       <change beforePath="$PROJECT_DIR$/app.ts" afterPath="$PROJECT_DIR$/app.ts" />
@@ -41,53 +32,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user.route.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apis/user/route/user.route.ts">
+      <file leaf-file-name="pwdhash.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apis/encription/pwdhash.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-610">
-              <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="server.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="3" column="23" lean-forward="false" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="21" lean-forward="false" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.route.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apis/test/route/test.route.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="50" column="16" lean-forward="false" selection-start-line="50" selection-start-column="16" selection-end-line="50" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.model.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apis/test/model/test.model.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="28" lean-forward="true" selection-start-line="0" selection-start-column="28" selection-end-line="0" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -96,18 +45,50 @@
       <file leaf-file-name="register.vo.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apis/register/vo/register.vo.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
+            <state relative-caret-position="-852">
               <caret line="15" column="11" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mysql.resource.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="register.route.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apis/register/route/register.route.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="22" column="53" lean-forward="false" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="98">
+              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mysql.resource.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resource/mysql.resource.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="20" lean-forward="false" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+            <state relative-caret-position="135">
+              <caret line="9" column="19" lean-forward="true" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -123,7 +104,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.model.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.model.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apis/login/model/login.model.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
@@ -174,11 +165,11 @@
         <option value="$PROJECT_DIR$/apis/register/vo/register.vo.ts" />
         <option value="$PROJECT_DIR$/apis/register/route/register.route.ts" />
         <option value="$PROJECT_DIR$/server.ts" />
-        <option value="$PROJECT_DIR$/resource/mysql.resource.ts" />
-        <option value="$PROJECT_DIR$/app.ts" />
         <option value="$PROJECT_DIR$/apis/user/model/user.model.ts" />
         <option value="$PROJECT_DIR$/apis/register/model/register.model.ts" />
         <option value="$PROJECT_DIR$/apis/login/model/login.model.ts" />
+        <option value="$PROJECT_DIR$/resource/mysql.resource.ts" />
+        <option value="$PROJECT_DIR$/app.ts" />
       </list>
     </option>
   </component>
@@ -238,22 +229,14 @@
               <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
               <item name="H6-server" type="462c0819:PsiDirectoryNode" />
               <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="login" type="462c0819:PsiDirectoryNode" />
+              <item name="encription" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
               <item name="H6-server" type="462c0819:PsiDirectoryNode" />
               <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="login" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="login" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="login.model.ts" type="620a8d5e:NestingTreeNode" />
+              <item name="encription" type="462c0819:PsiDirectoryNode" />
+              <item name="pwdhash.ts" type="620a8d5e:NestingTreeNode" />
             </path>
             <path>
               <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
@@ -280,48 +263,27 @@
               <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
               <item name="H6-server" type="462c0819:PsiDirectoryNode" />
               <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
+              <item name="register" type="462c0819:PsiDirectoryNode" />
+              <item name="vo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
+              <item name="apis" type="462c0819:PsiDirectoryNode" />
+              <item name="register" type="462c0819:PsiDirectoryNode" />
+              <item name="vo" type="462c0819:PsiDirectoryNode" />
+              <item name="register.vo.ts" type="620a8d5e:NestingTreeNode" />
             </path>
             <path>
               <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
               <item name="H6-server" type="462c0819:PsiDirectoryNode" />
               <item name="apis" type="462c0819:PsiDirectoryNode" />
               <item name="user" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="user.model.ts" type="620a8d5e:NestingTreeNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-              <item name="route" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-              <item name="route" type="462c0819:PsiDirectoryNode" />
-              <item name="user.route.ts" type="620a8d5e:NestingTreeNode" />
             </path>
             <path>
               <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
               <item name="H6-server" type="462c0819:PsiDirectoryNode" />
               <item name="resource" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="resource" type="462c0819:PsiDirectoryNode" />
-              <item name="mysql.resource.ts" type="620a8d5e:NestingTreeNode" />
             </path>
           </expand>
           <select />
@@ -398,12 +360,12 @@
       <workItem from="1516087054455" duration="2205000" />
       <workItem from="1516100423497" duration="593000" />
       <workItem from="1516157845685" duration="56000" />
-      <workItem from="1516159363397" duration="1848000" />
+      <workItem from="1516159363397" duration="3627000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="96869000" />
+    <option name="totallyTimeSpent" value="98648000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="440" y="22" width="985" height="832" extended-state="0" />
@@ -547,30 +509,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js" />
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apis/encription/pwdhash.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apis/login/model/login.model.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
@@ -586,24 +524,6 @@
           <folding>
             <element signature="e#0#35#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apis/register/route/register.route.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="53" lean-forward="false" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#35#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apis/register/vo/register.vo.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="11" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -631,14 +551,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resource/mysql.resource.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="20" lean-forward="false" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apis/user/route/user.route.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-610">
@@ -647,25 +559,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="21" lean-forward="false" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apis/user/model/user.model.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apis/register/model/register.model.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
@@ -680,6 +574,72 @@
           <folding>
             <element signature="e#1#50#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apis/register/route/register.route.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="22" column="53" lean-forward="false" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apis/register/model/register.model.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apis/encription/pwdhash.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="28" lean-forward="true" selection-start-line="0" selection-start-column="28" selection-end-line="0" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apis/register/vo/register.vo.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-852">
+          <caret line="15" column="11" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resource/mysql.resource.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="19" lean-forward="true" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>

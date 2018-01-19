@@ -9,5 +9,6 @@ var mysqlResource;
         password: '',
         database: 'h6'
     });
+    mysqlResource.conn.connect();
 })(mysqlResource = exports.mysqlResource || (exports.mysqlResource = {}));
 //# sourceMappingURL=mysql.resource.js.map

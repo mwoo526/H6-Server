@@ -7,4 +7,5 @@ export module mysqlResource {
 		password : '',
 		database : 'h6'
 	});
+	conn.connect();
 }

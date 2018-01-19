@@ -16,8 +16,7 @@ export class Server {
 		/** bodyParser 선언 */
 		this.app.use(bodyParser.urlencoded({ extended: false }));
 		/** 라우터 추가 */
-        const conn = mysqlResource.conn;
-        conn.connect();
+
 		this.app.use(userRoutes.userRouter);
 		this.app.use(testRoutes.testRouter);
 		this.app.use(registerRoutes.registerRouter);

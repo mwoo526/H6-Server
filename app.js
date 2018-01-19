@@ -6,7 +6,6 @@ const user_route_1 = require("./apis/user/route/user.route");
 const test_route_1 = require("./apis/test/route/test.route");
 const register_route_1 = require("./apis/register/route/register.route");
 const login_route_1 = require("./apis/login/route/login.route");
-const mysql_resource_1 = require("./resource/mysql.resource");
 class Server {
     constructor() {
         /** express 설정을 위한 express 선언 */
@@ -14,8 +13,6 @@ class Server {
         /** bodyParser 선언 */
         this.app.use(bodyParser.urlencoded({ extended: false }));
         /** 라우터 추가 */
-        const conn = mysql_resource_1.mysqlResource.conn;
-        conn.connect();
         this.app.use(user_route_1.userRoutes.userRouter);
         this.app.use(test_route_1.testRoutes.testRouter);
         this.app.use(register_route_1.registerRoutes.registerRouter);
