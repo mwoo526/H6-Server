@@ -63,7 +63,7 @@ export class User {
 	 */
 	updateUser(userId:string, userData: any): Promise<any> {
 		return new Promise(async(resolve, reject) => {
-			await conn.query(`UPDATE users SET ? WHERE userId=${userId}`, userData, function (err) {
+			await conn.query(`UPDATE users SET ? WHERE userId=?`, [userData,userId], function (err) {
 				if (err) {
 					reject(err);
 				} else {
@@ -80,7 +80,7 @@ export class User {
 	 */
 	deleteUser(userId:string): Promise<any> {
 		return new Promise(async(resolve, reject) => {
-			await conn.query(`DELETE FROM users WHERE userId=${userId}`,function(err, rows) {
+			await conn.query(`DELETE FROM users WHERE userId=?`,userId,function(err, rows) {
 				if (err) {
 					reject(err);
 				} else {

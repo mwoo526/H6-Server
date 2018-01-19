@@ -71,7 +71,7 @@ class User {
      */
     updateUser(userId, userData) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`UPDATE users SET ? WHERE userId=${userId}`, userData, function (err) {
+            yield conn.query(`UPDATE users SET ? WHERE userId=?`, [userData, userId], function (err) {
                 if (err) {
                     reject(err);
                 }
@@ -88,7 +88,7 @@ class User {
      */
     deleteUser(userId) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`DELETE FROM users WHERE userId=${userId}`, function (err, rows) {
+            yield conn.query(`DELETE FROM users WHERE userId=?`, userId, function (err, rows) {
                 if (err) {
                     reject(err);
                 }
