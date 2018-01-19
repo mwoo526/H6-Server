@@ -63,11 +63,29 @@ export class User {
 	 */
 	updateUser(userId:string, userData: any): Promise<any> {
 		return new Promise(async(resolve, reject) => {
-			await conn.query(`UPDATE users SET ? WHERE userId=?`, [userData,userId], function (err) {
+			await conn.query(`UPDATE users SET ? WHERE userId=?`, [userData,userId], function (err, rows) {
 				if (err) {
 					reject(err);
 				} else {
-					resolve(userData);
+					resolve(rows);
+				}
+			})
+		})
+	}
+
+	/**
+	 * model: user 비밀번호 업데이트
+	 * @param {string} userId
+	 * @param userPw
+	 * @returns {Promise<any>}
+	 */
+	updateUserPassword(userId: string, userPw: any): Promise<any> {
+		return new Promise(async(resolve, reject) => {
+			await conn.query(`UPDATE users SET userPw=? WHERE userId=?`,[userPw,userId], function(err, rows) {
+				if (err) {
+					reject(err);
+				} else {
+					resolve(rows);
 				}
 			})
 		})

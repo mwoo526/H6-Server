@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
+const encryption_resource_1 = require("../../../resource/encryption.resource");
 const user_resource_1 = require("../../../resource/user.resource");
 const user_model_1 = require("../model/user.model");
 class UserRoutes {
@@ -21,6 +22,7 @@ class UserRoutes {
         this.userRouter.get('/users', listUser);
         this.userRouter.get('/users/:userId', getUser);
         this.userRouter.put('/users/:userId', updateUser);
+        this.userRouter.put('/users/:userId/password', updateUserPassword);
         this.userRouter.delete('/users/:userId', deleteUser);
     }
 }
@@ -61,7 +63,7 @@ function listUser(req, res) {
     });
 }
 /**
- * route: user studentId 조회
+ * route: user userId 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
@@ -98,6 +100,33 @@ function updateUser(req, res) {
         try {
             const result = yield user_model_1.user.updateUser(userId, userData);
             res.send(result);
+        }
+        catch (err) {
+            res.send(err.message);
+        }
+    });
+}
+/**
+ * route: user 비밀번호 업데이트
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+function updateUserPassword(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let userId = req.params.userId;
+        let userPw = req.body.userPw;
+        let userNewPw = req.body.userNewPw;
+        const getUserPw = yield user_model_1.user.getUser(userId);
+        try {
+            if (encryption_resource_1.encriptionPw.getHash(userPw) === getUserPw[0].userPw) {
+                const userPw = encryption_resource_1.encriptionPw.getHash(userNewPw);
+                const result = yield user_model_1.user.updateUserPassword(userId, userPw);
+                res.send(result);
+            }
+            else {
+                throw new Error('The password is incorrect');
+            }
         }
         catch (err) {
             res.send(err.message);
