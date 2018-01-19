@@ -1,11 +1,9 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import { userRoutes } from './apis/user/route/user.route';
+import { signInRoutes } from './apis/sign/route/signIn.route';
+import { signUpRoutes } from './apis/sign/route/signUp.route';
 import { testRoutes } from './apis/test/route/test.route';
-import {registerRoutes} from "./apis/register/route/register.route";
-import {loginRoutes} from "./apis/login/route/login.route";
-import {mysqlResource} from "./resource/mysql.resource";
-
+import { userRoutes } from './apis/user/route/user.route';
 
 export class Server {
 	/** app 에 대한 타입 설정 */
@@ -17,10 +15,10 @@ export class Server {
 		this.app.use(bodyParser.urlencoded({ extended: false }));
 		/** 라우터 추가 */
 
-		this.app.use(userRoutes.userRouter);
 		this.app.use(testRoutes.testRouter);
-		this.app.use(registerRoutes.registerRouter);
-		this.app.use(loginRoutes.loginRouter);
+		this.app.use(userRoutes.userRouter);
+		this.app.use(signUpRoutes.signUpRouter);
+		this.app.use(signInRoutes.signInRouter);
 		/** Not Found */
 		this.app.use((req: express.Request, res: express.Response, next: Function) => {
 			/**

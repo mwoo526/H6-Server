@@ -10,24 +10,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const mysql_resource_1 = require("../../../resource/mysql.resource");
 const conn = mysql_resource_1.mysqlResource.conn;
-class Register {
+class SignUp {
+    constructor() {
+    }
     /**
-     * model: user 생성(가입)
+     * model: 회원가입
      * @param userData
      * @returns {Promise<any>}
      */
-    createRegister(registerVO) {
+    createUser(userData) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`INSERT INTO users SET ?`, [registerVO], function (err) {
+            yield conn.query(`INSERT INTO users SET ?`, [userData], function (err) {
                 if (err) {
                     reject(err);
                 }
                 else {
-                    resolve(registerVO);
+                    resolve(userData);
                 }
             });
         }));
     }
 }
-exports.register = new Register;
-//# sourceMappingURL=register.model.js.map
+exports.SignUp = SignUp;
+exports.signUp = new SignUp();
+//# sourceMappingURL=signUp.model.js.map

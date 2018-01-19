@@ -9,6 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
+const encryption_resource_1 = require("../../../resource/encryption.resource");
+const user_resource_1 = require("../../../resource/user.resource");
 const user_model_1 = require("../model/user.model");
 class UserRoutes {
     constructor() {
@@ -18,24 +20,22 @@ class UserRoutes {
     router() {
         this.userRouter.post('/users', createUser);
         this.userRouter.get('/users', listUser);
-        this.userRouter.get('/users/:studentId', getUser);
-        this.userRouter.put('/users/:studentId', updateUser);
-        this.userRouter.delete('/users/:studentId', deleteUser);
+        this.userRouter.get('/users/:userId', getUser);
+        this.userRouter.put('/users/:userId', updateUser);
+        this.userRouter.put('/users/:userId/password', updateUserPassword);
+        this.userRouter.delete('/users/:userId', deleteUser);
     }
 }
 exports.UserRoutes = UserRoutes;
 /**
- * 라우트: user 생성
+ * route: user 생성
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
 function createUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        let userData = {
-            studentId: req.body.studentId,
-            name: req.body.name
-        };
+        const userData = new user_resource_1.UserResource(req.body);
         try {
             const result = yield user_model_1.user.createUser(userData);
             res.send(result);
@@ -46,7 +46,7 @@ function createUser(req, res) {
     });
 }
 /**
- * 라우트: user 리스트 조회
+ * route: user 리스트 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
@@ -63,16 +63,16 @@ function listUser(req, res) {
     });
 }
 /**
- * 라우트: user studentId 조회
+ * route: user userId 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
 function getUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        let studentId = req.params.studentId;
+        let userId = req.params.userId;
         try {
-            const result = yield user_model_1.user.getUser(studentId);
+            const result = yield user_model_1.user.getUser(userId);
             res.send(result);
         }
         catch (err) {
@@ -81,19 +81,24 @@ function getUser(req, res) {
     });
 }
 /**
- * 라우트: user 업데이트
+ * route: user 업데이트
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
 function updateUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        let studentId = req.params.studentId;
+        let userId = req.params.userId;
         let userData = {
-            name: req.body.name
+            userNickName: req.body.userNickName,
+            major: req.body.major,
+            minor: req.body.minor,
+            doubleMajor: req.body.doubleMajor,
+            connectedMajor: req.body.connectedMajor,
+            admissionYear: req.body.admissionYear
         };
         try {
-            const result = yield user_model_1.user.updateUser(studentId, userData);
+            const result = yield user_model_1.user.updateUser(userId, userData);
             res.send(result);
         }
         catch (err) {
@@ -102,16 +107,43 @@ function updateUser(req, res) {
     });
 }
 /**
- * 라우트: user 삭제
+ * route: user 비밀번호 업데이트
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+function updateUserPassword(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let userId = req.params.userId;
+        let userPw = req.body.userPw;
+        let userNewPw = req.body.userNewPw;
+        const getUserPw = yield user_model_1.user.getUser(userId);
+        try {
+            if (encryption_resource_1.encriptionPw.getHash(userPw) === getUserPw[0].userPw) {
+                const userPw = encryption_resource_1.encriptionPw.getHash(userNewPw);
+                const result = yield user_model_1.user.updateUserPassword(userId, userPw);
+                res.send(result);
+            }
+            else {
+                throw new Error('The password is incorrect');
+            }
+        }
+        catch (err) {
+            res.send(err.message);
+        }
+    });
+}
+/**
+ * route: user 삭제
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
 function deleteUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        let studentId = req.params.studentId;
+        let userId = req.params.userId;
         try {
-            const result = yield user_model_1.user.deleteUser(studentId);
+            const result = yield user_model_1.user.deleteUser(userId);
             res.send(result);
         }
         catch (err) {

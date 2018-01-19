@@ -9,29 +9,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
-const register_model_1 = require("..//model/register.model");
-const register_vo_1 = require("../vo/register.vo");
-class RegisterRoutes {
+const signIn_model_1 = require("../model/signIn.model");
+class SignInRoutes {
     constructor() {
-        this.registerRouter = express.Router();
+        this.signInRouter = express.Router();
         this.router();
     }
     router() {
-        this.registerRouter.post('/register', createRegister);
+        this.signInRouter.post('/signIn', getUser);
     }
 }
-exports.RegisterRoutes = RegisterRoutes;
+exports.SignInRoutes = SignInRoutes;
 /**
- * 라우트: 회원 생성
+ * route: 로그인
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
-function createRegister(req, res) {
+function getUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        let registerVO = new register_vo_1.RegisterVO(req.body);
         try {
-            const result = yield register_model_1.register.createRegister(registerVO.getRegister());
+            const result = yield signIn_model_1.signIn.getUser(req.body);
             res.send(result);
         }
         catch (err) {
@@ -39,5 +37,5 @@ function createRegister(req, res) {
         }
     });
 }
-exports.registerRoutes = new RegisterRoutes();
-//# sourceMappingURL=register.route.js.map
+exports.signInRoutes = new SignInRoutes();
+//# sourceMappingURL=signIn.route.js.map

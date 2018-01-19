@@ -51,9 +51,9 @@ class User {
      * @param {number} studentId
      * @returns {Promise<any>}
      */
-    getUser(studentId) {
+    getUser(userId) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`SELECT * FROM users WHERE studentId=?`, [studentId], function (err, rows) {
+            yield conn.query(`SELECT * FROM users WHERE userId=?`, [userId], function (err, rows) {
                 if (err) {
                     reject(err);
                 }
@@ -69,14 +69,32 @@ class User {
      * @param userData
      * @returns {Promise<any>}
      */
-    updateUser(studentId, userData) {
+    updateUser(userId, userData) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`UPDATE users SET name='${userData.name}' WHERE studentId=${studentId}`, function (err) {
+            yield conn.query(`UPDATE users SET ? WHERE userId=?`, [userData, userId], function (err, rows) {
                 if (err) {
                     reject(err);
                 }
                 else {
-                    resolve(userData);
+                    resolve(rows);
+                }
+            });
+        }));
+    }
+    /**
+     * model: user 비밀번호 업데이트
+     * @param {string} userId
+     * @param userPw
+     * @returns {Promise<any>}
+     */
+    updateUserPassword(userId, userPw) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield conn.query(`UPDATE users SET userPw=? WHERE userId=?`, [userPw, userId], function (err, rows) {
+                if (err) {
+                    reject(err);
+                }
+                else {
+                    resolve(rows);
                 }
             });
         }));
@@ -86,9 +104,9 @@ class User {
      * @param {number} studentId
      * @returns {Promise<any>}
      */
-    deleteUser(studentId) {
+    deleteUser(userId) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`DELETE FROM users WHERE studentId=${studentId}`, function (err, rows) {
+            yield conn.query(`DELETE FROM users WHERE userId=?`, userId, function (err, rows) {
                 if (err) {
                     reject(err);
                 }
