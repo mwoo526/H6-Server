@@ -1,6 +1,6 @@
 import { encriptionPw } from './encryption.resource';
 
-export class UserResource{
+export class UserResource {
 	private userId;
 	private userPw;
 	private userNickName;
