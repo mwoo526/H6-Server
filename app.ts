@@ -4,6 +4,7 @@ import { signInRoutes } from './apis/sign/route/signIn.route';
 import { signUpRoutes } from './apis/sign/route/signUp.route';
 import { testRoutes } from './apis/test/route/test.route';
 import { userRoutes } from './apis/user/route/user.route';
+import {professorRoutes} from "./apis/professor/route/professor.route";
 
 export class Server {
 	/** app 에 대한 타입 설정 */
@@ -19,6 +20,7 @@ export class Server {
 		this.app.use(userRoutes.userRouter);
 		this.app.use(signUpRoutes.signUpRouter);
 		this.app.use(signInRoutes.signInRouter);
+		this.app.use(professorRoutes.professorRouter);
 		/** Not Found */
 		this.app.use((req: express.Request, res: express.Response, next: Function) => {
 			/**
