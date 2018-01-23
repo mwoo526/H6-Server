@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class ProfessorResource {
     constructor(professorData) {
         this.setProfessorName(professorData.professorName);
-        this.setProfessorDepartment(professorData.professorDepartment);
-        this.setProfessorAddress(professorData.professorAddress);
-        this.setProfessorPhone(professorData.professorPhone);
-        this.setProfessorEmail(professorData.professorEmail);
+        this.setDepartment(professorData.department);
+        this.setAddress(professorData.address);
+        this.setTel(professorData.tel);
+        this.setEmail(professorData.email);
     }
     getProfessorName() {
         return this.professorName;
@@ -14,37 +14,37 @@ class ProfessorResource {
     setProfessorName(professorName) {
         this.professorName = professorName;
     }
-    getProfessorDepartment() {
-        return this.professorDepartment;
+    getDepartment() {
+        return this.department;
     }
-    setProfessorDepartment(professorDepartment) {
-        this.professorDepartment = professorDepartment;
+    setDepartment(department) {
+        this.department = department;
     }
-    getProfessorAddress() {
-        return this.professorAddress;
+    getAddress() {
+        return this.address;
     }
-    setProfessorAddress(professorAddress) {
-        this.professorAddress = professorAddress;
+    setAddress(address) {
+        this.address = address;
     }
-    getProfessorPhone() {
-        return this.professorPhone;
+    getTel() {
+        return this.tel;
     }
-    setProfessorPhone(professorPhone) {
-        this.professorPhone = professorPhone;
+    setTel(tel) {
+        this.tel = tel;
     }
-    getProfessorEmail() {
-        return this.professorEmail;
+    getEmail() {
+        return this.email;
     }
-    setProfessorEmail(professorEmail) {
-        this.professorEmail = professorEmail;
+    setEmail(email) {
+        this.email = email;
     }
     getProfessor() {
         let professorResource = {
             professorName: this.getProfessorName(),
-            professorDepartment: this.getProfessorDepartment(),
-            professorAddress: this.getProfessorAddress(),
-            professorPhone: this.getProfessorPhone(),
-            professorEmail: this.getProfessorEmail()
+            department: this.getDepartment(),
+            address: this.getAddress(),
+            tel: this.getTel(),
+            email: this.getEmail()
         };
         return professorResource;
     }

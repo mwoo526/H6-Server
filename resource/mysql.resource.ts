@@ -9,6 +9,5 @@ export module mysqlResource {
         database : 'h6',
         timezone:'UTC'
 	});
-
 	conn.connect();
 }
