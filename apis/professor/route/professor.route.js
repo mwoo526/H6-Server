@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const professor_model_1 = require("../model/professor.model");
 const professorResource_1 = require("../../../resource/professorResource");
-class ProfessorRoute {
+class ProfessorRoutes {
     constructor() {
         this.professorRouter = express.Router();
         this.router();
@@ -25,7 +25,7 @@ class ProfessorRoute {
         this.professorRouter.delete('/professors/:professorIndex', deleteProfessor);
     }
 }
-exports.ProfessorRoute = ProfessorRoute;
+exports.ProfessorRoutes = ProfessorRoutes;
 /**
  * route: professor 생성
  * @param req
@@ -134,5 +134,5 @@ function deleteProfessor(req, res) {
         }
     });
 }
-exports.professorRoutes = new ProfessorRoute();
+exports.professorRoutes = new ProfessorRoutes();
 //# sourceMappingURL=professor.route.js.map

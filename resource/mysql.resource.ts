@@ -7,7 +7,7 @@ export module mysqlResource {
         user     : 'h6_root',
         password : 'h6mysqldb',
         database : 'h6',
-        timezone:'UTC'
+        timezone : 'UTC'
 	});
 	conn.connect();
 }

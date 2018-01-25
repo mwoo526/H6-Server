@@ -2,7 +2,7 @@ import * as express from 'express';
 import {professor} from "../model/professor.model";
 import {ProfessorResource} from "../../../resource/professorResource";
 
-export class ProfessorRoute {
+export class ProfessorRoutes {
     public professorRouter: express.Router = express.Router();
 
     constructor(){
@@ -117,4 +117,4 @@ async function deleteProfessor(req, res): Promise<void> {
     }
 }
 
-export const professorRoutes: ProfessorRoute = new ProfessorRoute();
+export const professorRoutes: ProfessorRoutes = new ProfessorRoutes();
