@@ -38,7 +38,7 @@ async function createProfessor(req, res): Promise<void> {
 
 
 /**
- * route: professor 리스트
+ * route: professor 리스트 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
