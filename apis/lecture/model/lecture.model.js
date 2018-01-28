@@ -10,50 +10,31 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const mysql_resource_1 = require("../../../resource/mysql.resource");
 const conn = mysql_resource_1.mysqlResource.conn;
-class User {
-    constructor() {
-    }
+class Lecture {
     /**
-     * model: user 생성
-     * @param userData
+     * model: lecture 생성
+     * @param lectureData
      * @returns {Promise<any>}
      */
-    createUser(userData) {
+    createLecture(lectureData) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`INSERT INTO users SET ?`, [userData], function (err) {
+            yield conn.query('INSERT INTO lectures SET ?', lectureData, function (err) {
                 if (err) {
                     reject(err);
                 }
                 else {
-                    resolve(userData);
+                    resolve(lectureData);
                 }
             });
         }));
     }
     /**
-     * model: user 리스트 조회
+     * model: lecture 리스트 조회
      * @returns {Promise<any>}
      */
-    listUser() {
+    listLecture() {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`SELECT * FROM users`, function (err, rows) {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve(rows);
-                }
-            });
-        }));
-    }
-    /**
-     * model: user studentId 조회
-     * @param {number} studentId
-     * @returns {Promise<any>}
-     */
-    getUser(userId) {
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`SELECT * FROM users WHERE userId=?`, [userId], function (err, rows) {
+            yield conn.query('SELECT * FROM lectures', function (err, rows) {
                 if (err) {
                     reject(err);
                 }
@@ -64,14 +45,13 @@ class User {
         }));
     }
     /**
-     * model: user 업데이트
-     * @param {number} studentId
-     * @param userData
+     * model: lecture index 조회
+     * @param {number} lectureIndex
      * @returns {Promise<any>}
      */
-    updateUser(userId, userData) {
+    getLecture(lectureIndex) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`UPDATE users SET ? WHERE userId=?`, [userData, userId], function (err, rows) {
+            yield conn.query('SELECT * FROM lectures WHERE lectureIndex = ?', lectureIndex, function (err, rows) {
                 if (err) {
                     reject(err);
                 }
@@ -82,14 +62,13 @@ class User {
         }));
     }
     /**
-     * model: user 비밀번호 업데이트
-     * @param {string} userId
-     * @param userPw
+     * model: lecture professsorName 조회
+     * @param {string} professorName
      * @returns {Promise<any>}
      */
-    updateUserPassword(userId, userPw) {
+    getLectureProfessorName(professorName) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`UPDATE users SET userPw=? WHERE userId=?`, [userPw, userId], function (err, rows) {
+            yield conn.query('SELECT * FROM lectures JOIN professors USING(professorIndex) WHERE professorName = ?', professorName, function (err, rows) {
                 if (err) {
                     reject(err);
                 }
@@ -100,13 +79,65 @@ class User {
         }));
     }
     /**
-     * model: user 삭제
-     * @param {number} studentId
+     * model: lecture lectureName 조회
+     * @param {string} lectureName
      * @returns {Promise<any>}
      */
-    deleteUser(userId) {
+    getLectureName(lectureName) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`DELETE FROM users WHERE userId=?`, userId, function (err, rows) {
+            yield conn.query(`SELECT * FROM lectures WHERE lectureName LIKE '%${lectureName}%'`, function (err, rows) {
+                if (err) {
+                    reject(err);
+                }
+                else {
+                    resolve(rows);
+                }
+            });
+        }));
+    }
+    /**
+     * model: lecture track 조회
+     * @param {string} track
+     * @returns {Promise<any>}
+     */
+    getLectureTrack(track) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield conn.query(`SELECT * FROM lectures WHERE track LIKE '%${track}%'`, function (err, rows) {
+                if (err) {
+                    reject(err);
+                }
+                else {
+                    resolve(rows);
+                }
+            });
+        }));
+    }
+    /**
+     * model: lecture 업데이트
+     * @param {number} lectureIndex
+     * @param lectureData
+     * @returns {Promise<any>}
+     */
+    updateLecture(lectureIndex, lectureData) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield conn.query('UPDATE lectures SET ? WHERE lectureIndex = ?', [lectureData, lectureIndex], function (err, rows) {
+                if (err) {
+                    reject(err);
+                }
+                else {
+                    resolve(rows);
+                }
+            });
+        }));
+    }
+    /**
+     * model: lecture 삭제
+     * @param {number} lectureIndex
+     * @returns {Promise<any>}
+     */
+    deleteLecture(lectureIndex) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield conn.query('DELETE FROM lectures WHERE lectureIndex = ?', lectureIndex, function (err, rows) {
                 if (err) {
                     reject(err);
                 }
@@ -117,6 +148,6 @@ class User {
         }));
     }
 }
-exports.User = User;
-exports.user = new User();
-//# sourceMappingURL=user.model.js.map
+exports.Lecture = Lecture;
+exports.lecture = new Lecture();
+//# sourceMappingURL=lecture.model.js.map

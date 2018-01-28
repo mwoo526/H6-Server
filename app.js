@@ -6,6 +6,8 @@ const signIn_route_1 = require("./apis/sign/route/signIn.route");
 const signUp_route_1 = require("./apis/sign/route/signUp.route");
 const test_route_1 = require("./apis/test/route/test.route");
 const user_route_1 = require("./apis/user/route/user.route");
+const professor_route_1 = require("./apis/professor/route/professor.route");
+const lecture_route_1 = require("./apis/lecture/route/lecture.route");
 class Server {
     constructor() {
         /** express 설정을 위한 express 선언 */
@@ -17,6 +19,8 @@ class Server {
         this.app.use(user_route_1.userRoutes.userRouter);
         this.app.use(signUp_route_1.signUpRoutes.signUpRouter);
         this.app.use(signIn_route_1.signInRoutes.signInRouter);
+        this.app.use(professor_route_1.professorRoutes.professorRouter);
+        this.app.use(lecture_route_1.lectureRoutes.lectureRouter);
         /** Not Found */
         this.app.use((req, res, next) => {
             /**
