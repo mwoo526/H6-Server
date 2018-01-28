@@ -10,50 +10,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const mysql_resource_1 = require("../../../resource/mysql.resource");
 const conn = mysql_resource_1.mysqlResource.conn;
-class User {
+class Professor {
     constructor() {
     }
     /**
-     * model: user 생성
-     * @param userData
+     * model: professor 생성
+     * @param professorData
      * @returns {Promise<any>}
      */
-    createUser(userData) {
+    createProfessor(professorData) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`INSERT INTO users SET ?`, [userData], function (err) {
+            yield conn.query(`INSERT INTO professors SET ?`, [professorData], function (err) {
                 if (err) {
                     reject(err);
                 }
                 else {
-                    resolve(userData);
+                    resolve(professorData);
                 }
             });
         }));
     }
     /**
-     * model: user 리스트 조회
+     * model: professor 리스트 조회
      * @returns {Promise<any>}
      */
-    listUser() {
+    listProfessor() {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`SELECT * FROM users`, function (err, rows) {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve(rows);
-                }
-            });
-        }));
-    }
-    /**
-     * model: user studentId 조회
-     * @param {number} studentId
-     * @returns {Promise<any>}
-     */
-    getUser(userId) {
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`SELECT * FROM users WHERE userId=?`, [userId], function (err, rows) {
+            yield conn.query(`SELECT * FROM professors`, function (err, rows) {
                 if (err) {
                     reject(err);
                 }
@@ -64,14 +47,13 @@ class User {
         }));
     }
     /**
-     * model: user 업데이트
-     * @param {number} studentId
-     * @param userData
+     * model: professor professorIndex 조회
+     * @param {number} professorIndex
      * @returns {Promise<any>}
      */
-    updateUser(userId, userData) {
+    getProfessorIndex(professorIndex) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`UPDATE users SET ? WHERE userId=?`, [userData, userId], function (err, rows) {
+            yield conn.query(`SELECT * FROM professors WHERE professorIndex=?`, [professorIndex], function (err, rows) {
                 if (err) {
                     reject(err);
                 }
@@ -82,14 +64,13 @@ class User {
         }));
     }
     /**
-     * model: user 비밀번호 업데이트
-     * @param {string} userId
-     * @param userPw
+     * model: professor professorName 조회
+     * @param {string} professorName
      * @returns {Promise<any>}
      */
-    updateUserPassword(userId, userPw) {
+    getProfessorName(professorName) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`UPDATE users SET userPw=? WHERE userId=?`, [userPw, userId], function (err, rows) {
+            yield conn.query(`SELECT * FROM professors WHERE professorName LIKE '%${professorName}%'`, function (err, rows) {
                 if (err) {
                     reject(err);
                 }
@@ -100,13 +81,31 @@ class User {
         }));
     }
     /**
-     * model: user 삭제
-     * @param {number} studentId
+     * model: professor 업데이트
+     * @param {number} professorIndex
+     * @param professorData
      * @returns {Promise<any>}
      */
-    deleteUser(userId) {
+    updateProfessor(professorIndex, professorData) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`DELETE FROM users WHERE userId=?`, userId, function (err, rows) {
+            yield conn.query(`UPDATE professors SET ? WHERE professorIndex=?`, [professorData, professorIndex], function (err, rows) {
+                if (err) {
+                    reject(err);
+                }
+                else {
+                    resolve(rows);
+                }
+            });
+        }));
+    }
+    /**
+     * model: professor 삭제
+     * @param {number} professorIndex
+     * @returns {Promise<any>}
+     */
+    deleteProfessor(professorIndex) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield conn.query(`DELETE FROM professors WHERE professorIndex=?`, professorIndex, function (err, rows) {
                 if (err) {
                     reject(err);
                 }
@@ -117,6 +116,6 @@ class User {
         }));
     }
 }
-exports.User = User;
-exports.user = new User();
-//# sourceMappingURL=user.model.js.map
+exports.Professor = Professor;
+exports.professor = new Professor();
+//# sourceMappingURL=professor.model.js.map

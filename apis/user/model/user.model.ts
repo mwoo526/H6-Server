@@ -1,5 +1,4 @@
 import { mysqlResource } from '../../../resource/mysql.resource';
-
 const conn = mysqlResource.conn;
 
 export class User {
@@ -62,9 +61,9 @@ export class User {
 	 * @param userData
 	 * @returns {Promise<any>}
 	 */
-	updateUser(userId: string, userData: any): Promise<any> {
+	updateUser(userId:string, userData: any): Promise<any> {
 		return new Promise(async(resolve, reject) => {
-			await conn.query(`UPDATE users SET ? WHERE userId=${userId}`, userData, function (err, rows) {
+			await conn.query(`UPDATE users SET ? WHERE userId=?`, [userData,userId], function (err, rows) {
 				if (err) {
 					reject(err);
 				} else {
@@ -82,7 +81,7 @@ export class User {
 	 */
 	updateUserPassword(userId: string, userPw: any): Promise<any> {
 		return new Promise(async(resolve, reject) => {
-			await conn.query(`UPDATE users SET userPw='${userPw}' WHERE userId=${userId}`, function(err, rows) {
+			await conn.query(`UPDATE users SET userPw=? WHERE userId=?`,[userPw,userId], function(err, rows) {
 				if (err) {
 					reject(err);
 				} else {
@@ -97,9 +96,9 @@ export class User {
 	 * @param {number} studentId
 	 * @returns {Promise<any>}
 	 */
-	deleteUser(userId: string): Promise<any> {
+	deleteUser(userId:string): Promise<any> {
 		return new Promise(async(resolve, reject) => {
-			await conn.query(`DELETE FROM users WHERE userId=${userId}`, function(err, rows) {
+			await conn.query(`DELETE FROM users WHERE userId=?`,userId,function(err, rows) {
 				if (err) {
 					reject(err);
 				} else {
