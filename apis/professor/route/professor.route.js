@@ -19,8 +19,8 @@ class ProfessorRoutes {
     router() {
         this.professorRouter.post('/professors', createProfessor);
         this.professorRouter.get('/professors', listProfessor);
-        this.professorRouter.get('/professors/:professorIndex/professorIndex', getProfessorIndex);
-        this.professorRouter.get('/professors/:professorName/professorName', getProfessorName);
+        this.professorRouter.get('/professors/professorIndex/:professorIndex/', getProfessorByProfessorIndex);
+        this.professorRouter.get('/professors/professorName/:professorName', getProfessorByProfessorName);
         this.professorRouter.put('/professors/:professorIndex', updateProfessor);
         this.professorRouter.delete('/professors/:professorIndex', deleteProfessor);
     }
@@ -45,7 +45,7 @@ function createProfessor(req, res) {
     });
 }
 /**
- * route: professor 리스트
+ * route: professor 리스트 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
@@ -67,11 +67,11 @@ function listProfessor(req, res) {
  * @param res
  * @returns {Promise<void>}
  */
-function getProfessorIndex(req, res) {
+function getProfessorByProfessorIndex(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let professorIndex = req.params.professorIndex;
-            const result = yield professor_model_1.professor.getProfessorIndex(professorIndex);
+            const result = yield professor_model_1.professor.getProfessorByProfessorIndex(professorIndex);
             res.send(result);
         }
         catch (err) {
@@ -85,11 +85,11 @@ function getProfessorIndex(req, res) {
  * @param res
  * @returns {Promise<void>}
  */
-function getProfessorName(req, res) {
+function getProfessorByProfessorName(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let professorName = req.params.professorName;
-            const result = yield professor_model_1.professor.getProfessorName(professorName);
+            const result = yield professor_model_1.professor.getProfessorByProfessorName(professorName);
             res.send(result);
         }
         catch (err) {
