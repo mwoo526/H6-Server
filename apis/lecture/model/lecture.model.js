@@ -49,26 +49,9 @@ class Lecture {
      * @param {number} lectureIndex
      * @returns {Promise<any>}
      */
-    getLectureByLectureIndex(lectureIndex) {
+    getLecture(lectureIndex) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield conn.query('SELECT * FROM lectures WHERE lectureIndex = ?', lectureIndex, function (err, rows) {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve(rows);
-                }
-            });
-        }));
-    }
-    /**
-     * model: lecture code 조회
-     * @param {string} lectureCode
-     * @returns {Promise<any>}
-     */
-    getLectureByLectureCode(lectureCode) {
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`SELECT * FROM lectures WHERE lectureCode LIKE  '%${lectureCode}%'`, function (err, rows) {
                 if (err) {
                     reject(err);
                 }
@@ -83,9 +66,9 @@ class Lecture {
      * @param {string} professorName
      * @returns {Promise<any>}
      */
-    getLectureByProfessorName(professorName) {
+    getLectureProfessorName(professorName) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`SELECT * FROM lectures JOIN professors USING(professorIndex) WHERE professorName LIKE '%${professorName}%'`, function (err, rows) {
+            yield conn.query('SELECT * FROM lectures JOIN professors USING(professorIndex) WHERE professorName = ?', professorName, function (err, rows) {
                 if (err) {
                     reject(err);
                 }
@@ -100,7 +83,7 @@ class Lecture {
      * @param {string} lectureName
      * @returns {Promise<any>}
      */
-    getLectureByLectureName(lectureName) {
+    getLectureName(lectureName) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield conn.query(`SELECT * FROM lectures WHERE lectureName LIKE '%${lectureName}%'`, function (err, rows) {
                 if (err) {
@@ -117,7 +100,7 @@ class Lecture {
      * @param {string} track
      * @returns {Promise<any>}
      */
-    getLectureByTrack(track) {
+    getLectureTrack(track) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield conn.query(`SELECT * FROM lectures WHERE track LIKE '%${track}%'`, function (err, rows) {
                 if (err) {

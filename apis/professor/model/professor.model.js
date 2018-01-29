@@ -51,7 +51,7 @@ class Professor {
      * @param {number} professorIndex
      * @returns {Promise<any>}
      */
-    getProfessorByProfessorIndex(professorIndex) {
+    getProfessorIndex(professorIndex) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield conn.query(`SELECT * FROM professors WHERE professorIndex=?`, [professorIndex], function (err, rows) {
                 if (err) {
@@ -68,7 +68,7 @@ class Professor {
      * @param {string} professorName
      * @returns {Promise<any>}
      */
-    getProfessorByProfessorName(professorName) {
+    getProfessorName(professorName) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield conn.query(`SELECT * FROM professors WHERE professorName LIKE '%${professorName}%'`, function (err, rows) {
                 if (err) {

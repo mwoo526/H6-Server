@@ -19,11 +19,10 @@ class LectureRoutes {
     router() {
         this.lectureRouter.post('/lectures', createLecture);
         this.lectureRouter.get('/lectures', listLecture);
-        this.lectureRouter.get('/lectures/lectureIndex/:lectureIndex', getLectureByLectureIndex);
-        this.lectureRouter.get('/lectures/lectureCode/:lectureCode', getLectureByLectureCode);
-        this.lectureRouter.get('/lectures/professorName/:professorName', getLectureByProfessorName);
-        this.lectureRouter.get('/lectures/lectureName/:lectureName', getLectureByLectureName);
-        this.lectureRouter.get('/lectures/track/:track', getLectureByTrack);
+        this.lectureRouter.get('/lectures/:lectureIndex', getLecture);
+        this.lectureRouter.get('/lectures/:professorName/professorName', getLectureProfessorName);
+        this.lectureRouter.get('/lectures/:lectureName/lectureName', getLectureName);
+        this.lectureRouter.get('/lectures/:track/track', getLectureTrack);
         this.lectureRouter.put('/lectures/:lectureIndex', updateLecture);
         this.lectureRouter.delete('/lectures/:lectureIndex', deleteLecture);
     }
@@ -70,29 +69,11 @@ function listLecture(req, res) {
  * @param res
  * @returns {Promise<void>}
  */
-function getLectureByLectureIndex(req, res) {
+function getLecture(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let lectureIndex = req.params.lectureIndex;
-            const result = yield lecture_model_1.lecture.getLectureByLectureIndex(lectureIndex);
-            res.send(result);
-        }
-        catch (err) {
-            res.send(err.message);
-        }
-    });
-}
-/**
- * route: lecture code 조회
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-function getLectureByLectureCode(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            let lectureCode = req.params.lectureCode;
-            const result = yield lecture_model_1.lecture.getLectureByLectureCode(lectureCode);
+            const result = yield lecture_model_1.lecture.getLecture(lectureIndex);
             res.send(result);
         }
         catch (err) {
@@ -106,11 +87,11 @@ function getLectureByLectureCode(req, res) {
  * @param res
  * @returns {Promise<void>}
  */
-function getLectureByProfessorName(req, res) {
+function getLectureProfessorName(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let professorName = req.params.professorName;
-            const result = yield lecture_model_1.lecture.getLectureByProfessorName(professorName);
+            const result = yield lecture_model_1.lecture.getLectureProfessorName(professorName);
             res.send(result);
         }
         catch (err) {
@@ -124,11 +105,11 @@ function getLectureByProfessorName(req, res) {
  * @param res
  * @returns {Promise<void>}
  */
-function getLectureByLectureName(req, res) {
+function getLectureName(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let lectureName = req.params.lectureName;
-            const result = yield lecture_model_1.lecture.getLectureByLectureName(lectureName);
+            const result = yield lecture_model_1.lecture.getLectureName(lectureName);
             res.send(result);
         }
         catch (err) {
@@ -142,11 +123,11 @@ function getLectureByLectureName(req, res) {
  * @param res
  * @returns {Promise<void>}
  */
-function getLectureByTrack(req, res) {
+function getLectureTrack(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let track = req.params.track;
-            const result = yield lecture_model_1.lecture.getLectureByTrack(track);
+            const result = yield lecture_model_1.lecture.getLectureTrack(track);
             res.send(result);
         }
         catch (err) {
