@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const professor_model_1 = require("../model/professor.model");
-const professorResource_1 = require("../../../resource/professorResource");
+const professor_resource_1 = require("../../../resource/professor.resource");
 class ProfessorRoutes {
     constructor() {
         this.professorRouter = express.Router();
@@ -35,12 +35,12 @@ exports.ProfessorRoutes = ProfessorRoutes;
 function createProfessor(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            let professorData = new professorResource_1.ProfessorResource(req.body);
+            let professorData = new professor_resource_1.ProfessorResource(req.body);
             const result = yield professor_model_1.professor.createProfessor(professorData.getProfessor());
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -57,7 +57,7 @@ function listProfessor(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -75,7 +75,7 @@ function getProfessorByProfessorIndex(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -93,7 +93,7 @@ function getProfessorByProfessorName(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -107,12 +107,12 @@ function updateProfessor(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let professorIndex = req.params.professorIndex;
-            let professorData = new professorResource_1.ProfessorResource(req.body);
+            let professorData = new professor_resource_1.ProfessorResource(req.body);
             const result = yield professor_model_1.professor.updateProfessor(professorIndex, professorData);
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -130,7 +130,7 @@ function deleteProfessor(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }

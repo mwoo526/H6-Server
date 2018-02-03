@@ -2,7 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eaf1ca52-ebf8-419b-84b8-02c1d9b53f15" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/app.ts" afterPath="$PROJECT_DIR$/app.ts" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/apis/lecture/route/lecture.route.js" afterPath="$PROJECT_DIR$/apis/lecture/route/lecture.route.js" />
+      <change beforePath="$PROJECT_DIR$/apis/lecture/route/lecture.route.js.map" afterPath="$PROJECT_DIR$/apis/lecture/route/lecture.route.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/lecture/route/lecture.route.ts" afterPath="$PROJECT_DIR$/apis/lecture/route/lecture.route.ts" />
+      <change beforePath="$PROJECT_DIR$/apis/professor/route/professor.route.js" afterPath="$PROJECT_DIR$/apis/professor/route/professor.route.js" />
+      <change beforePath="$PROJECT_DIR$/apis/professor/route/professor.route.js.map" afterPath="$PROJECT_DIR$/apis/professor/route/professor.route.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/professor/route/professor.route.ts" afterPath="$PROJECT_DIR$/apis/professor/route/professor.route.ts" />
+      <change beforePath="$PROJECT_DIR$/apis/sign/route/signIn.route.js" afterPath="$PROJECT_DIR$/apis/sign/route/signIn.route.js" />
+      <change beforePath="$PROJECT_DIR$/apis/sign/route/signIn.route.js.map" afterPath="$PROJECT_DIR$/apis/sign/route/signIn.route.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/sign/route/signIn.route.ts" afterPath="$PROJECT_DIR$/apis/sign/route/signIn.route.ts" />
+      <change beforePath="$PROJECT_DIR$/apis/sign/route/signUp.route.js" afterPath="$PROJECT_DIR$/apis/sign/route/signUp.route.js" />
+      <change beforePath="$PROJECT_DIR$/apis/sign/route/signUp.route.js.map" afterPath="$PROJECT_DIR$/apis/sign/route/signUp.route.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/sign/route/signUp.route.ts" afterPath="$PROJECT_DIR$/apis/sign/route/signUp.route.ts" />
+      <change beforePath="$PROJECT_DIR$/apis/user/route/user.route.js" afterPath="$PROJECT_DIR$/apis/user/route/user.route.js" />
+      <change beforePath="$PROJECT_DIR$/apis/user/route/user.route.js.map" afterPath="$PROJECT_DIR$/apis/user/route/user.route.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/user/route/user.route.ts" afterPath="$PROJECT_DIR$/apis/user/route/user.route.ts" />
+      <change beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
+      <change beforePath="$PROJECT_DIR$/app.js.map" afterPath="$PROJECT_DIR$/app.js.map" />
+      <change beforePath="$PROJECT_DIR$/resource/professorResource.js" afterPath="$PROJECT_DIR$/resource/professor.resource.js" />
+      <change beforePath="$PROJECT_DIR$/resource/professorResource.js.map" afterPath="$PROJECT_DIR$/resource/professor.resource.js.map" />
+      <change beforePath="$PROJECT_DIR$/resource/professorResource.ts" afterPath="$PROJECT_DIR$/resource/professor.resource.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -16,11 +36,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="professor.route.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="professor.route.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/apis/professor/route/professor.route.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="1597">
+              <caret line="115" column="20" lean-forward="false" selection-start-line="115" selection-start-column="20" selection-end-line="115" selection-end-column="20" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -31,8 +51,8 @@
       <file leaf-file-name="lecture.route.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apis/lecture/route/lecture.route.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="50" lean-forward="false" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
+            <state relative-caret-position="2475">
+              <caret line="165" column="20" lean-forward="false" selection-start-line="165" selection-start-column="20" selection-end-line="165" selection-end-column="20" />
               <folding>
                 <element signature="e#0#67#0" expanded="true" />
               </folding>
@@ -40,12 +60,48 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
+            <state relative-caret-position="116">
               <caret line="17" column="40" lean-forward="false" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="signIn.route.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apis/sign/route/signIn.route.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="26" column="20" lean-forward="false" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="signUp.route.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apis/sign/route/signUp.route.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="28" column="20" lean-forward="false" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user.route.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apis/user/route/user.route.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="659">
+              <caret line="116" column="0" lean-forward="false" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -59,10 +115,13 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/apis/professor/model/professor.model.ts" />
-        <option value="$PROJECT_DIR$/apis/professor/route/professor.route.ts" />
         <option value="$PROJECT_DIR$/apis/lecture/model/lecture.model.ts" />
-        <option value="$PROJECT_DIR$/apis/lecture/route/lecture.route.ts" />
         <option value="$PROJECT_DIR$/app.ts" />
+        <option value="$PROJECT_DIR$/apis/lecture/route/lecture.route.ts" />
+        <option value="$PROJECT_DIR$/apis/professor/route/professor.route.ts" />
+        <option value="$PROJECT_DIR$/apis/sign/route/signIn.route.ts" />
+        <option value="$PROJECT_DIR$/apis/sign/route/signUp.route.ts" />
+        <option value="$PROJECT_DIR$/apis/user/route/user.route.ts" />
       </list>
     </option>
   </component>
@@ -155,6 +214,47 @@
             <path>
               <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
               <item name="H6-server" type="462c0819:PsiDirectoryNode" />
+              <item name="apis" type="462c0819:PsiDirectoryNode" />
+              <item name="sign" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
+              <item name="apis" type="462c0819:PsiDirectoryNode" />
+              <item name="sign" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
+              <item name="apis" type="462c0819:PsiDirectoryNode" />
+              <item name="sign" type="462c0819:PsiDirectoryNode" />
+              <item name="route" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
+              <item name="apis" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
+              <item name="apis" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
+              <item name="route" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
+              <item name="apis" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
+              <item name="route" type="462c0819:PsiDirectoryNode" />
+              <item name="user.route.ts" type="620a8d5e:NestingTreeNode" />
+            </path>
+            <path>
+              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
               <item name="resource" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -202,7 +302,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3729000" />
+    <option name="totallyTimeSpent" value="4014000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="203" y="39" width="1181" height="757" extended-state="0" />
@@ -367,13 +467,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resource/professor.resource.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/resource/professor.resource.ts" />
     <entry file="file://$PROJECT_DIR$/app.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -440,14 +534,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore" />
     <entry file="file://$PROJECT_DIR$/apis/user/model/user.model.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -639,20 +726,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apis/professor/route/professor.route.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apis/lecture/route/lecture.route.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="50" lean-forward="false" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
+        <state relative-caret-position="2475">
+          <caret line="165" column="20" lean-forward="false" selection-start-line="165" selection-start-column="20" selection-end-line="165" selection-end-column="20" />
           <folding>
             <element signature="e#0#67#0" expanded="true" />
           </folding>
@@ -674,30 +751,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apis/sign/route/signIn.route.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apis/sign/model/signUp.model.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apis/sign/route/signUp.route.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -717,21 +774,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apis/user/route/user.route.ts">
+    <entry file="file://$PROJECT_DIR$/app.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-61">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="116">
+          <caret line="17" column="40" lean-forward="false" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apis/sign/route/signIn.route.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="20" lean-forward="false" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.ts">
+    <entry file="file://$PROJECT_DIR$/apis/sign/route/signUp.route.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="17" column="40" lean-forward="false" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
-          <folding />
+        <state relative-caret-position="420">
+          <caret line="28" column="20" lean-forward="false" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apis/user/route/user.route.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="659">
+          <caret line="116" column="0" lean-forward="false" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apis/professor/route/professor.route.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1597">
+          <caret line="115" column="20" lean-forward="false" selection-start-line="115" selection-start-column="20" selection-end-line="115" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

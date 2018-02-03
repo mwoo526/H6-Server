@@ -34,7 +34,7 @@ async function createLecture(req, res): Promise<void> {
         const result: any = await lecture.createLecture(lectureData.getLecture());
         res.send(result);
     } catch (err) {
-        res.send(err.message);
+        res.send(err);
     }
 }
 
@@ -50,7 +50,7 @@ async function listLecture(req, res): Promise<void> {
         const result = await lecture.listLecture();
         res.send(result);
     }catch(err){
-        res.send(err.message);
+        res.send(err);
     }
 }
 
@@ -66,7 +66,7 @@ async function getLectureByLectureIndex(req, res): Promise<void> {
         const result = await lecture.getLectureByLectureIndex(lectureIndex);
         res.send(result);
     }catch(err){
-        res.send(err.message);
+        res.send(err);
     }
 }
 
@@ -82,7 +82,7 @@ async function getLectureByLectureCode(req, res): Promise<void> {
         const result = await lecture.getLectureByLectureCode(lectureCode);
         res.send(result);
     }catch(err){
-        res.send(err.message);
+        res.send(err);
     }
 }
 
@@ -98,7 +98,7 @@ async function getLectureByProfessorName(req, res): Promise<void> {
         const result = await lecture.getLectureByProfessorName(professorName);
         res.send(result);
     }catch(err){
-        res.send(err.message);
+        res.send(err);
     }
 }
 
@@ -114,7 +114,7 @@ async function getLectureByLectureName(req, res): Promise<void> {
         const result = await lecture.getLectureByLectureName(lectureName);
         res.send(result);
     }catch(err){
-        res.send(err.message);
+        res.send(err);
     }
 }
 
@@ -130,7 +130,7 @@ async function getLectureByTrack(req, res): Promise<void> {
         const result = await lecture.getLectureByTrack(track);
         res.send(result);
     }catch(err){
-        res.send(err.message);
+        res.send(err);
     }
 }
 
@@ -147,7 +147,7 @@ async function updateLecture(req, res): Promise<void> {
         const result = await lecture.updateLecture(lectureIndex, lectureData.getLecture());
         res.send(result);
     }catch(err){
-        res.send(err.message);
+        res.send(err);
     }
 }
 
@@ -163,7 +163,7 @@ async function deleteLecture(req, res): Promise<void> {
         const result = await lecture.deleteLecture(lectureIndex);
         res.send(result);
     }catch(err){
-        res.send(err.message);
+        res.send(err);
     }
 }
 

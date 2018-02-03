@@ -43,7 +43,7 @@ function createLecture(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -60,7 +60,7 @@ function listLecture(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -78,7 +78,7 @@ function getLectureByLectureIndex(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -96,7 +96,7 @@ function getLectureByLectureCode(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -114,7 +114,7 @@ function getLectureByProfessorName(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -132,7 +132,7 @@ function getLectureByLectureName(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -150,7 +150,7 @@ function getLectureByTrack(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -169,7 +169,7 @@ function updateLecture(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -187,7 +187,7 @@ function deleteLecture(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
