@@ -12,8 +12,8 @@ export class ProfessorRoutes {
     public router() {
         this.professorRouter.post('/professors', createProfessor);
         this.professorRouter.get('/professors', listProfessor);
-        this.professorRouter.get('/professors/:professorIndex/professorIndex', getProfessorIndex);
-        this.professorRouter.get('/professors/:professorName/professorName', getProfessorName);
+        this.professorRouter.get('/professors/professorIndex/:professorIndex/', getProfessorByProfessorIndex);
+        this.professorRouter.get('/professors/professorName/:professorName/', getProfessorByProfessorName);
         this.professorRouter.put('/professors/:professorIndex', updateProfessor);
         this.professorRouter.delete('/professors/:professorIndex', deleteProfessor);
     }
@@ -58,10 +58,10 @@ async function listProfessor(req, res): Promise<void> {
  * @param res
  * @returns {Promise<void>}
  */
-async function getProfessorIndex(req, res): Promise<void> {
+async function getProfessorByProfessorIndex(req, res): Promise<void> {
     try {
         let professorIndex: number = req.params.professorIndex;
-        const result: any = await professor.getProfessorIndex(professorIndex);
+        const result: any = await professor.getProfessorByProfessorIndex(professorIndex);
         res.send(result);
     } catch (err) {
         res.send(err);
@@ -74,10 +74,10 @@ async function getProfessorIndex(req, res): Promise<void> {
  * @param res
  * @returns {Promise<void>}
  */
-async function getProfessorName(req, res): Promise<void> {
+async function getProfessorByProfessorName(req, res): Promise<void> {
     try {
         let professorName: string = req.params.professorName;
-        const result: any = await professor.getProfessorName(professorName);
+        const result: any = await professor.getProfessorByProfessorName(professorName);
         res.send(result);
     } catch (err) {
         res.send(err);
