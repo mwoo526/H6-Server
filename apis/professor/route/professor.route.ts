@@ -1,6 +1,6 @@
 import * as express from 'express';
 import {professor} from "../model/professor.model";
-import {ProfessorResource} from "../../../resource/professorResource";
+import {ProfessorResource} from "../../../resource/professor.resource";
 
 export class ProfessorRoutes {
     public professorRouter: express.Router = express.Router();
@@ -32,7 +32,7 @@ async function createProfessor(req, res): Promise<void> {
         const result: any = await professor.createProfessor(professorData.getProfessor());
         res.send(result);
     } catch (err) {
-        res.send(err.message);
+        res.send(err);
     }
 }
 
@@ -48,7 +48,7 @@ async function listProfessor(req, res): Promise<void> {
         const result: any = await professor.listProfessor();
         res.send(result);
     } catch (err) {
-        res.send(err.message);
+        res.send(err);
     }
 }
 
@@ -64,7 +64,7 @@ async function getProfessorIndex(req, res): Promise<void> {
         const result: any = await professor.getProfessorIndex(professorIndex);
         res.send(result);
     } catch (err) {
-        res.send(err.message);
+        res.send(err);
     }
 }
 
@@ -80,7 +80,7 @@ async function getProfessorName(req, res): Promise<void> {
         const result: any = await professor.getProfessorName(professorName);
         res.send(result);
     } catch (err) {
-        res.send(err.message);
+        res.send(err);
     }
 }
 
@@ -97,7 +97,7 @@ async function updateProfessor(req, res): Promise<void> {
         const result: any = await professor.updateProfessor(professorIndex, professorData);
         res.send(result);
     } catch (err) {
-        res.send(err.message);
+        res.send(err);
     }
 }
 
@@ -113,7 +113,7 @@ async function deleteProfessor(req, res): Promise<void> {
         const result: any = await professor.deleteProfessor(professorIndex);
         res.send(result);
     } catch (err) {
-        res.send(err.message);
+        res.send(err);
     }
 }
 

@@ -33,7 +33,7 @@ async function createLecture(req, res): Promise<void> {
         const result: any = await lecture.createLecture(lectureData.getLecture());
         res.send(result);
     } catch (err) {
-        res.send(err.message);
+        res.send(err);
     }
 }
 
@@ -49,7 +49,7 @@ async function listLecture(req, res): Promise<void> {
         const result = await lecture.listLecture();
         res.send(result);
     }catch(err){
-        res.send(err.message);
+        res.send(err);
     }
 }
 
@@ -65,7 +65,7 @@ async function getLecture(req, res): Promise<void> {
         const result = await lecture.getLecture(lectureIndex);
         res.send(result);
     }catch(err){
-        res.send(err.message);
+        res.send(err);
     }
 }
 
@@ -81,7 +81,7 @@ async function getLectureProfessorName(req, res): Promise<void> {
         const result = await lecture.getLectureProfessorName(professorName);
         res.send(result);
     }catch(err){
-        res.send(err.message);
+        res.send(err);
     }
 }
 
@@ -97,7 +97,7 @@ async function getLectureName(req, res): Promise<void> {
         const result = await lecture.getLectureName(lectureName);
         res.send(result);
     }catch(err){
-        res.send(err.message);
+        res.send(err);
     }
 }
 
@@ -113,7 +113,7 @@ async function getLectureTrack(req, res): Promise<void> {
         const result = await lecture.getLectureTrack(track);
         res.send(result);
     }catch(err){
-        res.send(err.message);
+        res.send(err);
     }
 }
 
@@ -130,7 +130,7 @@ async function updateLecture(req, res): Promise<void> {
         const result = await lecture.updateLecture(lectureIndex, lectureData.getLecture());
         res.send(result);
     }catch(err){
-        res.send(err.message);
+        res.send(err);
     }
 }
 
@@ -146,7 +146,7 @@ async function deleteLecture(req, res): Promise<void> {
         const result = await lecture.deleteLecture(lectureIndex);
         res.send(result);
     }catch(err){
-        res.send(err.message);
+        res.send(err);
     }
 }
 

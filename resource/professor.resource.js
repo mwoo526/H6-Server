@@ -50,4 +50,4 @@ class ProfessorResource {
     }
 }
 exports.ProfessorResource = ProfessorResource;
-//# sourceMappingURL=professorResource.js.map
+//# sourceMappingURL=professor.resource.js.map
