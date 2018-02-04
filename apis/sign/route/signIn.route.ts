@@ -24,7 +24,7 @@ async function getUser(req, res): Promise<void> {
 		const result: any = await signIn.getUser(req.body);
 		res.send(result);
 	} catch (err) {
-		res.send(err.message);
+		res.send(err);
 	}
 }
 

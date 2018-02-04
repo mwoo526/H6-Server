@@ -19,10 +19,11 @@ class LectureRoutes {
     router() {
         this.lectureRouter.post('/lectures', createLecture);
         this.lectureRouter.get('/lectures', listLecture);
-        this.lectureRouter.get('/lectures/:lectureIndex', getLecture);
-        this.lectureRouter.get('/lectures/:professorName/professorName', getLectureProfessorName);
-        this.lectureRouter.get('/lectures/:lectureName/lectureName', getLectureName);
-        this.lectureRouter.get('/lectures/:track/track', getLectureTrack);
+        this.lectureRouter.get('/lectures/lectureIndex/:lectureIndex', getLectureByLectureIndex);
+        this.lectureRouter.get('/lectures/lectureCode/:lectureCode', getLectureByLectureCode);
+        this.lectureRouter.get('/lectures/professorName/:professorName', getLectureByProfessorName);
+        this.lectureRouter.get('/lectures/lectureName/:lectureName', getLectureByLectureName);
+        this.lectureRouter.get('/lectures/track/:track', getLectureByTrack);
         this.lectureRouter.put('/lectures/:lectureIndex', updateLecture);
         this.lectureRouter.delete('/lectures/:lectureIndex', deleteLecture);
     }
@@ -42,7 +43,7 @@ function createLecture(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -59,7 +60,7 @@ function listLecture(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -69,15 +70,33 @@ function listLecture(req, res) {
  * @param res
  * @returns {Promise<void>}
  */
-function getLecture(req, res) {
+function getLectureByLectureIndex(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let lectureIndex = req.params.lectureIndex;
-            const result = yield lecture_model_1.lecture.getLecture(lectureIndex);
+            const result = yield lecture_model_1.lecture.getLectureByLectureIndex(lectureIndex);
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
+        }
+    });
+}
+/**
+ * route: lecture code 조회
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+function getLectureByLectureCode(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            let lectureCode = req.params.lectureCode;
+            const result = yield lecture_model_1.lecture.getLectureByLectureCode(lectureCode);
+            res.send(result);
+        }
+        catch (err) {
+            res.send(err);
         }
     });
 }
@@ -87,15 +106,15 @@ function getLecture(req, res) {
  * @param res
  * @returns {Promise<void>}
  */
-function getLectureProfessorName(req, res) {
+function getLectureByProfessorName(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let professorName = req.params.professorName;
-            const result = yield lecture_model_1.lecture.getLectureProfessorName(professorName);
+            const result = yield lecture_model_1.lecture.getLectureByProfessorName(professorName);
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -105,15 +124,15 @@ function getLectureProfessorName(req, res) {
  * @param res
  * @returns {Promise<void>}
  */
-function getLectureName(req, res) {
+function getLectureByLectureName(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let lectureName = req.params.lectureName;
-            const result = yield lecture_model_1.lecture.getLectureName(lectureName);
+            const result = yield lecture_model_1.lecture.getLectureByLectureName(lectureName);
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -123,15 +142,15 @@ function getLectureName(req, res) {
  * @param res
  * @returns {Promise<void>}
  */
-function getLectureTrack(req, res) {
+function getLectureByTrack(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let track = req.params.track;
-            const result = yield lecture_model_1.lecture.getLectureTrack(track);
+            const result = yield lecture_model_1.lecture.getLectureByTrack(track);
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -150,7 +169,7 @@ function updateLecture(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -168,7 +187,7 @@ function deleteLecture(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }

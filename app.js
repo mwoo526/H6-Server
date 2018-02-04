@@ -14,6 +14,7 @@ class Server {
         this.app = express();
         /** bodyParser 선언 */
         this.app.use(bodyParser.urlencoded({ extended: false }));
+        this.app.use(bodyParser.json());
         /** 라우터 추가 */
         this.app.use(test_route_1.testRoutes.testRouter);
         this.app.use(user_route_1.userRoutes.userRouter);

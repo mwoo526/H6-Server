@@ -43,7 +43,7 @@ export class Professor {
      * @param {number} professorIndex
      * @returns {Promise<any>}
      */
-    getProfessorIndex(professorIndex: number): Promise<any> {
+    getProfessorByProfessorIndex(professorIndex: number): Promise<any> {
         return new Promise(async (resolve, reject) => {
             await conn.query(`SELECT * FROM professors WHERE professorIndex=?`, [professorIndex], function (err, rows) {
                 if (err) {
@@ -60,7 +60,7 @@ export class Professor {
      * @param {string} professorName
      * @returns {Promise<any>}
      */
-    getProfessorName(professorName: string): Promise<any> {
+    getProfessorByProfessorName(professorName: string): Promise<any> {
         return new Promise(async (resolve, reject) => {
             await conn.query(`SELECT * FROM professors WHERE professorName LIKE '%${professorName}%'`, function (err, rows) {
                 if (err) {

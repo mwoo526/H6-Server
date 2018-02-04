@@ -26,7 +26,7 @@ async function createUser(req, res): Promise<void> {
 		const result: any = await signUp.createUser(userResource.getSignUp());
 		res.send(result);
 	} catch (err) {
-		res.send(err.message);
+		res.send(err);
 	}
 }
 

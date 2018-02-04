@@ -32,7 +32,7 @@ async function createUser(req, res): Promise<void> {
 		const result: any = await user.createUser(userData);
 		res.send(result);
 	} catch (err) {
-		res.send(err.message);
+		res.send(err);
 	}
 }
 
@@ -47,7 +47,7 @@ async function listUser(req, res): Promise<void> {
 		const result: any = await user.listUser();
 		res.send(result);
 	} catch (err) {
-		res.send(err.message);
+		res.send(err);
 	}
 }
 
@@ -63,7 +63,7 @@ async function getUser(req, res): Promise<void> {
 		const result: any = await user.getUser(userId);
 		res.send(result);
 	} catch (err) {
-		res.send(err.message);
+		res.send(err);
 	}
 }
 
@@ -87,7 +87,7 @@ async function updateUser(req, res): Promise<void> {
 		const result: any = await user.updateUser(userId, userData);
 		res.send(result);
 	} catch (err) {
-		res.send(err.message);
+		res.send(err);
 	}
 }
 
@@ -111,7 +111,7 @@ async function updateUserPassword(req, res): Promise<void> {
 			throw new Error('The password is incorrect')
 		}
 	} catch (err) {
-		res.send(err.message);
+		res.send(err);
 	}
 }
 
@@ -127,7 +127,7 @@ async function deleteUser(req, res): Promise<void> {
 		const result: any = await user.deleteUser(userId);
 		res.send(result);
 	} catch (err) {
-		res.send(err.message);
+		res.send(err);
 	}
 }
 

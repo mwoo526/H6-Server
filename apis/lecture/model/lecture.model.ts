@@ -42,9 +42,26 @@ export class Lecture{
      * @param {number} lectureIndex
      * @returns {Promise<any>}
      */
-    getLecture(lectureIndex: number): Promise<void> {
+    getLectureByLectureIndex(lectureIndex: number): Promise<void> {
         return new Promise(async (resolve, reject) => {
             await conn.query('SELECT * FROM lectures WHERE lectureIndex = ?', lectureIndex, function(err, rows){
+                if(err){
+                    reject(err);
+                }else{
+                    resolve(rows);
+                }
+            })
+        })
+    }
+
+    /**
+     * model: lecture lectureCode 조회
+     * @param {string} lectureCode
+     * @returns {Promise<any>}
+     */
+    getLectureByLectureCode(lectureCode: string): Promise<void> {
+        return new Promise(async (resolve, reject) => {
+            await conn.query(`SELECT * FROM lectures WHERE lectureCode LIKE '%${lectureCode}%'`, function(err, rows){
                 if(err){
                     reject(err);
                 }else{
@@ -59,9 +76,9 @@ export class Lecture{
      * @param {string} professorName
      * @returns {Promise<any>}
      */
-    getLectureProfessorName(professorName: string): Promise<void> {
+    getLectureByProfessorName(professorName: string): Promise<void> {
         return new Promise(async (resolve, reject) => {
-            await conn.query('SELECT * FROM lectures JOIN professors USING(professorIndex) WHERE professorName = ?', professorName, function(err, rows){
+            await conn.query(`SELECT * FROM lectures JOIN professors USING(professorIndex) WHERE professorName LIKE '%${professorName}%'`, function(err, rows){
                 if(err){
                     reject(err);
                 }else{
@@ -76,7 +93,7 @@ export class Lecture{
      * @param {string} lectureName
      * @returns {Promise<any>}
      */
-    getLectureName(lectureName: string): Promise<void> {
+    getLectureByLectureName(lectureName: string): Promise<void> {
         return new Promise(async (resolve, reject) => {
             await conn.query(`SELECT * FROM lectures WHERE lectureName LIKE '%${lectureName}%'`, function(err, rows){
                 if(err){
@@ -93,7 +110,7 @@ export class Lecture{
      * @param {string} track
      * @returns {Promise<any>}
      */
-    getLectureTrack(track: string): Promise<void> {
+    getLectureByTrack(track: string): Promise<void> {
         return new Promise(async (resolve, reject) => {
             await conn.query(`SELECT * FROM lectures WHERE track LIKE '%${track}%'`, function(err, rows){
                 if(err){

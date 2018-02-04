@@ -41,7 +41,7 @@ function createUser(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -58,7 +58,7 @@ function listUser(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -76,7 +76,7 @@ function getUser(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -102,7 +102,7 @@ function updateUser(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -129,7 +129,7 @@ function updateUserPassword(req, res) {
             }
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
@@ -147,7 +147,7 @@ function deleteUser(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err.message);
+            res.send(err);
         }
     });
 }
