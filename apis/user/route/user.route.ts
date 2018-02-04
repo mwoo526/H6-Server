@@ -1,6 +1,6 @@
 import * as express from 'express';
-import { encriptionPw } from '../../../resource/encryption.resource';
-import { UserResource } from '../../../resource/user.resource';
+import { encriptionPw } from '../../../packages/utils/encryption.utli';
+import { UserResource } from '../../../resources/user.resource';
 import { user } from '../model/user.model';
 
 export class UserRoutes {

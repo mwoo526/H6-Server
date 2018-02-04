@@ -1,4 +1,4 @@
-import {mysqlResource} from "../../../resource/mysql.resource";
+import { mysqlResource } from '../../../packages/utils/mysql.util';
 
 const conn = mysqlResource.conn;
 

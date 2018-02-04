@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { UserResource } from '../../../resource/user.resource';
+import { UserResource } from '../../../resources/user.resource';
 import { signUp } from '../model/signUp.model';
 
 export class SignUpRoutes {

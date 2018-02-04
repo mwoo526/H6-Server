@@ -1,4 +1,4 @@
-import { encriptionPw } from './encryption.resource';
+import { encriptionPw } from '../packages/utils/encryption.utli';
 
 export class UserResource {
 	private userId;

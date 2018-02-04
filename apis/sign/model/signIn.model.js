@@ -8,9 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const encryption_resource_1 = require("../../../resource/encryption.resource");
-const mysql_resource_1 = require("../../../resource/mysql.resource");
-const conn = mysql_resource_1.mysqlResource.conn;
+const encryption_utli_1 = require("../../../packages/utils/encryption.utli");
+const mysql_util_1 = require("../../../packages/utils/mysql.util");
+const conn = mysql_util_1.mysqlResource.conn;
 class SignIn {
     /**
      * model: 로그인
@@ -31,7 +31,7 @@ class SignIn {
                         reject(err);
                     }
                     else {
-                        if (rows[0].userPw === encryption_resource_1.encriptionPw.getHash(userData.userPw)) {
+                        if (rows[0].userPw === encryption_utli_1.encriptionPw.getHash(userData.userPw)) {
                             resolve(rows);
                         }
                         else {

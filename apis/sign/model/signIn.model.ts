@@ -1,5 +1,5 @@
-import { encriptionPw } from '../../../resource/encryption.resource';
-import { mysqlResource } from '../../../resource/mysql.resource';
+import { encriptionPw } from '../../../packages/utils/encryption.utli';
+import { mysqlResource } from '../../../packages/utils/mysql.util';
 
 const conn = mysqlResource.conn;
 

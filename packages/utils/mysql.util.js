@@ -13,4 +13,4 @@ var mysqlResource;
     });
     mysqlResource.conn.connect();
 })(mysqlResource = exports.mysqlResource || (exports.mysqlResource = {}));
-//# sourceMappingURL=mysql.resource.js.map
+//# sourceMappingURL=mysql.util.js.map

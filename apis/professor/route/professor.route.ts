@@ -1,6 +1,6 @@
 import * as express from 'express';
 import {professor} from "../model/professor.model";
-import {ProfessorResource} from "../../../resource/professor.resource";
+import {ProfessorResource} from "../../../resources/professor.resource";
 
 export class ProfessorRoutes {
     public professorRouter: express.Router = express.Router();

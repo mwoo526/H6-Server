@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const lecture_resource_1 = require("../../../resource/lecture.resource");
+const lecture_resource_1 = require("../../../resources/lecture.resource");
 const lecture_model_1 = require("../model/lecture.model");
 const express = require("express");
 class LectureRoutes {

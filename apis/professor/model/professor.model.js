@@ -8,8 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const mysql_resource_1 = require("../../../resource/mysql.resource");
-const conn = mysql_resource_1.mysqlResource.conn;
+const mysql_util_1 = require("../../../packages/utils/mysql.util");
+const conn = mysql_util_1.mysqlResource.conn;
 class Professor {
     constructor() {
     }

@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const professor_model_1 = require("../model/professor.model");
-const professor_resource_1 = require("../../../resource/professor.resource");
+const professor_resource_1 = require("../../../resources/professor.resource");
 class ProfessorRoutes {
     constructor() {
         this.professorRouter = express.Router();

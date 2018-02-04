@@ -1,4 +1,4 @@
-import {LectureResource} from "../../../resource/lecture.resource";
+import {LectureResource} from "../../../resources/lecture.resource";
 import {lecture} from "../model/lecture.model";
 import * as express from 'express';
 

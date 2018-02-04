@@ -9,8 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
-const encryption_resource_1 = require("../../../resource/encryption.resource");
-const user_resource_1 = require("../../../resource/user.resource");
+const encryption_utli_1 = require("../../../packages/utils/encryption.utli");
+const user_resource_1 = require("../../../resources/user.resource");
 const user_model_1 = require("../model/user.model");
 class UserRoutes {
     constructor() {
@@ -119,8 +119,8 @@ function updateUserPassword(req, res) {
         let userNewPw = req.body.userNewPw;
         const getUserPw = yield user_model_1.user.getUser(userId);
         try {
-            if (encryption_resource_1.encriptionPw.getHash(userPw) === getUserPw[0].userPw) {
-                const userPw = encryption_resource_1.encriptionPw.getHash(userNewPw);
+            if (encryption_utli_1.encriptionPw.getHash(userPw) === getUserPw[0].userPw) {
+                const userPw = encryption_utli_1.encriptionPw.getHash(userNewPw);
                 const result = yield user_model_1.user.updateUserPassword(userId, userPw);
                 res.send(result);
             }
