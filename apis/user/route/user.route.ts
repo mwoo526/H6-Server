@@ -108,10 +108,10 @@ async function updateUserPassword(req, res): Promise<void> {
 			const result: any = await user.updateUserPassword(userId, userPw);
 			res.send(result);
 		} else {
-			throw new Error('The password is incorrect')
+			throw new Error('The password is incorrect');
 		}
 	} catch (err) {
-		res.send(err);
+		res.send(err.message);
 	}
 }
 

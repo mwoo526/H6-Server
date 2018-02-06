@@ -129,7 +129,7 @@ function updateUserPassword(req, res) {
             }
         }
         catch (err) {
-            res.send(err);
+            res.send(err.message);
         }
     });
 }

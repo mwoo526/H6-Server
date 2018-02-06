@@ -1,5 +1,5 @@
 import { mysqlResource } from '../../../packages/utils/mysql.util';
-const conn = mysqlResource.conn;
+const pool = mysqlResource.pool;
 
 export class User {
 	constructor() {
@@ -12,13 +12,17 @@ export class User {
 	 */
 	createUser(userData: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
-			await conn.query(`INSERT INTO users SET ?`, [userData], function (err) {
-				if (err) {
-					reject(err);
-				} else {
-					resolve(userData);
-				}
-			})
+            await pool.getConnection(async function(err,connection) {
+                await connection.query(`INSERT INTO users SET ?`, [userData], function (err) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(userData);
+                    }
+                })
+            })
 		})
 	}
 
@@ -28,12 +32,16 @@ export class User {
 	 */
 	listUser(): Promise<any> {
 		return new Promise(async (resolve, reject) => {
-			await conn.query(`SELECT * FROM users`, function (err, rows) {
-				if (err) {
-					reject(err);
-				} else {
-					resolve(rows);
-				}
+			await pool.getConnection(async function(err,connection) {
+				await connection.query(`SELECT * FROM users`, function (err, rows) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+                        connection.release();
+                        resolve(rows);
+					}
+				})
 			})
 		})
 	}
@@ -45,13 +53,17 @@ export class User {
 	 */
 	getUser(userId: string): Promise<any> {
 		return new Promise(async (resolve, reject) => {
-			await conn.query(`SELECT * FROM users WHERE userId=?`, [userId], function (err, rows) {
-				if (err) {
-					reject(err);
-				} else {
-					resolve(rows);
-				}
-			})
+            await pool.getConnection(async function(err,connection) {
+                await connection.query(`SELECT * FROM users WHERE userId = ?`, [userId], function (err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(rows);
+                    }
+                })
+            })
 		})
 	}
 
@@ -63,13 +75,17 @@ export class User {
 	 */
 	updateUser(userId:string, userData: any): Promise<any> {
 		return new Promise(async(resolve, reject) => {
-			await conn.query(`UPDATE users SET ? WHERE userId=?`, [userData,userId], function (err, rows) {
-				if (err) {
-					reject(err);
-				} else {
-					resolve(rows);
-				}
-			})
+            await pool.getConnection(async function(err,connection) {
+                await connection.query(`UPDATE users SET ? WHERE userId = ?`, [userData,userId], function (err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(rows);
+                    }
+                })
+            })
 		})
 	}
 
@@ -81,13 +97,17 @@ export class User {
 	 */
 	updateUserPassword(userId: string, userPw: any): Promise<any> {
 		return new Promise(async(resolve, reject) => {
-			await conn.query(`UPDATE users SET userPw=? WHERE userId=?`,[userPw,userId], function(err, rows) {
-				if (err) {
-					reject(err);
-				} else {
-					resolve(rows);
-				}
-			})
+            await pool.getConnection(async function(err,connection) {
+                await connection.query(`UPDATE users SET userPw=? WHERE userId=?`,[userPw,userId], function (err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(rows);
+                    }
+                })
+            })
 		})
 	}
 
@@ -98,13 +118,17 @@ export class User {
 	 */
 	deleteUser(userId:string): Promise<any> {
 		return new Promise(async(resolve, reject) => {
-			await conn.query(`DELETE FROM users WHERE userId=?`,userId,function(err, rows) {
-				if (err) {
-					reject(err);
-				} else {
-					resolve(rows);
-				}
-			})
+            await pool.getConnection(async function(err,connection) {
+                await connection.query(`DELETE FROM users WHERE userId = ?`, userId, function (err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(rows);
+                    }
+                })
+            })
 		})
 	}
 }

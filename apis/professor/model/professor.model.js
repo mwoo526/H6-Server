@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mysql_util_1 = require("../../../packages/utils/mysql.util");
-const conn = mysql_util_1.mysqlResource.conn;
+const pool = mysql_util_1.mysqlResource.pool;
 class Professor {
     constructor() {
     }
@@ -20,13 +20,19 @@ class Professor {
      */
     createProfessor(professorData) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`INSERT INTO professors SET ?`, [professorData], function (err) {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve(professorData);
-                }
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`INSERT INTO professors SET ?`, [professorData], function (err) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(professorData);
+                        }
+                    });
+                });
             });
         }));
     }
@@ -36,13 +42,19 @@ class Professor {
      */
     listProfessor() {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`SELECT * FROM professors`, function (err, rows) {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve(rows);
-                }
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`SELECT * FROM professors`, function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(rows);
+                        }
+                    });
+                });
             });
         }));
     }
@@ -53,13 +65,19 @@ class Professor {
      */
     getProfessorByProfessorIndex(professorIndex) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`SELECT * FROM professors WHERE professorIndex=?`, [professorIndex], function (err, rows) {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve(rows);
-                }
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`SELECT * FROM professors WHERE professorIndex = ?`, [professorIndex], function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(rows);
+                        }
+                    });
+                });
             });
         }));
     }
@@ -70,13 +88,19 @@ class Professor {
      */
     getProfessorByProfessorName(professorName) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`SELECT * FROM professors WHERE professorName LIKE '%${professorName}%'`, function (err, rows) {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve(rows);
-                }
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`SELECT * FROM professors WHERE professorName LIKE '%${professorName}%'`, function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(rows);
+                        }
+                    });
+                });
             });
         }));
     }
@@ -88,13 +112,19 @@ class Professor {
      */
     updateProfessor(professorIndex, professorData) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`UPDATE professors SET ? WHERE professorIndex=?`, [professorData, professorIndex], function (err, rows) {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve(rows);
-                }
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`UPDATE professors SET ? WHERE professorIndex = ?`, [professorData, professorIndex], function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(rows);
+                        }
+                    });
+                });
             });
         }));
     }
@@ -105,13 +135,19 @@ class Professor {
      */
     deleteProfessor(professorIndex) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`DELETE FROM professors WHERE professorIndex=?`, professorIndex, function (err, rows) {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve(rows);
-                }
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`DELETE FROM professors WHERE professorIndex = ?`, professorIndex, function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(rows);
+                        }
+                    });
+                });
             });
         }));
     }

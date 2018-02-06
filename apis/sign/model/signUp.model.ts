@@ -1,6 +1,5 @@
 import { mysqlResource } from '../../../packages/utils/mysql.util';
-
-const conn = mysqlResource.conn;
+const pool = mysqlResource.pool;
 
 export class SignUp{
 	constructor() {
@@ -13,12 +12,16 @@ export class SignUp{
 	 */
 	createUser(userData: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
-			await conn.query(`INSERT INTO users SET ?`, [userData], function (err) {
-				if (err) {
-					reject(err);
-				} else {
-					resolve(userData);
-				}
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`INSERT INTO users SET ?`, [userData], function (err) {
+					if (err) {
+                        connection.release();
+                        reject(err);
+					} else {
+                        connection.release();
+                        resolve(userData);
+					}
+				})
 			})
 		})
 	}

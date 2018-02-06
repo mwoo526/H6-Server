@@ -1,6 +1,5 @@
 import { mysqlResource } from '../../../packages/utils/mysql.util';
-
-const conn = mysqlResource.conn;
+const pool = mysqlResource.pool;
 
 export class Lecture{
 
@@ -11,13 +10,18 @@ export class Lecture{
      */
     createLecture(lectureData: any): Promise<void> {
         return new Promise(async (resolve, reject) => {
-            await conn.query('INSERT INTO lectures SET ?', lectureData, function(err){
-                if(err){
-                    reject(err);
-                }else{
-                    resolve(lectureData);
-                }
-            });
+            await pool.getConnection(async function (err, connection) {
+                await connection.query('INSERT INTO lectures SET ?', lectureData, function (err) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(lectureData);
+                    }
+                })
+            })
+
         })
     }
 
@@ -27,13 +31,18 @@ export class Lecture{
      */
     listLecture(): Promise<void> {
         return new Promise(async (resolve, reject) => {
-            await conn.query('SELECT * FROM lectures', function(err, rows){
-                if(err){
-                    reject(err);
-                }else{
-                    resolve(rows);
-                }
+            await pool.getConnection(async function (err, connection) {
+                await connection.query('SELECT * FROM lectures', function (err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(rows);
+                    }
+                })
             })
+
         })
     }
 
@@ -44,12 +53,16 @@ export class Lecture{
      */
     getLectureByLectureIndex(lectureIndex: number): Promise<void> {
         return new Promise(async (resolve, reject) => {
-            await conn.query('SELECT * FROM lectures WHERE lectureIndex = ?', lectureIndex, function(err, rows){
-                if(err){
-                    reject(err);
-                }else{
-                    resolve(rows);
-                }
+            await pool.getConnection(async function (err, connection) {
+                await connection.query('SELECT * FROM lectures WHERE lectureIndex = ?', lectureIndex, function (err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(rows);
+                    }
+                })
             })
         })
     }
@@ -61,12 +74,16 @@ export class Lecture{
      */
     getLectureByLectureCode(lectureCode: string): Promise<void> {
         return new Promise(async (resolve, reject) => {
-            await conn.query(`SELECT * FROM lectures WHERE lectureCode LIKE '%${lectureCode}%'`, function(err, rows){
-                if(err){
-                    reject(err);
-                }else{
-                    resolve(rows);
-                }
+            await pool.getConnection(async function (err, connection) {
+                await connection.query(`SELECT * FROM lectures WHERE lectureCode LIKE '%${lectureCode}%'`, function (err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(rows);
+                    }
+                })
             })
         })
     }
@@ -78,12 +95,16 @@ export class Lecture{
      */
     getLectureByProfessorName(professorName: string): Promise<void> {
         return new Promise(async (resolve, reject) => {
-            await conn.query(`SELECT * FROM lectures JOIN professors USING(professorIndex) WHERE professorName LIKE '%${professorName}%'`, function(err, rows){
-                if(err){
-                    reject(err);
-                }else{
-                    resolve(rows);
-                }
+            await pool.getConnection(async function (err, connection) {
+                await connection.query(`SELECT * FROM lectures JOIN professors USING(professorIndex) WHERE professorName LIKE '%${professorName}%'`, function (err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(rows);
+                    }
+                })
             })
         })
     }
@@ -95,12 +116,16 @@ export class Lecture{
      */
     getLectureByLectureName(lectureName: string): Promise<void> {
         return new Promise(async (resolve, reject) => {
-            await conn.query(`SELECT * FROM lectures WHERE lectureName LIKE '%${lectureName}%'`, function(err, rows){
-                if(err){
-                    reject(err);
-                }else{
-                    resolve(rows);
-                }
+            await pool.getConnection(async function (err, connection) {
+                await connection.query(`SELECT * FROM lectures WHERE lectureName LIKE '%${lectureName}%'`, function (err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(rows);
+                    }
+                })
             })
         })
     }
@@ -112,12 +137,16 @@ export class Lecture{
      */
     getLectureByTrack(track: string): Promise<void> {
         return new Promise(async (resolve, reject) => {
-            await conn.query(`SELECT * FROM lectures WHERE track LIKE '%${track}%'`, function(err, rows){
-                if(err){
-                    reject(err);
-                }else{
-                    resolve(rows);
-                }
+          await pool.getConnection(async function (err, connection) {
+                await connection.query(`SELECT * FROM lectures WHERE track LIKE '%${track}%'`, function (err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(rows);
+                    }
+                })
             })
         })
     }
@@ -130,12 +159,16 @@ export class Lecture{
      */
     updateLecture(lectureIndex: number,lectureData: any): Promise<void> {
         return new Promise(async (resolve, reject) => {
-            await conn.query('UPDATE lectures SET ? WHERE lectureIndex = ?', [lectureData, lectureIndex], function(err, rows){
-                if(err){
-                    reject(err);
-                }else{
-                    resolve(rows);
-                }
+            await pool.getConnection(async function (err, connection) {
+                await connection.query('UPDATE lectures SET ? WHERE lectureIndex = ?', [lectureData, lectureIndex], function (err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(rows);
+                    }
+                })
             })
         })
     }
@@ -147,12 +180,16 @@ export class Lecture{
      */
     deleteLecture(lectureIndex: number): Promise<void> {
         return new Promise(async (resolve, reject) => {
-            await conn.query('DELETE FROM lectures WHERE lectureIndex = ?', lectureIndex, function(err, rows){
-                if(err){
-                    reject(err);
-                }else{
-                    resolve(rows);
-                }
+            await pool.getConnection(async function (err, connection) {
+                await connection.query('DELETE FROM lectures WHERE lectureIndex = ?', lectureIndex, function (err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(rows);
+                    }
+                })
             })
         })
     }
