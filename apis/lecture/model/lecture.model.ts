@@ -1,6 +1,6 @@
-import { mysqlResource } from '../../../packages/utils/mysql.util';
+import { mysqlUtil } from '../../../packages/utils/mysql.util';
 
-const conn = mysqlResource.conn;
+const conn = mysqlUtil.conn;
 
 export class Lecture{
 

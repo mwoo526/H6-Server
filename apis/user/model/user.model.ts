@@ -1,5 +1,5 @@
-import { mysqlResource } from '../../../packages/utils/mysql.util';
-const conn = mysqlResource.conn;
+import { mysqlUtil } from '../../../packages/utils/mysql.util';
+const conn = mysqlUtil.conn;
 
 export class User {
 	constructor() {
