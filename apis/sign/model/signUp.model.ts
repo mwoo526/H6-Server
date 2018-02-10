@@ -1,6 +1,5 @@
 import { mysqlUtil } from '../../../packages/utils/mysql.util';
-
-const conn = mysqlUtil.conn;
+const pool = mysqlUtil.pool;
 
 export class SignUp{
 	constructor() {
@@ -13,20 +12,24 @@ export class SignUp{
 	 */
 	createUser(userData: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
-			await conn.query(`INSERT INTO users SET ?`, [userData], async function (err) {
-				if (err) {
-					reject(err);
-				} else {
-					resolve(userData);
-				}
-			});
-			await conn.query(`INSERT INTO usersValidation (userId) VALUES ('${userData.userId}')`, function (err) {
-				if (err) {
-					reject(err);
-				} else {
-					resolve(userData);
-				}
-			});
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`INSERT INTO users SET ?`, [userData], function (err, rows) {
+					if (err) {
+                        reject(err);
+					} else {
+                        resolve(rows);
+					}
+				})
+                await connection.query(`INSERT INTO usersValidation (userId) VALUES ('${userData.userId}')`, function (err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                    	connection.release();
+                        resolve(rows);
+                    }
+                });
+			})
 		})
 	}
 }

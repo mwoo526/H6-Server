@@ -23,6 +23,12 @@ class UserValidationRoutes {
     }
 }
 exports.UserValidationRoutes = UserValidationRoutes;
+/**
+ * route: 인증코드 전송
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
 function sendValidationCode(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -38,6 +44,12 @@ function sendValidationCode(req, res) {
         }
     });
 }
+/**
+ * route: 인증코드 체크
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
 function checkValidationCode(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const userId = req.params.userId;

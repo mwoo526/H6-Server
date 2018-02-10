@@ -10,48 +10,66 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const email_util_1 = require("../../../packages/utils/email.util");
 const mysql_util_1 = require("../../../packages/utils/mysql.util");
-const conn = mysql_util_1.mysqlUtil.conn;
+const pool = mysql_util_1.mysqlUtil.pool;
 class UserValidation {
     constructor() {
     }
+    /**
+     * model: 인증코드 생성
+     * @param {string} userId
+     * @param {string} email
+     * @param validationCode
+     * @returns {Promise<any>}
+     */
     createValidationCode(userId, email, validationCode) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield email_util_1.emailUtil.sendEmail('kingdom0608@gmail.com', `${email}@naver.com`, 'test', validationCode);
-            yield conn.query(`UPDATE usersValidation SET validationCode = '${validationCode}' WHERE userId = '${userId}'`, function (err) {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve(validationCode);
-                }
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`UPDATE usersValidation SET validationCode = '${validationCode}' WHERE userId = '${userId}'`, function (err) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(validationCode);
+                        }
+                    });
+                });
             });
         }));
     }
+    /**
+     * model: 인증코드 조회
+     * @param {string} userId
+     * @returns {Promise<any>}
+     */
     getValidationCode(userId) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`SELECT * FROM usersValidation WHERE userId=?`, [userId], function (err, rows) {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve(rows);
-                }
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`SELECT * FROM usersValidation WHERE userId=?`, [userId], function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(rows);
+                        }
+                    });
+                });
             });
         }));
     }
-    updateIsValidation(userId) {
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`UPDATE usersValidation SET isValidation = true WHERE userId = '${userId}'`, function (err) {
-                if (err) {
-                    console.log(err);
-                    reject(err);
-                }
-                else {
-                    resolve(userId);
-                }
-            });
-        }));
-    }
+    /**
+     * model: 인증코드 체크
+     * @param {string} userId
+     * @param userData
+     * @param validationCode
+     * @returns {Promise<any>}
+     */
     checkValidationCode(userId, userData, validationCode) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             const getValidationCode = yield this.getValidationCode(userId);
@@ -71,6 +89,30 @@ class UserValidation {
                     reject('The validation Code does not correct');
                 }
             }
+        }));
+    }
+    /**
+     * model: 인증여부 업데이트
+     * @param {string} userId
+     * @returns {Promise<any>}
+     */
+    updateIsValidation(userId) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`UPDATE usersValidation SET isValidation = true WHERE userId = '${userId}'`, function (err) {
+                        if (err) {
+                            console.log(err);
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(userId);
+                        }
+                    });
+                });
+            });
         }));
     }
 }

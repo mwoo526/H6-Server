@@ -7,7 +7,7 @@ var emailUtil;
         service: 'gmail',
         auth: {
             user: 'kingdom0608@gmail.com',
-            pass: 'ajs141749'
+            pass: '비밀번호'
         }
     });
     function sendEmail(from, to, subject, text) {

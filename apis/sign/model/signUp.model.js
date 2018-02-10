@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mysql_util_1 = require("../../../packages/utils/mysql.util");
-const conn = mysql_util_1.mysqlUtil.conn;
+const pool = mysql_util_1.mysqlUtil.pool;
 class SignUp {
     constructor() {
     }
@@ -20,24 +20,27 @@ class SignUp {
      */
     createUser(userData) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            console.log(userData.userId);
-            yield conn.query(`INSERT INTO users SET ?`, [userData], function (err) {
+            yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    if (err) {
-                        reject(err);
-                    }
-                    else {
-                        resolve(userData);
-                    }
+                    yield connection.query(`INSERT INTO users SET ?`, [userData], function (err, rows) {
+                        if (err) {
+                            reject(err);
+                        }
+                        else {
+                            resolve(rows);
+                        }
+                    });
+                    yield connection.query(`INSERT INTO usersValidation (userId) VALUES ('${userData.userId}')`, function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(rows);
+                        }
+                    });
                 });
-            });
-            yield conn.query(`INSERT INTO usersValidation (userId) VALUES ('${userData.userId}')`, function (err) {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve(userData);
-                }
             });
         }));
     }

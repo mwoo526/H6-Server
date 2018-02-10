@@ -1,6 +1,6 @@
 import { emailUtil } from '../../../packages/utils/email.util';
 import { mysqlUtil } from '../../../packages/utils/mysql.util';
-const conn = mysqlUtil.conn;
+const pool = mysqlUtil.pool;
 
 export class UserValidation {
 	constructor() {
@@ -16,12 +16,16 @@ export class UserValidation {
 	createValidationCode(userId: string, email: string, validationCode: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await emailUtil.sendEmail('kingdom0608@gmail.com', `${email}@naver.com`, 'test', validationCode);
-			await conn.query(`UPDATE usersValidation SET validationCode = '${validationCode}' WHERE userId = '${userId}'`, function (err) {
-				if (err) {
-					reject(err);
-				} else {
-					resolve(validationCode);
-				}
+			await pool.getConnection(async function (err, connection) {
+                await connection.query(`UPDATE usersValidation SET validationCode = '${validationCode}' WHERE userId = '${userId}'`, function (err) {
+                    if (err) {
+                    	connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(validationCode);
+                    }
+                })
 			})
 		})
 	}
@@ -33,12 +37,16 @@ export class UserValidation {
 	 */
 	getValidationCode(userId: string): Promise<any> {
 		return new Promise(async (resolve, reject) => {
-			await conn.query(`SELECT * FROM usersValidation WHERE userId=?`, [userId], function(err, rows) {
-				if (err) {
-					reject(err);
-				} else {
-					resolve(rows);
-				}
+			await pool.getConnection(async function (err, connection) {
+                await connection.query(`SELECT * FROM usersValidation WHERE userId=?`, [userId], function(err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(rows);
+                    }
+                })
 			})
 		})
 	}
@@ -79,13 +87,17 @@ export class UserValidation {
 	 */
 	updateIsValidation(userId: string): Promise<any> {
 		return new Promise(async (resolve, reject) => {
-			await conn.query(`UPDATE usersValidation SET isValidation = true WHERE userId = '${userId}'`, function (err) {
-				if (err) {
-					console.log(err);
-					reject(err);
-				} else {
-					resolve(userId);
-				}
+			await pool.getConnection(async function (err, connection) {
+                await connection.query(`UPDATE usersValidation SET isValidation = true WHERE userId = '${userId}'`, function (err) {
+                    if (err) {
+                        console.log(err);
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(userId);
+                    }
+                })
 			})
 		})
 	}

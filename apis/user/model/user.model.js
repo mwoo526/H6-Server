@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mysql_util_1 = require("../../../packages/utils/mysql.util");
-const conn = mysql_util_1.mysqlUtil.conn;
+const pool = mysql_util_1.mysqlUtil.pool;
 class User {
     constructor() {
     }
@@ -20,13 +20,19 @@ class User {
      */
     createUser(userData) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`INSERT INTO users SET ?`, [userData], function (err) {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve(userData);
-                }
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`INSERT INTO users SET ?`, [userData], function (err) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(userData);
+                        }
+                    });
+                });
             });
         }));
     }
@@ -36,13 +42,19 @@ class User {
      */
     listUser() {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`SELECT * FROM users`, function (err, rows) {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve(rows);
-                }
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`SELECT * FROM users`, function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(rows);
+                        }
+                    });
+                });
             });
         }));
     }
@@ -53,13 +65,19 @@ class User {
      */
     getUser(userId) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`SELECT * FROM users WHERE userId=?`, [userId], function (err, rows) {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve(rows);
-                }
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`SELECT * FROM users WHERE userId = ?`, [userId], function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(rows);
+                        }
+                    });
+                });
             });
         }));
     }
@@ -71,13 +89,19 @@ class User {
      */
     updateUser(userId, userData) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`UPDATE users SET ? WHERE userId=?`, [userData, userId], function (err, rows) {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve(rows);
-                }
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`UPDATE users SET ? WHERE userId = ?`, [userData, userId], function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(rows);
+                        }
+                    });
+                });
             });
         }));
     }
@@ -89,13 +113,19 @@ class User {
      */
     updateUserPassword(userId, userPw) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`UPDATE users SET userPw=? WHERE userId=?`, [userPw, userId], function (err, rows) {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve(rows);
-                }
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`UPDATE users SET userPw=? WHERE userId=?`, [userPw, userId], function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(rows);
+                        }
+                    });
+                });
             });
         }));
     }
@@ -106,13 +136,19 @@ class User {
      */
     deleteUser(userId) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield conn.query(`DELETE FROM users WHERE userId=?`, userId, function (err, rows) {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve(rows);
-                }
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`DELETE FROM users WHERE userId = ?`, userId, function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(rows);
+                        }
+                    });
+                });
             });
         }));
     }

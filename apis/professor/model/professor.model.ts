@@ -1,5 +1,5 @@
 import { mysqlUtil } from '../../../packages/utils/mysql.util';
-const conn = mysqlUtil.conn;
+const pool = mysqlUtil.pool;
 
 export class Professor {
     constructor() {
@@ -12,12 +12,16 @@ export class Professor {
      */
     createProfessor(professorData: any): Promise<any> {
         return new Promise(async (resolve, reject) => {
-            await conn.query(`INSERT INTO professors SET ?`, [professorData], function (err) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(professorData);
-                }
+            await pool.getConnection(async function(err, connection) {
+                await connection.query(`INSERT INTO professors SET ?`, [professorData], function (err) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(professorData);
+                    }
+                })
             })
         })
     }
@@ -28,12 +32,16 @@ export class Professor {
      */
     listProfessor(): Promise<any> {
         return new Promise(async (resolve, reject) => {
-            await conn.query(`SELECT * FROM professors`, function (err, rows) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(rows);
-                }
+            await pool.getConnection(async function(err, connection) {
+                await connection.query(`SELECT * FROM professors`, function (err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(rows);
+                    }
+                })
             })
         })
     }
@@ -45,12 +53,16 @@ export class Professor {
      */
     getProfessorByProfessorIndex(professorIndex: number): Promise<any> {
         return new Promise(async (resolve, reject) => {
-            await conn.query(`SELECT * FROM professors WHERE professorIndex=?`, [professorIndex], function (err, rows) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(rows);
-                }
+            await pool.getConnection(async function(err, connection) {
+                await connection.query(`SELECT * FROM professors WHERE professorIndex = ?`, [professorIndex], function (err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(rows);
+                    }
+                })
             })
         })
     }
@@ -62,12 +74,16 @@ export class Professor {
      */
     getProfessorByProfessorName(professorName: string): Promise<any> {
         return new Promise(async (resolve, reject) => {
-            await conn.query(`SELECT * FROM professors WHERE professorName LIKE '%${professorName}%'`, function (err, rows) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(rows);
-                }
+            await pool.getConnection(async function(err, connection) {
+                await connection.query(`SELECT * FROM professors WHERE professorName LIKE '%${professorName}%'`, function (err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(rows);
+                    }
+                })
             })
         })
     }
@@ -80,12 +96,16 @@ export class Professor {
      */
     updateProfessor(professorIndex:number, professorData: any): Promise<any> {
         return new Promise(async(resolve, reject) => {
-            await conn.query(`UPDATE professors SET ? WHERE professorIndex=?`, [professorData,professorIndex], function (err, rows) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(rows);
-                }
+            await pool.getConnection(async function(err, connection) {
+                await connection.query(`UPDATE professors SET ? WHERE professorIndex = ?`, [professorData, professorIndex], function (err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(rows);
+                    }
+                })
             })
         })
     }
@@ -97,12 +117,16 @@ export class Professor {
      */
     deleteProfessor(professorIndex:number): Promise<any> {
         return new Promise(async(resolve, reject) => {
-            await conn.query(`DELETE FROM professors WHERE professorIndex=?`,professorIndex,function(err, rows) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(rows);
-                }
+            await pool.getConnection(async function(err, connection) {
+                await connection.query(`DELETE FROM professors WHERE professorIndex = ?`, professorIndex, function (err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(rows);
+                    }
+                })
             })
         })
     }
