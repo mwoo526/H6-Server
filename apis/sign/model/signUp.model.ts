@@ -1,6 +1,6 @@
-import { mysqlResource } from '../../../packages/utils/mysql.util';
+import { mysqlUtil } from '../../../packages/utils/mysql.util';
 
-const conn = mysqlResource.conn;
+const conn = mysqlUtil.conn;
 
 export class SignUp{
 	constructor() {
@@ -13,13 +13,20 @@ export class SignUp{
 	 */
 	createUser(userData: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
-			await conn.query(`INSERT INTO users SET ?`, [userData], function (err) {
+			await conn.query(`INSERT INTO users SET ?`, [userData], async function (err) {
 				if (err) {
 					reject(err);
 				} else {
 					resolve(userData);
 				}
-			})
+			});
+			await conn.query(`INSERT INTO usersValidation (userId) VALUES ('${userData.userId}')`, function (err) {
+				if (err) {
+					reject(err);
+				} else {
+					resolve(userData);
+				}
+			});
 		})
 	}
 }
