@@ -4,6 +4,7 @@ export class UserResource {
 	private userId;
 	private userPw;
 	private userNickName;
+	private email;
 	private major;
 	private minor;
 	private doubleMajor;
@@ -14,6 +15,7 @@ export class UserResource {
 		this.setUserId(signUpData.userId);
 		this.setUserPw(signUpData.userPw);
 		this.setUserNickName(signUpData.userNickName);
+		this.setEmail(signUpData.email);
 		this.setMajor(signUpData.major);
 		this.setMinor(signUpData.minor);
 		this.setDoubleMajor(signUpData.doubleMajor);
@@ -40,6 +42,13 @@ export class UserResource {
 	}
 	public setUserNickName(userNickName){
 		this.userNickName = userNickName;
+	}
+
+	public getEmail(){
+		return this.email;
+	}
+	public setEmail(email){
+		this.email = email;
 	}
 
 	public getMajor(){
@@ -82,6 +91,7 @@ export class UserResource {
 			userId: this.getUserId(),
 			userPw: this.getUserPw(),
 			userNickName: this.getUserNickName(),
+			email: this.getEmail(),
 			major: this.getMajor(),
 			minor: this.getMinor(),
 			doubleMajor: this.getDoubleMajor(),

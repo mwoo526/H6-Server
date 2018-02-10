@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const encryption_utli_1 = require("../../../packages/utils/encryption.utli");
 const mysql_util_1 = require("../../../packages/utils/mysql.util");
-const pool = mysql_util_1.mysqlResource.pool;
+const pool = mysql_util_1.mysqlUtil.pool;
 class SignIn {
     /**
      * model: 로그인

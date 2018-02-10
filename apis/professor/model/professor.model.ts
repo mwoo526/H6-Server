@@ -1,5 +1,5 @@
-import { mysqlResource } from '../../../packages/utils/mysql.util';
-const pool = mysqlResource.pool;
+import { mysqlUtil } from '../../../packages/utils/mysql.util';
+const pool = mysqlUtil.pool;
 
 export class Professor {
     constructor() {

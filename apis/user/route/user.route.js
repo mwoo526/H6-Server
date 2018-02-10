@@ -91,6 +91,7 @@ function updateUser(req, res) {
         let userId = req.params.userId;
         let userData = {
             userNickName: req.body.userNickName,
+            email: req.body.email,
             major: req.body.major,
             minor: req.body.minor,
             doubleMajor: req.body.doubleMajor,

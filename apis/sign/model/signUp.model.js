@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mysql_util_1 = require("../../../packages/utils/mysql.util");
-const pool = mysql_util_1.mysqlResource.pool;
+const pool = mysql_util_1.mysqlUtil.pool;
 class SignUp {
     constructor() {
     }
@@ -23,6 +23,14 @@ class SignUp {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`INSERT INTO users SET ?`, [userData], function (err, rows) {
+                        if (err) {
+                            reject(err);
+                        }
+                        else {
+                            resolve(rows);
+                        }
+                    });
+                    yield connection.query(`INSERT INTO usersValidation (userId) VALUES ('${userData.userId}')`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);

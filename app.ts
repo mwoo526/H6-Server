@@ -6,6 +6,7 @@ import { testRoutes } from './apis/test/route/test.route';
 import { userRoutes } from './apis/user/route/user.route';
 import { professorRoutes } from "./apis/professor/route/professor.route";
 import { lectureRoutes } from "./apis/lecture/route/lecture.route";
+import { userValidationRoutes } from './apis/userValidation/route/userValidation.route';
 
 export class Server {
 	/** app 에 대한 타입 설정 */
@@ -17,13 +18,13 @@ export class Server {
 		this.app.use(bodyParser.urlencoded({ extended: false }));
 		this.app.use(bodyParser.json());
 		/** 라우터 추가 */
-
 		this.app.use(testRoutes.testRouter);
 		this.app.use(userRoutes.userRouter);
 		this.app.use(signUpRoutes.signUpRouter);
 		this.app.use(signInRoutes.signInRouter);
 		this.app.use(professorRoutes.professorRouter);
 		this.app.use(lectureRoutes.lectureRouter);
+		this.app.use(userValidationRoutes.userValidationRouter);
 		/** Not Found */
 		this.app.use((req: express.Request, res: express.Response, next: Function) => {
 			/**

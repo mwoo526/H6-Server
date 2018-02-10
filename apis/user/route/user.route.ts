@@ -77,6 +77,7 @@ async function updateUser(req, res): Promise<void> {
 	let userId: string = req.params.userId;
 	let userData = {
 		userNickName: req.body.userNickName,
+		email: req.body.email,
 		major: req.body.major,
 		minor: req.body.minor,
 		doubleMajor: req.body.doubleMajor,

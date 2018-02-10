@@ -1,5 +1,5 @@
-import { mysqlResource } from '../../../packages/utils/mysql.util';
-const pool = mysqlResource.pool;
+import { mysqlUtil } from '../../../packages/utils/mysql.util';
+const pool = mysqlUtil.pool;
 
 export class SignUp{
 	constructor() {
@@ -15,13 +15,20 @@ export class SignUp{
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`INSERT INTO users SET ?`, [userData], function (err, rows) {
 					if (err) {
-                        connection.release();
                         reject(err);
 					} else {
-                        connection.release();
                         resolve(rows);
 					}
 				})
+                await connection.query(`INSERT INTO usersValidation (userId) VALUES ('${userData.userId}')`, function (err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                    	connection.release();
+                        resolve(rows);
+                    }
+                });
 			})
 		})
 	}

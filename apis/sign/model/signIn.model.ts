@@ -1,6 +1,6 @@
 import { encriptionPw } from '../../../packages/utils/encryption.utli';
-import { mysqlResource } from '../../../packages/utils/mysql.util';
-const pool = mysqlResource.pool;
+import { mysqlUtil } from '../../../packages/utils/mysql.util';
+const pool = mysqlUtil.pool;
 
 class SignIn{
 	/**
