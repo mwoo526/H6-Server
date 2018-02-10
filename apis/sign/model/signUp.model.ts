@@ -13,13 +13,13 @@ export class SignUp{
 	createUser(userData: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`INSERT INTO users SET ?`, [userData], function (err) {
+				await connection.query(`INSERT INTO users SET ?`, [userData], function (err, rows) {
 					if (err) {
                         connection.release();
                         reject(err);
 					} else {
                         connection.release();
-                        resolve(userData);
+                        resolve(rows);
 					}
 				})
 			})

@@ -3,27 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="eaf1ca52-ebf8-419b-84b8-02c1d9b53f15" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/apis/lecture/model/lecture.model.js" afterPath="$PROJECT_DIR$/apis/lecture/model/lecture.model.js" />
-      <change beforePath="$PROJECT_DIR$/apis/lecture/model/lecture.model.js.map" afterPath="$PROJECT_DIR$/apis/lecture/model/lecture.model.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/lecture/model/lecture.model.ts" afterPath="$PROJECT_DIR$/apis/lecture/model/lecture.model.ts" />
-      <change beforePath="$PROJECT_DIR$/apis/professor/model/professor.model.js" afterPath="$PROJECT_DIR$/apis/professor/model/professor.model.js" />
-      <change beforePath="$PROJECT_DIR$/apis/professor/model/professor.model.js.map" afterPath="$PROJECT_DIR$/apis/professor/model/professor.model.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/professor/model/professor.model.ts" afterPath="$PROJECT_DIR$/apis/professor/model/professor.model.ts" />
-      <change beforePath="$PROJECT_DIR$/apis/sign/model/signIn.model.js" afterPath="$PROJECT_DIR$/apis/sign/model/signIn.model.js" />
-      <change beforePath="$PROJECT_DIR$/apis/sign/model/signIn.model.js.map" afterPath="$PROJECT_DIR$/apis/sign/model/signIn.model.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/sign/model/signIn.model.ts" afterPath="$PROJECT_DIR$/apis/sign/model/signIn.model.ts" />
       <change beforePath="$PROJECT_DIR$/apis/sign/model/signUp.model.js" afterPath="$PROJECT_DIR$/apis/sign/model/signUp.model.js" />
       <change beforePath="$PROJECT_DIR$/apis/sign/model/signUp.model.js.map" afterPath="$PROJECT_DIR$/apis/sign/model/signUp.model.js.map" />
       <change beforePath="$PROJECT_DIR$/apis/sign/model/signUp.model.ts" afterPath="$PROJECT_DIR$/apis/sign/model/signUp.model.ts" />
-      <change beforePath="$PROJECT_DIR$/apis/user/model/user.model.js" afterPath="$PROJECT_DIR$/apis/user/model/user.model.js" />
-      <change beforePath="$PROJECT_DIR$/apis/user/model/user.model.js.map" afterPath="$PROJECT_DIR$/apis/user/model/user.model.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/user/model/user.model.ts" afterPath="$PROJECT_DIR$/apis/user/model/user.model.ts" />
-      <change beforePath="$PROJECT_DIR$/apis/user/route/user.route.js" afterPath="$PROJECT_DIR$/apis/user/route/user.route.js" />
-      <change beforePath="$PROJECT_DIR$/apis/user/route/user.route.js.map" afterPath="$PROJECT_DIR$/apis/user/route/user.route.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/user/route/user.route.ts" afterPath="$PROJECT_DIR$/apis/user/route/user.route.ts" />
-      <change beforePath="$PROJECT_DIR$/packages/utils/mysql.util.js" afterPath="$PROJECT_DIR$/packages/utils/mysql.util.js" />
-      <change beforePath="$PROJECT_DIR$/packages/utils/mysql.util.js.map" afterPath="$PROJECT_DIR$/packages/utils/mysql.util.js.map" />
-      <change beforePath="$PROJECT_DIR$/packages/utils/mysql.util.ts" afterPath="$PROJECT_DIR$/packages/utils/mysql.util.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -47,7 +29,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mysql.util.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="mysql.util.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/packages/utils/mysql.util.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
@@ -72,8 +54,8 @@
       <file leaf-file-name="lecture.model.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apis/lecture/model/lecture.model.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+            <state relative-caret-position="543">
+              <caret line="197" column="0" lean-forward="false" selection-start-line="197" selection-start-column="0" selection-end-line="197" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -92,7 +74,7 @@
       <file leaf-file-name="user.route.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apis/user/route/user.route.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
+            <state relative-caret-position="740">
               <caret line="113" column="30" lean-forward="false" selection-start-line="113" selection-start-column="30" selection-end-line="113" selection-end-column="30" />
               <folding />
             </state>
@@ -133,11 +115,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="signUp.model.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="signUp.model.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/apis/sign/model/signUp.model.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="14" lean-forward="false" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
+            <state relative-caret-position="270">
+              <caret line="18" column="36" lean-forward="false" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -161,11 +143,11 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/apis/user/route/user.route.ts" />
         <option value="$PROJECT_DIR$/apis/user/model/user.model.ts" />
-        <option value="$PROJECT_DIR$/apis/sign/model/signUp.model.ts" />
         <option value="$PROJECT_DIR$/apis/sign/model/signIn.model.ts" />
         <option value="$PROJECT_DIR$/apis/professor/model/professor.model.ts" />
         <option value="$PROJECT_DIR$/apis/lecture/model/lecture.model.ts" />
         <option value="$PROJECT_DIR$/packages/utils/mysql.util.ts" />
+        <option value="$PROJECT_DIR$/apis/sign/model/signUp.model.ts" />
       </list>
     </option>
   </component>
@@ -181,8 +163,8 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="294" />
-    <option name="y" value="56" />
+    <option name="x" value="113" />
+    <option name="y" value="26" />
     <option name="width" value="956" />
     <option name="height" value="767" />
   </component>
@@ -390,10 +372,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18535000" />
+    <option name="totallyTimeSpent" value="20344000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="294" y="56" width="956" height="767" extended-state="0" />
+    <frame x="113" y="26" width="956" height="767" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -833,22 +815,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apis/user/route/user.route.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="113" column="30" lean-forward="false" selection-start-line="113" selection-start-column="30" selection-end-line="113" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apis/lecture/model/lecture.model.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apis/lecture/route/lecture.route.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="523">
@@ -877,14 +843,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apis/sign/model/signUp.model.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="14" lean-forward="false" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apis/user/model/user.model.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1575">
@@ -897,6 +855,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="7" lean-forward="false" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apis/lecture/model/lecture.model.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="543">
+          <caret line="197" column="0" lean-forward="false" selection-start-line="197" selection-start-column="0" selection-end-line="197" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apis/user/route/user.route.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="740">
+          <caret line="113" column="30" lean-forward="false" selection-start-line="113" selection-start-column="30" selection-end-line="113" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apis/sign/model/signUp.model.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="36" lean-forward="false" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
           <folding />
         </state>
       </provider>
