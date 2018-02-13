@@ -4,15 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha index.spec.js --timeout 50000 -R spec --full-trace --exit"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/mocha": "^2.2.48",
     "body-parser": "^1.18.2",
     "boom": "^7.1.1",
+    "chai": "^4.1.2",
     "express": "^4.16.2",
     "logger": "0.0.1",
+    "mocha": "^2.5.3",
     "node-mysql": "^0.4.2",
     "node-uuid": "^1.4.8",
     "nodemailer": "^4.4.2",
