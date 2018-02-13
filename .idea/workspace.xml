@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eaf1ca52-ebf8-419b-84b8-02c1d9b53f15" name="Default" comment="" />
+    <list default="true" id="eaf1ca52-ebf8-419b-84b8-02c1d9b53f15" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.js" afterPath="$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.js" />
+      <change beforePath="$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.js.map" afterPath="$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.ts" afterPath="$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.ts" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -13,7 +18,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.39225483">
+    <splitter split-orientation="horizontal" split-proportion="0.45">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="app.ts" pinned="false" current-in-tab="false">
@@ -31,8 +36,8 @@
           <file leaf-file-name="lecture.model.ts" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/apis/lecture/model/lecture.model.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="333">
-                  <caret line="96" column="23" lean-forward="false" selection-start-line="96" selection-start-column="23" selection-end-line="96" selection-end-column="23" />
+                <state relative-caret-position="-1567">
+                  <caret line="19" column="39" lean-forward="false" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
                   <folding />
                 </state>
               </provider>
@@ -45,7 +50,7 @@
           <file leaf-file-name="app.ts" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="437">
+                <state relative-caret-position="0">
                   <caret line="23" column="44" lean-forward="false" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
                   <folding>
                     <element signature="e#0#35#0" expanded="true" />
@@ -57,8 +62,8 @@
           <file leaf-file-name="lecture.model.spec.ts" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="247">
-                  <caret line="13" column="27" lean-forward="true" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+                <state relative-caret-position="608">
+                  <caret line="32" column="4" lean-forward="true" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
                   <folding>
                     <element signature="e#0#30#0" expanded="true" />
                   </folding>
@@ -72,20 +77,6 @@
                 <state relative-caret-position="209">
                   <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="17" />
                   <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="lecture.route.ts" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/apis/lecture/route/lecture.route.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="8" />
-                  <folding>
-                    <element signature="e#0#68#0" expanded="true" />
-                    <marker date="1518524968000" expanded="true" signature="2775:2810" ph="{...}" />
-                    <marker date="1518524968000" expanded="true" signature="2775:2852" ph="{...}" />
-                  </folding>
                 </state>
               </provider>
             </entry>
@@ -113,9 +104,10 @@
         <option value="$PROJECT_DIR$/apis/sign/model/signUp.model.ts" />
         <option value="$PROJECT_DIR$/apis/sign/model/signIn.model.ts" />
         <option value="$PROJECT_DIR$/apis/professor/model/professor.model.ts" />
-        <option value="$PROJECT_DIR$/apis/lecture/model/lecture.model.ts" />
         <option value="$PROJECT_DIR$/apis/userValidation/model/userValidation.model.ts" />
         <option value="$PROJECT_DIR$/packages/utils/mysql.util.ts" />
+        <option value="$PROJECT_DIR$/apis/lecture/model/lecture.model.ts" />
+        <option value="$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.ts" />
       </list>
     </option>
   </component>
@@ -137,10 +129,10 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="480" />
-    <option name="y" value="22" />
-    <option name="width" value="956" />
-    <option name="height" value="767" />
+    <option name="x" value="42" />
+    <option name="y" value="23" />
+    <option name="width" value="1858" />
+    <option name="height" value="1110" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -204,7 +196,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -242,6 +233,7 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -249,7 +241,7 @@
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
-    <property name="nodejs.mocha.mocha_node_package_dir" value="$PROJECT_DIR$/node_modules/mocha" />
+    <property name="nodejs.mocha.mocha_node_package_dir" value="$USER_HOME$/.nvm/versions/node/v8.5.0/lib/node_modules/mocha" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -267,6 +259,110 @@
         </RuleState>
       </list>
     </option>
+  </component>
+  <component name="RunManager" selected="Mocha.lecture 모델">
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory />
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui>bdd</ui>
+      <extra-mocha-options>--require ts-node/register</extra-mocha-options>
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+    </configuration>
+    <configuration name="lecture 모델" type="mocha-javascript-test-runner" factoryName="Mocha" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui>bdd</ui>
+      <extra-mocha-options>--require ts-node/register</extra-mocha-options>
+      <test-kind>SUITE</test-kind>
+      <test-file>$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.ts</test-file>
+      <test-names>
+        <name value="lecture 모델" />
+      </test-names>
+    </configuration>
+    <configuration name="lecture 모델.createLecture" type="mocha-javascript-test-runner" factoryName="Mocha" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui>bdd</ui>
+      <extra-mocha-options>--require ts-node/register</extra-mocha-options>
+      <test-kind>TEST</test-kind>
+      <test-file>$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.ts</test-file>
+      <test-names>
+        <name value="lecture 모델" />
+        <name value="createLecture" />
+      </test-names>
+    </configuration>
+    <configuration name="lecture 모델.deleteLecture" type="mocha-javascript-test-runner" factoryName="Mocha" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui>bdd</ui>
+      <extra-mocha-options>--require ts-node/register</extra-mocha-options>
+      <test-kind>TEST</test-kind>
+      <test-file>$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.ts</test-file>
+      <test-names>
+        <name value="lecture 모델" />
+        <name value="deleteLecture" />
+      </test-names>
+    </configuration>
+    <configuration name="lecture 모델.getLectureByLectureCode" type="mocha-javascript-test-runner" factoryName="Mocha" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui>bdd</ui>
+      <extra-mocha-options>--require ts-node/register</extra-mocha-options>
+      <test-kind>TEST</test-kind>
+      <test-file>$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.ts</test-file>
+      <test-names>
+        <name value="lecture 모델" />
+        <name value="getLectureByLectureCode" />
+      </test-names>
+    </configuration>
+    <configuration name="lecture 모델.getLectureByLectureIndex" type="mocha-javascript-test-runner" factoryName="Mocha" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui>bdd</ui>
+      <extra-mocha-options>--require ts-node/register</extra-mocha-options>
+      <test-kind>TEST</test-kind>
+      <test-file>$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.ts</test-file>
+      <test-names>
+        <name value="lecture 모델" />
+        <name value="getLectureByLectureIndex" />
+      </test-names>
+    </configuration>
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="Mocha.lecture 모델" />
+      <item index="1" class="java.lang.String" itemvalue="Mocha.lecture 모델.getLectureByLectureIndex" />
+      <item index="2" class="java.lang.String" itemvalue="Mocha.lecture 모델.deleteLecture" />
+      <item index="3" class="java.lang.String" itemvalue="Mocha.lecture 모델.getLectureByLectureCode" />
+      <item index="4" class="java.lang.String" itemvalue="Mocha.lecture 모델.createLecture" />
+    </list>
+    <recent_temporary>
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Mocha.lecture 모델" />
+        <item index="1" class="java.lang.String" itemvalue="Mocha.lecture 모델.getLectureByLectureCode" />
+        <item index="2" class="java.lang.String" itemvalue="Mocha.lecture 모델.createLecture" />
+        <item index="3" class="java.lang.String" itemvalue="Mocha.lecture 모델.deleteLecture" />
+        <item index="4" class="java.lang.String" itemvalue="Mocha.lecture 모델.getLectureByLectureIndex" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -286,47 +382,69 @@
       <workItem from="1517217013742" duration="48000" />
       <workItem from="1517629409123" duration="175000" />
       <workItem from="1517629666271" duration="856000" />
+      <workItem from="1518526022090" duration="224000" />
+      <workItem from="1518526275367" duration="2337000" />
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="lecture_모델 - 2018.02.13 at 22h 39m 19s.xml">
+      <configuration name="lecture 모델" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="lecture_모델 - 2018.02.13 at 23h 00m 58s.xml">
+      <configuration name="lecture 모델" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="lecture_모델_createLecture - 2018.02.13 at 23h 00m 19s.xml">
+      <configuration name="lecture 모델.createLecture" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="lecture_모델_deleteLecture - 2018.02.13 at 22h 17m 11s.xml">
+      <configuration name="lecture 모델.deleteLecture" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="lecture_모델_deleteLecture - 2018.02.13 at 22h 17m 18s.xml">
+      <configuration name="lecture 모델.deleteLecture" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="lecture_모델_deleteLecture - 2018.02.13 at 22h 39m 08s.xml">
+      <configuration name="lecture 모델.deleteLecture" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="lecture_모델_getLectureByLectureCode - 2018.02.13 at 23h 00m 00s.xml">
+      <configuration name="lecture 모델.getLectureByLectureCode" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="lecture_모델_getLectureByLectureCode - 2018.02.13 at 23h 00m 09s.xml">
+      <configuration name="lecture 모델.getLectureByLectureCode" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="lecture_모델_getLectureByLectureCode - 2018.02.13 at 23h 00m 29s.xml">
+      <configuration name="lecture 모델.getLectureByLectureCode" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="lecture_모델_getLectureByLectureCode - 2018.02.13 at 23h 00m 35s.xml">
+      <configuration name="lecture 모델.getLectureByLectureCode" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+  </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22358000" />
+    <option name="totallyTimeSpent" value="25040000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-5" y="23" width="1920" height="1105" extended-state="0" />
+    <frame x="42" y="23" width="1858" height="1110" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16614583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3252662" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24978241" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12809473" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916266" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29576108" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916266" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -387,7 +505,6 @@
           <folding>
             <element signature="e#0#68#0" expanded="true" />
             <marker date="1518524968000" expanded="true" signature="2775:2810" ph="{...}" />
-            <marker date="1518524968000" expanded="true" signature="2775:2852" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -449,7 +566,6 @@
           <folding>
             <element signature="e#0#68#0" expanded="true" />
             <marker date="1518524968000" expanded="true" signature="2775:2810" ph="{...}" />
-            <marker date="1518524968000" expanded="true" signature="2775:2852" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -532,7 +648,6 @@
           <folding>
             <element signature="e#0#68#0" expanded="true" />
             <marker date="1518524968000" expanded="true" signature="2775:2810" ph="{...}" />
-            <marker date="1518524968000" expanded="true" signature="2775:2852" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -625,7 +740,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
+        <state relative-caret-position="0">
           <caret line="23" column="44" lean-forward="false" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
@@ -637,18 +752,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="26" column="20" lean-forward="false" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apis/lecture/route/lecture.route.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#68#0" expanded="true" />
-            <marker date="1518524968000" expanded="true" signature="2775:2810" ph="{...}" />
-            <marker date="1518524968000" expanded="true" signature="2775:2852" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -723,14 +826,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apis/lecture/model/lecture.model.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="96" column="23" lean-forward="false" selection-start-line="96" selection-start-column="23" selection-end-line="96" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/packages/utils/email.util.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -746,6 +841,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/apis/lecture/route/lecture.route.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#68#0" expanded="true" />
+            <marker date="1518524968000" expanded="true" signature="2775:2810" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
@@ -754,10 +860,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/apis/lecture/model/lecture.model.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1567">
+          <caret line="19" column="39" lean-forward="false" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="27" lean-forward="true" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+        <state relative-caret-position="608">
+          <caret line="32" column="4" lean-forward="true" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
           <folding>
             <element signature="e#0#30#0" expanded="true" />
           </folding>
