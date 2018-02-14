@@ -2,52 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eaf1ca52-ebf8-419b-84b8-02c1d9b53f15" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/apis/lecture/model/lecture.model.js" afterPath="$PROJECT_DIR$/apis/lecture/model/lecture.model.js" />
       <change beforePath="$PROJECT_DIR$/apis/lecture/model/lecture.model.js.map" afterPath="$PROJECT_DIR$/apis/lecture/model/lecture.model.js.map" />
       <change beforePath="$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.js" afterPath="$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.js" />
       <change beforePath="$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.js.map" afterPath="$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.ts" afterPath="$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.ts" />
-      <change beforePath="$PROJECT_DIR$/apis/lecture/model/lecture.model.ts" afterPath="$PROJECT_DIR$/apis/lecture/model/lecture.model.ts" />
       <change beforePath="$PROJECT_DIR$/apis/lecture/route/lecture.route.js" afterPath="$PROJECT_DIR$/apis/lecture/route/lecture.route.js" />
       <change beforePath="$PROJECT_DIR$/apis/lecture/route/lecture.route.js.map" afterPath="$PROJECT_DIR$/apis/lecture/route/lecture.route.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/lecture/route/lecture.route.ts" afterPath="$PROJECT_DIR$/apis/lecture/route/lecture.route.ts" />
       <change beforePath="$PROJECT_DIR$/apis/professor/model/professor.model.js" afterPath="$PROJECT_DIR$/apis/professor/model/professor.model.js" />
       <change beforePath="$PROJECT_DIR$/apis/professor/model/professor.model.js.map" afterPath="$PROJECT_DIR$/apis/professor/model/professor.model.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/professor/model/professor.model.ts" afterPath="$PROJECT_DIR$/apis/professor/model/professor.model.ts" />
       <change beforePath="$PROJECT_DIR$/apis/professor/route/professor.route.js" afterPath="$PROJECT_DIR$/apis/professor/route/professor.route.js" />
       <change beforePath="$PROJECT_DIR$/apis/professor/route/professor.route.js.map" afterPath="$PROJECT_DIR$/apis/professor/route/professor.route.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/professor/route/professor.route.ts" afterPath="$PROJECT_DIR$/apis/professor/route/professor.route.ts" />
       <change beforePath="$PROJECT_DIR$/apis/sign/model/signIn.model.js" afterPath="$PROJECT_DIR$/apis/sign/model/signIn.model.js" />
       <change beforePath="$PROJECT_DIR$/apis/sign/model/signIn.model.js.map" afterPath="$PROJECT_DIR$/apis/sign/model/signIn.model.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/sign/model/signIn.model.ts" afterPath="$PROJECT_DIR$/apis/sign/model/signIn.model.ts" />
       <change beforePath="$PROJECT_DIR$/apis/sign/model/signUp.model.js" afterPath="$PROJECT_DIR$/apis/sign/model/signUp.model.js" />
       <change beforePath="$PROJECT_DIR$/apis/sign/model/signUp.model.js.map" afterPath="$PROJECT_DIR$/apis/sign/model/signUp.model.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/sign/model/signUp.model.ts" afterPath="$PROJECT_DIR$/apis/sign/model/signUp.model.ts" />
       <change beforePath="$PROJECT_DIR$/apis/sign/route/signIn.route.js" afterPath="$PROJECT_DIR$/apis/sign/route/signIn.route.js" />
       <change beforePath="$PROJECT_DIR$/apis/sign/route/signIn.route.js.map" afterPath="$PROJECT_DIR$/apis/sign/route/signIn.route.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/sign/route/signIn.route.ts" afterPath="$PROJECT_DIR$/apis/sign/route/signIn.route.ts" />
       <change beforePath="$PROJECT_DIR$/apis/sign/route/signUp.route.js" afterPath="$PROJECT_DIR$/apis/sign/route/signUp.route.js" />
       <change beforePath="$PROJECT_DIR$/apis/sign/route/signUp.route.js.map" afterPath="$PROJECT_DIR$/apis/sign/route/signUp.route.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/sign/route/signUp.route.ts" afterPath="$PROJECT_DIR$/apis/sign/route/signUp.route.ts" />
       <change beforePath="$PROJECT_DIR$/apis/test/model/test.model.js" afterPath="$PROJECT_DIR$/apis/test/model/test.model.js" />
       <change beforePath="$PROJECT_DIR$/apis/test/model/test.model.js.map" afterPath="$PROJECT_DIR$/apis/test/model/test.model.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/test/model/test.model.ts" afterPath="$PROJECT_DIR$/apis/test/model/test.model.ts" />
       <change beforePath="$PROJECT_DIR$/apis/test/route/test.route.js" afterPath="$PROJECT_DIR$/apis/test/route/test.route.js" />
       <change beforePath="$PROJECT_DIR$/apis/test/route/test.route.js.map" afterPath="$PROJECT_DIR$/apis/test/route/test.route.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/test/route/test.route.ts" afterPath="$PROJECT_DIR$/apis/test/route/test.route.ts" />
       <change beforePath="$PROJECT_DIR$/apis/user/model/user.model.js" afterPath="$PROJECT_DIR$/apis/user/model/user.model.js" />
       <change beforePath="$PROJECT_DIR$/apis/user/model/user.model.js.map" afterPath="$PROJECT_DIR$/apis/user/model/user.model.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/user/model/user.model.ts" afterPath="$PROJECT_DIR$/apis/user/model/user.model.ts" />
       <change beforePath="$PROJECT_DIR$/apis/user/route/user.route.js" afterPath="$PROJECT_DIR$/apis/user/route/user.route.js" />
       <change beforePath="$PROJECT_DIR$/apis/user/route/user.route.js.map" afterPath="$PROJECT_DIR$/apis/user/route/user.route.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/user/route/user.route.ts" afterPath="$PROJECT_DIR$/apis/user/route/user.route.ts" />
       <change beforePath="$PROJECT_DIR$/apis/userValidation/model/userValidation.model.js" afterPath="$PROJECT_DIR$/apis/userValidation/model/userValidation.model.js" />
       <change beforePath="$PROJECT_DIR$/apis/userValidation/model/userValidation.model.js.map" afterPath="$PROJECT_DIR$/apis/userValidation/model/userValidation.model.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/userValidation/model/userValidation.model.ts" afterPath="$PROJECT_DIR$/apis/userValidation/model/userValidation.model.ts" />
       <change beforePath="$PROJECT_DIR$/apis/userValidation/route/userValidation.route.js" afterPath="$PROJECT_DIR$/apis/userValidation/route/userValidation.route.js" />
       <change beforePath="$PROJECT_DIR$/apis/userValidation/route/userValidation.route.js.map" afterPath="$PROJECT_DIR$/apis/userValidation/route/userValidation.route.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/userValidation/route/userValidation.route.ts" afterPath="$PROJECT_DIR$/apis/userValidation/route/userValidation.route.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -76,8 +60,8 @@
       <file leaf-file-name="lecture.model.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/apis/lecture/model/lecture.model.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1632">
-              <caret line="24" column="3" lean-forward="false" selection-start-line="24" selection-start-column="3" selection-end-line="24" selection-end-column="3" />
+            <state relative-caret-position="382">
+              <caret line="130" column="5" lean-forward="false" selection-start-line="130" selection-start-column="5" selection-end-line="130" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -381,7 +365,7 @@
       <workItem from="1518526275367" duration="3727000" />
       <workItem from="1518534247559" duration="3114000" />
       <workItem from="1518597904627" duration="11000" />
-      <workItem from="1518598083076" duration="46000" />
+      <workItem from="1518598083076" duration="140000" />
     </task>
     <servers />
   </component>
@@ -418,10 +402,11 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29601000" />
+    <option name="totallyTimeSpent" value="29695000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="669" y="387" width="2693" height="1551" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27383366" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -430,7 +415,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.088377275" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.088377275" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916266" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -651,6 +636,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -855,8 +841,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apis/lecture/model/lecture.model.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1632">
-          <caret line="24" column="3" lean-forward="false" selection-start-line="24" selection-start-column="3" selection-end-line="24" selection-end-column="3" />
+        <state relative-caret-position="382">
+          <caret line="130" column="5" lean-forward="false" selection-start-line="130" selection-start-column="5" selection-end-line="130" selection-end-column="5" />
           <folding />
         </state>
       </provider>
