@@ -1,21 +1,22 @@
-import * as express from 'express';
 import * as bodyParser from 'body-parser';
+import * as express from 'express';
+import { lectureRoutes } from './apis/lecture/route/lecture.route';
+import { professorRoutes } from './apis/professor/route/professor.route';
 import { signInRoutes } from './apis/sign/route/signIn.route';
 import { signUpRoutes } from './apis/sign/route/signUp.route';
 import { testRoutes } from './apis/test/route/test.route';
 import { userRoutes } from './apis/user/route/user.route';
-import { professorRoutes } from "./apis/professor/route/professor.route";
-import { lectureRoutes } from "./apis/lecture/route/lecture.route";
 import { userValidationRoutes } from './apis/userValidation/route/userValidation.route';
 
 export class Server {
 	/** app 에 대한 타입 설정 */
 	public app: express.Application;
+
 	constructor() {
 		/** express 설정을 위한 express 선언 */
 		this.app = express();
 		/** bodyParser 선언 */
-		this.app.use(bodyParser.urlencoded({ extended: false }));
+		this.app.use(bodyParser.urlencoded({extended: false}));
 		this.app.use(bodyParser.json());
 		/** 라우터 추가 */
 		this.app.use(testRoutes.testRouter);
@@ -36,10 +37,10 @@ export class Server {
 		});
 		/** 에러 처리 */
 		this.app.use((err: any, req: express.Request, res: express.Response) => {
-			err.status  = err.status || 500;
+			err.status = err.status || 500;
 			console.error(`error on request ${req.method} | ${req.url} | ${err.status}`);
 			console.error(err.stack || `${err.message}`);
-			err.message = err.status  == 500 ? 'Something bad happened.' : err.message;
+			err.message = err.status == 500 ? 'Something bad happened.' : err.message;
 			res.status(err.status).send(err.message);
 		});
 	}

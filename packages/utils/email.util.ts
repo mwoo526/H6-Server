@@ -15,7 +15,7 @@ export module emailUtil {
 			to: to,
 			subject: subject,
 			text: text
-		}, function(error, info){
+		}, function(error, info) {
 			if (error) {
 				console.log(error);
 			} else {

@@ -16,6 +16,7 @@ export class ProfessorResource {
 	public getProfessorName() {
 		return this.professorName;
 	}
+
 	public setProfessorName(professorName) {
 		this.professorName = professorName;
 	}
@@ -23,6 +24,7 @@ export class ProfessorResource {
 	public getDepartment() {
 		return this.department;
 	}
+
 	public setDepartment(department) {
 		this.department = department;
 	}
@@ -30,6 +32,7 @@ export class ProfessorResource {
 	public getAddress() {
 		return this.address;
 	}
+
 	public setAddress(address) {
 		this.address = address;
 	}
@@ -37,6 +40,7 @@ export class ProfessorResource {
 	public getTel() {
 		return this.tel;
 	}
+
 	public setTel(tel) {
 		this.tel = tel;
 	}
@@ -44,6 +48,7 @@ export class ProfessorResource {
 	public getEmail() {
 		return this.email;
 	}
+
 	public setEmail(email) {
 		this.email = email;
 	}

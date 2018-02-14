@@ -11,7 +11,7 @@ export class UserResource {
 	private connectedMajor;
 	private admissionYear;
 
-	constructor(signUpData){
+	constructor(signUpData) {
 		this.setUserId(signUpData.userId);
 		this.setUserPw(signUpData.userPw);
 		this.setUserNickName(signUpData.userNickName);
@@ -23,70 +23,79 @@ export class UserResource {
 		this.setAdmissionYear(signUpData.admissionYear);
 	}
 
-	public getUserId(){
+	public getUserId() {
 		return this.userId;
 	}
-	public setUserId(userId){
+
+	public setUserId(userId) {
 		this.userId = userId;
 	}
 
-	public getUserPw(){
+	public getUserPw() {
 		return this.userPw;
 	}
-	public setUserPw(userPw){
+
+	public setUserPw(userPw) {
 		this.userPw = encriptionPw.getHash(userPw);
 	}
 
-	public getUserNickName(){
+	public getUserNickName() {
 		return this.userNickName;
 	}
-	public setUserNickName(userNickName){
+
+	public setUserNickName(userNickName) {
 		this.userNickName = userNickName;
 	}
 
-	public getEmail(){
+	public getEmail() {
 		return this.email;
 	}
-	public setEmail(email){
+
+	public setEmail(email) {
 		this.email = email;
 	}
 
-	public getMajor(){
+	public getMajor() {
 		return this.major;
 	}
-	public setMajor(major){
+
+	public setMajor(major) {
 		this.major = major;
 	}
 
-	public getMinor(){
+	public getMinor() {
 		return this.minor;
 	}
-	public setMinor(minor){
+
+	public setMinor(minor) {
 		this.minor = minor;
 	}
 
-	public getDoubleMajor(){
+	public getDoubleMajor() {
 		return this.doubleMajor;
 	}
-	public setDoubleMajor(doubleMajor){
+
+	public setDoubleMajor(doubleMajor) {
 		this.doubleMajor = doubleMajor;
 	}
 
-	public getConnectedMajor(){
+	public getConnectedMajor() {
 		return this.connectedMajor;
 	}
-	public setConnectedMajor(connectedMajor){
+
+	public setConnectedMajor(connectedMajor) {
 		this.connectedMajor = connectedMajor;
 	}
 
-	public getAdmissionYear(){
+	public getAdmissionYear() {
 		return this.admissionYear;
 	}
-	public setAdmissionYear(admissionYear){
+
+	public setAdmissionYear(admissionYear) {
 		this.admissionYear = admissionYear;
 	}
 
-	getSignUp(){
+	getSignUp() {
 		let userResource = {
 			userId: this.getUserId(),
 			userPw: this.getUserPw(),

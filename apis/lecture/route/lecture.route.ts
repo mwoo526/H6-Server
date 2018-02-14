@@ -1,6 +1,6 @@
+import * as express from 'express';
 import { LectureResource } from '../../../resources/lecture.resource';
 import { lecture } from '../model/lecture.model';
-import * as express from 'express';
 
 export class LectureRoutes {
 	public lectureRouter: express.Router = express.Router();
