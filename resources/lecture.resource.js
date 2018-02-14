@@ -4,6 +4,7 @@ class LectureResource {
     constructor(lectureData) {
         this.setLectureCode(lectureData.lectureCode);
         this.setLectureName(lectureData.lectureName);
+        this.setProfessorIndex(lectureData.professorIndex);
         this.setTrack(lectureData.track);
     }
     getLectureCode() {
@@ -18,6 +19,12 @@ class LectureResource {
     setLectureName(lectureName) {
         this.lectureName = lectureName;
     }
+    getProfessorIndex() {
+        return this.professorIndex;
+    }
+    setProfessorIndex(professorIndex) {
+        this.professorIndex = professorIndex;
+    }
     getTrack() {
         return this.track;
     }
@@ -28,6 +35,7 @@ class LectureResource {
         let lectureResource = {
             lectureCode: this.getLectureCode(),
             lectureName: this.getLectureName(),
+            professorIndex: this.getProfessorIndex(),
             track: this.getTrack()
         };
         return lectureResource;

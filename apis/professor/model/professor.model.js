@@ -14,29 +14,6 @@ class Professor {
     constructor() {
     }
     /**
-     * model: professor 생성
-     * @param professorData
-     * @returns {Promise<any>}
-     */
-    createProfessor(professorData) {
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield pool.getConnection(function (err, connection) {
-                return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`INSERT INTO professors SET ?`, [professorData], function (err) {
-                        if (err) {
-                            connection.release();
-                            reject(err);
-                        }
-                        else {
-                            connection.release();
-                            resolve(professorData);
-                        }
-                    });
-                });
-            });
-        }));
-    }
-    /**
      * model: professor 리스트 조회
      * @returns {Promise<any>}
      */

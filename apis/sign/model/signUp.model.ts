@@ -33,4 +33,5 @@ export class SignUp{
 		})
 	}
 }
+
 export const signUp: SignUp = new SignUp();

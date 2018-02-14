@@ -42,7 +42,6 @@ export class Test {
 		}
 	}
 
-
 }
 
 export const test: any = new Test();
