@@ -1,9 +1,11 @@
 import { mysqlUtil } from '../../../packages/utils/mysql.util';
+
 const pool = mysqlUtil.pool;
 
 export class Professor {
 	constructor() {
 	}
+
 	/**
 	 * model: professor 리스트 조회
 	 * @returns {Promise<any>}
@@ -11,7 +13,7 @@ export class Professor {
 	listProfessor(): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM professors`, function (err, rows) {
+				await connection.query(`SELECT * FROM professors`, function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -32,7 +34,7 @@ export class Professor {
 	getProfessorByProfessorIndex(professorIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM professors WHERE professorIndex = ?`, [professorIndex], function (err, rows) {
+				await connection.query(`SELECT * FROM professors WHERE professorIndex = ?`, [professorIndex], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -53,7 +55,7 @@ export class Professor {
 	getProfessorByProfessorName(professorName: string): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM professors WHERE professorName LIKE '%${professorName}%'`, function (err, rows) {
+				await connection.query(`SELECT * FROM professors WHERE professorName LIKE '%${professorName}%'`, function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -72,10 +74,11 @@ export class Professor {
 	 * @param professorData
 	 * @returns {Promise<any>}
 	 */
-	updateProfessor(professorIndex:number, professorData: any): Promise<any> {
-		return new Promise(async(resolve, reject) => {
+	updateProfessor(professorIndex: number, professorData: any): Promise<any> {
+		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`UPDATE professors SET ? WHERE professorIndex = ?`, [professorData, professorIndex], function (err, rows) {
+				await connection.query(`UPDATE professors SET ? WHERE professorIndex = ?`, [professorData,
+					professorIndex], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -93,10 +96,10 @@ export class Professor {
 	 * @param {number} professorIndex
 	 * @returns {Promise<any>}
 	 */
-	deleteProfessor(professorIndex:number): Promise<any> {
-		return new Promise(async(resolve, reject) => {
+	deleteProfessor(professorIndex: number): Promise<any> {
+		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`DELETE FROM professors WHERE professorIndex = ?`, professorIndex, function (err, rows) {
+				await connection.query(`DELETE FROM professors WHERE professorIndex = ?`, professorIndex, function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);

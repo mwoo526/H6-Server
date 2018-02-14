@@ -12,7 +12,7 @@ export class TestRoutes {
 		/**
 		 * 라우트: 테스트 생성
 		 */
-		this.testRouter.post('/test', function (req, res){
+		this.testRouter.post('/test', function(req, res) {
 			let name: string = req.body.name;
 			try {
 				let result: any = test.createName(name);
@@ -25,7 +25,7 @@ export class TestRoutes {
 		/**
 		 * 라우트: 테스트 리스트 조회
 		 */
-		this.testRouter.get('/test', function (req, res){
+		this.testRouter.get('/test', function(req, res) {
 			try {
 				let result: any = test.listName();
 				res.send(result);
@@ -37,7 +37,7 @@ export class TestRoutes {
 		/**
 		 * 라우트: 테스트 name 조회
 		 */
-		this.testRouter.get('/test/:name', function (req, res){
+		this.testRouter.get('/test/:name', function(req, res) {
 			let name: any = req.params.name;
 			try {
 				let result: any = test.getName(name);
@@ -50,7 +50,7 @@ export class TestRoutes {
 		/**
 		 * 라우트: 테스트 업데이트
 		 */
-		this.testRouter.put('/test/:name', function (req, res){
+		this.testRouter.put('/test/:name', function(req, res) {
 			let name: any = req.params.name;
 			try {
 				let result: any = test.updateName(name, 'Mike');
@@ -63,7 +63,7 @@ export class TestRoutes {
 		/**
 		 * 라우트: 테스트 삭제
 		 */
-		this.testRouter.delete('/test/:name', function (req, res){
+		this.testRouter.delete('/test/:name', function(req, res) {
 			let name: any = req.params.name;
 			try {
 				let result: any = test.deleteName(name);

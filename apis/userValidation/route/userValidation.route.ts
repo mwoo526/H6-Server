@@ -6,7 +6,7 @@ import { userValidation } from '../model/userValidation.model';
 export class UserValidationRoutes {
 	public userValidationRouter: express.Router = express.Router();
 
-	constructor(){
+	constructor() {
 		this.router();
 	}
 
@@ -42,7 +42,7 @@ async function sendValidationCode(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function checkValidationCode(req, res): Promise<void> {
-	const userId: string =  req.params.userId;
+	const userId: string = req.params.userId;
 	const validationCode: any = req.body.validationCode;
 	const userData: any = await user.getUser(userId);
 	try {

@@ -12,7 +12,7 @@ export class Test {
 		return nameArray;
 	}
 
-	listName(){
+	listName() {
 		return nameArray;
 	}
 
@@ -34,8 +34,8 @@ export class Test {
 	}
 
 	async deleteName(name: string) {
-		for (let i: number = 0; i< nameArray.length; i++) {
-			if( nameArray[i].name === name) {
+		for (let i: number = 0; i < nameArray.length; i++) {
+			if (nameArray[i].name === name) {
 				await nameArray.splice(i, 1);
 				return nameArray[i];
 			}

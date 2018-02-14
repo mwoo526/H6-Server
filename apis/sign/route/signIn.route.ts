@@ -4,7 +4,7 @@ import { signIn } from '../model/signIn.model';
 export class SignInRoutes {
 	public signInRouter: express.Router = express.Router();
 
-	constructor(){
+	constructor() {
 		this.router();
 	}
 

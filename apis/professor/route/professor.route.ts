@@ -1,11 +1,11 @@
 import * as express from 'express';
-import {professor} from "../model/professor.model";
-import {ProfessorResource} from "../../../resources/professor.resource";
+import { professor } from '../model/professor.model';
+import { ProfessorResource } from '../../../resources/professor.resource';
 
 export class ProfessorRoutes {
 	public professorRouter: express.Router = express.Router();
 
-	constructor(){
+	constructor() {
 		this.router();
 	}
 
@@ -18,7 +18,6 @@ export class ProfessorRoutes {
 		this.professorRouter.delete('/professors/:professorIndex', deleteProfessor);
 	}
 }
-
 
 /**
  * route: professor 생성

@@ -1,5 +1,6 @@
 import { emailUtil } from '../../../packages/utils/email.util';
 import { mysqlUtil } from '../../../packages/utils/mysql.util';
+
 const pool = mysqlUtil.pool;
 
 export class UserValidation {
@@ -16,8 +17,8 @@ export class UserValidation {
 	createValidationCode(userId: string, email: string, validationCode: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await emailUtil.sendEmail('kingdom0608@gmail.com', `${email}@naver.com`, 'test', validationCode);
-			await pool.getConnection(async function (err, connection) {
-				await connection.query(`UPDATE usersValidation SET validationCode = '${validationCode}' WHERE userId = '${userId}'`, function (err) {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`UPDATE usersValidation SET validationCode = '${validationCode}' WHERE userId = '${userId}'`, function(err) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -37,7 +38,7 @@ export class UserValidation {
 	 */
 	getValidationCode(userId: string): Promise<any> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT * FROM usersValidation WHERE userId=?`, [userId], function(err, rows) {
 					if (err) {
 						connection.release();
@@ -87,8 +88,8 @@ export class UserValidation {
 	 */
 	updateIsValidation(userId: string): Promise<any> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
-				await connection.query(`UPDATE usersValidation SET isValidation = true WHERE userId = '${userId}'`, function (err) {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`UPDATE usersValidation SET isValidation = true WHERE userId = '${userId}'`, function(err) {
 					if (err) {
 						console.log(err);
 						connection.release();

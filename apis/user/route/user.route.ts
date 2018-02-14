@@ -6,7 +6,7 @@ import { user } from '../model/user.model';
 export class UserRoutes {
 	public userRouter: express.Router = express.Router();
 
-	constructor(){
+	constructor() {
 		this.router();
 	}
 
@@ -101,7 +101,7 @@ async function updateUser(req, res): Promise<void> {
 async function updateUserPassword(req, res): Promise<void> {
 	let userId: string = req.params.userId;
 	let userPw: string = req.body.userPw;
-	let userNewPw: string =  req.body.userNewPw;
+	let userNewPw: string = req.body.userNewPw;
 	const getUserPw: any = await user.getUser(userId);
 	try {
 		if (encriptionPw.getHash(userPw) === getUserPw[0].userPw) {

@@ -5,7 +5,7 @@ import { signUp } from '../model/signUp.model';
 export class SignUpRoutes {
 	public signUpRouter: express.Router = express.Router();
 
-	constructor(){
+	constructor() {
 		this.router();
 	}
 

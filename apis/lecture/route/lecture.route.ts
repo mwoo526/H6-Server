@@ -1,11 +1,11 @@
-import {LectureResource} from "../../../resources/lecture.resource";
-import {lecture} from "../model/lecture.model";
+import { LectureResource } from '../../../resources/lecture.resource';
+import { lecture } from '../model/lecture.model';
 import * as express from 'express';
 
-export class LectureRoutes{
+export class LectureRoutes {
 	public lectureRouter: express.Router = express.Router();
 
-	constructor(){
+	constructor() {
 		this.router();
 	}
 
@@ -45,10 +45,10 @@ async function createLecture(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function listLecture(req, res): Promise<void> {
-	try{
+	try {
 		const result = await lecture.listLecture();
 		res.send(result);
-	} catch(err){
+	} catch (err) {
 		res.send(err);
 	}
 }
@@ -60,11 +60,11 @@ async function listLecture(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function getLectureByLectureIndex(req, res): Promise<void> {
-	try{
+	try {
 		let lectureIndex: number = req.params.lectureIndex;
 		const result = await lecture.getLectureByLectureIndex(lectureIndex);
 		res.send(result);
-	} catch(err){
+	} catch (err) {
 		res.send(err);
 	}
 }
@@ -76,11 +76,11 @@ async function getLectureByLectureIndex(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function getLectureByLectureCode(req, res): Promise<void> {
-	try{
+	try {
 		let lectureCode: string = req.params.lectureCode;
 		const result = await lecture.getLectureByLectureCode(lectureCode);
 		res.send(result);
-	}catch(err){
+	} catch (err) {
 		res.send(err);
 	}
 }
@@ -92,11 +92,11 @@ async function getLectureByLectureCode(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function getLectureByProfessorName(req, res): Promise<void> {
-	try{
+	try {
 		let professorName: string = req.params.professorName;
 		const result = await lecture.getLectureByProfessorName(professorName);
 		res.send(result);
-	} catch(err){
+	} catch (err) {
 		res.send(err);
 	}
 }
@@ -108,11 +108,11 @@ async function getLectureByProfessorName(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function getLectureByLectureName(req, res): Promise<void> {
-	try{
+	try {
 		let lectureName: string = req.params.lectureName;
 		const result = await lecture.getLectureByLectureName(lectureName);
 		res.send(result);
-	} catch(err){
+	} catch (err) {
 		res.send(err);
 	}
 }
@@ -124,11 +124,11 @@ async function getLectureByLectureName(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function getLectureByTrack(req, res): Promise<void> {
-	try{
+	try {
 		let track: string = req.params.track;
 		const result = await lecture.getLectureByTrack(track);
 		res.send(result);
-	} catch(err){
+	} catch (err) {
 		res.send(err);
 	}
 }
@@ -140,12 +140,12 @@ async function getLectureByTrack(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function updateLecture(req, res): Promise<void> {
-	try{
+	try {
 		let lectureIndex: number = req.params.lectureIndex;
 		let lectureData: any = new LectureResource(req.body);
 		const result = await lecture.updateLecture(lectureIndex, lectureData.getLecture());
 		res.send(result);
-	} catch(err){
+	} catch (err) {
 		res.send(err);
 	}
 }
@@ -157,11 +157,11 @@ async function updateLecture(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function deleteLecture(req, res): Promise<void> {
-	try{
+	try {
 		let lectureIndex: number = req.params.lectureIndex;
 		const result = await lecture.deleteLecture(lectureIndex);
 		res.send(result);
-	} catch(err){
+	} catch (err) {
 		res.send(err);
 	}
 }
