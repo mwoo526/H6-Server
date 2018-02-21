@@ -87,27 +87,6 @@ export class Lecture {
 	}
 
 	/**
-	 * model: lecture professsorName 조회
-	 * @param {string} professorName
-	 * @returns {Promise<any>}
-	 */
-	getLectureByProfessorName(professorName: string): Promise<void> {
-		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM lectures JOIN professors USING(professorIndex) WHERE professorName LIKE '%${professorName}%'`, function(err, rows) {
-					if (err) {
-						connection.release();
-						reject(err);
-					} else {
-						connection.release();
-						resolve(rows);
-					}
-				})
-			})
-		})
-	}
-
-	/**
 	 * model: lecture lectureName 조회
 	 * @param {string} lectureName
 	 * @returns {Promise<any>}
@@ -158,8 +137,7 @@ export class Lecture {
 	updateLecture(lectureIndex: number, lectureData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query('UPDATE lectures SET ? WHERE lectureIndex = ?', [lectureData,
-					lectureIndex], function(err, rows) {
+				await connection.query('UPDATE lectures SET ? WHERE lectureIndex = ?', [lectureData, lectureIndex], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);

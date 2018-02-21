@@ -103,29 +103,6 @@ class Lecture {
         }));
     }
     /**
-     * model: lecture professsorName 조회
-     * @param {string} professorName
-     * @returns {Promise<any>}
-     */
-    getLectureByProfessorName(professorName) {
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield pool.getConnection(function (err, connection) {
-                return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT * FROM lectures JOIN professors USING(professorIndex) WHERE professorName LIKE '%${professorName}%'`, function (err, rows) {
-                        if (err) {
-                            connection.release();
-                            reject(err);
-                        }
-                        else {
-                            connection.release();
-                            resolve(rows);
-                        }
-                    });
-                });
-            });
-        }));
-    }
-    /**
      * model: lecture lectureName 조회
      * @param {string} lectureName
      * @returns {Promise<any>}
@@ -181,8 +158,7 @@ class Lecture {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query('UPDATE lectures SET ? WHERE lectureIndex = ?', [lectureData,
-                        lectureIndex], function (err, rows) {
+                    yield connection.query('UPDATE lectures SET ? WHERE lectureIndex = ?', [lectureData, lectureIndex], function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);

@@ -21,7 +21,6 @@ class LectureRoutes {
         this.lectureRouter.get('/lectures', listLecture);
         this.lectureRouter.get('/lectures/lectureIndex/:lectureIndex', getLectureByLectureIndex);
         this.lectureRouter.get('/lectures/lectureCode/:lectureCode', getLectureByLectureCode);
-        this.lectureRouter.get('/lectures/professorName/:professorName', getLectureByProfessorName);
         this.lectureRouter.get('/lectures/lectureName/:lectureName', getLectureByLectureName);
         this.lectureRouter.get('/lectures/track/:track', getLectureByTrack);
         this.lectureRouter.put('/lectures/:lectureIndex', updateLecture);
@@ -93,24 +92,6 @@ function getLectureByLectureCode(req, res) {
         try {
             let lectureCode = req.params.lectureCode;
             const result = yield lecture_model_1.lecture.getLectureByLectureCode(lectureCode);
-            res.send(result);
-        }
-        catch (err) {
-            res.send(err);
-        }
-    });
-}
-/**
- * route: lecture professorName 조회
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-function getLectureByProfessorName(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            let professorName = req.params.professorName;
-            const result = yield lecture_model_1.lecture.getLectureByProfessorName(professorName);
             res.send(result);
         }
         catch (err) {
