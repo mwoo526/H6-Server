@@ -1,6 +1,7 @@
 import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import { lectureRoutes } from './apis/lecture/route/lecture.route';
+import { lectureInfoRoutes } from './apis/lectureInfo/route/lectureInfo.route';
 import { professorRoutes } from './apis/professor/route/professor.route';
 import { signInRoutes } from './apis/sign/route/signIn.route';
 import { signUpRoutes } from './apis/sign/route/signUp.route';
@@ -25,6 +26,7 @@ export class Server {
 		this.app.use(signInRoutes.signInRouter);
 		this.app.use(professorRoutes.professorRouter);
 		this.app.use(lectureRoutes.lectureRouter);
+		this.app.use(lectureInfoRoutes.lectureInfoRouter);
 		this.app.use(userValidationRoutes.userValidationRouter);
 		/** Not Found */
 		this.app.use((req: express.Request, res: express.Response, next: Function) => {
