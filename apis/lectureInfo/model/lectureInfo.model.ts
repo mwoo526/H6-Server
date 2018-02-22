@@ -75,7 +75,7 @@ export class LectureInfo {
 	getLectureInfoByLectureName(lectureName: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function (err, connection) {
-				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex WHERE t2.lectureName = '${lectureName}'`, function(err, rows) {
+				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex WHERE t2.lectureName LIKE '%${lectureName}%'`, function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -96,7 +96,7 @@ export class LectureInfo {
 	getLectureInfoByProfessorName(professorName: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function (err, connection) {
-				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex WHERE t3.professorName = '${professorName}'`, function(err, rows) {
+				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex WHERE t3.professorName LIKE '%${professorName}%'`, function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
