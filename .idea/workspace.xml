@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="eaf1ca52-ebf8-419b-84b8-02c1d9b53f15" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/apis/lectureInfo/route/lectureInfo.route.js" afterPath="$PROJECT_DIR$/apis/lectureInfo/route/lectureInfo.route.js" />
-      <change beforePath="$PROJECT_DIR$/apis/lectureInfo/route/lectureInfo.route.js.map" afterPath="$PROJECT_DIR$/apis/lectureInfo/route/lectureInfo.route.js.map" />
-      <change beforePath="$PROJECT_DIR$/apis/lectureInfo/route/lectureInfo.route.ts" afterPath="$PROJECT_DIR$/apis/lectureInfo/route/lectureInfo.route.ts" />
+      <change beforePath="$PROJECT_DIR$/apis/professor/model/professor.model.js" afterPath="$PROJECT_DIR$/apis/professor/model/professor.model.js" />
+      <change beforePath="$PROJECT_DIR$/apis/professor/model/professor.model.js.map" afterPath="$PROJECT_DIR$/apis/professor/model/professor.model.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/professor/model/professor.model.ts" afterPath="$PROJECT_DIR$/apis/professor/model/professor.model.ts" />
+      <change beforePath="$PROJECT_DIR$/apis/professor/route/professor.route.ts" afterPath="$PROJECT_DIR$/apis/professor/route/professor.route.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -24,7 +25,7 @@
           <file leaf-file-name="lecture.route.ts" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/apis/lecture/route/lecture.route.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1100">
+                <state relative-caret-position="830">
                   <caret line="60" column="21" lean-forward="false" selection-start-line="60" selection-start-column="21" selection-end-line="60" selection-end-column="21" />
                   <folding>
                     <element signature="e#0#35#0" expanded="true" />
@@ -36,7 +37,7 @@
           <file leaf-file-name="lectureInfo.model.ts" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/apis/lectureInfo/model/lectureInfo.model.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-74">
+                <state relative-caret-position="2222">
                   <caret line="117" column="19" lean-forward="false" selection-start-line="117" selection-start-column="2" selection-end-line="117" selection-end-column="19" />
                   <folding />
                 </state>
@@ -47,14 +48,34 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="lectureInfo.route.ts" pinned="false" current-in-tab="true">
+          <file leaf-file-name="lectureInfo.route.ts" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/apis/lectureInfo/route/lectureInfo.route.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="913">
+                <state relative-caret-position="2164">
                   <caret line="119" column="24" lean-forward="false" selection-start-line="119" selection-start-column="24" selection-end-line="119" selection-end-column="24" />
                   <folding>
                     <element signature="e#0#35#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="professor.route.ts" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/apis/professor/route/professor.route.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="496">
+                  <caret line="108" column="57" lean-forward="false" selection-start-line="108" selection-start-column="57" selection-end-line="108" selection-end-column="57" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="professor.model.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/apis/professor/model/professor.model.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="304">
+                  <caret line="16" column="40" lean-forward="false" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -84,8 +105,6 @@
         <option value="$PROJECT_DIR$/packages/utils/mysql.utils.ts" />
         <option value="$PROJECT_DIR$/resources/user.resource.ts" />
         <option value="$PROJECT_DIR$/apis/user/route/user.route.ts" />
-        <option value="$PROJECT_DIR$/apis/professor/model/professor.model.ts" />
-        <option value="$PROJECT_DIR$/apis/professor/route/professor.route.ts" />
         <option value="$PROJECT_DIR$/apis/test/model/test.model.ts" />
         <option value="$PROJECT_DIR$/apis/test/route/test.route.ts" />
         <option value="$PROJECT_DIR$/apis/user/model/user.model.ts" />
@@ -107,6 +126,8 @@
         <option value="$PROJECT_DIR$/app.ts" />
         <option value="$PROJECT_DIR$/apis/lectureInfo/route/lectureInfo.route.spec.ts" />
         <option value="$PROJECT_DIR$/apis/lectureInfo/route/lectureInfo.route.ts" />
+        <option value="$PROJECT_DIR$/apis/professor/model/professor.model.ts" />
+        <option value="$PROJECT_DIR$/apis/professor/route/professor.route.ts" />
       </list>
     </option>
   </component>
@@ -212,27 +233,37 @@
               <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
               <item name="H6-server" type="462c0819:PsiDirectoryNode" />
               <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="lecture" type="462c0819:PsiDirectoryNode" />
+              <item name="professor" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
               <item name="H6-server" type="462c0819:PsiDirectoryNode" />
               <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="lectureInfo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="lectureInfo" type="462c0819:PsiDirectoryNode" />
+              <item name="professor" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
               <item name="H6-server" type="462c0819:PsiDirectoryNode" />
               <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="lectureInfo" type="462c0819:PsiDirectoryNode" />
+              <item name="professor" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="professor.model.ts" type="620a8d5e:NestingTreeNode" />
+            </path>
+            <path>
+              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
+              <item name="apis" type="462c0819:PsiDirectoryNode" />
+              <item name="professor" type="462c0819:PsiDirectoryNode" />
               <item name="route" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
+              <item name="apis" type="462c0819:PsiDirectoryNode" />
+              <item name="professor" type="462c0819:PsiDirectoryNode" />
+              <item name="route" type="462c0819:PsiDirectoryNode" />
+              <item name="professor.route.ts" type="620a8d5e:NestingTreeNode" />
             </path>
             <path>
               <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
@@ -399,7 +430,7 @@
       <workItem from="1518999817171" duration="2417000" />
       <workItem from="1519002293426" duration="10000" />
       <workItem from="1519037517629" duration="17386000" />
-      <workItem from="1519274332277" duration="5621000" />
+      <workItem from="1519274332277" duration="6335000" />
     </task>
     <servers />
   </component>
@@ -436,7 +467,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55588000" />
+    <option name="totallyTimeSpent" value="56302000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1100" extended-state="0" />
@@ -747,20 +778,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apis/professor/model/professor.model.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2147">
-          <caret line="113" column="0" lean-forward="false" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apis/professor/route/professor.route.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-987">
-          <caret line="18" column="2" lean-forward="false" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/packages/utils/email.util.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
@@ -887,7 +904,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apis/lectureInfo/model/lectureInfo.model.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-74">
+        <state relative-caret-position="2222">
           <caret line="117" column="19" lean-forward="false" selection-start-line="117" selection-start-column="2" selection-end-line="117" selection-end-column="19" />
           <folding />
         </state>
@@ -895,7 +912,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apis/lecture/route/lecture.route.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1100">
+        <state relative-caret-position="830">
           <caret line="60" column="21" lean-forward="false" selection-start-line="60" selection-start-column="21" selection-end-line="60" selection-end-column="21" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
@@ -905,11 +922,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apis/lectureInfo/route/lectureInfo.route.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="913">
+        <state relative-caret-position="2164">
           <caret line="119" column="24" lean-forward="false" selection-start-line="119" selection-start-column="24" selection-end-line="119" selection-end-column="24" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apis/professor/model/professor.model.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="40" lean-forward="false" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apis/professor/route/professor.route.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="108" column="57" lean-forward="false" selection-start-line="108" selection-start-column="57" selection-end-line="108" selection-end-column="57" />
+          <folding />
         </state>
       </provider>
     </entry>
