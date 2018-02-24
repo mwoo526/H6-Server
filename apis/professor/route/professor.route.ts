@@ -26,8 +26,8 @@ export class ProfessorRoutes {
  * @returns {Promise<void>}
  */
 async function createProfessor(req, res): Promise<void> {
+	let professorData: any = new ProfessorResource(req.body);
 	try {
-		let professorData: any = new ProfessorResource(req.body);
 		const result: any = await professor.createProfessor(professorData.getProfessor());
 		res.send(result);
 	} catch (err) {
@@ -57,8 +57,8 @@ async function listProfessor(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function getProfessorByProfessorIndex(req, res): Promise<void> {
+	let professorIndex: number = req.params.professorIndex;
 	try {
-		let professorIndex: number = req.params.professorIndex;
 		const result: any = await professor.getProfessorByProfessorIndex(professorIndex);
 		res.send(result);
 	} catch (err) {
@@ -73,8 +73,8 @@ async function getProfessorByProfessorIndex(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function getProfessorByProfessorName(req, res): Promise<void> {
+	let professorName: string = req.params.professorName;
 	try {
-		let professorName: string = req.params.professorName;
 		const result: any = await professor.getProfessorByProfessorName(professorName);
 		res.send(result);
 	} catch (err) {
@@ -89,9 +89,9 @@ async function getProfessorByProfessorName(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function updateProfessor(req, res): Promise<void> {
+	let professorIndex: number = req.params.professorIndex;
+	let professorData: any = new ProfessorResource(req.body);
 	try {
-		let professorIndex: number = req.params.professorIndex;
-		let professorData: any = new ProfessorResource(req.body);
 		const result: any = await professor.updateProfessor(professorIndex, professorData);
 		res.send(result);
 	} catch (err) {
@@ -106,8 +106,8 @@ async function updateProfessor(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function deleteProfessor(req, res): Promise<void> {
+	let professorIndex: number = req.params.professorIndex;
 	try {
-		let professorIndex: number = req.params.professorIndex;
 		const result: any = await professor.deleteProfessor(professorIndex);
 		res.send(result);
 	} catch (err) {

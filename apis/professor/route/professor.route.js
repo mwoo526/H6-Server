@@ -34,8 +34,8 @@ exports.ProfessorRoutes = ProfessorRoutes;
  */
 function createProfessor(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        let professorData = new professor_resource_1.ProfessorResource(req.body);
         try {
-            let professorData = new professor_resource_1.ProfessorResource(req.body);
             const result = yield professor_model_1.professor.createProfessor(professorData.getProfessor());
             res.send(result);
         }
@@ -69,8 +69,8 @@ function listProfessor(req, res) {
  */
 function getProfessorByProfessorIndex(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        let professorIndex = req.params.professorIndex;
         try {
-            let professorIndex = req.params.professorIndex;
             const result = yield professor_model_1.professor.getProfessorByProfessorIndex(professorIndex);
             res.send(result);
         }
@@ -87,8 +87,8 @@ function getProfessorByProfessorIndex(req, res) {
  */
 function getProfessorByProfessorName(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        let professorName = req.params.professorName;
         try {
-            let professorName = req.params.professorName;
             const result = yield professor_model_1.professor.getProfessorByProfessorName(professorName);
             res.send(result);
         }
@@ -105,9 +105,9 @@ function getProfessorByProfessorName(req, res) {
  */
 function updateProfessor(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        let professorIndex = req.params.professorIndex;
+        let professorData = new professor_resource_1.ProfessorResource(req.body);
         try {
-            let professorIndex = req.params.professorIndex;
-            let professorData = new professor_resource_1.ProfessorResource(req.body);
             const result = yield professor_model_1.professor.updateProfessor(professorIndex, professorData);
             res.send(result);
         }
@@ -124,8 +124,8 @@ function updateProfessor(req, res) {
  */
 function deleteProfessor(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        let professorIndex = req.params.professorIndex;
         try {
-            let professorIndex = req.params.professorIndex;
             const result = yield professor_model_1.professor.deleteProfessor(professorIndex);
             res.send(result);
         }

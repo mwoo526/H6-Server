@@ -1,0 +1,53 @@
+import { expect } from 'chai';
+import { lectureInfo } from './lectureInfo.model';
+
+describe('lectureInfo 모델', () => {
+	it('createLectureInfo', async () => {
+		const result = await lectureInfo.createLectureInfo({
+			lectureIndex: 11,
+			professorIndex: 3,
+			textbookIndex: null,
+			average: 0
+		});
+		// console.log(result);
+		expect(result).to.instanceof(Object);
+	});
+
+	it('listLectureInfo', async () => {
+		const result = await lectureInfo.listLectureInfo();
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
+	it('getLectureInfoByLectureInfoIndex', async () => {
+		const result = await lectureInfo.getLectureInfoByLectureInfoIndex(1);
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
+	it('getLectureInfoByLectureName', async () => {
+		const result = await lectureInfo.getLectureInfoByLectureName('os');
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
+	it('getLectureInfoByProfessorName', async () => {
+		const result = await lectureInfo.getLectureInfoByProfessorName('안재성');
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
+	it('updateLectureInfo', async () => {
+		const result = await lectureInfo.updateLectureInfo(2, {
+			average: 2
+		});
+		// console.log(result);
+		expect(result).to.instanceof(Object);
+	});
+
+	it('deleteLectureInfo', async () => {
+		const result = await lectureInfo.deleteLectureInfo(6);
+		// console.log(result);
+		expect(result).to.instanceof(Object);
+	});
+});

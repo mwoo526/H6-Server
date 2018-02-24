@@ -7,6 +7,27 @@ export class Professor {
 	}
 
 	/**
+	 * model: professor 생성
+	 * @param professorData
+	 * @returns {Promise<any>}
+	 */
+	createProfessor(professorData: any): Promise<any> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function (err, connection) {
+				await connection.query(`INSERT INTO professors SET ?`, professorData, function(err) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						connection.release();
+						resolve(professorData);
+					}
+				})
+			})
+		})
+	}
+
+	/**
 	 * model: professor 리스트 조회
 	 * @returns {Promise<any>}
 	 */

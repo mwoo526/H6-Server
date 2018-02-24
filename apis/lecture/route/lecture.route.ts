@@ -14,7 +14,6 @@ export class LectureRoutes {
 		this.lectureRouter.get('/lectures', listLecture);
 		this.lectureRouter.get('/lectures/lectureIndex/:lectureIndex', getLectureByLectureIndex);
 		this.lectureRouter.get('/lectures/lectureCode/:lectureCode', getLectureByLectureCode);
-		this.lectureRouter.get('/lectures/professorName/:professorName', getLectureByProfessorName);
 		this.lectureRouter.get('/lectures/lectureName/:lectureName', getLectureByLectureName);
 		this.lectureRouter.get('/lectures/track/:track', getLectureByTrack);
 		this.lectureRouter.put('/lectures/:lectureIndex', updateLecture);
@@ -79,22 +78,6 @@ async function getLectureByLectureCode(req, res): Promise<void> {
 	try {
 		let lectureCode: string = req.params.lectureCode;
 		const result = await lecture.getLectureByLectureCode(lectureCode);
-		res.send(result);
-	} catch (err) {
-		res.send(err);
-	}
-}
-
-/**
- * route: lecture professorName 조회
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-async function getLectureByProfessorName(req, res): Promise<void> {
-	try {
-		let professorName: string = req.params.professorName;
-		const result = await lecture.getLectureByProfessorName(professorName);
 		res.send(result);
 	} catch (err) {
 		res.send(err);

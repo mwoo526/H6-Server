@@ -10,24 +10,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const mysql_util_1 = require("../../../packages/utils/mysql.util");
 const pool = mysql_util_1.mysqlUtil.pool;
-class Lecture {
+// TODO(@jade): textbook 칼럼 추가  date: 2018. 2. 21. 오후 6:11
+class LectureInfo {
     /**
-     * model: lecture 생성
-     * @param lectureData
-     * @returns {Promise<any>}
+     * model: lectureInfo 생성
+     * @param lectureInfoData
+     * @returns {Promise<void>}
      */
-    createLecture(lectureData) {
+    createLectureInfo(lectureInfoData) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query('INSERT INTO lectures SET ?', lectureData, function (err) {
+                    yield connection.query(`INSERT INTO lecturesInfo SET ?`, lectureInfoData, function (err) {
                         if (err) {
                             connection.release();
                             reject(err);
                         }
                         else {
                             connection.release();
-                            resolve(lectureData);
+                            resolve(lectureInfoData);
                         }
                     });
                 });
@@ -35,37 +36,14 @@ class Lecture {
         }));
     }
     /**
-     * model: lecture 리스트 조회
-     * @returns {Promise<any>}
+     * model: lectureInfo 리스트 조회
+     * @returns {Promise<void>}
      */
-    listLecture() {
+    listLectureInfo() {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query('SELECT * FROM lectures', function (err, rows) {
-                        if (err) {
-                            connection.release();
-                            reject(err);
-                        }
-                        else {
-                            connection.release();
-                            resolve(rows);
-                        }
-                    });
-                });
-            });
-        }));
-    }
-    /**
-     * model: lecture index 조회
-     * @param {number} lectureIndex
-     * @returns {Promise<any>}
-     */
-    getLectureByLectureIndex(lectureIndex) {
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield pool.getConnection(function (err, connection) {
-                return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query('SELECT * FROM lectures WHERE lectureIndex = ?', lectureIndex, function (err, rows) {
+                    yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -80,15 +58,15 @@ class Lecture {
         }));
     }
     /**
-     * model: lecture lectureCode 조회
-     * @param {string} lectureCode
-     * @returns {Promise<any>}
+     * model: lectureInfo index 조회
+     * @param lectureInfoIndex
+     * @returns {Promise<void>}
      */
-    getLectureByLectureCode(lectureCode) {
+    getLectureInfoByLectureInfoIndex(lectureInfoIndex) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT * FROM lectures WHERE lectureCode LIKE '%${lectureCode}%'`, function (err, rows) {
+                    yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex WHERE t1.lectureInfoIndex = ${lectureInfoIndex}`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -103,15 +81,15 @@ class Lecture {
         }));
     }
     /**
-     * model: lecture lectureName 조회
-     * @param {string} lectureName
-     * @returns {Promise<any>}
+     * model: lectureInfo lectureName 조회
+     * @param lectureName
+     * @returns {Promise<void>}
      */
-    getLectureByLectureName(lectureName) {
+    getLectureInfoByLectureName(lectureName) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT * FROM lectures WHERE lectureName LIKE '%${lectureName}%'`, function (err, rows) {
+                    yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex WHERE t2.lectureName LIKE '%${lectureName}%'`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -126,15 +104,15 @@ class Lecture {
         }));
     }
     /**
-     * model: lecture track 조회
-     * @param {string} track
-     * @returns {Promise<any>}
+     * model: lectureInfo professorName 조회
+     * @param professorName
+     * @returns {Promise<void>}
      */
-    getLectureByTrack(track) {
+    getLectureInfoByProfessorName(professorName) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT * FROM lectures WHERE track LIKE '%${track}%'`, function (err, rows) {
+                    yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex WHERE t3.professorName LIKE '%${professorName}%'`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -149,23 +127,23 @@ class Lecture {
         }));
     }
     /**
-     * model: lecture 업데이트
-     * @param {number} lectureIndex
-     * @param lectureData
-     * @returns {Promise<any>}
+     * model: lectureInfo 업데이트
+     * @param {number} lectureInfoIndex
+     * @param lectureInfoData
+     * @returns {Promise<void>}
      */
-    updateLecture(lectureIndex, lectureData) {
+    updateLectureInfo(lectureInfoIndex, lectureInfoData) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query('UPDATE lectures SET ? WHERE lectureIndex = ?', [lectureData, lectureIndex], function (err, rows) {
+                    yield connection.query(`UPDATE lecturesInfo SET ? WHERE lectureInfoIndex = ?`, [lectureInfoData, lectureInfoIndex], function (err) {
                         if (err) {
                             connection.release();
                             reject(err);
                         }
                         else {
                             connection.release();
-                            resolve(rows);
+                            resolve(lectureInfoData);
                         }
                     });
                 });
@@ -173,15 +151,15 @@ class Lecture {
         }));
     }
     /**
-     * model: lecture 삭제
-     * @param {number} lectureIndex
-     * @returns {Promise<any>}
+     * model: lectureInfo 삭제
+     * @param {number} lectureInfoIndex
+     * @returns {Promise<void>}
      */
-    deleteLecture(lectureIndex) {
+    deleteLectureInfo(lectureInfoIndex) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query('DELETE FROM lectures WHERE lectureIndex = ?', lectureIndex, function (err, rows) {
+                    yield connection.query('DELETE FROM lecturesInfo WHERE lectureInfoIndex = ?', lectureInfoIndex, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -196,6 +174,6 @@ class Lecture {
         }));
     }
 }
-exports.Lecture = Lecture;
-exports.lecture = new Lecture();
-//# sourceMappingURL=lecture.model.js.map
+exports.LectureInfo = LectureInfo;
+exports.lectureInfo = new LectureInfo();
+//# sourceMappingURL=lectureInfo.model.js.map
