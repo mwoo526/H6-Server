@@ -20,6 +20,7 @@ class UserRoutes {
     router() {
         this.userRouter.post('/users', createUser);
         this.userRouter.get('/users', listUser);
+        this.userRouter.get('/users/:page/:count', pageListUser);
         this.userRouter.get('/users/:userId', getUser);
         this.userRouter.put('/users/:userId', updateUser);
         this.userRouter.put('/users/:userId/password', updateUserPassword);
@@ -55,6 +56,25 @@ function listUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const result = yield user_model_1.user.listUser();
+            res.send(result);
+        }
+        catch (err) {
+            res.send(err);
+        }
+    });
+}
+/**
+ * route: user page 리스트 조회
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+function pageListUser(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            let page = parseInt(req.params.page);
+            let count = parseInt(req.params.count);
+            const result = yield user_model_1.user.pageListUser(page, count);
             res.send(result);
         }
         catch (err) {

@@ -59,6 +59,38 @@ class User {
         }));
     }
     /**
+     * model: user page 리스트 조회
+     * @returns {Promise<any>}
+     */
+    pageListUser(page, count) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    let start = (page - 1) * count + 1;
+                    let end = start + count - 1;
+                    console.log(page + "," + count);
+                    console.log(start + "," + end);
+                    yield connection.query(`SELECT B.* FROM (
+				SELECT @ROWNUM:=@ROWNUM + 1 as rownum, A.* 
+				from (
+				SELECT * FROM users ORDER BY createdAt DESC
+				)A, (SELECT @ROWNUM :=0)R
+				)
+				B WHERE rownum BETWEEN ${start} AND ${end}`, function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(rows);
+                        }
+                    });
+                });
+            });
+        }));
+    }
+    /**
      * model: user studentId 조회
      * @param {number} studentId
      * @returns {Promise<any>}
