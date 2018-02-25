@@ -19,6 +19,12 @@ describe('lectureInfo 모델', () => {
 		expect(result).to.instanceof(Array);
 	});
 
+	it('pageListLectureInfo', async () => {
+		const result = await lectureInfo.pageListLectureInfo(1, 3);
+		//console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
 	it('getLectureInfoByLectureInfoIndex', async () => {
 		const result = await lectureInfo.getLectureInfoByLectureInfoIndex(1);
 		// console.log(result);
@@ -31,11 +37,22 @@ describe('lectureInfo 모델', () => {
 		expect(result).to.instanceof(Array);
 	});
 
+	it('pageGetLectureInfoByLectureName', async () => {
+	    const result = await lectureInfo.pageGetLectureInfoByLectureName('os', 1, 3);
+	    //console.log(result);
+        expect(result).to.instanceof(Array);
+    });
+
 	it('getLectureInfoByProfessorName', async () => {
 		const result = await lectureInfo.getLectureInfoByProfessorName('안재성');
 		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});
+
+	it('pageGetLectureInfoByProfessorName', async () => {
+	    const result = await lectureInfo.pageGetLectureInfoByProfessorName('안재성', 1, 3);
+	    expect(result).to.instanceof(Array);
+    });
 
 	it('updateLectureInfo', async () => {
 		const result = await lectureInfo.updateLectureInfo(2, {

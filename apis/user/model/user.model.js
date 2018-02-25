@@ -68,8 +68,6 @@ class User {
                 return __awaiter(this, void 0, void 0, function* () {
                     let start = (page - 1) * count + 1;
                     let end = start + count - 1;
-                    console.log(page + "," + count);
-                    console.log(start + "," + end);
                     yield connection.query(`SELECT B.* FROM (
 				SELECT @ROWNUM:=@ROWNUM + 1 as rownum, A.* 
 				from (

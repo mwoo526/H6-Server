@@ -26,6 +26,11 @@ describe('lectureInfo 모델', () => {
         // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
+    it('pageListLectureInfo', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield lectureInfo_model_1.lectureInfo.pageListLectureInfo(1, 3);
+        //console.log(result);
+        chai_1.expect(result).to.instanceof(Array);
+    }));
     it('getLectureInfoByLectureInfoIndex', () => __awaiter(this, void 0, void 0, function* () {
         const result = yield lectureInfo_model_1.lectureInfo.getLectureInfoByLectureInfoIndex(1);
         // console.log(result);
@@ -36,9 +41,18 @@ describe('lectureInfo 모델', () => {
         // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
+    it('pageGetLectureInfoByLectureName', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield lectureInfo_model_1.lectureInfo.pageGetLectureInfoByLectureName('os', 1, 3);
+        //console.log(result);
+        chai_1.expect(result).to.instanceof(Array);
+    }));
     it('getLectureInfoByProfessorName', () => __awaiter(this, void 0, void 0, function* () {
         const result = yield lectureInfo_model_1.lectureInfo.getLectureInfoByProfessorName('안재성');
         // console.log(result);
+        chai_1.expect(result).to.instanceof(Array);
+    }));
+    it('pageGetLectureInfoByProfessorName', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield lectureInfo_model_1.lectureInfo.pageGetLectureInfoByProfessorName('안재성', 1, 3);
         chai_1.expect(result).to.instanceof(Array);
     }));
     it('updateLectureInfo', () => __awaiter(this, void 0, void 0, function* () {
