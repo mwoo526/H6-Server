@@ -12,7 +12,7 @@ export class LectureInfo {
 	 */
 	createLectureInfo(lectureInfoData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				await connection.query(`INSERT INTO lecturesInfo SET ?`, lectureInfoData, function(err) {
 					if (err) {
 						connection.release();
@@ -32,7 +32,7 @@ export class LectureInfo {
 	 */
 	listLectureInfo(): Promise<void> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex`, function(err, rows) {
 					if (err) {
 						connection.release();
@@ -46,16 +46,16 @@ export class LectureInfo {
 		})
 	}
 
-    /**
-     * model: lectureInfo page 리스트 조회
-     * @returns {Promise<any>}
-     */
-    pageListLectureInfo(page : number, count : number) : Promise<any> {
-        return new Promise(async (resolve, reject) => {
-            await pool.getConnection(async function(err, connection) {
-                let start = (page-1) * count + 1;
-                let end = start + count - 1;
-                await connection.query(`SELECT B.* FROM (
+	/**
+	 * model: lectureInfo page 리스트 조회
+	 * @returns {Promise<any>}
+	 */
+	pageListLectureInfo(page: number, count: number): Promise<any> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				let start = (page - 1) * count + 1;
+				let end = start + count - 1;
+				await connection.query(`SELECT B.* FROM (
 				SELECT @ROWNUM:=@ROWNUM + 1 as rownum, A.* 
 				from (
 				SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
@@ -66,27 +66,26 @@ export class LectureInfo {
 				)A, (SELECT @ROWNUM :=0)R
 				)
 				B WHERE rownum BETWEEN ${start} AND ${end}`, function(err, rows) {
-                    if (err) {
-                        connection.release();
-                        reject(err);
-                    } else {
-                        connection.release();
-                        resolve(rows);
-                    }
-                })
-            })
-        })
-    }
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						connection.release();
+						resolve(rows);
+					}
+				})
+			})
+		})
+	}
 
-
-    /**
+	/**
 	 * model: lectureInfo index 조회
 	 * @param lectureInfoIndex
 	 * @returns {Promise<void>}
 	 */
 	getLectureInfoByLectureInfoIndex(lectureInfoIndex: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex WHERE t1.lectureInfoIndex = ${lectureInfoIndex}`, function(err, rows) {
 					if (err) {
 						connection.release();
@@ -107,7 +106,7 @@ export class LectureInfo {
 	 */
 	getLectureInfoByLectureName(lectureName: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex WHERE t2.lectureName LIKE '%${lectureName}%'`, function(err, rows) {
 					if (err) {
 						connection.release();
@@ -121,17 +120,17 @@ export class LectureInfo {
 		})
 	}
 
-    /**
-     * model: lectureInfo lectureName page 조회
-     * @param lectureName
-     * @returns {Promise<void>}
-     */
-    pageGetLectureInfoByLectureName(lectureName: any, page: number, count: number): Promise<void> {
-        return new Promise(async (resolve, reject) => {
-            await pool.getConnection(async function (err, connection) {
-                let start = (page-1) * count + 1;
-                let end = start + count - 1;
-                await connection.query(`SELECT B.* FROM (
+	/**
+	 * model: lectureInfo lectureName page 조회
+	 * @param lectureName
+	 * @returns {Promise<void>}
+	 */
+	pageGetLectureInfoByLectureName(lectureName: any, page: number, count: number): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				let start = (page - 1) * count + 1;
+				let end = start + count - 1;
+				await connection.query(`SELECT B.* FROM (
 				SELECT @ROWNUM:=@ROWNUM + 1 as rownum, A.* 
 				from (
 				SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
@@ -143,17 +142,17 @@ export class LectureInfo {
 				)A, (SELECT @ROWNUM :=0)R
 				)
 				B WHERE rownum BETWEEN ${start} AND ${end}`, function(err, rows) {
-                    if (err) {
-                        connection.release();
-                        reject(err);
-                    } else {
-                        connection.release();
-                        resolve(rows);
-                    }
-                });
-            })
-        })
-    }
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						connection.release();
+						resolve(rows);
+					}
+				});
+			})
+		})
+	}
 
 	/**
 	 * model: lectureInfo professorName 조회
@@ -162,7 +161,7 @@ export class LectureInfo {
 	 */
 	getLectureInfoByProfessorName(professorName: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex WHERE t3.professorName LIKE '%${professorName}%'`, function(err, rows) {
 					if (err) {
 						connection.release();
@@ -176,17 +175,17 @@ export class LectureInfo {
 		})
 	}
 
-    /**
-     * model: lectureInfo professorName page 조회
-     * @param professorName
-     * @returns {Promise<void>}
-     */
-    pageGetLectureInfoByProfessorName(professorName: any, page: number, count: number): Promise<void> {
-        return new Promise(async (resolve, reject) => {
-            await pool.getConnection(async function (err, connection) {
-                let start = (page-1) * count + 1;
-                let end = start + count - 1
-                await connection.query(`SELECT B.* FROM (
+	/**
+	 * model: lectureInfo professorName page 조회
+	 * @param professorName
+	 * @returns {Promise<void>}
+	 */
+	pageGetLectureInfoByProfessorName(professorName: any, page: number, count: number): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				let start = (page - 1) * count + 1;
+				let end = start + count - 1
+				await connection.query(`SELECT B.* FROM (
 				SELECT @ROWNUM:=@ROWNUM + 1 as rownum, A.* 
 				from (
 				SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
@@ -198,17 +197,17 @@ export class LectureInfo {
 				)A, (SELECT @ROWNUM :=0)R
 				)
 				B WHERE rownum BETWEEN ${start} AND ${end}`, function(err, rows) {
-                    if (err) {
-                        connection.release();
-                        reject(err);
-                    } else {
-                        connection.release();
-                        resolve(rows);
-                    }
-                });
-            })
-        })
-    }
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						connection.release();
+						resolve(rows);
+					}
+				});
+			})
+		})
+	}
 
 	/**
 	 * model: lectureInfo 업데이트
@@ -218,8 +217,9 @@ export class LectureInfo {
 	 */
 	updateLectureInfo(lectureInfoIndex: number, lectureInfoData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
-				await connection.query(`UPDATE lecturesInfo SET ? WHERE lectureInfoIndex = ?`, [lectureInfoData, lectureInfoIndex], function(err) {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`UPDATE lecturesInfo SET ? WHERE lectureInfoIndex = ?`, [lectureInfoData,
+					lectureInfoIndex], function(err) {
 					if (err) {
 						connection.release();
 						reject(err);

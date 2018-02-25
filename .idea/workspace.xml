@@ -3,6 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="eaf1ca52-ebf8-419b-84b8-02c1d9b53f15" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/apis/lecture/model/lecture.model.js" afterPath="$PROJECT_DIR$/apis/lecture/model/lecture.model.js" />
+      <change beforePath="$PROJECT_DIR$/apis/lecture/model/lecture.model.js.map" afterPath="$PROJECT_DIR$/apis/lecture/model/lecture.model.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.js" afterPath="$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.js" />
+      <change beforePath="$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.js.map" afterPath="$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.ts" afterPath="$PROJECT_DIR$/apis/lecture/model/lecture.model.spec.ts" />
+      <change beforePath="$PROJECT_DIR$/apis/lecture/model/lecture.model.ts" afterPath="$PROJECT_DIR$/apis/lecture/model/lecture.model.ts" />
+      <change beforePath="$PROJECT_DIR$/apis/lecture/route/lecture.route.js" afterPath="$PROJECT_DIR$/apis/lecture/route/lecture.route.js" />
+      <change beforePath="$PROJECT_DIR$/apis/lecture/route/lecture.route.js.map" afterPath="$PROJECT_DIR$/apis/lecture/route/lecture.route.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/lecture/route/lecture.route.ts" afterPath="$PROJECT_DIR$/apis/lecture/route/lecture.route.ts" />
       <change beforePath="$PROJECT_DIR$/apis/lectureInfo/model/lectureInfo.model.js" afterPath="$PROJECT_DIR$/apis/lectureInfo/model/lectureInfo.model.js" />
       <change beforePath="$PROJECT_DIR$/apis/lectureInfo/model/lectureInfo.model.js.map" afterPath="$PROJECT_DIR$/apis/lectureInfo/model/lectureInfo.model.js.map" />
       <change beforePath="$PROJECT_DIR$/apis/lectureInfo/model/lectureInfo.model.spec.js" afterPath="$PROJECT_DIR$/apis/lectureInfo/model/lectureInfo.model.spec.js" />
@@ -12,8 +21,79 @@
       <change beforePath="$PROJECT_DIR$/apis/lectureInfo/route/lectureInfo.route.js" afterPath="$PROJECT_DIR$/apis/lectureInfo/route/lectureInfo.route.js" />
       <change beforePath="$PROJECT_DIR$/apis/lectureInfo/route/lectureInfo.route.js.map" afterPath="$PROJECT_DIR$/apis/lectureInfo/route/lectureInfo.route.js.map" />
       <change beforePath="$PROJECT_DIR$/apis/lectureInfo/route/lectureInfo.route.ts" afterPath="$PROJECT_DIR$/apis/lectureInfo/route/lectureInfo.route.ts" />
+      <change beforePath="$PROJECT_DIR$/apis/professor/model/professor.model.js" afterPath="$PROJECT_DIR$/apis/professor/model/professor.model.js" />
+      <change beforePath="$PROJECT_DIR$/apis/professor/model/professor.model.js.map" afterPath="$PROJECT_DIR$/apis/professor/model/professor.model.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/professor/model/professor.model.ts" afterPath="$PROJECT_DIR$/apis/professor/model/professor.model.ts" />
+      <change beforePath="$PROJECT_DIR$/apis/professor/route/professor.route.js" afterPath="$PROJECT_DIR$/apis/professor/route/professor.route.js" />
+      <change beforePath="$PROJECT_DIR$/apis/professor/route/professor.route.js.map" afterPath="$PROJECT_DIR$/apis/professor/route/professor.route.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/professor/route/professor.route.ts" afterPath="$PROJECT_DIR$/apis/professor/route/professor.route.ts" />
+      <change beforePath="$PROJECT_DIR$/apis/sign/model/signIn.model.js" afterPath="$PROJECT_DIR$/apis/sign/model/signIn.model.js" />
+      <change beforePath="$PROJECT_DIR$/apis/sign/model/signIn.model.js.map" afterPath="$PROJECT_DIR$/apis/sign/model/signIn.model.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/sign/model/signIn.model.ts" afterPath="$PROJECT_DIR$/apis/sign/model/signIn.model.ts" />
+      <change beforePath="$PROJECT_DIR$/apis/sign/model/signUp.model.js" afterPath="$PROJECT_DIR$/apis/sign/model/signUp.model.js" />
+      <change beforePath="$PROJECT_DIR$/apis/sign/model/signUp.model.js.map" afterPath="$PROJECT_DIR$/apis/sign/model/signUp.model.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/sign/model/signUp.model.ts" afterPath="$PROJECT_DIR$/apis/sign/model/signUp.model.ts" />
+      <change beforePath="$PROJECT_DIR$/apis/sign/route/signIn.route.js" afterPath="$PROJECT_DIR$/apis/sign/route/signIn.route.js" />
+      <change beforePath="$PROJECT_DIR$/apis/sign/route/signIn.route.js.map" afterPath="$PROJECT_DIR$/apis/sign/route/signIn.route.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/sign/route/signIn.route.ts" afterPath="$PROJECT_DIR$/apis/sign/route/signIn.route.ts" />
+      <change beforePath="$PROJECT_DIR$/apis/sign/route/signUp.route.js" afterPath="$PROJECT_DIR$/apis/sign/route/signUp.route.js" />
+      <change beforePath="$PROJECT_DIR$/apis/sign/route/signUp.route.js.map" afterPath="$PROJECT_DIR$/apis/sign/route/signUp.route.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/sign/route/signUp.route.ts" afterPath="$PROJECT_DIR$/apis/sign/route/signUp.route.ts" />
+      <change beforePath="$PROJECT_DIR$/apis/test/model/test.model.js" afterPath="$PROJECT_DIR$/apis/test/model/test.model.js" />
+      <change beforePath="$PROJECT_DIR$/apis/test/model/test.model.js.map" afterPath="$PROJECT_DIR$/apis/test/model/test.model.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/test/route/test.route.js" afterPath="$PROJECT_DIR$/apis/test/route/test.route.js" />
+      <change beforePath="$PROJECT_DIR$/apis/test/route/test.route.js.map" afterPath="$PROJECT_DIR$/apis/test/route/test.route.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/test/route/test.route.ts" afterPath="$PROJECT_DIR$/apis/test/route/test.route.ts" />
       <change beforePath="$PROJECT_DIR$/apis/user/model/user.model.js" afterPath="$PROJECT_DIR$/apis/user/model/user.model.js" />
       <change beforePath="$PROJECT_DIR$/apis/user/model/user.model.js.map" afterPath="$PROJECT_DIR$/apis/user/model/user.model.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/user/model/user.model.ts" afterPath="$PROJECT_DIR$/apis/user/model/user.model.ts" />
+      <change beforePath="$PROJECT_DIR$/apis/user/route/user.route.js" afterPath="$PROJECT_DIR$/apis/user/route/user.route.js" />
+      <change beforePath="$PROJECT_DIR$/apis/user/route/user.route.js.map" afterPath="$PROJECT_DIR$/apis/user/route/user.route.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/user/route/user.route.ts" afterPath="$PROJECT_DIR$/apis/user/route/user.route.ts" />
+      <change beforePath="$PROJECT_DIR$/apis/userValidation/model/userValidation.model.js" afterPath="$PROJECT_DIR$/apis/userValidation/model/userValidation.model.js" />
+      <change beforePath="$PROJECT_DIR$/apis/userValidation/model/userValidation.model.js.map" afterPath="$PROJECT_DIR$/apis/userValidation/model/userValidation.model.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/userValidation/model/userValidation.model.ts" afterPath="$PROJECT_DIR$/apis/userValidation/model/userValidation.model.ts" />
+      <change beforePath="$PROJECT_DIR$/apis/userValidation/route/userValidation.route.js" afterPath="$PROJECT_DIR$/apis/userValidation/route/userValidation.route.js" />
+      <change beforePath="$PROJECT_DIR$/apis/userValidation/route/userValidation.route.js.map" afterPath="$PROJECT_DIR$/apis/userValidation/route/userValidation.route.js.map" />
+      <change beforePath="$PROJECT_DIR$/apis/userValidation/route/userValidation.route.ts" afterPath="$PROJECT_DIR$/apis/userValidation/route/userValidation.route.ts" />
+      <change beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
+      <change beforePath="$PROJECT_DIR$/app.js.map" afterPath="$PROJECT_DIR$/app.js.map" />
+      <change beforePath="$PROJECT_DIR$/app.ts" afterPath="$PROJECT_DIR$/app.ts" />
+      <change beforePath="$PROJECT_DIR$/node_modules/minimist/test/default_bool.js" afterPath="$PROJECT_DIR$/node_modules/minimist/test/default_bool.js" />
+      <change beforePath="$PROJECT_DIR$/node_modules/minimist/test/dotted.js" afterPath="$PROJECT_DIR$/node_modules/minimist/test/dotted.js" />
+      <change beforePath="$PROJECT_DIR$/node_modules/minimist/test/parse_modified.js" afterPath="$PROJECT_DIR$/node_modules/minimist/test/parse_modified.js" />
+      <change beforePath="$PROJECT_DIR$/node_modules/minimist/test/short.js" afterPath="$PROJECT_DIR$/node_modules/minimist/test/short.js" />
+      <change beforePath="$PROJECT_DIR$/node_modules/minimist/test/whitespace.js" afterPath="$PROJECT_DIR$/node_modules/minimist/test/whitespace.js" />
+      <change beforePath="$PROJECT_DIR$/node_modules/mocha/lib/reporters/templates/menu.jade" afterPath="$PROJECT_DIR$/node_modules/mocha/lib/reporters/templates/menu.jade" />
+      <change beforePath="$PROJECT_DIR$/node_modules/raw-body/index.d.ts" afterPath="$PROJECT_DIR$/node_modules/raw-body/index.d.ts" />
+      <change beforePath="$PROJECT_DIR$/packages/utils/email.util.js" afterPath="$PROJECT_DIR$/packages/utils/email.util.js" />
+      <change beforePath="$PROJECT_DIR$/packages/utils/email.util.js.map" afterPath="$PROJECT_DIR$/packages/utils/email.util.js.map" />
+      <change beforePath="$PROJECT_DIR$/packages/utils/email.util.ts" afterPath="$PROJECT_DIR$/packages/utils/email.util.ts" />
+      <change beforePath="$PROJECT_DIR$/packages/utils/encryption.utli.js" afterPath="$PROJECT_DIR$/packages/utils/encryption.utli.js" />
+      <change beforePath="$PROJECT_DIR$/packages/utils/encryption.utli.js.map" afterPath="$PROJECT_DIR$/packages/utils/encryption.utli.js.map" />
+      <change beforePath="$PROJECT_DIR$/packages/utils/encryption.utli.ts" afterPath="$PROJECT_DIR$/packages/utils/encryption.utli.ts" />
+      <change beforePath="$PROJECT_DIR$/packages/utils/error.util.js" afterPath="$PROJECT_DIR$/packages/utils/error.util.js" />
+      <change beforePath="$PROJECT_DIR$/packages/utils/error.util.js.map" afterPath="$PROJECT_DIR$/packages/utils/error.util.js.map" />
+      <change beforePath="$PROJECT_DIR$/packages/utils/error.util.ts" afterPath="$PROJECT_DIR$/packages/utils/error.util.ts" />
+      <change beforePath="$PROJECT_DIR$/packages/utils/inviteCode.util.js" afterPath="$PROJECT_DIR$/packages/utils/inviteCode.util.js" />
+      <change beforePath="$PROJECT_DIR$/packages/utils/inviteCode.util.js.map" afterPath="$PROJECT_DIR$/packages/utils/inviteCode.util.js.map" />
+      <change beforePath="$PROJECT_DIR$/packages/utils/mysql.util.js" afterPath="$PROJECT_DIR$/packages/utils/mysql.util.js" />
+      <change beforePath="$PROJECT_DIR$/packages/utils/mysql.util.js.map" afterPath="$PROJECT_DIR$/packages/utils/mysql.util.js.map" />
+      <change beforePath="$PROJECT_DIR$/packages/utils/mysql.util.ts" afterPath="$PROJECT_DIR$/packages/utils/mysql.util.ts" />
+      <change beforePath="$PROJECT_DIR$/packages/utils/uuid.util.js" afterPath="$PROJECT_DIR$/packages/utils/uuid.util.js" />
+      <change beforePath="$PROJECT_DIR$/packages/utils/uuid.util.js.map" afterPath="$PROJECT_DIR$/packages/utils/uuid.util.js.map" />
+      <change beforePath="$PROJECT_DIR$/packages/utils/uuid.util.ts" afterPath="$PROJECT_DIR$/packages/utils/uuid.util.ts" />
+      <change beforePath="$PROJECT_DIR$/resources/lecture.resource.js" afterPath="$PROJECT_DIR$/resources/lecture.resource.js" />
+      <change beforePath="$PROJECT_DIR$/resources/lecture.resource.js.map" afterPath="$PROJECT_DIR$/resources/lecture.resource.js.map" />
+      <change beforePath="$PROJECT_DIR$/resources/lectureInfo.resource.js" afterPath="$PROJECT_DIR$/resources/lectureInfo.resource.js" />
+      <change beforePath="$PROJECT_DIR$/resources/lectureInfo.resource.js.map" afterPath="$PROJECT_DIR$/resources/lectureInfo.resource.js.map" />
+      <change beforePath="$PROJECT_DIR$/resources/professor.resource.js" afterPath="$PROJECT_DIR$/resources/professor.resource.js" />
+      <change beforePath="$PROJECT_DIR$/resources/professor.resource.js.map" afterPath="$PROJECT_DIR$/resources/professor.resource.js.map" />
+      <change beforePath="$PROJECT_DIR$/resources/user.resource.js" afterPath="$PROJECT_DIR$/resources/user.resource.js" />
+      <change beforePath="$PROJECT_DIR$/resources/user.resource.js.map" afterPath="$PROJECT_DIR$/resources/user.resource.js.map" />
+      <change beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
+      <change beforePath="$PROJECT_DIR$/server.js.map" afterPath="$PROJECT_DIR$/server.js.map" />
+      <change beforePath="$PROJECT_DIR$/server.ts" afterPath="$PROJECT_DIR$/server.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -26,110 +106,70 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="user.model.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apis/user/model/user.model.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="446">
-              <caret line="76" column="0" lean-forward="false" selection-start-line="49" selection-start-column="4" selection-end-line="76" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="lectureInfo.model.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apis/lectureInfo/model/lectureInfo.model.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="199" column="58" lean-forward="false" selection-start-line="199" selection-start-column="58" selection-end-line="199" selection-end-column="58" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="lecture.model.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apis/lecture/model/lecture.model.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="150" column="5" lean-forward="false" selection-start-line="150" selection-start-column="5" selection-end-line="150" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="user.route.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apis/user/route/user.route.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="930">
-              <caret line="65" column="25" lean-forward="false" selection-start-line="62" selection-start-column="8" selection-end-line="65" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="professor.route.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apis/professor/route/professor.route.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="lectureInfo.route.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apis/lectureInfo/route/lectureInfo.route.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-537">
-              <caret line="20" column="129" lean-forward="false" selection-start-line="20" selection-start-column="129" selection-end-line="20" selection-end-column="129" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="lectureInfo.model.spec.ts" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/apis/lectureInfo/model/lectureInfo.model.spec.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="53" column="44" lean-forward="false" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="encryption.utli.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/packages/utils/encryption.utli.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="1" lean-forward="false" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="email.util.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/packages/utils/email.util.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="1" lean-forward="false" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
-              <folding>
-                <marker date="1518611931000" expanded="true" signature="418:530" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="professor.model.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apis/professor/model/professor.model.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="26" column="10" lean-forward="false" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.42882776">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="lectureInfo.model.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/apis/lectureInfo/model/lectureInfo.model.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2222">
+                  <caret line="217" column="19" lean-forward="false" selection-start-line="217" selection-start-column="2" selection-end-line="217" selection-end-column="19" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="lectureInfo.model.spec.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/apis/lectureInfo/model/lectureInfo.model.spec.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="523">
+                  <caret line="37" column="5" lean-forward="false" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
+                  <folding>
+                    <element signature="e#0#30#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="user.resource.ts" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/resources/user.resource.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-1252">
+                  <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="lectureInfo.route.ts" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/apis/lectureInfo/route/lectureInfo.route.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2164">
+                  <caret line="175" column="24" lean-forward="false" selection-start-line="175" selection-start-column="24" selection-end-line="175" selection-end-column="24" />
+                  <folding>
+                    <element signature="e#0#35#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="professor.model.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/apis/professor/model/professor.model.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="304">
+                  <caret line="16" column="40" lean-forward="false" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -263,6 +303,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -273,129 +315,12 @@
             <path>
               <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
               <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="lecture" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="lecture" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="lecture" type="462c0819:PsiDirectoryNode" />
-              <item name="route" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="lectureInfo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="lectureInfo" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="lectureInfo" type="462c0819:PsiDirectoryNode" />
-              <item name="route" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="lectureInfo" type="462c0819:PsiDirectoryNode" />
-              <item name="route" type="462c0819:PsiDirectoryNode" />
-              <item name="lectureInfo.route.ts" type="620a8d5e:NestingTreeNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="professor" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="professor" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="professor" type="462c0819:PsiDirectoryNode" />
-              <item name="route" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="user.model.ts" type="620a8d5e:NestingTreeNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-              <item name="route" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="apis" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-              <item name="route" type="462c0819:PsiDirectoryNode" />
-              <item name="user.route.ts" type="620a8d5e:NestingTreeNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="packages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="H6-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="H6-server" type="462c0819:PsiDirectoryNode" />
-              <item name="packages" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -422,7 +347,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Mocha.lectureInfo 모델.pageListLectureInfo">
+  <component name="RunManager" selected="Mocha.lectureInfo 모델">
     <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
       <node-interpreter>project</node-interpreter>
       <node-options />
@@ -517,11 +442,11 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Mocha.lectureInfo 모델.pageListLectureInfo" />
-        <item index="1" class="java.lang.String" itemvalue="Mocha.lectureInfo 모델.getLectureInfoByProfessorName" />
-        <item index="2" class="java.lang.String" itemvalue="Mocha.lectureInfo 모델.getLectureInfoByLectureName" />
-        <item index="3" class="java.lang.String" itemvalue="Mocha.lecture 모델" />
-        <item index="4" class="java.lang.String" itemvalue="Mocha.lectureInfo 모델" />
+        <item index="0" class="java.lang.String" itemvalue="Mocha.lectureInfo 모델" />
+        <item index="1" class="java.lang.String" itemvalue="Mocha.lectureInfo 모델.pageListLectureInfo" />
+        <item index="2" class="java.lang.String" itemvalue="Mocha.lectureInfo 모델.getLectureInfoByProfessorName" />
+        <item index="3" class="java.lang.String" itemvalue="Mocha.lectureInfo 모델.getLectureInfoByLectureName" />
+        <item index="4" class="java.lang.String" itemvalue="Mocha.lecture 모델" />
       </list>
     </recent_temporary>
   </component>
@@ -557,7 +482,7 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="lectureInfo_모델 - 2018.02.21 at 22h 42m 35s.xml">
+    <history-entry file="lectureInfo_모델 - 2018.02.25 at 12h 22m 07s.xml">
       <configuration name="lectureInfo 모델" configurationId="mocha-javascript-test-runner" />
     </history-entry>
     <history-entry file="lectureInfo_모델_getLectureInfoByLectureName - 2018.02.22 at 09h 22m 11s.xml">
@@ -589,22 +514,22 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61470000" />
+    <option name="totallyTimeSpent" value="61639000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="312" y="56" width="983" height="767" extended-state="1" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1920" height="1100" extended-state="0" />
     <layout>
-      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24923703" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294964" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17617108" sideWeight="0.2395998" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17617108" sideWeight="0.76040024" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1195366" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916266" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -613,19 +538,18 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17617108" sideWeight="0.23635787" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17663981" sideWeight="0.76364213" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17663981" sideWeight="0.76364213" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1195366" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916266" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -735,7 +659,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="23" lean-forward="true" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -809,7 +732,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -905,9 +827,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="25" column="1" lean-forward="false" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
-          <folding>
-            <marker date="1518611931000" expanded="true" signature="418:530" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -937,15 +857,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="24" lean-forward="true" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/user.resource.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -961,7 +872,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
           <caret line="2" column="20" lean-forward="false" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1020,8 +930,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apis/professor/model/professor.model.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="26" column="10" lean-forward="false" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
+        <state relative-caret-position="304">
+          <caret line="16" column="40" lean-forward="false" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
           <folding />
         </state>
       </provider>
@@ -1052,24 +962,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apis/lectureInfo/model/lectureInfo.model.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="199" column="58" lean-forward="false" selection-start-line="199" selection-start-column="58" selection-end-line="199" selection-end-column="58" />
+        <state relative-caret-position="2222">
+          <caret line="217" column="19" lean-forward="false" selection-start-line="217" selection-start-column="2" selection-end-line="217" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apis/lectureInfo/route/lectureInfo.route.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-537">
-          <caret line="20" column="129" lean-forward="false" selection-start-line="20" selection-start-column="129" selection-end-line="20" selection-end-column="129" />
-          <folding />
+        <state relative-caret-position="2164">
+          <caret line="175" column="24" lean-forward="false" selection-start-line="175" selection-start-column="24" selection-end-line="175" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apis/lectureInfo/model/lectureInfo.model.spec.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="53" column="44" lean-forward="false" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
+        <state relative-caret-position="523">
+          <caret line="37" column="5" lean-forward="false" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/user.resource.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1252">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
       </provider>

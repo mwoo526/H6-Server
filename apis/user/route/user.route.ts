@@ -59,16 +59,15 @@ async function listUser(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function pageListUser(req, res): Promise<void> {
-    try {
-    	let page: number = parseInt(req.params.page);
-    	let count: number = parseInt(req.params.count);
-        const result: any = await user.pageListUser(page, count);
-        res.send(result);
-    } catch (err) {
-        res.send(err);
-    }
+	try {
+		let page: number = parseInt(req.params.page);
+		let count: number = parseInt(req.params.count);
+		const result: any = await user.pageListUser(page, count);
+		res.send(result);
+	} catch (err) {
+		res.send(err);
+	}
 }
-
 
 /**
  * route: user userId 조회

@@ -13,7 +13,7 @@ export class Professor {
 	 */
 	createProfessor(professorData: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				await connection.query(`INSERT INTO professors SET ?`, professorData, function(err) {
 					if (err) {
 						connection.release();
