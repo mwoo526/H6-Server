@@ -1,6 +1,7 @@
 import * as express from 'express';
 import { LectureInfoResource } from '../../../resources/lectureInfo.resource';
 import { lectureInfo } from '../model/lectureInfo.model';
+import {user} from "../../user/model/user.model";
 
 export class LectureInfoRoutes {
 	public lectureInfoRouter: express.Router = express.Router();
@@ -12,9 +13,12 @@ export class LectureInfoRoutes {
 	public router() {
 		this.lectureInfoRouter.post('/lecturesInfo', createLectureInfo);
 		this.lectureInfoRouter.get('/lecturesInfo', listLectureInfo);
+		this.lectureInfoRouter.get('/lecturesInfo/:page/:count', pageListLectureInfo);
 		this.lectureInfoRouter.get('/lecturesInfo/lectureInfoIndex/:lectureInfoIndex', getLectureInfoByLectureInfoIndex);
 		this.lectureInfoRouter.get('/lecturesInfo/lectureName/:lectureName', getLectureInfoByLectureName);
+		this.lectureInfoRouter.get('/lecturesInfo/lectureName/:lectureName/:page/:count', pageGetLectureInfoByLectureName);
 		this.lectureInfoRouter.get('/lecturesInfo/professorName/:professorName', getLectureInfoByProfessorName);
+		this.lectureInfoRouter.get('/lecturesInfo/professorName/:professorName/:page/:count', pageGetLectureInfoByProfessorName);
 		this.lectureInfoRouter.put('/lecturesInfo/:lectureInfoIndex', updateLectureInfo);
 		this.lectureInfoRouter.delete('/lecturesInfo/:lectureInfoIndex', deleteLectureInfo);
 	}
@@ -52,6 +56,23 @@ async function listLectureInfo(req, res): Promise<void> {
 }
 
 /**
+ * route: lectureInfo page 리스트 조회
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function pageListLectureInfo(req, res): Promise<void> {
+	try {
+        let page: number = parseInt(req.params.page);
+        let count: number = parseInt(req.params.count);
+        const result: any = await lectureInfo.pageListLectureInfo(page, count);
+        res.send(result);
+	} catch (err) {
+		res.send(err);
+	}
+}
+
+/**
  * route: lectureInfo index 조회
  * @param req
  * @param res
@@ -66,6 +87,7 @@ async function getLectureInfoByLectureInfoIndex(req, res): Promise<void> {
 		res.send(err);
 	}
 }
+
 
 /**
  * route: lectureInfo lectureName 조회
@@ -84,6 +106,25 @@ async function getLectureInfoByLectureName(req, res): Promise<void> {
 }
 
 /**
+ * route: lectureInfo lectureName page 조회
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function pageGetLectureInfoByLectureName(req, res): Promise<void> {
+    let lectureName: string = req.params.lectureName;
+    let page: number = parseInt(req.params.page);
+    let count: number = parseInt(req.params.count);
+    try {
+        const result = await lectureInfo.pageGetLectureInfoByLectureName(lectureName, page, count);
+        res.send(result);
+    } catch (err) {
+        res.send(err);
+    }
+}
+
+
+/**
  * route: lectureInfo professorName 조회
  * @param req
  * @param res
@@ -97,6 +138,24 @@ async function getLectureInfoByProfessorName(req, res): Promise<void> {
 	} catch (err) {
 		res.send(err);
 	}
+}
+
+/**
+ * route: lectureInfo professorName page 조회
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function pageGetLectureInfoByProfessorName(req, res): Promise<void> {
+    let professorName: string = req.params.professorName;
+    let page: number = parseInt(req.params.page);
+    let count: number = parseInt(req.params.count);
+    try {
+        const result = await lectureInfo.pageGetLectureInfoByProfessorName(professorName, page, count);
+        res.send(result);
+    } catch (err) {
+        res.send(err);
+    }
 }
 
 /**
