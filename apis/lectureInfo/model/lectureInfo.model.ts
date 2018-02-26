@@ -12,7 +12,7 @@ export class LectureInfo {
 	 */
 	createLectureInfo(lectureInfoData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				await connection.query(`INSERT INTO lecturesInfo SET ?`, lectureInfoData, function(err) {
 					if (err) {
 						connection.release();
@@ -32,7 +32,7 @@ export class LectureInfo {
 	 */
 	listLectureInfo(): Promise<void> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex`, function(err, rows) {
 					if (err) {
 						connection.release();
@@ -72,8 +72,7 @@ export class LectureInfo {
         })
     }
 
-
-    /**
+	/**
 	 * model: lectureInfo index 조회
 	 * @param lectureInfoIndex
 	 * @returns {Promise<void>}
@@ -102,7 +101,7 @@ export class LectureInfo {
 	 */
 	getLectureInfoByLectureName(lectureName: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex WHERE t2.lectureName LIKE '%${lectureName}%'`, function(err, rows) {
 					if (err) {
 						connection.release();
@@ -144,6 +143,7 @@ export class LectureInfo {
         })
     }
 
+
 	/**
 	 * model: lectureInfo professorName 조회
 	 * @param professorName
@@ -151,7 +151,7 @@ export class LectureInfo {
 	 */
 	getLectureInfoByProfessorName(professorName: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex WHERE t3.professorName LIKE '%${professorName}%'`, function(err, rows) {
 					if (err) {
 						connection.release();
@@ -201,8 +201,9 @@ export class LectureInfo {
 	 */
 	updateLectureInfo(lectureInfoIndex: number, lectureInfoData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
-				await connection.query(`UPDATE lecturesInfo SET ? WHERE lectureInfoIndex = ?`, [lectureInfoData, lectureInfoIndex], function(err) {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`UPDATE lecturesInfo SET ? WHERE lectureInfoIndex = ?`, [lectureInfoData,
+					lectureInfoIndex], function(err) {
 					if (err) {
 						connection.release();
 						reject(err);

@@ -137,7 +137,8 @@ export class Lecture {
 	updateLecture(lectureIndex: number, lectureData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query('UPDATE lectures SET ? WHERE lectureIndex = ?', [lectureData, lectureIndex], function(err, rows) {
+				await connection.query('UPDATE lectures SET ? WHERE lectureIndex = ?', [lectureData,
+					lectureIndex], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);

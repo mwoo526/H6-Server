@@ -228,7 +228,8 @@ class LectureInfo {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`UPDATE lecturesInfo SET ? WHERE lectureInfoIndex = ?`, [lectureInfoData, lectureInfoIndex], function (err) {
+                    yield connection.query(`UPDATE lecturesInfo SET ? WHERE lectureInfoIndex = ?`, [lectureInfoData,
+                        lectureInfoIndex], function (err) {
                         if (err) {
                             connection.release();
                             reject(err);

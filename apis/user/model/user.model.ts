@@ -47,14 +47,14 @@ export class User {
 		})
 	}
 
-    /**
-     * model: user page 리스트 조회
-     * @returns {Promise<any>}
-     */
-	pageListUser(page : number, count : number) : Promise<any> {
+	/**
+	 * model: user page 리스트 조회
+	 * @returns {Promise<any>}
+	 */
+	pageListUser(page: number, count: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				let start = (page-1) * count + 1;
+				let start = (page - 1) * count + 1;
 				let end = start + count - 1;
 				await connection.query(`SELECT B.* FROM (
 				SELECT @ROWNUM:=@ROWNUM + 1 as rownum, A.* 
