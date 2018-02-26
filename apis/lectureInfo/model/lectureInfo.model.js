@@ -65,19 +65,14 @@ class LectureInfo {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    let start = (page - 1) * count + 1;
-                    let end = start + count - 1;
-                    yield connection.query(`SELECT B.* FROM (
-				SELECT @ROWNUM:=@ROWNUM + 1 as rownum, A.* 
-				from (
-				SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
-				FROM lecturesInfo t1
-				INNER JOIN lectures t2 ON t1.lectureIndex = t2.lectureIndex
-				INNER JOIN professors t3 ON t1.professorIndex = t3.professorIndex
-				ORDER BY t1.createdAt DESC
-				)A, (SELECT @ROWNUM :=0)R
-				)
-				B WHERE rownum BETWEEN ${start} AND ${end}`, function (err, rows) {
+                    let start = (page - 1) * count;
+                    if (start < 0)
+                        start = 0;
+                    yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName
+                FROM lecturesInfo AS t1 
+                INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
+                INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
+                ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -100,7 +95,8 @@ class LectureInfo {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex WHERE t1.lectureInfoIndex = ${lectureInfoIndex}`, function (err, rows) {
+                    yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
+				FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex WHERE t1.lectureInfoIndex = ${lectureInfoIndex}`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -146,20 +142,15 @@ class LectureInfo {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    let start = (page - 1) * count + 1;
-                    let end = start + count - 1;
-                    yield connection.query(`SELECT B.* FROM (
-				SELECT @ROWNUM:=@ROWNUM + 1 as rownum, A.* 
-				from (
-				SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
-				FROM lecturesInfo t1
-				INNER JOIN lectures t2 ON t1.lectureIndex = t2.lectureIndex
-				INNER JOIN professors t3 ON t1.professorIndex = t3.professorIndex
-				WHERE t2.lectureName LIKE '%${lectureName}%'
-				ORDER BY t1.createdAt DESC
-				)A, (SELECT @ROWNUM :=0)R
-				)
-				B WHERE rownum BETWEEN ${start} AND ${end}`, function (err, rows) {
+                    let start = (page - 1) * count;
+                    if (start < 0)
+                        start = 0;
+                    yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
+                FROM lecturesInfo AS t1 
+                INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
+                INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
+                WHERE t2.lectureName LIKE '%${lectureName}%'
+                ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -205,20 +196,15 @@ class LectureInfo {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    let start = (page - 1) * count + 1;
-                    let end = start + count - 1;
-                    yield connection.query(`SELECT B.* FROM (
-				SELECT @ROWNUM:=@ROWNUM + 1 as rownum, A.* 
-				from (
-				SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
-				FROM lecturesInfo t1
-				INNER JOIN lectures t2 ON t1.lectureIndex = t2.lectureIndex
-				INNER JOIN professors t3 ON t1.professorIndex = t3.professorIndex
-				WHERE t3.professorName LIKE '%${professorName}%'
-				ORDER BY t1.createdAt DESC
-				)A, (SELECT @ROWNUM :=0)R
-				)
-				B WHERE rownum BETWEEN ${start} AND ${end}`, function (err, rows) {
+                    let start = (page - 1) * count;
+                    if (start < 0)
+                        start = 0;
+                    yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
+                FROM lecturesInfo AS t1 
+                INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
+                INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
+                WHERE t3.professorName LIKE '%${professorName}%'
+                ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
