@@ -39,7 +39,7 @@ describe('lectureInfo 모델', () => {
 
 	it('pageGetLectureInfoByLectureName', async () => {
 		const result = await lectureInfo.pageGetLectureInfoByLectureName('os', 1, 3);
-		console.log(result);
+		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});
 

@@ -43,7 +43,7 @@ describe('lectureInfo 모델', () => {
     }));
     it('pageGetLectureInfoByLectureName', () => __awaiter(this, void 0, void 0, function* () {
         const result = yield lectureInfo_model_1.lectureInfo.pageGetLectureInfoByLectureName('os', 1, 3);
-        //console.log(result);
+        // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
     it('getLectureInfoByProfessorName', () => __awaiter(this, void 0, void 0, function* () {
@@ -52,7 +52,8 @@ describe('lectureInfo 모델', () => {
         chai_1.expect(result).to.instanceof(Array);
     }));
     it('pageGetLectureInfoByProfessorName', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield lectureInfo_model_1.lectureInfo.pageGetLectureInfoByProfessorName('안재성', 1, 3);
+        const result = yield lectureInfo_model_1.lectureInfo.pageGetLectureInfoByProfessorName('안재성', 1, 2);
+        // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
     it('updateLectureInfo', () => __awaiter(this, void 0, void 0, function* () {
