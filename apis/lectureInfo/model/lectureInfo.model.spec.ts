@@ -39,7 +39,7 @@ describe('lectureInfo 모델', () => {
 
 	it('pageGetLectureInfoByLectureName', async () => {
 		const result = await lectureInfo.pageGetLectureInfoByLectureName('os', 1, 3);
-		//console.log(result);
+		console.log(result);
 		expect(result).to.instanceof(Array);
 	});
 
@@ -50,7 +50,8 @@ describe('lectureInfo 모델', () => {
 	});
 
 	it('pageGetLectureInfoByProfessorName', async () => {
-		const result = await lectureInfo.pageGetLectureInfoByProfessorName('안재성', 1, 3);
+		const result = await lectureInfo.pageGetLectureInfoByProfessorName('안재성', 1, 2);
+		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});
 
