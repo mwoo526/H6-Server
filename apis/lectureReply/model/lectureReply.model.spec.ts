@@ -93,11 +93,10 @@ describe('lectureReply 모델', () => {
 		expect(result).to.instanceof(Array);
 	});
 
-	it('getLectureReplyByNickName', async () => {
-		const result = await lectureReply.getLectureReplyByNickName(testUserNickName);
+	it('getLectureReplyByUserNickName', async () => {
+		const result = await lectureReply.getLectureReplyByUserNickName(testUserNickName);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
-
 	});
 
 	it('updateLectureReply', async () => {

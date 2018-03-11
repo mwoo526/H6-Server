@@ -102,6 +102,11 @@ class LectureReply {
             });
         }));
     }
+    /**
+     * model: lectureReply userIndex 조회
+     * @param {number} userIndex
+     * @returns {Promise<void>}
+     */
     getLectureReplyByUserIndex(userIndex) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
@@ -120,6 +125,11 @@ class LectureReply {
             });
         }));
     }
+    /**
+     * model: lectureReply userId 조회
+     * @param {string} userId
+     * @returns {Promise<void>}
+     */
     getLectureReplyByUserId(userId) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
@@ -138,7 +148,12 @@ class LectureReply {
             });
         }));
     }
-    getLectureReplyByNickName(userNickName) {
+    /**
+     * model: lectureReply userNickName 조회
+     * @param {string} userNickName
+     * @returns {Promise<void>}
+     */
+    getLectureReplyByUserNickName(userNickName) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {

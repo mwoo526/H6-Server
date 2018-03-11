@@ -86,6 +86,11 @@ export class LectureReply {
 		})
 	}
 
+	/**
+	 * model: lectureReply userIndex 조회
+	 * @param {number} userIndex
+	 * @returns {Promise<void>}
+	 */
 	getLectureReplyByUserIndex(userIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function (err, connection) {
@@ -102,6 +107,11 @@ export class LectureReply {
 		})
 	}
 
+	/**
+	 * model: lectureReply userId 조회
+	 * @param {string} userId
+	 * @returns {Promise<void>}
+	 */
 	getLectureReplyByUserId(userId: string): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function (err, connection) {
@@ -118,7 +128,12 @@ export class LectureReply {
 		})
 	}
 
-	getLectureReplyByNickName(userNickName: string): Promise<void> {
+	/**
+	 * model: lectureReply userNickName 조회
+	 * @param {string} userNickName
+	 * @returns {Promise<void>}
+	 */
+	getLectureReplyByUserNickName(userNickName: string): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function (err, connection) {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex WHERE t2.userNickName LIKE '%${userNickName}%'`, function(err, rows) {

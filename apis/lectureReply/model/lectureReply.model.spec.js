@@ -95,8 +95,8 @@ describe('lectureReply 모델', () => {
         // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
-    it('getLectureReplyByNickName', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield lectureReply_model_1.lectureReply.getLectureReplyByNickName(testUserNickName);
+    it('getLectureReplyByUserNickName', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield lectureReply_model_1.lectureReply.getLectureReplyByUserNickName(testUserNickName);
         // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
