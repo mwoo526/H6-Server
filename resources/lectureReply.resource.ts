@@ -88,7 +88,7 @@ export class LectureReplyResource {
 			lectureInfoIndex: this.getLectureInfoIndex(),
 			userIndex: this.getUserIndex(),
 			semester: this.getSemester(),
-			homework: this.getHomework,
+			homework: this.getHomework(),
 			homeworkType: this.getHomeworkType(),
 			testCount: this.getTestCount(),
 			receivedGrade: this.getReceivedGrade(),
