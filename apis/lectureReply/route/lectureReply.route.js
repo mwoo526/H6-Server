@@ -19,6 +19,7 @@ class LectureReplyRoutes {
     router() {
         this.lectureReplyRouter.post('/lecturesReply', createLectureReply);
         this.lectureReplyRouter.get('/lecturesReply', listLectureReply);
+        this.lectureReplyRouter.get('/lecturesReply/:page/:count', pageListLectureReply);
     }
 }
 exports.LectureReplyRoutes = LectureReplyRoutes;
@@ -50,6 +51,25 @@ function listLectureReply(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const result = yield lectureReply_model_1.lectureReply.listLectureReply();
+            res.send(result);
+        }
+        catch (err) {
+            res.send(err);
+        }
+    });
+}
+/**
+ * route: lectureReply page 리스트 조회
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+function pageListLectureReply(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            let page = parseInt(req.params.page);
+            let count = parseInt(req.params.count);
+            const result = yield lectureReply_model_1.lectureReply.pageListLectureReply(page, count);
             res.send(result);
         }
         catch (err) {

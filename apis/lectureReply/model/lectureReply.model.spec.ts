@@ -69,6 +69,12 @@ describe('lectureReply 모델', () => {
 		expect(result).to.instanceof(Array);
 	});
 
+	it('pageListLectureReply', async () => {
+		const result = await lectureReply.pageListLectureReply(2, 3);
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
 	it('getLectureReplyByLectureReplyIndex', async () => {
 		const result = await lectureReply.getLectureReplyByLectureReplyIndex(testLectureReplyIndex);
 		// console.log(result);

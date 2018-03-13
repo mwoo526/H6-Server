@@ -57,6 +57,36 @@ class LectureReply {
         }));
     }
     /**
+     * model: lectureReply 페이지 리스트 조회
+     * @param {number} page
+     * @param {number} count
+     * @returns {Promise<any>}
+     */
+    pageListLectureReply(page, count) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    let start = (page - 1) * count;
+                    if (start < 0) {
+                        start = 0;
+                    }
+                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName 
+				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
+				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(rows);
+                        }
+                    });
+                });
+            });
+        }));
+    }
+    /**
      * model: lectureReply index 조회
      * @param {number} lectureReplyIndex
      * @returns {Promise<void>}
