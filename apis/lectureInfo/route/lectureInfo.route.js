@@ -18,15 +18,12 @@ class LectureInfoRoutes {
     }
     router() {
         this.lectureInfoRouter.post('/lecturesInfo', createLectureInfo);
-        this.lectureInfoRouter.get('/lecturesInfo', listLectureInfo);
-        this.lectureInfoRouter.get('/lecturesInfo/:page/:count', pageListLectureInfo);
+        this.lectureInfoRouter.get('/lecturesInfo', pageListLectureInfo);
         this.lectureInfoRouter.get('/lecturesInfo/lectureInfoIndex/:lectureInfoIndex', getLectureInfoByLectureInfoIndex);
-        this.lectureInfoRouter.get('/lecturesInfo/lectureName/:lectureName', getLectureInfoByLectureName);
-        this.lectureInfoRouter.get('/lecturesInfo/lectureName/:lectureName/:page/:count', pageGetLectureInfoByLectureName);
-        this.lectureInfoRouter.get('/lecturesInfo/professorName/:professorName', getLectureInfoByProfessorName);
-        this.lectureInfoRouter.get('/lecturesInfo/professorName/:professorName/:page/:count', pageGetLectureInfoByProfessorName);
-        this.lectureInfoRouter.put('/lecturesInfo/:lectureInfoIndex', updateLectureInfo);
-        this.lectureInfoRouter.delete('/lecturesInfo/:lectureInfoIndex', deleteLectureInfo);
+        this.lectureInfoRouter.get('/lecturesInfo/lectureName/:lectureName', pageGetLectureInfoByLectureName);
+        this.lectureInfoRouter.get('/lecturesInfo/professorName/:professorName', pageGetLectureInfoByProfessorName);
+        this.lectureInfoRouter.put('/lecturesInfo/lectureInfoIndex/:lectureInfoIndex', updateLectureInfo);
+        this.lectureInfoRouter.delete('/lecturesInfo/lectureInfoIndex/:lectureInfoIndex', deleteLectureInfo);
     }
 }
 exports.LectureInfoRoutes = LectureInfoRoutes;
@@ -49,23 +46,6 @@ function createLectureInfo(req, res) {
     });
 }
 /**
- * route: lectureInfo 리스트 조회
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-function listLectureInfo(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const result = yield lectureInfo_model_1.lectureInfo.listLectureInfo();
-            res.send(result);
-        }
-        catch (err) {
-            res.send(err);
-        }
-    });
-}
-/**
  * route: lectureInfo page 리스트 조회
  * @param req
  * @param res
@@ -74,8 +54,8 @@ function listLectureInfo(req, res) {
 function pageListLectureInfo(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            let page = parseInt(req.params.page);
-            let count = parseInt(req.params.count);
+            let page = parseInt(req.query.page);
+            let count = parseInt(req.query.count);
             const result = yield lectureInfo_model_1.lectureInfo.pageListLectureInfo(page, count);
             res.send(result);
         }
@@ -103,24 +83,6 @@ function getLectureInfoByLectureInfoIndex(req, res) {
     });
 }
 /**
- * route: lectureInfo lectureName 조회
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-function getLectureInfoByLectureName(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        let lectureName = req.params.lectureName;
-        try {
-            const result = yield lectureInfo_model_1.lectureInfo.getLectureInfoByLectureName(lectureName);
-            res.send(result);
-        }
-        catch (err) {
-            res.send(err);
-        }
-    });
-}
-/**
  * route: lectureInfo lectureName page 조회
  * @param req
  * @param res
@@ -129,28 +91,10 @@ function getLectureInfoByLectureName(req, res) {
 function pageGetLectureInfoByLectureName(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let lectureName = req.params.lectureName;
-        let page = parseInt(req.params.page);
-        let count = parseInt(req.params.count);
+        let page = parseInt(req.query.page);
+        let count = parseInt(req.query.count);
         try {
             const result = yield lectureInfo_model_1.lectureInfo.pageGetLectureInfoByLectureName(lectureName, page, count);
-            res.send(result);
-        }
-        catch (err) {
-            res.send(err);
-        }
-    });
-}
-/**
- * route: lectureInfo professorName 조회
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-function getLectureInfoByProfessorName(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        let professorName = req.params.professorName;
-        try {
-            const result = yield lectureInfo_model_1.lectureInfo.getLectureInfoByProfessorName(professorName);
             res.send(result);
         }
         catch (err) {
@@ -167,8 +111,8 @@ function getLectureInfoByProfessorName(req, res) {
 function pageGetLectureInfoByProfessorName(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let professorName = req.params.professorName;
-        let page = parseInt(req.params.page);
-        let count = parseInt(req.params.count);
+        let page = parseInt(req.query.page);
+        let count = parseInt(req.query.count);
         try {
             const result = yield lectureInfo_model_1.lectureInfo.pageGetLectureInfoByProfessorName(professorName, page, count);
             res.send(result);

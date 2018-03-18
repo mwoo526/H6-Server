@@ -16,8 +16,8 @@ export class LectureRoutes {
 		this.lectureRouter.get('/lectures/lectureCode/:lectureCode', getLectureByLectureCode);
 		this.lectureRouter.get('/lectures/lectureName/:lectureName', getLectureByLectureName);
 		this.lectureRouter.get('/lectures/track/:track', getLectureByTrack);
-		this.lectureRouter.put('/lectures/:lectureIndex', updateLecture);
-		this.lectureRouter.delete('/lectures/:lectureIndex', deleteLecture);
+		this.lectureRouter.put('/lectures/lectureIndex/:lectureIndex', updateLecture);
+		this.lectureRouter.delete('/lectures/lectureIndex/:lectureIndex', deleteLecture);
 	}
 }
 

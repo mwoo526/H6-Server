@@ -110,6 +110,38 @@ class LectureReply {
         }));
     }
     /**
+     * model: lectureReply replyIndex 페이지 조회
+     * @param {number} lectureReplyIndex
+     * @param {number} page
+     * @param {number} count
+     * @returns {Promise<any>}
+     */
+    pageGetLectureReplyByLectureReplyIndex(lectureReplyIndex, page, count) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    let start = (page - 1) * count;
+                    if (start < 0) {
+                        start = 0;
+                    }
+                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName 
+				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
+				WHERE t1.lectureReplyIndex LIKE '%${lectureReplyIndex}%'
+				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(rows);
+                        }
+                    });
+                });
+            });
+        }));
+    }
+    /**
      * model: lectureReply lectureInfoIndex 조회
      * @param {number} lectureInfoIndex
      * @returns {Promise<void>}
@@ -119,6 +151,38 @@ class LectureReply {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex WHERE t1.lectureInfoIndex = ${lectureInfoIndex}`, function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(rows);
+                        }
+                    });
+                });
+            });
+        }));
+    }
+    /**
+     * model: lectureReply lectureInfoIndex 페이지 조회
+     * @param {number} lectureInfoIndex
+     * @param {number} page
+     * @param {number} count
+     * @returns {Promise<any>}
+     */
+    pageGetLectureReplyByLectureInfoIndex(lectureInfoIndex, page, count) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    let start = (page - 1) * count;
+                    if (start < 0) {
+                        start = 0;
+                    }
+                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName 
+				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
+				WHERE t1.lectureInfoIndex LIKE '%${lectureInfoIndex}%'
+				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -156,6 +220,38 @@ class LectureReply {
         }));
     }
     /**
+     * model: lectureReply userIndex 페이지 조회
+     * @param {number} userIndex
+     * @param {number} page
+     * @param {number} count
+     * @returns {Promise<any>}
+     */
+    pageGetLectureReplyByUserIndex(userIndex, page, count) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    let start = (page - 1) * count;
+                    if (start < 0) {
+                        start = 0;
+                    }
+                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName 
+				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
+				WHERE t1.userIndex LIKE '%${userIndex}%'
+				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(rows);
+                        }
+                    });
+                });
+            });
+        }));
+    }
+    /**
      * model: lectureReply userId 조회
      * @param {string} userId
      * @returns {Promise<void>}
@@ -179,6 +275,38 @@ class LectureReply {
         }));
     }
     /**
+     * model: lectureReply userId 페이지 조회
+     * @param {number} userId
+     * @param {number} page
+     * @param {number} count
+     * @returns {Promise<any>}
+     */
+    pageGetLectureReplyByUserId(userId, page, count) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    let start = (page - 1) * count;
+                    if (start < 0) {
+                        start = 0;
+                    }
+                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName 
+				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
+				WHERE t2.userId LIKE '%${userId}%'
+				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(rows);
+                        }
+                    });
+                });
+            });
+        }));
+    }
+    /**
      * model: lectureReply userNickName 조회
      * @param {string} userNickName
      * @returns {Promise<void>}
@@ -188,6 +316,38 @@ class LectureReply {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex WHERE t2.userNickName LIKE '%${userNickName}%'`, function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(rows);
+                        }
+                    });
+                });
+            });
+        }));
+    }
+    /**
+     * model: lectureReply userNickName 페이지 조회
+     * @param {number} userNickName
+     * @param {number} page
+     * @param {number} count
+     * @returns {Promise<any>}
+     */
+    pageGetLectureReplyByUserNickName(userNickName, page, count) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    let start = (page - 1) * count;
+                    if (start < 0) {
+                        start = 0;
+                    }
+                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName 
+				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
+				WHERE t2.userNickName LIKE '%${userNickName}%'
+				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);

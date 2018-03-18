@@ -11,15 +11,12 @@ export class LectureInfoRoutes {
 
 	public router() {
 		this.lectureInfoRouter.post('/lecturesInfo', createLectureInfo);
-		this.lectureInfoRouter.get('/lecturesInfo', listLectureInfo);
-		this.lectureInfoRouter.get('/lecturesInfo/:page/:count', pageListLectureInfo);
+		this.lectureInfoRouter.get('/lecturesInfo', pageListLectureInfo);
 		this.lectureInfoRouter.get('/lecturesInfo/lectureInfoIndex/:lectureInfoIndex', getLectureInfoByLectureInfoIndex);
-		this.lectureInfoRouter.get('/lecturesInfo/lectureName/:lectureName', getLectureInfoByLectureName);
-		this.lectureInfoRouter.get('/lecturesInfo/lectureName/:lectureName/:page/:count', pageGetLectureInfoByLectureName);
-		this.lectureInfoRouter.get('/lecturesInfo/professorName/:professorName', getLectureInfoByProfessorName);
-		this.lectureInfoRouter.get('/lecturesInfo/professorName/:professorName/:page/:count', pageGetLectureInfoByProfessorName);
-		this.lectureInfoRouter.put('/lecturesInfo/:lectureInfoIndex', updateLectureInfo);
-		this.lectureInfoRouter.delete('/lecturesInfo/:lectureInfoIndex', deleteLectureInfo);
+		this.lectureInfoRouter.get('/lecturesInfo/lectureName/:lectureName', pageGetLectureInfoByLectureName);
+		this.lectureInfoRouter.get('/lecturesInfo/professorName/:professorName', pageGetLectureInfoByProfessorName);
+		this.lectureInfoRouter.put('/lecturesInfo/lectureInfoIndex/:lectureInfoIndex', updateLectureInfo);
+		this.lectureInfoRouter.delete('/lecturesInfo/lectureInfoIndex/:lectureInfoIndex', deleteLectureInfo);
 	}
 }
 
@@ -40,21 +37,6 @@ async function createLectureInfo(req, res): Promise<void> {
 }
 
 /**
- * route: lectureInfo 리스트 조회
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-async function listLectureInfo(req, res): Promise<void> {
-	try {
-		const result = await lectureInfo.listLectureInfo();
-		res.send(result);
-	} catch (err) {
-		res.send(err);
-	}
-}
-
-/**
  * route: lectureInfo page 리스트 조회
  * @param req
  * @param res
@@ -62,8 +44,8 @@ async function listLectureInfo(req, res): Promise<void> {
  */
 async function pageListLectureInfo(req, res): Promise<void> {
 	try {
-		let page: number = parseInt(req.params.page);
-		let count: number = parseInt(req.params.count);
+		let page: number = parseInt(req.query.page);
+		let count: number = parseInt(req.query.count);
 		const result: any = await lectureInfo.pageListLectureInfo(page, count);
 		res.send(result);
 	} catch (err) {
@@ -88,22 +70,6 @@ async function getLectureInfoByLectureInfoIndex(req, res): Promise<void> {
 }
 
 /**
- * route: lectureInfo lectureName 조회
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-async function getLectureInfoByLectureName(req, res): Promise<void> {
-	let lectureName: string = req.params.lectureName;
-	try {
-		const result = await lectureInfo.getLectureInfoByLectureName(lectureName);
-		res.send(result);
-	} catch (err) {
-		res.send(err);
-	}
-}
-
-/**
  * route: lectureInfo lectureName page 조회
  * @param req
  * @param res
@@ -111,26 +77,10 @@ async function getLectureInfoByLectureName(req, res): Promise<void> {
  */
 async function pageGetLectureInfoByLectureName(req, res): Promise<void> {
 	let lectureName: string = req.params.lectureName;
-	let page: number = parseInt(req.params.page);
-	let count: number = parseInt(req.params.count);
+	let page: number = parseInt(req.query.page);
+	let count: number = parseInt(req.query.count);
 	try {
 		const result = await lectureInfo.pageGetLectureInfoByLectureName(lectureName, page, count);
-		res.send(result);
-	} catch (err) {
-		res.send(err);
-	}
-}
-
-/**
- * route: lectureInfo professorName 조회
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-async function getLectureInfoByProfessorName(req, res): Promise<void> {
-	let professorName: string = req.params.professorName;
-	try {
-		const result = await lectureInfo.getLectureInfoByProfessorName(professorName);
 		res.send(result);
 	} catch (err) {
 		res.send(err);
@@ -145,8 +95,8 @@ async function getLectureInfoByProfessorName(req, res): Promise<void> {
  */
 async function pageGetLectureInfoByProfessorName(req, res): Promise<void> {
 	let professorName: string = req.params.professorName;
-	let page: number = parseInt(req.params.page);
-	let count: number = parseInt(req.params.count);
+	let page: number = parseInt(req.query.page);
+	let count: number = parseInt(req.query.count);
 	try {
 		const result = await lectureInfo.pageGetLectureInfoByProfessorName(professorName, page, count);
 		res.send(result);

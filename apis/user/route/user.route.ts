@@ -12,12 +12,11 @@ export class UserRoutes {
 
 	public router() {
 		this.userRouter.post('/users', createUser);
-		this.userRouter.get('/users', listUser);
-		this.userRouter.get('/users/:page/:count', pageListUser);
-		this.userRouter.get('/users/:userId', getUser);
-		this.userRouter.put('/users/:userId', updateUser);
-		this.userRouter.put('/users/:userId/password', updateUserPassword);
-		this.userRouter.delete('/users/:userId', deleteUser);
+		this.userRouter.get('/users', pageListUser);
+		this.userRouter.get('/users/userId/:userId', getUser);
+		this.userRouter.put('/users/userId/:userId', updateUser);
+		this.userRouter.put('/users/userId/:userId/password', updateUserPassword);
+		this.userRouter.delete('/users/userId/:userId', deleteUser);
 	}
 }
 
@@ -38,21 +37,6 @@ async function createUser(req, res): Promise<void> {
 }
 
 /**
- * route: user 리스트 조회
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-async function listUser(req, res): Promise<void> {
-	try {
-		const result: any = await user.listUser();
-		res.send(result);
-	} catch (err) {
-		res.send(err);
-	}
-}
-
-/**
  * route: user page 리스트 조회
  * @param req
  * @param res
@@ -60,8 +44,8 @@ async function listUser(req, res): Promise<void> {
  */
 async function pageListUser(req, res): Promise<void> {
 	try {
-		let page: number = parseInt(req.params.page);
-		let count: number = parseInt(req.params.count);
+		let page: number = parseInt(req.query.page);
+		let count: number = parseInt(req.query.count);
 		const result: any = await user.pageListUser(page, count);
 		res.send(result);
 	} catch (err) {

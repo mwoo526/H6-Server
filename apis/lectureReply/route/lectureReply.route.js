@@ -18,8 +18,12 @@ class LectureReplyRoutes {
     }
     router() {
         this.lectureReplyRouter.post('/lecturesReply', createLectureReply);
-        this.lectureReplyRouter.get('/lecturesReply', listLectureReply);
-        this.lectureReplyRouter.get('/lecturesReply/:page/:count', pageListLectureReply);
+        this.lectureReplyRouter.get('/lecturesReply', pageListLectureReply);
+        this.lectureReplyRouter.get('/lecturesReply/lectureReplyIndex/:lectureReplyIndex', getLectureReplyByLectureReplyIndex);
+        this.lectureReplyRouter.get('/lecturesReply/userId/:userId', pageGetLectureReplyByUserId);
+        this.lectureReplyRouter.get('/lecturesReply/userNickName/:userNickName', pageGetLectureReplyByUserNickName);
+        this.lectureReplyRouter.put('/lecturesReply/lectureReplyIndex/:lectureReplyIndex', updateLectureReply);
+        this.lectureReplyRouter.delete('/lecturesReply/lectureReplyIndex/:lectureReplyIndex', deleteLectureReply);
     }
 }
 exports.LectureReplyRoutes = LectureReplyRoutes;
@@ -42,15 +46,17 @@ function createLectureReply(req, res) {
     });
 }
 /**
- * route: lectureReply 리스트 조회
+ * route: lectureReply page 리스트 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
-function listLectureReply(req, res) {
+function pageListLectureReply(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        let page = parseInt(req.query.page);
+        let count = parseInt(req.query.count);
         try {
-            const result = yield lectureReply_model_1.lectureReply.listLectureReply();
+            const result = yield lectureReply_model_1.lectureReply.pageListLectureReply(page, count);
             res.send(result);
         }
         catch (err) {
@@ -59,17 +65,93 @@ function listLectureReply(req, res) {
     });
 }
 /**
- * route: lectureReply page 리스트 조회
+ * route: lectureReply replyIndex 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
-function pageListLectureReply(req, res) {
+function getLectureReplyByLectureReplyIndex(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        let lectureReplyIndex = req.params.lectureReplyIndex;
         try {
-            let page = parseInt(req.params.page);
-            let count = parseInt(req.params.count);
-            const result = yield lectureReply_model_1.lectureReply.pageListLectureReply(page, count);
+            const result = yield lectureReply_model_1.lectureReply.getLectureReplyByLectureReplyIndex(lectureReplyIndex);
+            res.send(result);
+        }
+        catch (err) {
+            res.send(err);
+        }
+    });
+}
+/**
+ * route: lectureReply userId 조회
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+function pageGetLectureReplyByUserId(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const userId = req.params.userId;
+        let page = parseInt(req.query.page);
+        let count = parseInt(req.query.count);
+        try {
+            const result = yield lectureReply_model_1.lectureReply.pageGetLectureReplyByUserId(userId, page, count);
+            res.send(result);
+        }
+        catch (err) {
+            res.send(err);
+        }
+    });
+}
+/**
+ * route: lectureReply userNickName 조회
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+function pageGetLectureReplyByUserNickName(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const userNickName = req.params.userNickName;
+        let page = parseInt(req.query.page);
+        let count = parseInt(req.query.count);
+        try {
+            const result = yield lectureReply_model_1.lectureReply.pageGetLectureReplyByUserNickName(userNickName, page, count);
+            res.send(result);
+        }
+        catch (err) {
+            res.send(err);
+        }
+    });
+}
+/**
+ * route: lectureReply 업데이트
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+function updateLectureReply(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const lectureReplyIndex = req.params.lectureReplyIndex;
+        let lectureReplyData = new lectureReply_resource_1.LectureReplyResource(req.body);
+        try {
+            const result = yield lectureReply_model_1.lectureReply.updateLectureReply(lectureReplyIndex, lectureReplyData);
+            res.send(result);
+        }
+        catch (err) {
+            res.send(err);
+        }
+    });
+}
+/**
+ * route: lectureReply 삭제
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+function deleteLectureReply(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const lectureReplyIndex = req.params.lectureReplyIndex;
+        try {
+            const result = yield lectureReply_model_1.lectureReply.deleteLectureReply(lectureReplyIndex);
             res.send(result);
         }
         catch (err) {

@@ -81,8 +81,20 @@ describe('lectureReply 모델', () => {
 		expect(result).to.instanceof(Array);
 	});
 
+	it('pageGetLectureReplyByLectureReplyIndex', async () => {
+		const result = await lectureReply.pageGetLectureReplyByLectureReplyIndex(testLectureReplyIndex,1, 3);
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
 	it('getLectureReplyByLectureInfoIndex', async () => {
 		const result = await lectureReply.getLectureReplyByLectureInfoIndex(testLectureInfoIndex);
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
+	it('pageGetLectureReplyByLectureInfoIndex', async () => {
+		const result = await lectureReply.pageGetLectureReplyByLectureInfoIndex(testLectureInfoIndex, 1, 3);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});
@@ -93,14 +105,32 @@ describe('lectureReply 모델', () => {
 		expect(result).to.instanceof(Array);
 	});
 
+	it('pageGetLectureReplyUserIndex', async () => {
+		const result = await lectureReply.pageGetLectureReplyByUserIndex(testUserIndex,1 ,3);
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
 	it('getLectureReplyUserId', async () => {
 		const result = await lectureReply.getLectureReplyByUserId(testUserId);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});
 
+	it('pageGetLectureReplyByUserId', async () => {
+		const result = await lectureReply.pageGetLectureReplyByUserId(testUserId, 1, 3);
+		console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
 	it('getLectureReplyByUserNickName', async () => {
 		const result = await lectureReply.getLectureReplyByUserNickName(testUserNickName);
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
+	it('pageGetLectureReplyByUserNickName', async () => {
+		const result = await lectureReply.pageGetLectureReplyByUserNickName(testUserNickName, 1, 3);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});

@@ -14,8 +14,8 @@ export class ProfessorRoutes {
 		this.professorRouter.get('/professors', listProfessor);
 		this.professorRouter.get('/professors/professorIndex/:professorIndex/', getProfessorByProfessorIndex);
 		this.professorRouter.get('/professors/professorName/:professorName/', getProfessorByProfessorName);
-		this.professorRouter.put('/professors/:professorIndex', updateProfessor);
-		this.professorRouter.delete('/professors/:professorIndex', deleteProfessor);
+		this.professorRouter.put('/professors/professorIndex/:professorIndex', updateProfessor);
+		this.professorRouter.delete('/professors/professorIndex/:professorIndex', deleteProfessor);
 	}
 }
 
