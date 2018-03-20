@@ -1,8 +1,8 @@
 import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import { lectureRoutes } from './apis/lecture/route/lecture.route';
-import { lectureInfoRoutes } from './apis/lectureInfo/route/lectureInfo.route';
-import { lectureReplyRoutes } from './apis/lectureReply/route/lectureReply.route';
+import { lectureInfoRoutes } from './apis/lecture/route/lectureInfo.route';
+import { lectureReplyRoutes } from './apis/lecture/route/lectureReply.route';
 import { professorRoutes } from './apis/professor/route/professor.route';
 import { signInRoutes } from './apis/sign/route/signIn.route';
 import { signUpRoutes } from './apis/sign/route/signUp.route';

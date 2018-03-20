@@ -70,8 +70,8 @@ describe('lectureReply 모델', () => {
 	});
 
 	it('pageListLectureReply', async () => {
-		const result = await lectureReply.pageListLectureReply(2, 3);
-		// console.log(result);
+		const result = await lectureReply.pageListLectureReply(1, 3);
+		console.log(result);
 		expect(result).to.instanceof(Array);
 	});
 

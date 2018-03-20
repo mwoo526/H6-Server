@@ -28,7 +28,7 @@ describe('lectureInfo 모델', () => {
     }));
     it('pageListLectureInfo', () => __awaiter(this, void 0, void 0, function* () {
         const result = yield lectureInfo_model_1.lectureInfo.pageListLectureInfo(1, 3);
-        //console.log(result);
+        // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
     it('getLectureInfoByLectureInfoIndex', () => __awaiter(this, void 0, void 0, function* () {

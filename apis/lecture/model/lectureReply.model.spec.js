@@ -76,8 +76,8 @@ describe('lectureReply 모델', () => {
         chai_1.expect(result).to.instanceof(Array);
     }));
     it('pageListLectureReply', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield lectureReply_model_1.lectureReply.pageListLectureReply(2, 3);
-        // console.log(result);
+        const result = yield lectureReply_model_1.lectureReply.pageListLectureReply(1, 3);
+        console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
     it('getLectureReplyByLectureReplyIndex', () => __awaiter(this, void 0, void 0, function* () {
