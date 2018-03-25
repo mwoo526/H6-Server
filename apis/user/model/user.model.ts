@@ -54,15 +54,11 @@ export class User {
 	pageListUser(page: number, count: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				let start = (page - 1) * count + 1;
-				let end = start + count - 1;
-				await connection.query(`SELECT B.* FROM (
-				SELECT @ROWNUM:=@ROWNUM + 1 as rownum, A.* 
-				from (
-				SELECT * FROM users ORDER BY createdAt DESC
-				)A, (SELECT @ROWNUM :=0)R
-				)
-				B WHERE rownum BETWEEN ${start} AND ${end}`, function(err, rows) {
+				let start = (page - 1) * count;
+				if (start < 0) {
+					start = 0;
+				}
+				await connection.query(`SELECT * FROM users ORDER BY userIndex ASC LIMIT ${start}, ${count}`, function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);

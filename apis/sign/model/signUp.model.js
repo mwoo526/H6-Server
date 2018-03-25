@@ -30,16 +30,6 @@ class SignUp {
                             resolve(rows);
                         }
                     });
-                    yield connection.query(`INSERT INTO usersValidation (userId) VALUES ('${userData.userId}')`, function (err, rows) {
-                        if (err) {
-                            connection.release();
-                            reject(err);
-                        }
-                        else {
-                            connection.release();
-                            resolve(rows);
-                        }
-                    });
                 });
             });
         }));
