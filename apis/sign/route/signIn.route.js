@@ -30,7 +30,10 @@ function getUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const result = yield signIn_model_1.signIn.getUser(req.body);
-            res.send(result);
+            res.json({
+                message: 'logged in successfully',
+                token: result
+            });
         }
         catch (err) {
             res.send(err);

@@ -10,6 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const encryption_utli_1 = require("../../../packages/utils/encryption.utli");
 const mysql_util_1 = require("../../../packages/utils/mysql.util");
+const jwt = require("jsonwebtoken");
+const secret_util_1 = require("../../../packages/utils/secret.util");
 const pool = mysql_util_1.mysqlUtil.pool;
 class SignIn {
     /**
@@ -37,7 +39,17 @@ class SignIn {
                             else {
                                 if (rows[0].userPw === encryption_utli_1.encriptionPw.getHash(userData.userPw)) {
                                     connection.release();
-                                    resolve(rows);
+                                    jwt.sign({
+                                        tokenId: rows[0].userId,
+                                        tokenNickname: rows[0].userNickName
+                                    }, secret_util_1.jwtToken.secret, {
+                                        algorithm: secret_util_1.jwtToken.algorithm,
+                                        expiresIn: secret_util_1.jwtToken.expiresln
+                                    }, (err, token) => {
+                                        if (err)
+                                            throw new Error('The jwt is incorrect');
+                                        resolve(token);
+                                    });
                                 }
                                 else {
                                     err.message = 'The password is incorrect';

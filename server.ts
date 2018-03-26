@@ -1,7 +1,8 @@
 import * as express from 'express';
 import { Server } from './app';
 
-const port: number = 80;
+const port: number = 3000;
+// 80번 -> 3000번 포트로 접근
 const app: express.Application = new Server().app;
 app.set('port', port);
 app.listen(app.get('port'), () => {

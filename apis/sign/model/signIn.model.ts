@@ -1,5 +1,7 @@
 import { encriptionPw } from '../../../packages/utils/encryption.utli';
 import { mysqlUtil } from '../../../packages/utils/mysql.util';
+import * as jwt from 'jsonwebtoken';
+import {jwtToken} from "../../../packages/utils/secret.util";
 
 const pool = mysqlUtil.pool;
 
@@ -26,7 +28,20 @@ class SignIn {
 						} else {
 							if (rows[0].userPw === encriptionPw.getHash(userData.userPw)) {
 								connection.release();
-								resolve(rows);
+
+								jwt.sign(
+									{
+										tokenId:rows[0].userId,
+										tokenNickname:rows[0].userNickName
+									},
+									jwtToken.secret,
+									{
+										algorithm:jwtToken.algorithm,
+                                        expiresIn:jwtToken.expiresln
+									},(err,token)=>{
+										if(err) throw new Error('The jwt is incorrect');
+										resolve(token)
+									})
 							} else {
 								err.message = 'The password is incorrect';
 								connection.release();

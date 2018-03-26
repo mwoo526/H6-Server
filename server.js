@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = require("./app");
-const port = 80;
+const port = 3000;
+// 80번 -> 3000번 포트로 접근
 const app = new app_1.Server().app;
 app.set('port', port);
 app.listen(app.get('port'), () => {
