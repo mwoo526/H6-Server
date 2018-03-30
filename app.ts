@@ -9,8 +9,8 @@ import { signUpRoutes } from './apis/sign/route/signUp.route';
 import { testRoutes } from './apis/test/route/test.route';
 import { userRoutes } from './apis/user/route/user.route';
 import { userValidationRoutes } from './apis/userValidation/route/userValidation.route';
-import { notFoundError, serverError } from './middleware/error.middleware';
-import { verify } from './middleware/tokenVerify.middleware';
+import { notFoundError, serverError } from './middlewares/error.middleware';
+import { verify } from './middlewares/tokenVerify.middleware';
 
 export class Server {
 	/** app 에 대한 타입 설정 */
@@ -33,7 +33,7 @@ export class Server {
 		this.app.use(lectureReplyRoutes.lectureReplyRouter);
 		this.app.use(userValidationRoutes.userValidationRouter);
 
-		/*미들웨어 처리*/
+		/** 미들웨어 처리 */
 		this.app.use(verify);
 		this.app.use(notFoundError);
 		this.app.use(serverError);

@@ -8,37 +8,31 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express = require("express");
-const signIn_model_1 = require("../model/signIn.model");
-class SignInRoutes {
-    constructor() {
-        this.signInRouter = express.Router();
-        this.router();
-    }
-    router() {
-        this.signInRouter.post('/signIn', getUser);
-    }
-}
-exports.SignInRoutes = SignInRoutes;
-/**
- * route: 로그인
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-function getUser(req, res) {
+const tokenVerify_1 = require("./tokenVerify/tokenVerify");
+function verify(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
+        let token = req.headers['x-access-token'];
+        if (!token) {
+            return res.status(403).json({
+                success: false,
+                message: 'not logged in'
+            });
+        }
         try {
-            const result = yield signIn_model_1.signIn.getUser(req.body);
+            const result = yield tokenVerify_1.verifyUser(token);
             res.json({
-                message: 'logged in successfully',
-                token: result
+                success: true,
+                info: result
             });
         }
         catch (err) {
-            res.send(err);
+            res.status(403).json({
+                success: false,
+                message: err.message
+            });
         }
+        next();
     });
 }
-exports.signInRoutes = new SignInRoutes();
-//# sourceMappingURL=signIn.route.js.map
+exports.verify = verify;
+//# sourceMappingURL=tokenVerify.middleware.js.map

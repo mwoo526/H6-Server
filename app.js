@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
+Object.defineProperty(exports, "__esModule", { value: true });
 const bodyParser = require("body-parser");
 const express = require("express");
 const lecture_route_1 = require("./apis/lecture/route/lecture.route");
@@ -11,33 +11,30 @@ const signUp_route_1 = require("./apis/sign/route/signUp.route");
 const test_route_1 = require("./apis/test/route/test.route");
 const user_route_1 = require("./apis/user/route/user.route");
 const userValidation_route_1 = require("./apis/userValidation/route/userValidation.route");
-const tokenVerify_middleware_1 = require("./middleware/tokenVerify.middleware");
-const error_middleware_1 = require("./middleware/error.middleware");
-const error_middleware_2 = require("./middleware/error.middleware");
-
+const error_middleware_1 = require("./middlewares/error.middleware");
+const tokenVerify_middleware_1 = require("./middlewares/tokenVerify.middleware");
 class Server {
-  constructor() {
-    /** express 설정을 위한 express 선언 */
-    this.app = express();
-    /** bodyParser 선언 */
-    this.app.use(bodyParser.urlencoded({extended: false}));
-    this.app.use(bodyParser.json());
-    /** 라우터 추가 */
-    this.app.use(test_route_1.testRoutes.testRouter);
-    this.app.use(user_route_1.userRoutes.userRouter);
-    this.app.use(signUp_route_1.signUpRoutes.signUpRouter);
-    this.app.use(signIn_route_1.signInRoutes.signInRouter);
-    this.app.use(professor_route_1.professorRoutes.professorRouter);
-    this.app.use(lecture_route_1.lectureRoutes.lectureRouter);
-    this.app.use(lectureInfo_route_1.lectureInfoRoutes.lectureInfoRouter);
-    this.app.use(lectureReply_route_1.lectureReplyRoutes.lectureReplyRouter);
-    this.app.use(userValidation_route_1.userValidationRoutes.userValidationRouter);
-    /*미들웨어 처리*/
-    this.app.use(tokenVerify_middleware_1.verify);
-    this.app.use(error_middleware_1.notFoundError);
-    this.app.use(error_middleware_2.serverError);
-  }
+    constructor() {
+        /** express 설정을 위한 express 선언 */
+        this.app = express();
+        /** bodyParser 선언 */
+        this.app.use(bodyParser.urlencoded({ extended: false }));
+        this.app.use(bodyParser.json());
+        /** 라우터 추가 */
+        this.app.use(test_route_1.testRoutes.testRouter);
+        this.app.use(user_route_1.userRoutes.userRouter);
+        this.app.use(signUp_route_1.signUpRoutes.signUpRouter);
+        this.app.use(signIn_route_1.signInRoutes.signInRouter);
+        this.app.use(professor_route_1.professorRoutes.professorRouter);
+        this.app.use(lecture_route_1.lectureRoutes.lectureRouter);
+        this.app.use(lectureInfo_route_1.lectureInfoRoutes.lectureInfoRouter);
+        this.app.use(lectureReply_route_1.lectureReplyRoutes.lectureReplyRouter);
+        this.app.use(userValidation_route_1.userValidationRoutes.userValidationRouter);
+        /*미들웨어 처리*/
+        this.app.use(tokenVerify_middleware_1.verify);
+        this.app.use(error_middleware_1.notFoundError);
+        this.app.use(error_middleware_1.serverError);
+    }
 }
-
 exports.Server = Server;
 //# sourceMappingURL=app.js.map
