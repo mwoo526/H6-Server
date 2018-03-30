@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = require("./app");
 const port = 80;
+// http 80번 포트 설정
 const app = new app_1.Server().app;
 app.set('port', port);
 app.listen(app.get('port'), () => {

@@ -11,6 +11,7 @@ const signUp_route_1 = require("./apis/sign/route/signUp.route");
 const test_route_1 = require("./apis/test/route/test.route");
 const user_route_1 = require("./apis/user/route/user.route");
 const userValidation_route_1 = require("./apis/userValidation/route/userValidation.route");
+const verify_middleware_1 = require("./apis/tokenVerify/verify.middleware");
 class Server {
     constructor() {
         /** express 설정을 위한 express 선언 */
@@ -28,6 +29,7 @@ class Server {
         this.app.use(lectureInfo_route_1.lectureInfoRoutes.lectureInfoRouter);
         this.app.use(lectureReply_route_1.lectureReplyRoutes.lectureReplyRouter);
         this.app.use(userValidation_route_1.userValidationRoutes.userValidationRouter);
+        this.app.use('/verify', verify_middleware_1.verify);
         /** Not Found */
         this.app.use((req, res, next) => {
             /**
