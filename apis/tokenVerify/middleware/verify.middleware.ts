@@ -1,5 +1,5 @@
 import * as express from 'express';
-import {verifyUser} from "./verify.model";
+import {verifyUser} from "../model/verify.model";
 
 export async function verify(req:express.Request,res:express.Response,next:Function){
     let token = req.headers['x-access-token'];

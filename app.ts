@@ -9,6 +9,7 @@ import { signUpRoutes } from './apis/sign/route/signUp.route';
 import { testRoutes } from './apis/test/route/test.route';
 import { userRoutes } from './apis/user/route/user.route';
 import { userValidationRoutes } from './apis/userValidation/route/userValidation.route';
+import { verify } from "./apis/tokenVerify/middleware/verify.middleware";
 
 export class Server {
 	/** app 에 대한 타입 설정 */
@@ -30,6 +31,8 @@ export class Server {
 		this.app.use(lectureInfoRoutes.lectureInfoRouter);
 		this.app.use(lectureReplyRoutes.lectureReplyRouter);
 		this.app.use(userValidationRoutes.userValidationRouter);
+
+		this.app.use(verify);
 		/** Not Found */
 		this.app.use((req: express.Request, res: express.Response, next: Function) => {
 			/**

@@ -1,5 +1,5 @@
 import * as jwt from 'Jsonwebtoken';
-import {jwtToken} from '../../packages/utils/secret.util';
+import {jwtToken} from '../../../packages/utils/secret.util';
 
 export function verifyUser(token : any) : Promise <any>{
     return new Promise(async (resolve,reject)=>{
