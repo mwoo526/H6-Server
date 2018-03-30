@@ -11,7 +11,9 @@ const signUp_route_1 = require("./apis/sign/route/signUp.route");
 const test_route_1 = require("./apis/test/route/test.route");
 const user_route_1 = require("./apis/user/route/user.route");
 const userValidation_route_1 = require("./apis/userValidation/route/userValidation.route");
-const verify_middleware_1 = require("./apis/tokenVerify/verify.middleware");
+const tokenVerify_middleware_1 = require("./middleware/tokenVerify.middleware");
+const error_middleware_1 = require("./middleware/error.middleware");
+const error_middleware_2 = require("./middleware/error.middleware");
 class Server {
     constructor() {
         /** express 설정을 위한 express 선언 */
@@ -29,24 +31,10 @@ class Server {
         this.app.use(lectureInfo_route_1.lectureInfoRoutes.lectureInfoRouter);
         this.app.use(lectureReply_route_1.lectureReplyRoutes.lectureReplyRouter);
         this.app.use(userValidation_route_1.userValidationRoutes.userValidationRouter);
-        this.app.use('/verify', verify_middleware_1.verify);
-        /** Not Found */
-        this.app.use((req, res, next) => {
-            /**
-             *  Error 이라는 정의가 있지만 Error 에는 status 라는 정의가 없어서 any 설정
-             */
-            const err = new Error('not_found');
-            err.status = 404;
-            next(err);
-        });
-        /** 에러 처리 */
-        this.app.use((err, req, res) => {
-            err.status = err.status || 500;
-            console.error(`error on request ${req.method} | ${req.url} | ${err.status}`);
-            console.error(err.stack || `${err.message}`);
-            err.message = err.status == 500 ? 'Something bad happened.' : err.message;
-            res.status(err.status).send(err.message);
-        });
+        /*미들웨어 처리*/
+        this.app.use(tokenVerify_middleware_1.verify);
+        this.app.use(error_middleware_1.notFoundError);
+        this.app.use(error_middleware_2.serverError);
     }
 }
 exports.Server = Server;

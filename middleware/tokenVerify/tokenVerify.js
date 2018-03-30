@@ -9,10 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const jwt = require("Jsonwebtoken");
-const secret_util_1 = require("../../../packages/utils/secret.util");
+const jwt_util_1 = require("../../packages/utils/jwt.util");
 function verifyUser(token) {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-        yield jwt.verfiy(token, secret_util_1.jwtToken.secret, (err, decoded) => {
+        yield jwt.verify(token, jwt_util_1.jwtToken.secret, (err, decoded) => {
             if (err)
                 reject(err);
             resolve(decoded);
@@ -20,4 +20,4 @@ function verifyUser(token) {
     }));
 }
 exports.verifyUser = verifyUser;
-//# sourceMappingURL=tokenVerify.tokenVerify.js.map
+//# sourceMappingURL=tokenVerify.js.map

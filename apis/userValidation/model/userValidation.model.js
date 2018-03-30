@@ -15,7 +15,7 @@ class UserValidation {
     constructor() {
     }
     /**
-     * model: 인증코드 생성
+     * verify: 인증코드 생성
      * @param {string} userId
      * @param {string} email
      * @param validationCode
@@ -41,7 +41,7 @@ class UserValidation {
         }));
     }
     /**
-     * model: 인증코드 조회
+     * verify: 인증코드 조회
      * @param {string} userId
      * @returns {Promise<any>}
      */
@@ -64,7 +64,7 @@ class UserValidation {
         }));
     }
     /**
-     * model: 인증코드 체크
+     * verify: 인증코드 체크
      * @param {string} userId
      * @param userData
      * @param validationCode
@@ -92,7 +92,7 @@ class UserValidation {
         }));
     }
     /**
-     * model: 인증여부 업데이트
+     * verify: 인증여부 업데이트
      * @param {string} userId
      * @returns {Promise<any>}
      */

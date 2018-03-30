@@ -6,4 +6,4 @@ var jwtToken;
     jwtToken.algorithm = "HS256";
     jwtToken.expiresln = "24h";
 })(jwtToken = exports.jwtToken || (exports.jwtToken = {}));
-//# sourceMappingURL=secret.util.js.map
+//# sourceMappingURL=jwt.util.js.map

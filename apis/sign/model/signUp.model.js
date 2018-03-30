@@ -14,7 +14,7 @@ class SignUp {
     constructor() {
     }
     /**
-     * model: 회원가입
+     * verify: 회원가입
      * @param userData
      * @returns {Promise<any>}
      */

@@ -14,7 +14,7 @@ class User {
     constructor() {
     }
     /**
-     * model: user 생성
+     * verify: user 생성
      * @param userData
      * @returns {Promise<any>}
      */
@@ -37,7 +37,7 @@ class User {
         }));
     }
     /**
-     * model: user 리스트 조회
+     * verify: user 리스트 조회
      * @returns {Promise<any>}
      */
     listUser() {
@@ -59,7 +59,7 @@ class User {
         }));
     }
     /**
-     * model: user page 리스트 조회
+     * verify: user page 리스트 조회
      * @returns {Promise<any>}
      */
     pageListUser(page, count) {
@@ -85,7 +85,7 @@ class User {
         }));
     }
     /**
-     * model: user studentId 조회
+     * verify: user studentId 조회
      * @param {number} studentId
      * @returns {Promise<any>}
      */
@@ -108,7 +108,7 @@ class User {
         }));
     }
     /**
-     * model: user 업데이트
+     * verify: user 업데이트
      * @param {number} studentId
      * @param userData
      * @returns {Promise<any>}
@@ -132,7 +132,7 @@ class User {
         }));
     }
     /**
-     * model: user 비밀번호 업데이트
+     * verify: user 비밀번호 업데이트
      * @param {string} userId
      * @param userPw
      * @returns {Promise<any>}
@@ -156,7 +156,7 @@ class User {
         }));
     }
     /**
-     * model: user 삭제
+     * verify: user 삭제
      * @param {number} studentId
      * @returns {Promise<any>}
      */

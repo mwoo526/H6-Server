@@ -11,11 +11,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const encryption_utli_1 = require("../../../packages/utils/encryption.utli");
 const mysql_util_1 = require("../../../packages/utils/mysql.util");
 const jwt = require("jsonwebtoken");
-const secret_util_1 = require("../../../packages/utils/secret.util");
+const jwt_util_1 = require("../../../packages/utils/jwt.util");
 const pool = mysql_util_1.mysqlUtil.pool;
 class SignIn {
     /**
-     * model: 로그인
+     * tokenVerify: 로그인
      * @param userData
      * @returns {Promise<any>}
      */
@@ -42,9 +42,9 @@ class SignIn {
                                     jwt.sign({
                                         tokenId: rows[0].userId,
                                         tokenNickname: rows[0].userNickName
-                                    }, secret_util_1.jwtToken.secret, {
-                                        algorithm: secret_util_1.jwtToken.algorithm,
-                                        expiresIn: secret_util_1.jwtToken.expiresln
+                                    }, jwt_util_1.jwtToken.secret, {
+                                        algorithm: jwt_util_1.jwtToken.algorithm,
+                                        expiresIn: jwt_util_1.jwtToken.expiresln
                                     }, (err, token) => {
                                         if (err)
                                             throw new Error('The jwt is incorrect');

@@ -13,7 +13,7 @@ const pool = mysql_util_1.mysqlUtil.pool;
 // TODO(@jade): textbook 칼럼 추가  date: 2018. 2. 21. 오후 6:11
 class LectureInfo {
     /**
-     * model: lectureInfo 생성
+     * verify: lectureInfo 생성
      * @param lectureInfoData
      * @returns {Promise<void>}
      */
@@ -36,7 +36,7 @@ class LectureInfo {
         }));
     }
     /**
-     * model: lectureInfo 리스트 조회
+     * verify: lectureInfo 리스트 조회
      * @returns {Promise<void>}
      */
     listLectureInfo() {
@@ -58,7 +58,7 @@ class LectureInfo {
         }));
     }
     /**
-     * model: lectureInfo page 리스트 조회
+     * verify: lectureInfo page 리스트 조회
      * @returns {Promise<any>}
      */
     pageListLectureInfo(page, count) {
@@ -88,7 +88,7 @@ class LectureInfo {
         }));
     }
     /**
-     * model: lectureInfo index 조회
+     * verify: lectureInfo index 조회
      * @param lectureInfoIndex
      * @returns {Promise<void>}
      */
@@ -112,7 +112,7 @@ class LectureInfo {
         }));
     }
     /**
-     * model: lectureInfo lectureName 조회
+     * verify: lectureInfo lectureName 조회
      * @param lectureName
      * @returns {Promise<void>}
      */
@@ -135,7 +135,7 @@ class LectureInfo {
         }));
     }
     /**
-     * model: lectureInfo lectureName page 조회
+     * verify: lectureInfo lectureName page 조회
      * @param lectureName
      * @returns {Promise<void>}
      */
@@ -167,7 +167,7 @@ class LectureInfo {
         }));
     }
     /**
-     * model: lectureInfo professorName 조회
+     * verify: lectureInfo professorName 조회
      * @param professorName
      * @returns {Promise<void>}
      */
@@ -190,7 +190,7 @@ class LectureInfo {
         }));
     }
     /**
-     * model: lectureInfo professorName page 조회
+     * verify: lectureInfo professorName page 조회
      * @param professorName
      * @returns {Promise<void>}
      */
@@ -222,7 +222,7 @@ class LectureInfo {
         }));
     }
     /**
-     * model: lectureInfo 업데이트
+     * verify: lectureInfo 업데이트
      * @param {number} lectureInfoIndex
      * @param lectureInfoData
      * @returns {Promise<void>}
@@ -247,7 +247,7 @@ class LectureInfo {
         }));
     }
     /**
-     * model: lectureInfo 삭제
+     * verify: lectureInfo 삭제
      * @param {number} lectureInfoIndex
      * @returns {Promise<void>}
      */

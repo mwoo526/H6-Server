@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const verify_model_1 = require("./verify.model");
+const tokenVerify_1 = require("./tokenVerify/tokenVerify");
 function verify(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         let token = req.headers['x-access-token'];
@@ -19,7 +19,7 @@ function verify(req, res, next) {
             });
         }
         try {
-            const result = yield verify_model_1.verifyUser(token);
+            const result = yield tokenVerify_1.verifyUser(token);
             res.json({
                 success: true,
                 info: result
@@ -35,4 +35,4 @@ function verify(req, res, next) {
     });
 }
 exports.verify = verify;
-//# sourceMappingURL=verify.middleware.js.map
+//# sourceMappingURL=tokenVerify.middleware.js.map
