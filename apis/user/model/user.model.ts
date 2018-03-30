@@ -7,7 +7,7 @@ export class User {
 	}
 
 	/**
-	 * model: user 생성
+	 * verify: user 생성
 	 * @param userData
 	 * @returns {Promise<any>}
 	 */
@@ -28,7 +28,7 @@ export class User {
 	}
 
 	/**
-	 * model: user 리스트 조회
+	 * verify: user 리스트 조회
 	 * @returns {Promise<any>}
 	 */
 	listUser(): Promise<any> {
@@ -48,7 +48,7 @@ export class User {
 	}
 
 	/**
-	 * model: user page 리스트 조회
+	 * verify: user page 리스트 조회
 	 * @returns {Promise<any>}
 	 */
 	pageListUser(page: number, count: number): Promise<any> {
@@ -72,7 +72,7 @@ export class User {
 	}
 
 	/**
-	 * model: user studentId 조회
+	 * verify: user studentId 조회
 	 * @param {number} studentId
 	 * @returns {Promise<any>}
 	 */
@@ -93,7 +93,7 @@ export class User {
 	}
 
 	/**
-	 * model: user 업데이트
+	 * verify: user 업데이트
 	 * @param {number} studentId
 	 * @param userData
 	 * @returns {Promise<any>}
@@ -115,7 +115,7 @@ export class User {
 	}
 
 	/**
-	 * model: user 비밀번호 업데이트
+	 * verify: user 비밀번호 업데이트
 	 * @param {string} userId
 	 * @param userPw
 	 * @returns {Promise<any>}
@@ -137,7 +137,7 @@ export class User {
 	}
 
 	/**
-	 * model: user 삭제
+	 * verify: user 삭제
 	 * @param {number} studentId
 	 * @returns {Promise<any>}
 	 */

@@ -1,13 +1,13 @@
 import { encriptionPw } from '../../../packages/utils/encryption.utli';
 import { mysqlUtil } from '../../../packages/utils/mysql.util';
 import * as jwt from 'jsonwebtoken';
-import {jwtToken} from "../../../packages/utils/secret.util";
+import {jwtToken} from "../../../packages/utils/jwt.util";
 
 const pool = mysqlUtil.pool;
 
 class SignIn {
 	/**
-	 * model: 로그인
+	 * tokenVerify: 로그인
 	 * @param userData
 	 * @returns {Promise<any>}
 	 */

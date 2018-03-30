@@ -20,4 +20,4 @@ function verifyUser(token) {
     }));
 }
 exports.verifyUser = verifyUser;
-//# sourceMappingURL=verify.model.js.map
+//# sourceMappingURL=tokenVerify.tokenVerify.js.map

@@ -7,7 +7,7 @@ export class Professor {
 	}
 
 	/**
-	 * model: professor 생성
+	 * verify: professor 생성
 	 * @param professorData
 	 * @returns {Promise<any>}
 	 */
@@ -28,7 +28,7 @@ export class Professor {
 	}
 
 	/**
-	 * model: professor 리스트 조회
+	 * verify: professor 리스트 조회
 	 * @returns {Promise<any>}
 	 */
 	listProfessor(): Promise<any> {
@@ -48,7 +48,7 @@ export class Professor {
 	}
 
 	/**
-	 * model: professor professorIndex 조회
+	 * verify: professor professorIndex 조회
 	 * @param {number} professorIndex
 	 * @returns {Promise<any>}
 	 */
@@ -69,7 +69,7 @@ export class Professor {
 	}
 
 	/**
-	 * model: professor professorName 조회
+	 * verify: professor professorName 조회
 	 * @param {string} professorName
 	 * @returns {Promise<any>}
 	 */
@@ -90,7 +90,7 @@ export class Professor {
 	}
 
 	/**
-	 * model: professor 업데이트
+	 * verify: professor 업데이트
 	 * @param {number} professorIndex
 	 * @param professorData
 	 * @returns {Promise<any>}
@@ -113,7 +113,7 @@ export class Professor {
 	}
 
 	/**
-	 * model: professor 삭제
+	 * verify: professor 삭제
 	 * @param {number} professorIndex
 	 * @returns {Promise<any>}
 	 */

@@ -4,7 +4,7 @@ const pool = mysqlUtil.pool;
 
 export class LectureReply {
 	/**
-	 * model: lectureReply 생성
+	 * verify: lectureReply 생성
 	 * @param lectureReplyData
 	 * @returns {Promise<void>}
 	 */
@@ -25,7 +25,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply 리스트 조회
+	 * verify: lectureReply 리스트 조회
 	 * @returns {Promise<void>}
 	 */
 	listLectureReply(): Promise<void> {
@@ -45,7 +45,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply 페이지 리스트 조회
+	 * verify: lectureReply 페이지 리스트 조회
 	 * @param {number} page
 	 * @param {number} count
 	 * @returns {Promise<any>}
@@ -73,7 +73,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply index 조회
+	 * verify: lectureReply index 조회
 	 * @param {number} lectureReplyIndex
 	 * @returns {Promise<void>}
 	 */
@@ -94,7 +94,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply replyIndex 페이지 조회
+	 * verify: lectureReply replyIndex 페이지 조회
 	 * @param {number} lectureReplyIndex
 	 * @param {number} page
 	 * @param {number} count
@@ -124,7 +124,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply lectureInfoIndex 조회
+	 * verify: lectureReply lectureInfoIndex 조회
 	 * @param {number} lectureInfoIndex
 	 * @returns {Promise<void>}
 	 */
@@ -145,7 +145,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply lectureInfoIndex 페이지 조회
+	 * verify: lectureReply lectureInfoIndex 페이지 조회
 	 * @param {number} lectureInfoIndex
 	 * @param {number} page
 	 * @param {number} count
@@ -175,7 +175,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply userIndex 조회
+	 * verify: lectureReply userIndex 조회
 	 * @param {number} userIndex
 	 * @returns {Promise<void>}
 	 */
@@ -196,7 +196,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply userIndex 페이지 조회
+	 * verify: lectureReply userIndex 페이지 조회
 	 * @param {number} userIndex
 	 * @param {number} page
 	 * @param {number} count
@@ -226,7 +226,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply userId 조회
+	 * verify: lectureReply userId 조회
 	 * @param {string} userId
 	 * @returns {Promise<void>}
 	 */
@@ -247,7 +247,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply userId 페이지 조회
+	 * verify: lectureReply userId 페이지 조회
 	 * @param {number} userId
 	 * @param {number} page
 	 * @param {number} count
@@ -277,7 +277,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply userNickName 조회
+	 * verify: lectureReply userNickName 조회
 	 * @param {string} userNickName
 	 * @returns {Promise<void>}
 	 */
@@ -298,7 +298,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply userNickName 페이지 조회
+	 * verify: lectureReply userNickName 페이지 조회
 	 * @param {number} userNickName
 	 * @param {number} page
 	 * @param {number} count
@@ -328,7 +328,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply 업데이트
+	 * verify: lectureReply 업데이트
 	 * @param {number} lectureReplyIndex
 	 * @param lectureReplyData
 	 * @returns {Promise<void>}
@@ -351,7 +351,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply 삭제
+	 * verify: lectureReply 삭제
 	 * @param {number} lectureReplyIndex
 	 * @returns {Promise<void>}
 	 */
