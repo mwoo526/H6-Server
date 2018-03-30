@@ -23,8 +23,8 @@ async function getUser(req, res): Promise<void> {
 	try {
 		const result: any = await signIn.getUser(req.body);
 		res.json({
-			message:'logged in successfully',
-			token : result
+			message: 'logged in successfully',
+			token: result
 		})
 	} catch (err) {
 		res.send(err);

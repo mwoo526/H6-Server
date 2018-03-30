@@ -40,8 +40,8 @@ describe('lectureReply 모델', () => {
 
 	after(async () => {
 		try {
-				const result = await lectureReply.deleteLectureReply(testLectureReplyIndex);
-				expect(result).to.instanceof(Object);
+			const result = await lectureReply.deleteLectureReply(testLectureReplyIndex);
+			expect(result).to.instanceof(Object);
 		} catch (err) {
 			console.error('err', err);
 		}
@@ -82,7 +82,7 @@ describe('lectureReply 모델', () => {
 	});
 
 	it('pageGetLectureReplyByLectureReplyIndex', async () => {
-		const result = await lectureReply.pageGetLectureReplyByLectureReplyIndex(testLectureReplyIndex,1, 3);
+		const result = await lectureReply.pageGetLectureReplyByLectureReplyIndex(testLectureReplyIndex, 1, 3);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});
@@ -106,7 +106,7 @@ describe('lectureReply 모델', () => {
 	});
 
 	it('pageGetLectureReplyUserIndex', async () => {
-		const result = await lectureReply.pageGetLectureReplyByUserIndex(testUserIndex,1 ,3);
+		const result = await lectureReply.pageGetLectureReplyByUserIndex(testUserIndex, 1, 3);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});

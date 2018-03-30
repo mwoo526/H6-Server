@@ -82,7 +82,7 @@ export class LectureReplyResource {
 	setScore(score) {
 		this.score = score;
 	}
-	
+
 	getLectureReply() {
 		let lectureReplyResource: object = {
 			lectureInfoIndex: this.getLectureInfoIndex(),

@@ -52,7 +52,7 @@ export class LectureReply {
 	 */
 	pageListLectureReply(page: number, count: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				let start = (page - 1) * count;
 				if (start < 0) {
 					start = 0;
@@ -79,7 +79,7 @@ export class LectureReply {
 	 */
 	getLectureReplyByLectureReplyIndex(lectureReplyIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex WHERE t1.lectureReplyIndex = ${lectureReplyIndex}`, function(err, rows) {
 					if (err) {
 						connection.release();
@@ -102,7 +102,7 @@ export class LectureReply {
 	 */
 	pageGetLectureReplyByLectureReplyIndex(lectureReplyIndex: number, page: number, count: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				let start = (page - 1) * count;
 				if (start < 0) {
 					start = 0;
@@ -130,7 +130,7 @@ export class LectureReply {
 	 */
 	getLectureReplyByLectureInfoIndex(lectureInfoIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex WHERE t1.lectureInfoIndex = ${lectureInfoIndex}`, function(err, rows) {
 					if (err) {
 						connection.release();
@@ -153,7 +153,7 @@ export class LectureReply {
 	 */
 	pageGetLectureReplyByLectureInfoIndex(lectureInfoIndex: number, page: number, count: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				let start = (page - 1) * count;
 				if (start < 0) {
 					start = 0;
@@ -181,7 +181,7 @@ export class LectureReply {
 	 */
 	getLectureReplyByUserIndex(userIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex WHERE t2.userIndex = ${userIndex}`, function(err, rows) {
 					if (err) {
 						connection.release();
@@ -204,7 +204,7 @@ export class LectureReply {
 	 */
 	pageGetLectureReplyByUserIndex(userIndex: number, page: number, count: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				let start = (page - 1) * count;
 				if (start < 0) {
 					start = 0;
@@ -232,7 +232,7 @@ export class LectureReply {
 	 */
 	getLectureReplyByUserId(userId: string): Promise<void> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex WHERE t2.userId LIKE '%${userId}%'`, function(err, rows) {
 					if (err) {
 						connection.release();
@@ -255,7 +255,7 @@ export class LectureReply {
 	 */
 	pageGetLectureReplyByUserId(userId: number, page: number, count: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				let start = (page - 1) * count;
 				if (start < 0) {
 					start = 0;
@@ -283,7 +283,7 @@ export class LectureReply {
 	 */
 	getLectureReplyByUserNickName(userNickName: string): Promise<void> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex WHERE t2.userNickName LIKE '%${userNickName}%'`, function(err, rows) {
 					if (err) {
 						connection.release();
@@ -306,7 +306,7 @@ export class LectureReply {
 	 */
 	pageGetLectureReplyByUserNickName(userNickName: number, page: number, count: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function (err, connection) {
+			await pool.getConnection(async function(err, connection) {
 				let start = (page - 1) * count;
 				if (start < 0) {
 					start = 0;

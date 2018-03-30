@@ -1,7 +1,7 @@
-import { encriptionPw } from '../../../packages/utils/encryption.utli';
-import { mysqlUtil } from '../../../packages/utils/mysql.util';
 import * as jwt from 'jsonwebtoken';
-import {jwtToken} from "../../../packages/utils/jwt.util";
+import { encriptionPw } from '../../../packages/utils/encryption.utli';
+import { jwtToken } from '../../../packages/utils/jwt.util';
+import { mysqlUtil } from '../../../packages/utils/mysql.util';
 
 const pool = mysqlUtil.pool;
 
@@ -31,15 +31,17 @@ class SignIn {
 
 								jwt.sign(
 									{
-										tokenId:rows[0].userId,
-										tokenNickname:rows[0].userNickName
+										tokenId: rows[0].userId,
+										tokenNickname: rows[0].userNickName
 									},
 									jwtToken.secret,
 									{
-										algorithm:jwtToken.algorithm,
-                                        expiresIn:jwtToken.expiresln
-									},(err,token)=>{
-										if(err) throw new Error('The jwt is incorrect');
+										algorithm: jwtToken.algorithm,
+										expiresIn: jwtToken.expiresln
+									}, (err, token) => {
+										if (err) {
+											throw new Error('The jwt is incorrect');
+										}
 										resolve(token)
 									})
 							} else {
