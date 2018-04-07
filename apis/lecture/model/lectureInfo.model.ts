@@ -69,7 +69,7 @@ export class LectureInfo {
 						await connection.release();
 						reject(err);
 					} else {
-						for (let i=0; i<rows.length; i++) {
+						for (let i = 0; i < rows.length; i++) {
 							const result = await lectureReply.countLecturesReply(rows[i].lectureInfoIndex);
 							rows[i].replyCount = result[0].replyCount;
 						}
@@ -97,7 +97,7 @@ export class LectureInfo {
 						await connection.release();
 						reject(err);
 					} else {
-						for (let i=0; i<rows.length; i++) {
+						for (let i = 0; i < rows.length; i++) {
 							const result = await lectureReply.countLecturesReply(rows[i].lectureInfoIndex);
 							rows[i].replyCount = result[0].replyCount;
 						}
@@ -155,7 +155,7 @@ export class LectureInfo {
 						await connection.release();
 						reject(err);
 					} else {
-						for (let i=0; i<rows.length; i++) {
+						for (let i = 0; i < rows.length; i++) {
 							const result = await lectureReply.countLecturesReply(rows[i].lectureInfoIndex);
 							rows[i].replyCount = result[0].replyCount;
 						}
@@ -213,7 +213,7 @@ export class LectureInfo {
 						await connection.release();
 						reject(err);
 					} else {
-						for (let i=0; i<rows.length; i++) {
+						for (let i = 0; i < rows.length; i++) {
 							const result = await lectureReply.countLecturesReply(rows[i].lectureInfoIndex);
 							rows[i].replyCount = result[0].replyCount;
 						}
