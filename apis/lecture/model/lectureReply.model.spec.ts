@@ -63,6 +63,12 @@ describe('lectureReply 모델', () => {
 	// 	expect(result).to.instanceof(Object);
 	// });
 
+	it('countLecturesReply', async () => {
+		const result = await lectureReply.countLecturesReply(15);
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
 	it('listLectureReply', async () => {
 		const result = await lectureReply.listLectureReply();
 		// console.log(result);

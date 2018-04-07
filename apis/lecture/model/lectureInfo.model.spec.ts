@@ -50,7 +50,7 @@ describe('lectureInfo 모델', () => {
 	});
 
 	it('pageGetLectureInfoByProfessorName', async () => {
-		const result = await lectureInfo.pageGetLectureInfoByProfessorName('안재성', 1, 2);
+		const result = await lectureInfo.pageGetLectureInfoByProfessorName('안재성', 1, 3);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});

@@ -1,4 +1,5 @@
 import { mysqlUtil } from '../../../packages/utils/mysql.util';
+import { lectureReply } from './lectureReply.model';
 
 const pool = mysqlUtil.pool;
 
@@ -13,12 +14,12 @@ export class LectureInfo {
 	createLectureInfo(lectureInfoData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`INSERT INTO lecturesInfo SET ?`, lectureInfoData, function(err) {
+				await connection.query(`INSERT INTO lecturesInfo SET ?`, lectureInfoData, async function(err) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						await connection.release();
 						resolve(lectureInfoData);
 					}
 				})
@@ -33,12 +34,14 @@ export class LectureInfo {
 	listLectureInfo(): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex`, function(err, rows) {
+				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
+					FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
+					INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex`, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						await connection.release();
 						resolve(rows);
 					}
 				});
@@ -58,15 +61,19 @@ export class LectureInfo {
 					start = 0;
 				}
 				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName
-                FROM lecturesInfo AS t1 
-                INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
-                INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
-                ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, function(err, rows) {
+          FROM lecturesInfo AS t1 
+          INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
+          INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
+          ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						for (let i=0; i<rows.length; i++) {
+							const result = await lectureReply.countLecturesReply(rows[i].lectureInfoIndex);
+							rows[i].replyCount = result[0].replyCount;
+						}
+						await connection.release();
 						resolve(rows);
 					}
 				})
@@ -83,12 +90,18 @@ export class LectureInfo {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
-				FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex WHERE t1.lectureInfoIndex = ${lectureInfoIndex}`, function(err, rows) {
+				FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
+				INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
+				WHERE t1.lectureInfoIndex = ${lectureInfoIndex}`, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						for (let i=0; i<rows.length; i++) {
+							const result = await lectureReply.countLecturesReply(rows[i].lectureInfoIndex);
+							rows[i].replyCount = result[0].replyCount;
+						}
+						await connection.release();
 						resolve(rows);
 					}
 				});
@@ -104,12 +117,15 @@ export class LectureInfo {
 	getLectureInfoByLectureName(lectureName: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex WHERE t2.lectureName LIKE '%${lectureName}%'`, function(err, rows) {
+				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
+				FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
+				INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
+				WHERE t2.lectureName LIKE '%${lectureName}%'`, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						await connection.release();
 						resolve(rows);
 					}
 				});
@@ -134,12 +150,16 @@ export class LectureInfo {
                 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
                 INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
                 WHERE t2.lectureName LIKE '%${lectureName}%'
-                ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, function(err, rows) {
+                ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						for (let i=0; i<rows.length; i++) {
+							const result = await lectureReply.countLecturesReply(rows[i].lectureInfoIndex);
+							rows[i].replyCount = result[0].replyCount;
+						}
+						await connection.release();
 						resolve(rows);
 					}
 				});
@@ -155,12 +175,15 @@ export class LectureInfo {
 	getLectureInfoByProfessorName(professorName: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex WHERE t3.professorName LIKE '%${professorName}%'`, function(err, rows) {
+				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
+				FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
+				INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
+				WHERE t3.professorName LIKE '%${professorName}%'`, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						await connection.release();
 						resolve(rows);
 					}
 				});
@@ -185,12 +208,16 @@ export class LectureInfo {
                 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
                 INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
                 WHERE t3.professorName LIKE '%${professorName}%'
-                ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, function(err, rows) {
+                ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						for (let i=0; i<rows.length; i++) {
+							const result = await lectureReply.countLecturesReply(rows[i].lectureInfoIndex);
+							rows[i].replyCount = result[0].replyCount;
+						}
+						await connection.release();
 						resolve(rows);
 					}
 				});
@@ -208,12 +235,12 @@ export class LectureInfo {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`UPDATE lecturesInfo SET ? WHERE lectureInfoIndex = ?`, [lectureInfoData,
-					lectureInfoIndex], function(err) {
+					lectureInfoIndex], async function(err) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						await connection.release();
 						resolve(lectureInfoData);
 					}
 				})
@@ -229,12 +256,12 @@ export class LectureInfo {
 	deleteLectureInfo(lectureInfoIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query('DELETE FROM lecturesInfo WHERE lectureInfoIndex = ?', lectureInfoIndex, function(err, rows) {
+				await connection.query('DELETE FROM lecturesInfo WHERE lectureInfoIndex = ?', lectureInfoIndex, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						await connection.release();
 						resolve(rows);
 					}
 				})
