@@ -30,7 +30,7 @@ class Server {
         this.app.use(lectureInfo_route_1.lectureInfoRoutes.lectureInfoRouter);
         this.app.use(lectureReply_route_1.lectureReplyRoutes.lectureReplyRouter);
         this.app.use(userValidation_route_1.userValidationRoutes.userValidationRouter);
-        /** 미들웨어 처리 */
+        /*미들웨어 처리*/
         this.app.use(tokenVerify_middleware_1.verify);
         this.app.use(error_middleware_1.notFoundError);
         this.app.use(error_middleware_1.serverError);
