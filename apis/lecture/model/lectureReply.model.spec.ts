@@ -18,6 +18,7 @@ describe('lectureReply 모델', () => {
 				homeworkType: 1,
 				testCount: 2,
 				receivedGrade: 2,
+				review: '노광현 교수님 휴강이 많지만 좋아요',
 				score: 4
 			});
 			/** validation 체크 */
@@ -57,6 +58,7 @@ describe('lectureReply 모델', () => {
 	// 		homeworkType: 1,
 	// 		testCount: 2,
 	// 		receivedGrade: 2,
+	//    review: '노광현 교수님 휴강이 많지만 좋아요',
 	// 		score: 4
 	// 	});
 	// 	console.log(result);
@@ -77,7 +79,7 @@ describe('lectureReply 모델', () => {
 
 	it('pageListLectureReply', async () => {
 		const result = await lectureReply.pageListLectureReply(1, 3);
-		console.log(result);
+		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});
 
@@ -144,6 +146,7 @@ describe('lectureReply 모델', () => {
 	it('updateLectureReply', async () => {
 		const result = await lectureReply.updateLectureReply(testLectureInfoIndex, {
 			receivedGrade: 1,
+			review: '노광현 교수님 수업은 재매있지만 휴강이 많아요ㅠㅠㅠ',
 			score: 1
 		});
 		// console.log(result);

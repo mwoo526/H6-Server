@@ -18,6 +18,8 @@ class LectureReply {
      */
     createLectureReply(lectureReplyData) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            const preview = yield lectureReplyData.review.substring(0, 20);
+            lectureReplyData.preview = preview;
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`INSERT INTO lecturesReply SET ?`, lectureReplyData, function (err) {
@@ -34,6 +36,11 @@ class LectureReply {
             });
         }));
     }
+    /**
+     * verify: lectureReply 카운트 조회
+     * @param {string} lectureInfoIndex
+     * @returns {Promise<void>}
+     */
     countLecturesReply(lectureInfoIndex) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
@@ -60,7 +67,9 @@ class LectureReply {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex`, function (err, rows) {
+                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
+				FROM lecturesReply AS t1 
+				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -88,8 +97,9 @@ class LectureReply {
                     if (start < 0) {
                         start = 0;
                     }
-                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName 
-				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
+                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
+				FROM lecturesReply AS t1 
+				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
@@ -115,7 +125,10 @@ class LectureReply {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex WHERE t1.lectureReplyIndex = ${lectureReplyIndex}`, function (err, rows) {
+                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
+				FROM lecturesReply AS t1 
+				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
+				WHERE t1.lectureReplyIndex = ${lectureReplyIndex}`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -144,8 +157,9 @@ class LectureReply {
                     if (start < 0) {
                         start = 0;
                     }
-                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName 
-				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
+                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
+				FROM lecturesReply AS t1 
+				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t1.lectureReplyIndex LIKE '%${lectureReplyIndex}%'
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
                         if (err) {
@@ -170,7 +184,10 @@ class LectureReply {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex WHERE t1.lectureInfoIndex = ${lectureInfoIndex}`, function (err, rows) {
+                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
+				FROM lecturesReply AS t1 
+				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
+				WHERE t1.lectureInfoIndex = ${lectureInfoIndex}`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -199,7 +216,7 @@ class LectureReply {
                     if (start < 0) {
                         start = 0;
                     }
-                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName 
+                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t1.lectureInfoIndex LIKE '%${lectureInfoIndex}%'
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
@@ -225,7 +242,10 @@ class LectureReply {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex WHERE t2.userIndex = ${userIndex}`, function (err, rows) {
+                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
+				FROM lecturesReply AS t1 
+				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
+				WHERE t2.userIndex = ${userIndex}`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -254,7 +274,7 @@ class LectureReply {
                     if (start < 0) {
                         start = 0;
                     }
-                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName 
+                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t1.userIndex LIKE '%${userIndex}%'
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
@@ -280,7 +300,10 @@ class LectureReply {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex WHERE t2.userId LIKE '%${userId}%'`, function (err, rows) {
+                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
+				FROM lecturesReply AS t1 
+				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
+				WHERE t2.userId LIKE '%${userId}%'`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -309,7 +332,7 @@ class LectureReply {
                     if (start < 0) {
                         start = 0;
                     }
-                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName 
+                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t2.userId LIKE '%${userId}%'
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
@@ -335,7 +358,10 @@ class LectureReply {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex WHERE t2.userNickName LIKE '%${userNickName}%'`, function (err, rows) {
+                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
+				FROM lecturesReply AS t1 
+				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
+				WHERE t2.userNickName LIKE '%${userNickName}%'`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -364,7 +390,7 @@ class LectureReply {
                     if (start < 0) {
                         start = 0;
                     }
-                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.score, t2.userId, t2.userNickName 
+                    yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t2.userNickName LIKE '%${userNickName}%'
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
@@ -389,6 +415,8 @@ class LectureReply {
      */
     updateLectureReply(lectureReplyIndex, lectureReplyData) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            const preview = yield lectureReplyData.review.substring(0, 20);
+            lectureReplyData.preview = preview;
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`UPDATE lecturesReply SET ? WHERE lectureReplyIndex = ?`, [lectureReplyData,

@@ -6,6 +6,8 @@ export class LectureReplyResource {
 	private homeworkType;
 	private testCount;
 	private receivedGrade;
+	private preview;
+	private review;
 	private score;
 
 	constructor(lectureReplyData) {
@@ -16,6 +18,8 @@ export class LectureReplyResource {
 		this.setHomeworkType(lectureReplyData.homeworkType);
 		this.setTestCount(lectureReplyData.testCount);
 		this.setReceivedGrade(lectureReplyData.receivedGrade);
+		this.setPreview(lectureReplyData.preview);
+		this.setReview(lectureReplyData.review);
 		this.setScore(lectureReplyData.score);
 	}
 
@@ -75,6 +79,22 @@ export class LectureReplyResource {
 		this.receivedGrade = receivedGrade;
 	}
 
+	getPreview() {
+		return this.preview;
+	}
+
+	setPreview(preview) {
+		this.preview = preview;
+	}
+
+	getReview() {
+		return this.review;
+	}
+
+	setReview(review) {
+		this.review = review;
+	}
+
 	getScore() {
 		return this.score;
 	}
@@ -92,6 +112,8 @@ export class LectureReplyResource {
 			homeworkType: this.getHomeworkType(),
 			testCount: this.getTestCount(),
 			receivedGrade: this.getReceivedGrade(),
+			preview: this.getPreview(),
+			review: this.getReview(),
 			score: this.getScore()
 		};
 		return lectureReplyResource;

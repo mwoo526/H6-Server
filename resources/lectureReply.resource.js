@@ -9,6 +9,8 @@ class LectureReplyResource {
         this.setHomeworkType(lectureReplyData.homeworkType);
         this.setTestCount(lectureReplyData.testCount);
         this.setReceivedGrade(lectureReplyData.receivedGrade);
+        this.setPreview(lectureReplyData.preview);
+        this.setReview(lectureReplyData.review);
         this.setScore(lectureReplyData.score);
     }
     getLectureInfoIndex() {
@@ -53,6 +55,18 @@ class LectureReplyResource {
     setReceivedGrade(receivedGrade) {
         this.receivedGrade = receivedGrade;
     }
+    getPreview() {
+        return this.preview;
+    }
+    setPreview(preview) {
+        this.preview = preview;
+    }
+    getReview() {
+        return this.review;
+    }
+    setReview(review) {
+        this.review = review;
+    }
     getScore() {
         return this.score;
     }
@@ -68,6 +82,8 @@ class LectureReplyResource {
             homeworkType: this.getHomeworkType(),
             testCount: this.getTestCount(),
             receivedGrade: this.getReceivedGrade(),
+            preview: this.getPreview(),
+            review: this.getReview(),
             score: this.getScore()
         };
         return lectureReplyResource;

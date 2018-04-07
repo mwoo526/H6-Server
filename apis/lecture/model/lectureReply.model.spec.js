@@ -26,6 +26,7 @@ describe('lectureReply 모델', () => {
                 homeworkType: 1,
                 testCount: 2,
                 receivedGrade: 2,
+                review: '노광현 교수님 휴강이 많지만 좋아요',
                 score: 4
             });
             /** validation 체크 */
@@ -65,6 +66,7 @@ describe('lectureReply 모델', () => {
     // 		homeworkType: 1,
     // 		testCount: 2,
     // 		receivedGrade: 2,
+    //    review: '노광현 교수님 휴강이 많지만 좋아요',
     // 		score: 4
     // 	});
     // 	console.log(result);
@@ -82,7 +84,7 @@ describe('lectureReply 모델', () => {
     }));
     it('pageListLectureReply', () => __awaiter(this, void 0, void 0, function* () {
         const result = yield lectureReply_model_1.lectureReply.pageListLectureReply(1, 3);
-        console.log(result);
+        // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
     it('getLectureReplyByLectureReplyIndex', () => __awaiter(this, void 0, void 0, function* () {
@@ -138,6 +140,7 @@ describe('lectureReply 모델', () => {
     it('updateLectureReply', () => __awaiter(this, void 0, void 0, function* () {
         const result = yield lectureReply_model_1.lectureReply.updateLectureReply(testLectureInfoIndex, {
             receivedGrade: 1,
+            review: '노광현 교수님 수업은 재매있지만 휴강이 많아요ㅠㅠㅠ',
             score: 1
         });
         // console.log(result);
