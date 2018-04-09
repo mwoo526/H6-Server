@@ -102,6 +102,48 @@ export class UserValidation {
 			})
 		})
 	}
+
+	checkUserId(userId: string): Promise<any> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`SELECT * FROM users WHERE userId = '${userId}'`, function(err, rows) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						if (rows[0] != null) {
+							connection.release();
+							return resolve('이미 존재하는 아이디 입니다.');
+						} else {
+							connection.release();
+							return resolve('사용 가능한 아이디 입니다.');
+						}
+					}
+				})
+			})
+		})
+	}
+
+	checkEmail(email: string): Promise<any> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`SELECT * FROM users WHERE email = '${email}'`, function(err, rows) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						if (rows[0] != null) {
+							connection.release();
+							return resolve('이미 존재하는 이메일 입니다.');
+						} else {
+							connection.release();
+							return resolve('사용 가능한 이메일 입니다.');
+						}
+					}
+				})
+			})
+		})
+	}
 }
 
 export const userValidation: UserValidation = new UserValidation();

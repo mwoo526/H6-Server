@@ -115,6 +115,54 @@ class UserValidation {
             });
         }));
     }
+    checkUserId(userId) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`SELECT * FROM users WHERE userId = '${userId}'`, function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            if (rows[0] != null) {
+                                connection.release();
+                                return resolve('이미 존재하는 아이디 입니다.');
+                            }
+                            else {
+                                connection.release();
+                                return resolve('사용 가능한 아이디 입니다.');
+                            }
+                        }
+                    });
+                });
+            });
+        }));
+    }
+    checkEmail(email) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`SELECT * FROM users WHERE email = '${email}'`, function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            if (rows[0] != null) {
+                                connection.release();
+                                return resolve('이미 존재하는 이메일 입니다.');
+                            }
+                            else {
+                                connection.release();
+                                return resolve('사용 가능한 이메일 입니다.');
+                            }
+                        }
+                    });
+                });
+            });
+        }));
+    }
 }
 exports.UserValidation = UserValidation;
 exports.userValidation = new UserValidation();
