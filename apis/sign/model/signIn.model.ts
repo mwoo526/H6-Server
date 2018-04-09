@@ -31,8 +31,15 @@ class SignIn {
 
 								jwt.sign(
 									{
+										tokenIndex:rows[0].userIndex,
 										tokenId: rows[0].userId,
-										tokenNickname: rows[0].userNickName
+										tokenNickname: rows[0].userNickName,
+										tokenEmail:rows[0].email,
+										tokenMajor:rows[0].major,
+										tokenMinor:rows[0].minor,
+										tokenDoubleMajor : rows[0].doubleMajor,
+										tokenConnectedMajor : rows[0].connectedMajor,
+										tokenAdmissionYear : rows[0].year
 									},
 									jwtToken.secret,
 									{
