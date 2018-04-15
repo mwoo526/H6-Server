@@ -25,8 +25,6 @@ describe('userValidation 모델', () => {
 			});
 			/** validation 체크 */
 			expect(resultCreateUser).instanceof(Object);
-			console.log(resultCreateUser);
-			// const resultGetUser = await user.getUser(resultCreateUser[0].userId);
 		} catch (err) {
 			console.error('err', err);
 		}
@@ -42,21 +40,25 @@ describe('userValidation 모델', () => {
 
 	it('checkUserId - 이미 존재하는 아이디', async () => {
 		const result = await userValidation.checkUserId(resultCreateUser.userId);
-		console.log(result);
+		// console.log(result);
+		expect(result).instanceof(Object);
 	});
 
 	it('checkUserId - 사용 가능한 아이디', async () => {
 		const result = await userValidation.checkUserId(testUserId2);
-		console.log(result);
+		// console.log(result);
+		expect(result).instanceof(Object);
 	});
 
 	it('checkEmail - 이미 존재하는 이메일', async () => {
 		const result = await userValidation.checkEmail(resultCreateUser.email);
-		console.log(result);
+		// console.log(result);
+		expect(result).instanceof(Object);
 	});
 
 	it('checkEmail - 사용 가능한 이메일', async () => {
 		const result = await userValidation.checkEmail(testEmail2);
-		console.log(result);
+		// console.log(result);
+		expect(result).instanceof(Object);
 	});
 });

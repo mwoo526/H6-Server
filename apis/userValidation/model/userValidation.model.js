@@ -27,14 +27,16 @@ class UserValidation {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`UPDATE usersValidation SET validationCode = '${validationCode}' WHERE userId = '${userId}'`, function (err) {
-                        if (err) {
-                            connection.release();
-                            reject(err);
-                        }
-                        else {
-                            connection.release();
-                            resolve(validationCode);
-                        }
+                        return __awaiter(this, void 0, void 0, function* () {
+                            if (err) {
+                                yield connection.release();
+                                reject(err);
+                            }
+                            else {
+                                yield connection.release();
+                                resolve(validationCode);
+                            }
+                        });
                     });
                 });
             });
@@ -116,6 +118,7 @@ class UserValidation {
         }));
     }
     checkUserId(userId) {
+        let result;
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
@@ -127,11 +130,21 @@ class UserValidation {
                         else {
                             if (rows[0] != null) {
                                 connection.release();
-                                return resolve('이미 존재하는 아이디 입니다.');
+                                result = {
+                                    success: false,
+                                    statusCode: 409,
+                                    message: 'checkUserId: 이미 존재하는 아이디 입니다.'
+                                };
+                                return resolve(result);
                             }
                             else {
                                 connection.release();
-                                return resolve('사용 가능한 아이디 입니다.');
+                                result = {
+                                    success: true,
+                                    statusCode: 200,
+                                    message: 'checkUserId: 사용 가능한 아이디 입니다.'
+                                };
+                                return resolve(result);
                             }
                         }
                     });
@@ -140,24 +153,37 @@ class UserValidation {
         }));
     }
     checkEmail(email) {
+        let result;
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`SELECT * FROM users WHERE email = '${email}'`, function (err, rows) {
-                        if (err) {
-                            connection.release();
-                            reject(err);
-                        }
-                        else {
-                            if (rows[0] != null) {
+                        return __awaiter(this, void 0, void 0, function* () {
+                            if (err) {
                                 connection.release();
-                                return resolve('이미 존재하는 이메일 입니다.');
+                                reject(err);
                             }
                             else {
-                                connection.release();
-                                return resolve('사용 가능한 이메일 입니다.');
+                                if (rows[0] != null) {
+                                    yield connection.release();
+                                    result = {
+                                        success: false,
+                                        statusCode: 409,
+                                        message: 'checkUserId: 이미 존재하는 이메일 입니다.'
+                                    };
+                                    return resolve(result);
+                                }
+                                else {
+                                    yield connection.release();
+                                    result = {
+                                        success: true,
+                                        statusCode: 200,
+                                        message: 'checkUserId: 사용 가능한 이메일 입니다.'
+                                    };
+                                    return resolve(result);
+                                }
                             }
-                        }
+                        });
                     });
                 });
             });

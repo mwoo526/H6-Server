@@ -98,7 +98,10 @@ function pageGetLectureInfoByLectureName(req, res) {
             res.send(result);
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send('50000: Server error');
+            }
         }
     });
 }

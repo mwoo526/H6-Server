@@ -18,12 +18,12 @@ export class UserValidation {
 		return new Promise(async (resolve, reject) => {
 			await emailUtil.sendEmail('kingdom0608@gmail.com', `${email}@naver.com`, 'test', validationCode);
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`UPDATE usersValidation SET validationCode = '${validationCode}' WHERE userId = '${userId}'`, function(err) {
+				await connection.query(`UPDATE usersValidation SET validationCode = '${validationCode}' WHERE userId = '${userId}'`, async function(err) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						await connection.release();
 						resolve(validationCode);
 					}
 				})
@@ -104,6 +104,7 @@ export class UserValidation {
 	}
 
 	checkUserId(userId: string): Promise<any> {
+		let result: any;
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT * FROM users WHERE userId = '${userId}'`, function(err, rows) {
@@ -113,10 +114,20 @@ export class UserValidation {
 					} else {
 						if (rows[0] != null) {
 							connection.release();
-							return resolve('이미 존재하는 아이디 입니다.');
+							result = {
+								success: false,
+								statusCode: 409,
+								message: 'checkUserId: 이미 존재하는 아이디 입니다.'
+							};
+							return resolve(result);
 						} else {
 							connection.release();
-							return resolve('사용 가능한 아이디 입니다.');
+							result = {
+								success: true,
+								statusCode: 200,
+								message: 'checkUserId: 사용 가능한 아이디 입니다.'
+							};
+							return resolve(result);
 						}
 					}
 				})
@@ -125,19 +136,30 @@ export class UserValidation {
 	}
 
 	checkEmail(email: string): Promise<any> {
+		let result: any;
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM users WHERE email = '${email}'`, function(err, rows) {
+				await connection.query(`SELECT * FROM users WHERE email = '${email}'`, async function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
 					} else {
 						if (rows[0] != null) {
-							connection.release();
-							return resolve('이미 존재하는 이메일 입니다.');
+							await connection.release();
+							result = {
+								success: false,
+								statusCode: 409,
+								message: 'checkUserId: 이미 존재하는 이메일 입니다.'
+							};
+							return resolve(result);
 						} else {
-							connection.release();
-							return resolve('사용 가능한 이메일 입니다.');
+							await connection.release();
+							result = {
+								success: true,
+								statusCode: 200,
+								message: 'checkUserId: 사용 가능한 이메일 입니다.'
+							};
+							return resolve(result);
 						}
 					}
 				})

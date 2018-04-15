@@ -83,7 +83,10 @@ async function pageGetLectureInfoByLectureName(req, res): Promise<void> {
 		const result = await lectureInfo.pageGetLectureInfoByLectureName(lectureName, page, count);
 		res.send(result);
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			default :
+				res.send('50000: Server error');
+		}
 	}
 }
 

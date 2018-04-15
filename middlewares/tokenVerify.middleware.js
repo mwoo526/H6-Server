@@ -15,7 +15,8 @@ function verify(req, res, next) {
         if (!token) {
             return res.status(403).json({
                 success: false,
-                message: 'not logged in'
+                statusCode: 403,
+                message: 'You do not have permission'
             });
         }
         try {
@@ -28,6 +29,7 @@ function verify(req, res, next) {
         catch (err) {
             res.status(403).json({
                 success: false,
+                statusCode: 403,
                 message: err.message
             });
         }

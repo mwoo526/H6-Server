@@ -20,6 +20,8 @@ class UserValidationRoutes {
     router() {
         this.userValidationRouter.post('/userValidation/sendValidationCode/:userId', sendValidationCode);
         this.userValidationRouter.post('/userValidation/checkValidationCode/:userId', checkValidationCode);
+        this.userValidationRouter.get('/userValidation/checkUserId/:userId', checkUserId);
+        this.userValidationRouter.get('/userValidation/checkEmail/:email', checkEmail);
     }
 }
 exports.UserValidationRoutes = UserValidationRoutes;
@@ -57,6 +59,42 @@ function checkValidationCode(req, res) {
         const userData = yield user_model_1.user.getUser(userId);
         try {
             const result = yield userValidation_model_1.userValidation.checkValidationCode(userId, userData, validationCode);
+            res.send(result);
+        }
+        catch (err) {
+            res.send(err);
+        }
+    });
+}
+/**
+ * route: 아이디 중복 체크
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+function checkUserId(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const userId = req.params.userId;
+        try {
+            const result = yield userValidation_model_1.userValidation.checkUserId(userId);
+            res.send(result);
+        }
+        catch (err) {
+            res.send(err);
+        }
+    });
+}
+/**
+ * route: 이메일 중복 체크
+ * @param req
+ * @param res
+ * @returns {Promise<any>}
+ */
+function checkEmail(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const email = req.params.email;
+        try {
+            const result = yield userValidation_model_1.userValidation.checkEmail(email);
             res.send(result);
         }
         catch (err) {
