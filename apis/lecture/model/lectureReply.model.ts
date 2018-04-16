@@ -4,22 +4,28 @@ const pool = mysqlUtil.pool;
 
 export class LectureReply {
 	/**
-	 * verify: lectureReply 생성
+	 * model: lectureReply 생성
 	 * @param lectureReplyData
 	 * @returns {Promise<void>}
 	 */
 	createLectureReply(lectureReplyData: any): Promise<void> {
+		let result: any;
 		return new Promise(async (resolve, reject) => {
 			const preview = await lectureReplyData.review.substring(0, 20);
 			lectureReplyData.preview = preview;
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`INSERT INTO lecturesReply SET ?`, lectureReplyData, function(err) {
+				await connection.query(`INSERT INTO lecturesReply SET ?`, lectureReplyData, async function(err) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
-						resolve(lectureReplyData);
+						await connection.release();
+						result = {
+							success: true,
+							statusCode: 200,
+							message: 'createLectureReply: 리플 생성 성공'
+						};
+						resolve(result);
 					}
 				});
 			})
@@ -27,19 +33,19 @@ export class LectureReply {
 	}
 
 	/**
-	 * verify: lectureReply 카운트 조회
+	 * model: lectureReply 카운트 조회
 	 * @param {string} lectureInfoIndex
 	 * @returns {Promise<void>}
 	 */
 	countGetLecturesReplyByLectureInfoIndex(lectureInfoIndex: string): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT COUNT(*) AS replyCount FROM lecturesReply WHERE lecturesReply.lectureInfoIndex = ${lectureInfoIndex}`, function(err, rows) {
+				await connection.query(`SELECT COUNT(*) AS replyCount FROM lecturesReply WHERE lecturesReply.lectureInfoIndex = ${lectureInfoIndex}`, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						await connection.release();
 						resolve(rows);
 					}
 				});
@@ -48,7 +54,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * verify: lectureReply 리스트 조회
+	 * model: lectureReply 리스트 조회
 	 * @returns {Promise<void>}
 	 */
 	listLectureReply(): Promise<void> {
@@ -56,12 +62,12 @@ export class LectureReply {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
-				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex`, function(err, rows) {
+				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex`, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						await connection.release();
 						resolve(rows);
 					}
 				});
@@ -70,7 +76,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * verify: lectureReply 페이지 리스트 조회
+	 * model: lectureReply 페이지 리스트 조회
 	 * @param {number} page
 	 * @param {number} count
 	 * @returns {Promise<any>}
@@ -87,10 +93,10 @@ export class LectureReply {
 				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						await connection.release();
 						resolve(rows);
 					}
 				})
@@ -99,7 +105,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * verify: lectureReply index 조회
+	 * model: lectureReply index 조회
 	 * @param {number} lectureReplyIndex
 	 * @returns {Promise<void>}
 	 */
@@ -109,12 +115,12 @@ export class LectureReply {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
 				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
-				WHERE t1.lectureReplyIndex = ${lectureReplyIndex}`, function(err, rows) {
+				WHERE t1.lectureReplyIndex = ${lectureReplyIndex}`, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						await connection.release();
 						resolve(rows);
 					}
 				});
@@ -123,7 +129,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * verify: lectureReply replyIndex 페이지 조회
+	 * model: lectureReply replyIndex 페이지 조회
 	 * @param {number} lectureReplyIndex
 	 * @param {number} page
 	 * @param {number} count
@@ -140,12 +146,12 @@ export class LectureReply {
 				FROM lecturesReply AS t1 
 				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t1.lectureReplyIndex LIKE '%${lectureReplyIndex}%'
-				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function(err, rows) {
+				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						await connection.release();
 						resolve(rows);
 					}
 				})
@@ -154,7 +160,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * verify: lectureReply lectureInfoIndex 조회
+	 * model: lectureReply lectureInfoIndex 조회
 	 * @param {number} lectureInfoIndex
 	 * @returns {Promise<void>}
 	 */
@@ -164,12 +170,12 @@ export class LectureReply {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
 				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
-				WHERE t1.lectureInfoIndex = ${lectureInfoIndex}`, function(err, rows) {
+				WHERE t1.lectureInfoIndex = ${lectureInfoIndex}`, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						await connection.release();
 						resolve(rows);
 					}
 				});
@@ -178,7 +184,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * verify: lectureReply lectureInfoIndex 페이지 조회
+	 * model: lectureReply lectureInfoIndex 페이지 조회
 	 * @param {number} lectureInfoIndex
 	 * @param {number} page
 	 * @param {number} count
@@ -194,12 +200,12 @@ export class LectureReply {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t1.lectureInfoIndex LIKE '%${lectureInfoIndex}%'
-				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function(err, rows) {
+				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						await connection.release();
 						resolve(rows);
 					}
 				})
@@ -208,7 +214,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * verify: lectureReply userIndex 조회
+	 * model: lectureReply userIndex 조회
 	 * @param {number} userIndex
 	 * @returns {Promise<void>}
 	 */
@@ -218,12 +224,12 @@ export class LectureReply {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
 				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
-				WHERE t2.userIndex = ${userIndex}`, function(err, rows) {
+				WHERE t2.userIndex = ${userIndex}`, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						await connection.release();
 						resolve(rows);
 					}
 				});
@@ -232,7 +238,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * verify: lectureReply userIndex 페이지 조회
+	 * model: lectureReply userIndex 페이지 조회
 	 * @param {number} userIndex
 	 * @param {number} page
 	 * @param {number} count
@@ -248,12 +254,12 @@ export class LectureReply {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t1.userIndex LIKE '%${userIndex}%'
-				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function(err, rows) {
+				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						await connection.release();
 						resolve(rows);
 					}
 				})
@@ -262,7 +268,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * verify: lectureReply userId 조회
+	 * model: lectureReply userId 조회
 	 * @param {string} userId
 	 * @returns {Promise<void>}
 	 */
@@ -272,12 +278,12 @@ export class LectureReply {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
 				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
-				WHERE t2.userId LIKE '%${userId}%'`, function(err, rows) {
+				WHERE t2.userId LIKE '%${userId}%'`, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						await connection.release();
 						resolve(rows);
 					}
 				});
@@ -286,7 +292,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * verify: lectureReply userId 페이지 조회
+	 * model: lectureReply userId 페이지 조회
 	 * @param {number} userId
 	 * @param {number} page
 	 * @param {number} count
@@ -302,12 +308,12 @@ export class LectureReply {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t2.userId LIKE '%${userId}%'
-				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function(err, rows) {
+				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						await connection.release();
 						resolve(rows);
 					}
 				})
@@ -316,7 +322,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * verify: lectureReply userNickName 조회
+	 * model: lectureReply userNickName 조회
 	 * @param {string} userNickName
 	 * @returns {Promise<void>}
 	 */
@@ -326,12 +332,12 @@ export class LectureReply {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
 				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
-				WHERE t2.userNickName LIKE '%${userNickName}%'`, function(err, rows) {
+				WHERE t2.userNickName LIKE '%${userNickName}%'`, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						await connection.release();
 						resolve(rows);
 					}
 				});
@@ -340,7 +346,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * verify: lectureReply userNickName 페이지 조회
+	 * model: lectureReply userNickName 페이지 조회
 	 * @param {number} userNickName
 	 * @param {number} page
 	 * @param {number} count
@@ -356,12 +362,12 @@ export class LectureReply {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t2.userNickName LIKE '%${userNickName}%'
-				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function(err, rows) {
+				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
+						await connection.release();
 						resolve(rows);
 					}
 				})
@@ -370,24 +376,30 @@ export class LectureReply {
 	}
 
 	/**
-	 * verify: lectureReply 업데이트
+	 * model: lectureReply 업데이트
 	 * @param {number} lectureReplyIndex
 	 * @param lectureReplyData
 	 * @returns {Promise<void>}
 	 */
 	updateLectureReply(lectureReplyIndex: number, lectureReplyData: any): Promise<void> {
+		let result: any;
 		return new Promise(async (resolve, reject) => {
 			const preview = await lectureReplyData.review.substring(0, 20);
 			lectureReplyData.preview = preview;
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`UPDATE lecturesReply SET ? WHERE lectureReplyIndex = ?`, [lectureReplyData,
-					lectureReplyIndex], function(err) {
+					lectureReplyIndex], async function(err) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
-						resolve(lectureReplyData);
+						await connection.release();
+						result = {
+							success: true,
+							statusCode: 200,
+							message: 'createLectureReply: 리플 업데이트 성공'
+						};
+						resolve(result);
 					}
 				});
 			})
@@ -395,20 +407,26 @@ export class LectureReply {
 	}
 
 	/**
-	 * verify: lectureReply 삭제
+	 * model: lectureReply 삭제
 	 * @param {number} lectureReplyIndex
 	 * @returns {Promise<void>}
 	 */
 	deleteLectureReply(lectureReplyIndex: number): Promise<void> {
+		let result: any;
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query('DELETE FROM lecturesReply WHERE lectureReplyIndex = ?', lectureReplyIndex, function(err, rows) {
+				await connection.query('DELETE FROM lecturesReply WHERE lectureReplyIndex = ?', lectureReplyIndex, async function(err, rows) {
 					if (err) {
-						connection.release();
+						await connection.release();
 						reject(err);
 					} else {
-						connection.release();
-						resolve(rows);
+						await connection.release();
+						result = {
+							success: true,
+							statusCode: 200,
+							message: 'createLectureReply: 리플 삭제 성공'
+						};
+						resolve(result);
 					}
 				});
 			})
