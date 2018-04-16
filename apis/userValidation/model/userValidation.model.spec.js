@@ -15,8 +15,8 @@ describe('userValidation 모델', () => {
     let resultCreateUser;
     let testUserId = '이미 존재하는 아이디';
     let testUserId2 = '사용 가능한 아이디';
-    let testUserPw = 'marine1164k';
-    let testUserNickName = 'Jade';
+    let testUserPw = 'marine1164';
+    let testUserNickName = 'JadeAhn';
     let testEmail = '이미 존재하는 이메일';
     let testEmail2 = '사용 가능한 이메일';
     let testMajor = '산업경영공학과';

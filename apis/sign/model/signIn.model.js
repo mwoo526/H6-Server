@@ -24,48 +24,50 @@ class SignIn {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`SELECT * from users WHERE userId = ?`, [userData.userId], function (err, rows) {
-                        if (err) {
-                            connection.release();
-                            reject(err);
-                        }
-                        else {
-                            let err = {
-                                message: 'The ID does not exist'
-                            };
-                            if (rows.length === 0) {
+                        return __awaiter(this, void 0, void 0, function* () {
+                            if (err) {
                                 connection.release();
                                 reject(err);
                             }
                             else {
-                                if (rows[0].userPw === encryption_utli_1.encriptionPw.getHash(userData.userPw)) {
-                                    connection.release();
-                                    jwt.sign({
-                                        tokenIndex: rows[0].userIndex,
-                                        tokenId: rows[0].userId,
-                                        tokenNickname: rows[0].userNickName,
-                                        tokenEmail: rows[0].email,
-                                        tokenMajor: rows[0].major,
-                                        tokenMinor: rows[0].minor,
-                                        tokenDoubleMajor: rows[0].doubleMajor,
-                                        tokenConnectedMajor: rows[0].connectedMajor,
-                                        tokenAdmissionYear: rows[0].year
-                                    }, jwt_util_1.jwtToken.secret, {
-                                        algorithm: jwt_util_1.jwtToken.algorithm,
-                                        expiresIn: jwt_util_1.jwtToken.expiresln
-                                    }, (err, token) => {
-                                        if (err) {
-                                            throw new Error('The jwt is incorrect');
-                                        }
-                                        resolve(token);
-                                    });
-                                }
-                                else {
-                                    err.message = 'The password is incorrect';
-                                    connection.release();
+                                let err = {
+                                    message: 'The ID does not exist'
+                                };
+                                if (rows.length === 0) {
+                                    yield connection.release();
                                     reject(err);
                                 }
+                                else {
+                                    if (rows[0].userPw === encryption_utli_1.encriptionPw.getHash(userData.userPw)) {
+                                        connection.release();
+                                        jwt.sign({
+                                            tokenIndex: rows[0].userIndex,
+                                            tokenId: rows[0].userId,
+                                            tokenNickname: rows[0].userNickName,
+                                            tokenEmail: rows[0].email,
+                                            tokenMajor: rows[0].major,
+                                            tokenMinor: rows[0].minor,
+                                            tokenDoubleMajor: rows[0].doubleMajor,
+                                            tokenConnectedMajor: rows[0].connectedMajor,
+                                            tokenAdmissionYear: rows[0].year
+                                        }, jwt_util_1.jwtToken.secret, {
+                                            algorithm: jwt_util_1.jwtToken.algorithm,
+                                            expiresIn: jwt_util_1.jwtToken.expiresln
+                                        }, (err, token) => {
+                                            if (err) {
+                                                throw new Error('The jwt is incorrect');
+                                            }
+                                            resolve(token);
+                                        });
+                                    }
+                                    else {
+                                        err.message = 'The password is incorrect';
+                                        yield connection.release();
+                                        reject(err);
+                                    }
+                                }
                             }
-                        }
+                        });
                     });
                 });
             });

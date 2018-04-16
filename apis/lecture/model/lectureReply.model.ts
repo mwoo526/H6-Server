@@ -31,7 +31,7 @@ export class LectureReply {
 	 * @param {string} lectureInfoIndex
 	 * @returns {Promise<void>}
 	 */
-	countLecturesReply(lectureInfoIndex: string): Promise<void> {
+	countGetLecturesReplyByLectureInfoIndex(lectureInfoIndex: string): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT COUNT(*) AS replyCount FROM lecturesReply WHERE lecturesReply.lectureInfoIndex = ${lectureInfoIndex}`, function(err, rows) {

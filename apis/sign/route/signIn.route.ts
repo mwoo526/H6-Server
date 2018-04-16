@@ -21,11 +21,15 @@ export class SignInRoutes {
  */
 async function getUser(req, res): Promise<void> {
 	try {
-		const result: any = await signIn.getUser(req.body);
-		res.json({
-			message: 'logged in successfully',
-			token: result
-		})
+		let result: any;
+		const resultUser: any = await signIn.getUser(req.body);
+		result = {
+			success: true,
+			statusCode: 200,
+			message: 'logIn succeed',
+			token: resultUser
+		};
+		res.json(result);
 	} catch (err) {
 		res.send(err);
 	}

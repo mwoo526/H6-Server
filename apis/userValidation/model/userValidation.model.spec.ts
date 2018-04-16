@@ -6,8 +6,8 @@ describe('userValidation 모델', () => {
 	let resultCreateUser: any;
 	let testUserId: string = '이미 존재하는 아이디';
 	let testUserId2: string = '사용 가능한 아이디';
-	let testUserPw: string = 'marine1164k';
-	let testUserNickName: string = 'Jade';
+	let testUserPw: string = 'marine1164';
+	let testUserNickName: string = 'JadeAhn';
 	let testEmail: string = '이미 존재하는 이메일';
 	let testEmail2: string = '사용 가능한 이메일';
 	let testMajor: string = '산업경영공학과';

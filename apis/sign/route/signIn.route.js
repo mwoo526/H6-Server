@@ -29,11 +29,15 @@ exports.SignInRoutes = SignInRoutes;
 function getUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const result = yield signIn_model_1.signIn.getUser(req.body);
-            res.json({
-                message: 'logged in successfully',
-                token: result
-            });
+            let result;
+            const resultUser = yield signIn_model_1.signIn.getUser(req.body);
+            result = {
+                success: true,
+                statusCode: 200,
+                message: 'logIn succeed',
+                token: resultUser
+            };
+            res.json(result);
         }
         catch (err) {
             res.send(err);

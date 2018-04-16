@@ -41,7 +41,7 @@ class LectureReply {
      * @param {string} lectureInfoIndex
      * @returns {Promise<void>}
      */
-    countLecturesReply(lectureInfoIndex) {
+    countGetLecturesReplyByLectureInfoIndex(lectureInfoIndex) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {

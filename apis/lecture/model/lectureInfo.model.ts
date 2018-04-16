@@ -7,11 +7,12 @@ const pool = mysqlUtil.pool;
 export class LectureInfo {
 
 	/**
-	 * verify: lectureInfo 생성
+	 * model: lectureInfo 생성
 	 * @param lectureInfoData
 	 * @returns {Promise<void>}
 	 */
 	createLectureInfo(lectureInfoData: any): Promise<void> {
+		let result: any;
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`INSERT INTO lecturesInfo SET ?`, lectureInfoData, async function(err) {
@@ -20,7 +21,12 @@ export class LectureInfo {
 						reject(err);
 					} else {
 						await connection.release();
-						resolve(lectureInfoData);
+						result = {
+							success: true,
+							statusCode: 200,
+							message: 'createLectureInfo: 강의 생성 성공'
+						};
+						resolve(result);
 					}
 				})
 			})
@@ -28,7 +34,7 @@ export class LectureInfo {
 	}
 
 	/**
-	 * verify: lectureInfo 리스트 조회
+	 * model: lectureInfo 리스트 조회
 	 * @returns {Promise<void>}
 	 */
 	listLectureInfo(): Promise<void> {
@@ -50,7 +56,7 @@ export class LectureInfo {
 	}
 
 	/**
-	 * verify: lectureInfo page 리스트 조회
+	 * model: lectureInfo page 리스트 조회
 	 * @returns {Promise<any>}
 	 */
 	pageListLectureInfo(page: number, count: number): Promise<any> {
@@ -70,7 +76,7 @@ export class LectureInfo {
 						reject(err);
 					} else {
 						for (let i = 0; i < rows.length; i++) {
-							const result = await lectureReply.countLecturesReply(rows[i].lectureInfoIndex);
+							const result = await lectureReply.countGetLecturesReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
 							rows[i].replyCount = result[0].replyCount;
 						}
 						await connection.release();
@@ -82,7 +88,7 @@ export class LectureInfo {
 	}
 
 	/**
-	 * verify: lectureInfo index 조회
+	 * model: lectureInfo index 조회
 	 * @param lectureInfoIndex
 	 * @returns {Promise<void>}
 	 */
@@ -98,7 +104,7 @@ export class LectureInfo {
 						reject(err);
 					} else {
 						for (let i = 0; i < rows.length; i++) {
-							const result = await lectureReply.countLecturesReply(rows[i].lectureInfoIndex);
+							const result = await lectureReply.countGetLecturesReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
 							rows[i].replyCount = result[0].replyCount;
 						}
 						await connection.release();
@@ -110,7 +116,7 @@ export class LectureInfo {
 	}
 
 	/**
-	 * verify: lectureInfo lectureName 조회
+	 * model: lectureInfo lectureName 조회
 	 * @param lectureName
 	 * @returns {Promise<void>}
 	 */
@@ -134,7 +140,7 @@ export class LectureInfo {
 	}
 
 	/**
-	 * verify: lectureInfo lectureName page 조회
+	 * model: lectureInfo lectureName page 조회
 	 * @param lectureName
 	 * @returns {Promise<void>}
 	 */
@@ -156,7 +162,7 @@ export class LectureInfo {
 						reject(err);
 					} else {
 						for (let i = 0; i < rows.length; i++) {
-							const result = await lectureReply.countLecturesReply(rows[i].lectureInfoIndex);
+							const result = await lectureReply.countGetLecturesReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
 							rows[i].replyCount = result[0].replyCount;
 						}
 						await connection.release();
@@ -168,7 +174,7 @@ export class LectureInfo {
 	}
 
 	/**
-	 * verify: lectureInfo professorName 조회
+	 * model: lectureInfo professorName 조회
 	 * @param professorName
 	 * @returns {Promise<void>}
 	 */
@@ -192,7 +198,7 @@ export class LectureInfo {
 	}
 
 	/**
-	 * verify: lectureInfo professorName page 조회
+	 * model: lectureInfo professorName page 조회
 	 * @param professorName
 	 * @returns {Promise<void>}
 	 */
@@ -214,7 +220,7 @@ export class LectureInfo {
 						reject(err);
 					} else {
 						for (let i = 0; i < rows.length; i++) {
-							const result = await lectureReply.countLecturesReply(rows[i].lectureInfoIndex);
+							const result = await lectureReply.countGetLecturesReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
 							rows[i].replyCount = result[0].replyCount;
 						}
 						await connection.release();
@@ -226,7 +232,7 @@ export class LectureInfo {
 	}
 
 	/**
-	 * verify: lectureInfo 업데이트
+	 * model: lectureInfo 업데이트
 	 * @param {number} lectureInfoIndex
 	 * @param lectureInfoData
 	 * @returns {Promise<void>}
@@ -249,7 +255,7 @@ export class LectureInfo {
 	}
 
 	/**
-	 * verify: lectureInfo 삭제
+	 * model: lectureInfo 삭제
 	 * @param {number} lectureInfoIndex
 	 * @returns {Promise<void>}
 	 */

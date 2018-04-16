@@ -117,7 +117,7 @@ export class UserValidation {
 							result = {
 								success: false,
 								statusCode: 409,
-								message: 'checkUserId: 이미 존재하는 아이디 입니다.'
+								message: 'checkUserId: 이미 존재하는 아이디'
 							};
 							return resolve(result);
 						} else {
@@ -125,7 +125,7 @@ export class UserValidation {
 							result = {
 								success: true,
 								statusCode: 200,
-								message: 'checkUserId: 사용 가능한 아이디 입니다.'
+								message: 'checkUserId: 사용 가능한 아이디'
 							};
 							return resolve(result);
 						}
@@ -149,7 +149,7 @@ export class UserValidation {
 							result = {
 								success: false,
 								statusCode: 409,
-								message: 'checkUserId: 이미 존재하는 이메일 입니다.'
+								message: 'checkUserId: 이미 존재하는 이메일'
 							};
 							return resolve(result);
 						} else {
@@ -157,7 +157,7 @@ export class UserValidation {
 							result = {
 								success: true,
 								statusCode: 200,
-								message: 'checkUserId: 사용 가능한 이메일 입니다.'
+								message: 'checkUserId: 사용 가능한 이메일'
 							};
 							return resolve(result);
 						}

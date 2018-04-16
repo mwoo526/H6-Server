@@ -14,7 +14,7 @@ class SignIn {
 	getUser(userData: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * from users WHERE userId = ?`, [userData.userId], function(err, rows) {
+				await connection.query(`SELECT * from users WHERE userId = ?`, [userData.userId], async function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -23,7 +23,7 @@ class SignIn {
 							message: 'The ID does not exist'
 						};
 						if (rows.length === 0) {
-							connection.release();
+							await connection.release();
 							reject(err);
 						} else {
 							if (rows[0].userPw === encriptionPw.getHash(userData.userPw)) {
@@ -53,7 +53,7 @@ class SignIn {
 									})
 							} else {
 								err.message = 'The password is incorrect';
-								connection.release();
+								await connection.release();
 								reject(err);
 							}
 						}

@@ -14,11 +14,12 @@ const pool = mysql_util_1.mysqlUtil.pool;
 // TODO(@jade): textbook 칼럼 추가  date: 2018. 2. 21. 오후 6:11
 class LectureInfo {
     /**
-     * verify: lectureInfo 생성
+     * model: lectureInfo 생성
      * @param lectureInfoData
      * @returns {Promise<void>}
      */
     createLectureInfo(lectureInfoData) {
+        let result;
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
@@ -30,7 +31,12 @@ class LectureInfo {
                             }
                             else {
                                 yield connection.release();
-                                resolve(lectureInfoData);
+                                result = {
+                                    success: true,
+                                    statusCode: 200,
+                                    message: 'createLectureInfo: 강의 생성 성공'
+                                };
+                                resolve(result);
                             }
                         });
                     });
@@ -39,7 +45,7 @@ class LectureInfo {
         }));
     }
     /**
-     * verify: lectureInfo 리스트 조회
+     * model: lectureInfo 리스트 조회
      * @returns {Promise<void>}
      */
     listLectureInfo() {
@@ -65,7 +71,7 @@ class LectureInfo {
         }));
     }
     /**
-     * verify: lectureInfo page 리스트 조회
+     * model: lectureInfo page 리스트 조회
      * @returns {Promise<any>}
      */
     pageListLectureInfo(page, count) {
@@ -88,7 +94,7 @@ class LectureInfo {
                             }
                             else {
                                 for (let i = 0; i < rows.length; i++) {
-                                    const result = yield lectureReply_model_1.lectureReply.countLecturesReply(rows[i].lectureInfoIndex);
+                                    const result = yield lectureReply_model_1.lectureReply.countGetLecturesReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
                                     rows[i].replyCount = result[0].replyCount;
                                 }
                                 yield connection.release();
@@ -101,7 +107,7 @@ class LectureInfo {
         }));
     }
     /**
-     * verify: lectureInfo index 조회
+     * model: lectureInfo index 조회
      * @param lectureInfoIndex
      * @returns {Promise<void>}
      */
@@ -120,7 +126,7 @@ class LectureInfo {
                             }
                             else {
                                 for (let i = 0; i < rows.length; i++) {
-                                    const result = yield lectureReply_model_1.lectureReply.countLecturesReply(rows[i].lectureInfoIndex);
+                                    const result = yield lectureReply_model_1.lectureReply.countGetLecturesReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
                                     rows[i].replyCount = result[0].replyCount;
                                 }
                                 yield connection.release();
@@ -133,7 +139,7 @@ class LectureInfo {
         }));
     }
     /**
-     * verify: lectureInfo lectureName 조회
+     * model: lectureInfo lectureName 조회
      * @param lectureName
      * @returns {Promise<void>}
      */
@@ -161,7 +167,7 @@ class LectureInfo {
         }));
     }
     /**
-     * verify: lectureInfo lectureName page 조회
+     * model: lectureInfo lectureName page 조회
      * @param lectureName
      * @returns {Promise<void>}
      */
@@ -186,7 +192,7 @@ class LectureInfo {
                             }
                             else {
                                 for (let i = 0; i < rows.length; i++) {
-                                    const result = yield lectureReply_model_1.lectureReply.countLecturesReply(rows[i].lectureInfoIndex);
+                                    const result = yield lectureReply_model_1.lectureReply.countGetLecturesReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
                                     rows[i].replyCount = result[0].replyCount;
                                 }
                                 yield connection.release();
@@ -199,7 +205,7 @@ class LectureInfo {
         }));
     }
     /**
-     * verify: lectureInfo professorName 조회
+     * model: lectureInfo professorName 조회
      * @param professorName
      * @returns {Promise<void>}
      */
@@ -227,7 +233,7 @@ class LectureInfo {
         }));
     }
     /**
-     * verify: lectureInfo professorName page 조회
+     * model: lectureInfo professorName page 조회
      * @param professorName
      * @returns {Promise<void>}
      */
@@ -252,7 +258,7 @@ class LectureInfo {
                             }
                             else {
                                 for (let i = 0; i < rows.length; i++) {
-                                    const result = yield lectureReply_model_1.lectureReply.countLecturesReply(rows[i].lectureInfoIndex);
+                                    const result = yield lectureReply_model_1.lectureReply.countGetLecturesReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
                                     rows[i].replyCount = result[0].replyCount;
                                 }
                                 yield connection.release();
@@ -265,7 +271,7 @@ class LectureInfo {
         }));
     }
     /**
-     * verify: lectureInfo 업데이트
+     * model: lectureInfo 업데이트
      * @param {number} lectureInfoIndex
      * @param lectureInfoData
      * @returns {Promise<void>}
@@ -292,7 +298,7 @@ class LectureInfo {
         }));
     }
     /**
-     * verify: lectureInfo 삭제
+     * model: lectureInfo 삭제
      * @param {number} lectureInfoIndex
      * @returns {Promise<void>}
      */

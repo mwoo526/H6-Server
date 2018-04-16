@@ -19,16 +19,31 @@ class SignUp {
      * @returns {Promise<any>}
      */
     createUser(userData) {
+        let result;
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`INSERT INTO users SET ?`, [userData], function (err, rows) {
-                        if (err) {
-                            reject(err);
-                        }
-                        else {
-                            resolve(rows);
-                        }
+                        return __awaiter(this, void 0, void 0, function* () {
+                            if (err) {
+                                yield connection.release();
+                                result = {
+                                    success: false,
+                                    statusCode: 409,
+                                    message: 'createUser: 회원가입 실패'
+                                };
+                                reject(err);
+                            }
+                            else {
+                                yield connection.release();
+                                result = {
+                                    success: true,
+                                    statusCode: 200,
+                                    message: 'createUser: 회원가입 성공'
+                                };
+                                resolve(result);
+                            }
+                        });
                     });
                 });
             });

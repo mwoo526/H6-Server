@@ -65,8 +65,8 @@ describe('lectureReply 모델', () => {
 	// 	expect(result).to.instanceof(Object);
 	// });
 
-	it('countLecturesReply', async () => {
-		const result = await lectureReply.countLecturesReply(15);
+	it('countGetLecturesReplyByLectureInfoIndex', async () => {
+		const result = await lectureReply.countGetLecturesReplyByLectureInfoIndex(15);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});
@@ -127,7 +127,7 @@ describe('lectureReply 모델', () => {
 
 	it('pageGetLectureReplyByUserId', async () => {
 		const result = await lectureReply.pageGetLectureReplyByUserId(testUserId, 1, 3);
-		console.log(result);
+		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});
 
