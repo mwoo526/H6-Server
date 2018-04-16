@@ -34,7 +34,7 @@ function getUser(req, res) {
             result = {
                 success: true,
                 statusCode: 200,
-                message: 'logIn succeed',
+                message: 'logged in successfully',
                 token: resultUser
             };
             res.json(result);

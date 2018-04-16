@@ -26,7 +26,7 @@ async function getUser(req, res): Promise<void> {
 		result = {
 			success: true,
 			statusCode: 200,
-			message: 'logIn succeed',
+			message: 'logged in successfully',
 			token: resultUser
 		};
 		res.json(result);
