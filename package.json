@@ -20,6 +20,7 @@
     "node-mysql": "^0.4.2",
     "node-uuid": "^1.4.8",
     "nodemailer": "^4.4.2",
-    "pbkdf2": "^3.0.14"
+    "pbkdf2": "^3.0.14",
+    "chalk": "^2.3.2"
   }
 }

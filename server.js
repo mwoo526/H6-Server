@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const chalk_1 = require("chalk");
 const app_1 = require("./app");
 const port = 80;
 const app = new app_1.Server().app;
 app.set('port', port);
 app.listen(app.get('port'), () => {
-    console.log(`
+    console.log(chalk_1.default.rgb(0, 153, 255) `
   **********************************************************************************************************************************                                                             
     tf        tf    tf                  tftftftftftf    tftftftftftf    tftftftftftf   tf        tf   tftftftftftf    tftftftftftf
     tf        tf    tf                  tf              tf              tf        tf   tf        tf   tf              tf        tf
