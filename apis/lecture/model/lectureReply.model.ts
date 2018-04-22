@@ -9,7 +9,6 @@ export class LectureReply {
 	 * @returns {Promise<void>}
 	 */
 	createLectureReply(lectureReplyData: any): Promise<void> {
-		let result: any;
 		return new Promise(async (resolve, reject) => {
 			const preview = await lectureReplyData.review.substring(0, 20);
 			lectureReplyData.preview = preview;
@@ -20,12 +19,7 @@ export class LectureReply {
 						reject(err);
 					} else {
 						await connection.release();
-						result = {
-							success: true,
-							statusCode: 200,
-							message: 'createLectureReply: 리플 생성 성공'
-						};
-						resolve(result);
+						resolve(lectureReplyData);
 					}
 				});
 			})
@@ -37,7 +31,7 @@ export class LectureReply {
 	 * @param {string} lectureInfoIndex
 	 * @returns {Promise<void>}
 	 */
-	countGetLecturesReplyByLectureInfoIndex(lectureInfoIndex: string): Promise<void> {
+	countGetLectureReplyByLectureInfoIndex(lectureInfoIndex: string): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT COUNT(*) AS replyCount FROM lecturesReply WHERE lecturesReply.lectureInfoIndex = ${lectureInfoIndex}`, async function(err, rows) {
@@ -47,6 +41,32 @@ export class LectureReply {
 					} else {
 						await connection.release();
 						resolve(rows);
+					}
+				});
+			})
+		})
+	}
+
+	/**
+	 * model: lectureReply 중복 검사
+	 * @param {number} lectureInfoIndex
+	 * @param {number} userIndex
+	 * @returns {Promise<void>}
+	 */
+	checkGetLectureReply(lectureInfoIndex: number, userIndex: number): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`SELECT COUNT(*) AS replyCount FROM lecturesReply WHERE lecturesReply.lectureInfoIndex = ${lectureInfoIndex} AND lecturesReply.userIndex = ${userIndex}`, async function(err, rows) {
+					if (err) {
+						await connection.release();
+						reject(err);
+					} else {
+						await connection.release();
+						if (rows[0].replyCount === 0) {
+							return resolve(rows);
+						} else {
+							return reject('LectureReply already exists');
+						}
 					}
 				});
 			})
@@ -427,6 +447,27 @@ export class LectureReply {
 							message: 'createLectureReply: 리플 삭제 성공'
 						};
 						resolve(result);
+					}
+				});
+			})
+		})
+	}
+
+	/**
+	 * model: lectureReply 점수 조회
+	 * @param {string} lectureInfoIndex
+	 * @returns {Promise<void>}
+	 */
+	scoreGetLectureReply(lectureInfoIndex: string): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`SELECT AVG(score) AS totalScore FROM lecturesReply WHERE lectureInfoIndex = ${lectureInfoIndex}`, async function(err, rows) {
+					if (err) {
+						await connection.release();
+						reject(err);
+					} else {
+						await connection.release();
+						resolve(rows);
 					}
 				});
 			})

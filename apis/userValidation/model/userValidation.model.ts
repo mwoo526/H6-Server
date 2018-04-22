@@ -8,7 +8,7 @@ export class UserValidation {
 	}
 
 	/**
-	 * verify: 인증코드 생성
+	 * model: 인증코드 생성
 	 * @param {string} userId
 	 * @param {string} email
 	 * @param validationCode
@@ -32,7 +32,7 @@ export class UserValidation {
 	}
 
 	/**
-	 * verify: 인증코드 조회
+	 * model: 인증코드 조회
 	 * @param {string} userId
 	 * @returns {Promise<any>}
 	 */
@@ -53,7 +53,7 @@ export class UserValidation {
 	}
 
 	/**
-	 * verify: 인증코드 체크
+	 * model: 인증코드 체크
 	 * @param {string} userId
 	 * @param userData
 	 * @param validationCode
@@ -82,7 +82,7 @@ export class UserValidation {
 	}
 
 	/**
-	 * verify: 인증여부 업데이트
+	 * model: 인증여부 업데이트
 	 * @param {string} userId
 	 * @returns {Promise<any>}
 	 */
@@ -103,6 +103,11 @@ export class UserValidation {
 		})
 	}
 
+	/**
+	 * model: 아이디 중복 검사
+	 * @param {string} userId
+	 * @returns {Promise<any>}
+	 */
 	checkUserId(userId: string): Promise<any> {
 		let result: any;
 		return new Promise(async (resolve, reject) => {
@@ -114,19 +119,9 @@ export class UserValidation {
 					} else {
 						if (rows[0] != null) {
 							connection.release();
-							result = {
-								success: false,
-								statusCode: 409,
-								message: 'checkUserId: 이미 존재하는 아이디'
-							};
-							return resolve(result);
+							return reject('Id already exists');
 						} else {
 							connection.release();
-							result = {
-								success: true,
-								statusCode: 200,
-								message: 'checkUserId: 사용 가능한 아이디'
-							};
 							return resolve(result);
 						}
 					}
@@ -135,6 +130,11 @@ export class UserValidation {
 		})
 	}
 
+	/**
+	 * model: 이메일 중복 검사
+	 * @param {string} email
+	 * @returns {Promise<any>}
+	 */
 	checkEmail(email: string): Promise<any> {
 		let result: any;
 		return new Promise(async (resolve, reject) => {
@@ -146,19 +146,9 @@ export class UserValidation {
 					} else {
 						if (rows[0] != null) {
 							await connection.release();
-							result = {
-								success: false,
-								statusCode: 409,
-								message: 'checkUserId: 이미 존재하는 이메일'
-							};
-							return resolve(result);
+							return reject('Email already exists');
 						} else {
 							await connection.release();
-							result = {
-								success: true,
-								statusCode: 200,
-								message: 'checkUserId: 사용 가능한 이메일'
-							};
 							return resolve(result);
 						}
 					}

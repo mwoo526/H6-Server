@@ -63,6 +63,12 @@ describe('lectureInfo 모델', () => {
 		expect(result).to.instanceof(Object);
 	});
 
+	it('updateLectureInfoAverage', async () => {
+		const result = await lectureInfo.updateLectureInfoAverage(2, 1);
+		// console.log(result);
+		expect(result).to.instanceof(Object);
+	});
+
 	it('deleteLectureInfo', async () => {
 		const result = await lectureInfo.deleteLectureInfo(6);
 		// console.log(result);

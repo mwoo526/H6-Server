@@ -7,21 +7,18 @@ export async function verify(req: express.Request, res: express.Response, next: 
 		return res.status(403).json({
 			success: false,
 			statusCode: 403,
-			message: 'You do not have permission'
+			message: 'verify: 403'
 		})
 	}
 	try {
-		const result: any = await verifyUser(token);
-		res.json({
-			success: true,
-			info: result
-		})
+		await verifyUser(token);
+		return next();
+
 	} catch (err) {
 		res.status(403).json({
 			success: false,
 			statusCode: 403,
-			message: err.message
+			message: 'verify: 403'
 		})
 	}
-	next();
 }

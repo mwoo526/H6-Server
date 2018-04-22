@@ -76,11 +76,30 @@ function checkUserId(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const userId = req.params.userId;
         try {
-            const result = yield userValidation_model_1.userValidation.checkUserId(userId);
-            res.send(result);
+            yield userValidation_model_1.userValidation.checkUserId(userId);
+            res.send({
+                success: true,
+                statusCode: 200,
+                message: 'checkUserId: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                case 'Id already exists':
+                    res.send({
+                        success: false,
+                        statusCode: 409,
+                        message: 'checkUserId: 40901'
+                    });
+                    break;
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'checkUserId: 50000'
+                    });
+                    break;
+            }
         }
     });
 }
@@ -94,11 +113,30 @@ function checkEmail(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const email = req.params.email;
         try {
-            const result = yield userValidation_model_1.userValidation.checkEmail(email);
-            res.send(result);
+            yield userValidation_model_1.userValidation.checkEmail(email);
+            res.send({
+                success: true,
+                statusCode: 200,
+                message: 'checkEmail: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                case 'Email already exists':
+                    res.send({
+                        success: false,
+                        statusCode: 409,
+                        message: 'checkEmail: 40901'
+                    });
+                    break;
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'checkEmail: 50000'
+                    });
+                    break;
+            }
         }
     });
 }

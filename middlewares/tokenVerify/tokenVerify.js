@@ -14,9 +14,9 @@ function verifyUser(token) {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
         yield jwt.verify(token, jwt_util_1.jwtToken.secret, (err, decoded) => {
             if (err) {
-                reject(err);
+                return reject(err);
             }
-            resolve(decoded);
+            return resolve(decoded);
         });
     }));
 }

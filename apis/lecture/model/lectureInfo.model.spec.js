@@ -63,6 +63,11 @@ describe('lectureInfo 모델', () => {
         // console.log(result);
         chai_1.expect(result).to.instanceof(Object);
     }));
+    it('updateLectureInfoAverage', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield lectureInfo_model_1.lectureInfo.updateLectureInfoAverage(2, 1);
+        // console.log(result);
+        chai_1.expect(result).to.instanceof(Object);
+    }));
     it('deleteLectureInfo', () => __awaiter(this, void 0, void 0, function* () {
         const result = yield lectureInfo_model_1.lectureInfo.deleteLectureInfo(6);
         // console.log(result);

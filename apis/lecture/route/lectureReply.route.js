@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const lectureReply_resource_1 = require("../../../resources/lectureReply.resource");
+const lectureInfo_model_1 = require("../model/lectureInfo.model");
 const lectureReply_model_1 = require("../model/lectureReply.model");
 class LectureReplyRoutes {
     constructor() {
@@ -18,6 +19,7 @@ class LectureReplyRoutes {
     }
     router() {
         this.lectureReplyRouter.post('/lecturesReply', createLectureReply);
+        this.lectureReplyRouter.get('/lecturesReply/lectureInfoIndex/:lectureInfoIndex/userIndex/:userIndex', checkGetLectureReply);
         this.lectureReplyRouter.get('/lecturesReply', pageListLectureReply);
         this.lectureReplyRouter.get('/lecturesReply/lectureReplyIndex/:lectureReplyIndex', getLectureReplyByLectureReplyIndex);
         this.lectureReplyRouter.get('/lecturesReply/userId/:userId', pageGetLectureReplyByUserId);
@@ -38,10 +40,64 @@ function createLectureReply(req, res) {
         let lectureReplyData = new lectureReply_resource_1.LectureReplyResource(req.body);
         try {
             const result = yield lectureReply_model_1.lectureReply.createLectureReply(lectureReplyData.getLectureReply());
-            res.send(result);
+            const resultTotalScore = yield lectureReply_model_1.lectureReply.scoreGetLectureReply(result.lectureInfoIndex);
+            yield lectureInfo_model_1.lectureInfo.updateLectureInfoAverage(result.lectureInfoIndex, resultTotalScore[0].totalScore);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'createLectureReply: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'createLectureReply: 50000'
+                    });
+                    break;
+            }
+        }
+    });
+}
+/**
+ * route: lectureReply 중복 검사
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+function checkGetLectureReply(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let lectureInfoIndex = req.params.lectureInfoIndex;
+        let userIndex = req.params.userIndex;
+        try {
+            const result = yield lectureReply_model_1.lectureReply.checkGetLectureReply(lectureInfoIndex, userIndex);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'checkGetLectureReply: 200'
+            });
+        }
+        catch (err) {
+            switch (err) {
+                case 'LectureReply already exists':
+                    res.send({
+                        success: false,
+                        statusCode: 409,
+                        message: 'checkGetLectureReply: 40901'
+                    });
+                    break;
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'checkGetLectureReply: 50000'
+                    });
+                    break;
+            }
         }
     });
 }
@@ -57,10 +113,23 @@ function pageListLectureReply(req, res) {
         let count = parseInt(req.query.count);
         try {
             const result = yield lectureReply_model_1.lectureReply.pageListLectureReply(page, count);
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'pageListLectureReply: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'pageListLectureReply: 50000'
+                    });
+                    break;
+            }
         }
     });
 }
@@ -75,10 +144,23 @@ function getLectureReplyByLectureReplyIndex(req, res) {
         let lectureReplyIndex = req.params.lectureReplyIndex;
         try {
             const result = yield lectureReply_model_1.lectureReply.getLectureReplyByLectureReplyIndex(lectureReplyIndex);
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'getLectureReplyByLectureReplyIndex: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'getLectureReplyByLectureReplyIndex: 50000'
+                    });
+                    break;
+            }
         }
     });
 }
@@ -95,10 +177,23 @@ function pageGetLectureReplyByUserId(req, res) {
         let count = parseInt(req.query.count);
         try {
             const result = yield lectureReply_model_1.lectureReply.pageGetLectureReplyByUserId(userId, page, count);
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'pageGetLectureReplyByUserId: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'pageGetLectureReplyByUserId: 50000'
+                    });
+                    break;
+            }
         }
     });
 }
@@ -115,10 +210,23 @@ function pageGetLectureReplyByUserNickName(req, res) {
         let count = parseInt(req.query.count);
         try {
             const result = yield lectureReply_model_1.lectureReply.pageGetLectureReplyByUserNickName(userNickName, page, count);
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'pageGetLectureReplyByUserNickName: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'pageGetLectureReplyByUserNickName: 50000'
+                    });
+                    break;
+            }
         }
     });
 }
@@ -134,10 +242,23 @@ function updateLectureReply(req, res) {
         let lectureReplyData = new lectureReply_resource_1.LectureReplyResource(req.body);
         try {
             const result = yield lectureReply_model_1.lectureReply.updateLectureReply(lectureReplyIndex, lectureReplyData);
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'updateLectureReply: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'updateLectureReply: 50000'
+                    });
+                    break;
+            }
         }
     });
 }
@@ -152,10 +273,23 @@ function deleteLectureReply(req, res) {
         const lectureReplyIndex = req.params.lectureReplyIndex;
         try {
             const result = yield lectureReply_model_1.lectureReply.deleteLectureReply(lectureReplyIndex);
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'deleteLectureReply: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'deleteLectureReply: 50000'
+                    });
+                    break;
+            }
         }
     });
 }

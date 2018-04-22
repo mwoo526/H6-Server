@@ -31,9 +31,22 @@ async function createLecture(req, res): Promise<void> {
 	let lectureData: any = new LectureResource(req.body);
 	try {
 		const result: any = await lecture.createLecture(lectureData.getLecture());
-		res.send(result);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'createLecture: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'createLecture: 50000'
+				});
+				break;
+		}
 	}
 }
 
@@ -46,9 +59,22 @@ async function createLecture(req, res): Promise<void> {
 async function listLecture(req, res): Promise<void> {
 	try {
 		const result = await lecture.listLecture();
-		res.send(result);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'listLecture: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'listLecture: 50000'
+				});
+				break;
+		}
 	}
 }
 
@@ -62,9 +88,22 @@ async function getLectureByLectureIndex(req, res): Promise<void> {
 	try {
 		let lectureIndex: number = req.params.lectureIndex;
 		const result = await lecture.getLectureByLectureIndex(lectureIndex);
-		res.send(result);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'getLectureByLectureIndex: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'getLectureByLectureIndex: 50000'
+				});
+				break;
+		}
 	}
 }
 
@@ -78,9 +117,22 @@ async function getLectureByLectureCode(req, res): Promise<void> {
 	try {
 		let lectureCode: string = req.params.lectureCode;
 		const result = await lecture.getLectureByLectureCode(lectureCode);
-		res.send(result);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'getLectureByLectureCode: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'getLectureByLectureCode: 50000'
+				});
+				break;
+		}
 	}
 }
 
@@ -94,9 +146,22 @@ async function getLectureByLectureName(req, res): Promise<void> {
 	try {
 		let lectureName: string = req.params.lectureName;
 		const result = await lecture.getLectureByLectureName(lectureName);
-		res.send(result);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'getLectureByLectureName: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'getLectureByLectureName: 50000'
+				});
+				break;
+		}
 	}
 }
 
@@ -110,9 +175,22 @@ async function getLectureByTrack(req, res): Promise<void> {
 	try {
 		let track: string = req.params.track;
 		const result = await lecture.getLectureByTrack(track);
-		res.send(result);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'getLectureByTrack: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'getLectureByTrack: 50000'
+				});
+				break;
+		}
 	}
 }
 
@@ -127,9 +205,22 @@ async function updateLecture(req, res): Promise<void> {
 		let lectureIndex: number = req.params.lectureIndex;
 		let lectureData: any = new LectureResource(req.body);
 		const result = await lecture.updateLecture(lectureIndex, lectureData.getLecture());
-		res.send(result);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'updateLecture: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'updateLecture: 50000'
+				});
+				break;
+		}
 	}
 }
 
@@ -143,9 +234,22 @@ async function deleteLecture(req, res): Promise<void> {
 	try {
 		let lectureIndex: number = req.params.lectureIndex;
 		const result = await lecture.deleteLecture(lectureIndex);
-		res.send(result);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'deleteLecture: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'deleteLecture: 50000'
+				});
+				break;
+		}
 	}
 }
 

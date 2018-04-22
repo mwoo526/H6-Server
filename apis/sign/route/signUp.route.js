@@ -32,10 +32,23 @@ function createUser(req, res) {
         let userResource = new user_resource_1.UserResource(req.body);
         try {
             const result = yield signUp_model_1.signUp.createUser(userResource.getSignUp());
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'createUser: 2001'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'createUser: 50000'
+                    });
+                    break;
+            }
         }
     });
 }

@@ -7,7 +7,7 @@ const pool = mysqlUtil.pool;
 
 class SignIn {
 	/**
-	 * tokenVerify: 로그인
+	 * model: 로그인
 	 * @param userData
 	 * @returns {Promise<any>}
 	 */
@@ -19,12 +19,10 @@ class SignIn {
 						connection.release();
 						reject(err);
 					} else {
-						let err = {
-							message: 'The ID does not exist'
-						};
+						let err = 'The ID does not exist';
 						if (rows.length === 0) {
 							await connection.release();
-							reject(err);
+							return reject(err);
 						} else {
 							if (rows[0].userPw === encriptionPw.getHash(userData.userPw)) {
 								connection.release();
@@ -47,14 +45,13 @@ class SignIn {
 										expiresIn: jwtToken.expiresln
 									}, (err, token) => {
 										if (err) {
-											throw new Error('The jwt is incorrect');
+											return reject('The jwt is incorrect');
 										}
 										resolve(token)
 									})
 							} else {
-								err.message = 'The password is incorrect';
 								await connection.release();
-								reject(err);
+								return reject('The password is incorrect');
 							}
 						}
 					}

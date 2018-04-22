@@ -65,8 +65,20 @@ describe('lectureReply 모델', () => {
 	// 	expect(result).to.instanceof(Object);
 	// });
 
-	it('countGetLecturesReplyByLectureInfoIndex', async () => {
-		const result = await lectureReply.countGetLecturesReplyByLectureInfoIndex(15);
+	it('scoreGetLectureReply', async () => {
+		const result = await lectureReply.scoreGetLectureReply(testLectureInfoIndex);
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
+	it('countGetLectureReplyByLectureInfoIndex', async () => {
+		const result = await lectureReply.countGetLectureReplyByLectureInfoIndex(15);
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
+	it('checkGetLectureReply', async () => {
+		const result = await lectureReply.checkGetLectureReply(testLectureInfoIndex, testUserIndex);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});

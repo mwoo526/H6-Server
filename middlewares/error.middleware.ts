@@ -7,6 +7,11 @@ export async function notFoundError(req: express.Request, res: express.Response,
 	 */
 	const err: any = new Error('Not Found');
 	err.status = 404;
+	res.send({
+		success: false,
+		statusCode: 404,
+		message: 'Not Found'
+	});
 	next(err);
 }
 

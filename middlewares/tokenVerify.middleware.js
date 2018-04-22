@@ -16,24 +16,20 @@ function verify(req, res, next) {
             return res.status(403).json({
                 success: false,
                 statusCode: 403,
-                message: 'You do not have permission'
+                message: 'verify: 403'
             });
         }
         try {
-            const result = yield tokenVerify_1.verifyUser(token);
-            res.json({
-                success: true,
-                info: result
-            });
+            yield tokenVerify_1.verifyUser(token);
+            return next();
         }
         catch (err) {
             res.status(403).json({
                 success: false,
                 statusCode: 403,
-                message: err.message
+                message: 'verify: 403'
             });
         }
-        next();
     });
 }
 exports.verify = verify;

@@ -64,10 +64,29 @@ async function checkValidationCode(req, res): Promise<void> {
 async function checkUserId(req, res): Promise<void> {
 	const userId: string = req.params.userId;
 	try {
-		const result = await userValidation.checkUserId(userId);
-		res.send(result);
+		await userValidation.checkUserId(userId);
+		res.send({
+			success: true,
+			statusCode: 200,
+			message: 'checkUserId: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			case 'Id already exists':
+				res.send({
+					success: false,
+					statusCode: 409,
+					message: 'checkUserId: 40901'
+				});
+				break;
+			default :
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'checkUserId: 50000'
+				});
+				break;
+		}
 	}
 }
 
@@ -80,10 +99,29 @@ async function checkUserId(req, res): Promise<void> {
 async function checkEmail(req, res): Promise<any> {
 	const email: string = req.params.email;
 	try {
-		const result = await userValidation.checkEmail(email);
-		res.send(result);
+		await userValidation.checkEmail(email);
+		res.send({
+			success: true,
+			statusCode: 200,
+			message: 'checkEmail: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			case 'Email already exists':
+				res.send({
+					success: false,
+					statusCode: 409,
+					message: 'checkEmail: 40901'
+				});
+				break;
+			default :
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'checkEmail: 50000'
+				});
+				break;
+		}
 	}
 }
 

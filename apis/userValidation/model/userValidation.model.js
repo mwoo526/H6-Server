@@ -15,7 +15,7 @@ class UserValidation {
     constructor() {
     }
     /**
-     * verify: 인증코드 생성
+     * model: 인증코드 생성
      * @param {string} userId
      * @param {string} email
      * @param validationCode
@@ -43,7 +43,7 @@ class UserValidation {
         }));
     }
     /**
-     * verify: 인증코드 조회
+     * model: 인증코드 조회
      * @param {string} userId
      * @returns {Promise<any>}
      */
@@ -66,7 +66,7 @@ class UserValidation {
         }));
     }
     /**
-     * verify: 인증코드 체크
+     * model: 인증코드 체크
      * @param {string} userId
      * @param userData
      * @param validationCode
@@ -94,7 +94,7 @@ class UserValidation {
         }));
     }
     /**
-     * verify: 인증여부 업데이트
+     * model: 인증여부 업데이트
      * @param {string} userId
      * @returns {Promise<any>}
      */
@@ -117,6 +117,11 @@ class UserValidation {
             });
         }));
     }
+    /**
+     * model: 아이디 중복 검사
+     * @param {string} userId
+     * @returns {Promise<any>}
+     */
     checkUserId(userId) {
         let result;
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
@@ -130,20 +135,10 @@ class UserValidation {
                         else {
                             if (rows[0] != null) {
                                 connection.release();
-                                result = {
-                                    success: false,
-                                    statusCode: 409,
-                                    message: 'checkUserId: 이미 존재하는 아이디'
-                                };
-                                return resolve(result);
+                                return reject('Id already exists');
                             }
                             else {
                                 connection.release();
-                                result = {
-                                    success: true,
-                                    statusCode: 200,
-                                    message: 'checkUserId: 사용 가능한 아이디'
-                                };
                                 return resolve(result);
                             }
                         }
@@ -152,6 +147,11 @@ class UserValidation {
             });
         }));
     }
+    /**
+     * model: 이메일 중복 검사
+     * @param {string} email
+     * @returns {Promise<any>}
+     */
     checkEmail(email) {
         let result;
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
@@ -166,20 +166,10 @@ class UserValidation {
                             else {
                                 if (rows[0] != null) {
                                     yield connection.release();
-                                    result = {
-                                        success: false,
-                                        statusCode: 409,
-                                        message: 'checkUserId: 이미 존재하는 이메일'
-                                    };
-                                    return resolve(result);
+                                    return reject('Email already exists');
                                 }
                                 else {
                                     yield connection.release();
-                                    result = {
-                                        success: true,
-                                        statusCode: 200,
-                                        message: 'checkUserId: 사용 가능한 이메일'
-                                    };
                                     return resolve(result);
                                 }
                             }

@@ -30,9 +30,22 @@ async function createLectureInfo(req, res): Promise<void> {
 	let lectureInfoData: any = new LectureInfoResource(req.body);
 	try {
 		const result = await lectureInfo.createLectureInfo(lectureInfoData.getLectureInfo());
-		res.send(result);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'createLectureInfo: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'createLectureInfo: 50000'
+				});
+				break;
+		}
 	}
 }
 
@@ -47,9 +60,22 @@ async function pageListLectureInfo(req, res): Promise<void> {
 		let page: number = parseInt(req.query.page);
 		let count: number = parseInt(req.query.count);
 		const result: any = await lectureInfo.pageListLectureInfo(page, count);
-		res.send(result);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'pageListLectureInfo: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'pageListLectureInfo: 50000'
+				});
+				break;
+		}
 	}
 }
 
@@ -63,9 +89,22 @@ async function getLectureInfoByLectureInfoIndex(req, res): Promise<void> {
 	let lectureInfoIndex: number = req.params.lectureInfoIndex;
 	try {
 		const result = await lectureInfo.getLectureInfoByLectureInfoIndex(lectureInfoIndex);
-		res.send(result);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'getLectureInfoByLectureInfoIndex: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'getLectureInfoByLectureInfoIndex: 50000'
+				});
+				break;
+		}
 	}
 }
 
@@ -81,11 +120,21 @@ async function pageGetLectureInfoByLectureName(req, res): Promise<void> {
 	let count: number = parseInt(req.query.count);
 	try {
 		const result = await lectureInfo.pageGetLectureInfoByLectureName(lectureName, page, count);
-		res.send(result);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'pageGetLectureInfoByLectureName: 200'
+		});
 	} catch (err) {
 		switch (err) {
-			default :
-				res.send('50000: Server error');
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'pageGetLectureInfoByLectureName: 50000'
+				});
+				break;
 		}
 	}
 }
@@ -102,9 +151,22 @@ async function pageGetLectureInfoByProfessorName(req, res): Promise<void> {
 	let count: number = parseInt(req.query.count);
 	try {
 		const result = await lectureInfo.pageGetLectureInfoByProfessorName(professorName, page, count);
-		res.send(result);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'pageGetLectureInfoByProfessorName: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'pageGetLectureInfoByProfessorName: 50000'
+				});
+				break;
+		}
 	}
 }
 
@@ -119,9 +181,22 @@ async function updateLectureInfo(req, res): Promise<void> {
 	let lectureInfoData: any = new LectureInfoResource(req.body);
 	try {
 		const result = await lectureInfo.updateLectureInfo(lectureInfoIndex, lectureInfoData);
-		res.send(result);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'updateLectureInfo: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'updateLectureInfo: 50000'
+				});
+				break;
+		}
 	}
 }
 
@@ -135,9 +210,22 @@ async function deleteLectureInfo(req, res): Promise<void> {
 	let lectureInfoIndex: number = req.params.lectureInfoIndex;
 	try {
 		const result = await lectureInfo.deleteLectureInfo(lectureInfoIndex);
-		res.send(result);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'deleteLectureInfo: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'deleteLectureInfo: 50000'
+				});
+				break;
+		}
 	}
 }
 

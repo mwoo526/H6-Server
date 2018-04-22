@@ -12,7 +12,6 @@ export class LectureInfo {
 	 * @returns {Promise<void>}
 	 */
 	createLectureInfo(lectureInfoData: any): Promise<void> {
-		let result: any;
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`INSERT INTO lecturesInfo SET ?`, lectureInfoData, async function(err) {
@@ -21,12 +20,7 @@ export class LectureInfo {
 						reject(err);
 					} else {
 						await connection.release();
-						result = {
-							success: true,
-							statusCode: 200,
-							message: 'createLectureInfo: 강의 생성 성공'
-						};
-						resolve(result);
+						resolve(lectureInfoData);
 					}
 				})
 			})
@@ -76,7 +70,7 @@ export class LectureInfo {
 						reject(err);
 					} else {
 						for (let i = 0; i < rows.length; i++) {
-							const result = await lectureReply.countGetLecturesReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
+							const result = await lectureReply.countGetLectureReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
 							rows[i].replyCount = result[0].replyCount;
 						}
 						await connection.release();
@@ -104,7 +98,7 @@ export class LectureInfo {
 						reject(err);
 					} else {
 						for (let i = 0; i < rows.length; i++) {
-							const result = await lectureReply.countGetLecturesReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
+							const result = await lectureReply.countGetLectureReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
 							rows[i].replyCount = result[0].replyCount;
 						}
 						await connection.release();
@@ -162,7 +156,7 @@ export class LectureInfo {
 						reject(err);
 					} else {
 						for (let i = 0; i < rows.length; i++) {
-							const result = await lectureReply.countGetLecturesReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
+							const result = await lectureReply.countGetLectureReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
 							rows[i].replyCount = result[0].replyCount;
 						}
 						await connection.release();
@@ -189,6 +183,10 @@ export class LectureInfo {
 						await connection.release();
 						reject(err);
 					} else {
+						for (let i = 0; i < rows.length; i++) {
+							const result = await lectureReply.countGetLectureReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
+							rows[i].replyCount = result[0].replyCount;
+						}
 						await connection.release();
 						resolve(rows);
 					}
@@ -220,7 +218,7 @@ export class LectureInfo {
 						reject(err);
 					} else {
 						for (let i = 0; i < rows.length; i++) {
-							const result = await lectureReply.countGetLecturesReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
+							const result = await lectureReply.countGetLectureReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
 							rows[i].replyCount = result[0].replyCount;
 						}
 						await connection.release();
@@ -248,6 +246,28 @@ export class LectureInfo {
 					} else {
 						await connection.release();
 						resolve(lectureInfoData);
+					}
+				})
+			})
+		})
+	}
+
+	/**
+	 * model: lectureInfo 평균 업데이트
+	 * @param {number} lectureInfoIndex
+	 * @param {number} average
+	 * @returns {Promise<void>}
+	 */
+	updateLectureInfoAverage(lectureInfoIndex: number, average: number): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`UPDATE lecturesInfo SET average = ${average} WHERE lectureInfoIndex = ${lectureInfoIndex}`, async function(err, rows) {
+					if (err) {
+						await connection.release();
+						reject(err);
+					} else {
+						await connection.release();
+						resolve(rows);
 					}
 				})
 			})

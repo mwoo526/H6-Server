@@ -19,7 +19,6 @@ class LectureInfo {
      * @returns {Promise<void>}
      */
     createLectureInfo(lectureInfoData) {
-        let result;
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
@@ -31,12 +30,7 @@ class LectureInfo {
                             }
                             else {
                                 yield connection.release();
-                                result = {
-                                    success: true,
-                                    statusCode: 200,
-                                    message: 'createLectureInfo: 강의 생성 성공'
-                                };
-                                resolve(result);
+                                resolve(lectureInfoData);
                             }
                         });
                     });
@@ -94,7 +88,7 @@ class LectureInfo {
                             }
                             else {
                                 for (let i = 0; i < rows.length; i++) {
-                                    const result = yield lectureReply_model_1.lectureReply.countGetLecturesReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
+                                    const result = yield lectureReply_model_1.lectureReply.countGetLectureReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
                                     rows[i].replyCount = result[0].replyCount;
                                 }
                                 yield connection.release();
@@ -126,7 +120,7 @@ class LectureInfo {
                             }
                             else {
                                 for (let i = 0; i < rows.length; i++) {
-                                    const result = yield lectureReply_model_1.lectureReply.countGetLecturesReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
+                                    const result = yield lectureReply_model_1.lectureReply.countGetLectureReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
                                     rows[i].replyCount = result[0].replyCount;
                                 }
                                 yield connection.release();
@@ -192,7 +186,7 @@ class LectureInfo {
                             }
                             else {
                                 for (let i = 0; i < rows.length; i++) {
-                                    const result = yield lectureReply_model_1.lectureReply.countGetLecturesReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
+                                    const result = yield lectureReply_model_1.lectureReply.countGetLectureReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
                                     rows[i].replyCount = result[0].replyCount;
                                 }
                                 yield connection.release();
@@ -223,6 +217,10 @@ class LectureInfo {
                                 reject(err);
                             }
                             else {
+                                for (let i = 0; i < rows.length; i++) {
+                                    const result = yield lectureReply_model_1.lectureReply.countGetLectureReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
+                                    rows[i].replyCount = result[0].replyCount;
+                                }
                                 yield connection.release();
                                 resolve(rows);
                             }
@@ -258,7 +256,7 @@ class LectureInfo {
                             }
                             else {
                                 for (let i = 0; i < rows.length; i++) {
-                                    const result = yield lectureReply_model_1.lectureReply.countGetLecturesReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
+                                    const result = yield lectureReply_model_1.lectureReply.countGetLectureReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
                                     rows[i].replyCount = result[0].replyCount;
                                 }
                                 yield connection.release();
@@ -290,6 +288,32 @@ class LectureInfo {
                             else {
                                 yield connection.release();
                                 resolve(lectureInfoData);
+                            }
+                        });
+                    });
+                });
+            });
+        }));
+    }
+    /**
+     * model: lectureInfo 평균 업데이트
+     * @param {number} lectureInfoIndex
+     * @param {number} average
+     * @returns {Promise<void>}
+     */
+    updateLectureInfoAverage(lectureInfoIndex, average) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`UPDATE lecturesInfo SET average = ${average} WHERE lectureInfoIndex = ${lectureInfoIndex}`, function (err, rows) {
+                        return __awaiter(this, void 0, void 0, function* () {
+                            if (err) {
+                                yield connection.release();
+                                reject(err);
+                            }
+                            else {
+                                yield connection.release();
+                                resolve(rows);
                             }
                         });
                     });

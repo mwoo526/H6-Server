@@ -39,10 +39,23 @@ function createLecture(req, res) {
         let lectureData = new lecture_resource_1.LectureResource(req.body);
         try {
             const result = yield lecture_model_1.lecture.createLecture(lectureData.getLecture());
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'createLecture: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'createLecture: 50000'
+                    });
+                    break;
+            }
         }
     });
 }
@@ -56,10 +69,23 @@ function listLecture(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const result = yield lecture_model_1.lecture.listLecture();
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'listLecture: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'listLecture: 50000'
+                    });
+                    break;
+            }
         }
     });
 }
@@ -74,10 +100,23 @@ function getLectureByLectureIndex(req, res) {
         try {
             let lectureIndex = req.params.lectureIndex;
             const result = yield lecture_model_1.lecture.getLectureByLectureIndex(lectureIndex);
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'getLectureByLectureIndex: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'getLectureByLectureIndex: 50000'
+                    });
+                    break;
+            }
         }
     });
 }
@@ -92,10 +131,23 @@ function getLectureByLectureCode(req, res) {
         try {
             let lectureCode = req.params.lectureCode;
             const result = yield lecture_model_1.lecture.getLectureByLectureCode(lectureCode);
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'getLectureByLectureCode: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'getLectureByLectureCode: 50000'
+                    });
+                    break;
+            }
         }
     });
 }
@@ -110,10 +162,23 @@ function getLectureByLectureName(req, res) {
         try {
             let lectureName = req.params.lectureName;
             const result = yield lecture_model_1.lecture.getLectureByLectureName(lectureName);
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'getLectureByLectureName: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'getLectureByLectureName: 50000'
+                    });
+                    break;
+            }
         }
     });
 }
@@ -128,10 +193,23 @@ function getLectureByTrack(req, res) {
         try {
             let track = req.params.track;
             const result = yield lecture_model_1.lecture.getLectureByTrack(track);
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'getLectureByTrack: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'getLectureByTrack: 50000'
+                    });
+                    break;
+            }
         }
     });
 }
@@ -147,10 +225,23 @@ function updateLecture(req, res) {
             let lectureIndex = req.params.lectureIndex;
             let lectureData = new lecture_resource_1.LectureResource(req.body);
             const result = yield lecture_model_1.lecture.updateLecture(lectureIndex, lectureData.getLecture());
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'updateLecture: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'updateLecture: 50000'
+                    });
+                    break;
+            }
         }
     });
 }
@@ -165,10 +256,23 @@ function deleteLecture(req, res) {
         try {
             let lectureIndex = req.params.lectureIndex;
             const result = yield lecture_model_1.lecture.deleteLecture(lectureIndex);
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'deleteLecture: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'deleteLecture: 50000'
+                    });
+                    break;
+            }
         }
     });
 }

@@ -14,7 +14,7 @@ class Professor {
     constructor() {
     }
     /**
-     * verify: professor 생성
+     * model: professor 생성
      * @param professorData
      * @returns {Promise<any>}
      */
@@ -37,7 +37,7 @@ class Professor {
         }));
     }
     /**
-     * verify: professor 리스트 조회
+     * model: professor 리스트 조회
      * @returns {Promise<any>}
      */
     listProfessor() {
@@ -59,7 +59,7 @@ class Professor {
         }));
     }
     /**
-     * verify: professor professorIndex 조회
+     * model: professor professorIndex 조회
      * @param {number} professorIndex
      * @returns {Promise<any>}
      */
@@ -82,7 +82,7 @@ class Professor {
         }));
     }
     /**
-     * verify: professor professorName 조회
+     * model: professor professorName 조회
      * @param {string} professorName
      * @returns {Promise<any>}
      */
@@ -105,7 +105,7 @@ class Professor {
         }));
     }
     /**
-     * verify: professor 업데이트
+     * model: professor 업데이트
      * @param {number} professorIndex
      * @param professorData
      * @returns {Promise<any>}
@@ -130,7 +130,7 @@ class Professor {
         }));
     }
     /**
-     * verify: professor 삭제
+     * model: professor 삭제
      * @param {number} professorIndex
      * @returns {Promise<any>}
      */

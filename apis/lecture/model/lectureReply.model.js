@@ -17,7 +17,6 @@ class LectureReply {
      * @returns {Promise<void>}
      */
     createLectureReply(lectureReplyData) {
-        let result;
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             const preview = yield lectureReplyData.review.substring(0, 20);
             lectureReplyData.preview = preview;
@@ -31,12 +30,7 @@ class LectureReply {
                             }
                             else {
                                 yield connection.release();
-                                result = {
-                                    success: true,
-                                    statusCode: 200,
-                                    message: 'createLectureReply: 리플 생성 성공'
-                                };
-                                resolve(result);
+                                resolve(lectureReplyData);
                             }
                         });
                     });
@@ -49,7 +43,7 @@ class LectureReply {
      * @param {string} lectureInfoIndex
      * @returns {Promise<void>}
      */
-    countGetLecturesReplyByLectureInfoIndex(lectureInfoIndex) {
+    countGetLectureReplyByLectureInfoIndex(lectureInfoIndex) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
@@ -62,6 +56,37 @@ class LectureReply {
                             else {
                                 yield connection.release();
                                 resolve(rows);
+                            }
+                        });
+                    });
+                });
+            });
+        }));
+    }
+    /**
+     * model: lectureReply 중복 검사
+     * @param {number} lectureInfoIndex
+     * @param {number} userIndex
+     * @returns {Promise<void>}
+     */
+    checkGetLectureReply(lectureInfoIndex, userIndex) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`SELECT COUNT(*) AS replyCount FROM lecturesReply WHERE lecturesReply.lectureInfoIndex = ${lectureInfoIndex} AND lecturesReply.userIndex = ${userIndex}`, function (err, rows) {
+                        return __awaiter(this, void 0, void 0, function* () {
+                            if (err) {
+                                yield connection.release();
+                                reject(err);
+                            }
+                            else {
+                                yield connection.release();
+                                if (rows[0].replyCount === 0) {
+                                    return resolve(rows);
+                                }
+                                else {
+                                    return reject('LectureReply already exists');
+                                }
                             }
                         });
                     });
@@ -498,6 +523,31 @@ class LectureReply {
                                     message: 'createLectureReply: 리플 삭제 성공'
                                 };
                                 resolve(result);
+                            }
+                        });
+                    });
+                });
+            });
+        }));
+    }
+    /**
+     * model: lectureReply 점수 조회
+     * @param {string} lectureInfoIndex
+     * @returns {Promise<void>}
+     */
+    scoreGetLectureReply(lectureInfoIndex) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`SELECT AVG(score) AS totalScore FROM lecturesReply WHERE lectureInfoIndex = ${lectureInfoIndex}`, function (err, rows) {
+                        return __awaiter(this, void 0, void 0, function* () {
+                            if (err) {
+                                yield connection.release();
+                                reject(err);
+                            }
+                            else {
+                                yield connection.release();
+                                resolve(rows);
                             }
                         });
                     });

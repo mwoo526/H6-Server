@@ -4,7 +4,7 @@ const pool = mysqlUtil.pool;
 
 export class Lecture {
 	/**
-	 * tokenVerify: lecture 생성
+	 * model: lecture 생성
 	 * @param lectureData
 	 * @returns {Promise<any>}
 	 */
@@ -25,7 +25,7 @@ export class Lecture {
 	}
 
 	/**
-	 * tokenVerify: lecture 리스트 조회
+	 * model: lecture 리스트 조회
 	 * @returns {Promise<any>}
 	 */
 	listLecture(): Promise<void> {
@@ -45,7 +45,7 @@ export class Lecture {
 	}
 
 	/**
-	 * tokenVerify: lecture index 조회
+	 * model: lecture index 조회
 	 * @param {number} lectureIndex
 	 * @returns {Promise<any>}
 	 */
@@ -66,7 +66,7 @@ export class Lecture {
 	}
 
 	/**
-	 * tokenVerify: lecture lectureCode 조회
+	 * model: lecture lectureCode 조회
 	 * @param {string} lectureCode
 	 * @returns {Promise<any>}
 	 */
@@ -87,7 +87,7 @@ export class Lecture {
 	}
 
 	/**
-	 * tokenVerify: lecture lectureName 조회
+	 * model: lecture lectureName 조회
 	 * @param {string} lectureName
 	 * @returns {Promise<any>}
 	 */
@@ -108,7 +108,7 @@ export class Lecture {
 	}
 
 	/**
-	 * tokenVerify: lecture track 조회
+	 * model: lecture track 조회
 	 * @param {string} track
 	 * @returns {Promise<any>}
 	 */
@@ -129,7 +129,7 @@ export class Lecture {
 	}
 
 	/**
-	 * tokenVerify: lecture 업데이트
+	 * model: lecture 업데이트
 	 * @param {number} lectureIndex
 	 * @param lectureData
 	 * @returns {Promise<any>}
@@ -152,7 +152,7 @@ export class Lecture {
 	}
 
 	/**
-	 * tokenVerify: lecture 삭제
+	 * model: lecture 삭제
 	 * @param {number} lectureIndex
 	 * @returns {Promise<any>}
 	 */

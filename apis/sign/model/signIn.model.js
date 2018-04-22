@@ -15,7 +15,7 @@ const mysql_util_1 = require("../../../packages/utils/mysql.util");
 const pool = mysql_util_1.mysqlUtil.pool;
 class SignIn {
     /**
-     * tokenVerify: 로그인
+     * model: 로그인
      * @param userData
      * @returns {Promise<any>}
      */
@@ -30,12 +30,10 @@ class SignIn {
                                 reject(err);
                             }
                             else {
-                                let err = {
-                                    message: 'The ID does not exist'
-                                };
+                                let err = 'The ID does not exist';
                                 if (rows.length === 0) {
                                     yield connection.release();
-                                    reject(err);
+                                    return reject(err);
                                 }
                                 else {
                                     if (rows[0].userPw === encryption_utli_1.encriptionPw.getHash(userData.userPw)) {
@@ -55,15 +53,14 @@ class SignIn {
                                             expiresIn: jwt_util_1.jwtToken.expiresln
                                         }, (err, token) => {
                                             if (err) {
-                                                throw new Error('The jwt is incorrect');
+                                                return reject('The jwt is incorrect');
                                             }
                                             resolve(token);
                                         });
                                     }
                                     else {
-                                        err.message = 'The password is incorrect';
                                         yield connection.release();
-                                        reject(err);
+                                        return reject('The password is incorrect');
                                     }
                                 }
                             }

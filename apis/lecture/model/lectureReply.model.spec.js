@@ -72,8 +72,18 @@ describe('lectureReply 모델', () => {
     // 	console.log(result);
     // 	expect(result).to.instanceof(Object);
     // });
-    it('countGetLecturesReplyByLectureInfoIndex', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield lectureReply_model_1.lectureReply.countGetLecturesReplyByLectureInfoIndex(15);
+    it('scoreGetLectureReply', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield lectureReply_model_1.lectureReply.scoreGetLectureReply(testLectureInfoIndex);
+        // console.log(result);
+        chai_1.expect(result).to.instanceof(Array);
+    }));
+    it('countGetLectureReplyByLectureInfoIndex', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield lectureReply_model_1.lectureReply.countGetLectureReplyByLectureInfoIndex(15);
+        // console.log(result);
+        chai_1.expect(result).to.instanceof(Array);
+    }));
+    it('checkGetLectureReply', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield lectureReply_model_1.lectureReply.checkGetLectureReply(testLectureInfoIndex, testUserIndex);
         // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));

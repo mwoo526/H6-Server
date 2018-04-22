@@ -24,9 +24,22 @@ async function createUser(req, res): Promise<void> {
 	let userResource = new UserResource(req.body);
 	try {
 		const result: any = await signUp.createUser(userResource.getSignUp());
-		res.send(result);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'createUser: 2001'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'createUser: 50000'
+				});
+				break;
+		}
 	}
 }
 

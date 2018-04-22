@@ -21,17 +21,44 @@ export class SignInRoutes {
  */
 async function getUser(req, res): Promise<void> {
 	try {
-		let result: any;
-		const resultUser: any = await signIn.getUser(req.body);
-		result = {
+		const result: any = await signIn.getUser(req.body);
+		res.send({
 			success: true,
 			statusCode: 200,
-			message: 'logged in successfully',
-			token: resultUser
-		};
-		res.json(result);
+			result: result,
+			message: 'getUser: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			case 'The ID does not exist':
+				res.send({
+					success: false,
+					statusCode: 404,
+					message: 'getUser: 40401'
+				});
+				break;
+			case 'The password is incorrect':
+				res.send({
+					success: false,
+					statusCode: 404,
+					message: 'getUser: 40402'
+				});
+				break;
+			case 'The jwt is incorrect':
+				res.send({
+					success: false,
+					statusCode: 403,
+					message: 'getUser: 40301'
+				});
+				break;
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'getUser: 50000'
+				});
+				break;
+		}
 	}
 }
 

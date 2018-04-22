@@ -5,9 +5,9 @@ export function verifyUser(token: any): Promise<any> {
 	return new Promise(async (resolve, reject) => {
 		await jwt.verify(token, jwtToken.secret, (err, decoded) => {
 			if (err) {
-				reject(err);
+				return reject(err);
 			}
-			resolve(decoded);
+			return resolve(decoded);
 		})
 	})
 }

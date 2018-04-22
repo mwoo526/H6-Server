@@ -38,10 +38,23 @@ function createLectureInfo(req, res) {
         let lectureInfoData = new lectureInfo_resource_1.LectureInfoResource(req.body);
         try {
             const result = yield lectureInfo_model_1.lectureInfo.createLectureInfo(lectureInfoData.getLectureInfo());
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'createLectureInfo: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'createLectureInfo: 50000'
+                    });
+                    break;
+            }
         }
     });
 }
@@ -57,10 +70,23 @@ function pageListLectureInfo(req, res) {
             let page = parseInt(req.query.page);
             let count = parseInt(req.query.count);
             const result = yield lectureInfo_model_1.lectureInfo.pageListLectureInfo(page, count);
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'pageListLectureInfo: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'pageListLectureInfo: 50000'
+                    });
+                    break;
+            }
         }
     });
 }
@@ -75,10 +101,23 @@ function getLectureInfoByLectureInfoIndex(req, res) {
         let lectureInfoIndex = req.params.lectureInfoIndex;
         try {
             const result = yield lectureInfo_model_1.lectureInfo.getLectureInfoByLectureInfoIndex(lectureInfoIndex);
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'getLectureInfoByLectureInfoIndex: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'getLectureInfoByLectureInfoIndex: 50000'
+                    });
+                    break;
+            }
         }
     });
 }
@@ -95,12 +134,22 @@ function pageGetLectureInfoByLectureName(req, res) {
         let count = parseInt(req.query.count);
         try {
             const result = yield lectureInfo_model_1.lectureInfo.pageGetLectureInfoByLectureName(lectureName, page, count);
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'pageGetLectureInfoByLectureName: 200'
+            });
         }
         catch (err) {
             switch (err) {
                 default:
-                    res.send('50000: Server error');
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'pageGetLectureInfoByLectureName: 50000'
+                    });
+                    break;
             }
         }
     });
@@ -118,10 +167,23 @@ function pageGetLectureInfoByProfessorName(req, res) {
         let count = parseInt(req.query.count);
         try {
             const result = yield lectureInfo_model_1.lectureInfo.pageGetLectureInfoByProfessorName(professorName, page, count);
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'pageGetLectureInfoByProfessorName: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'pageGetLectureInfoByProfessorName: 50000'
+                    });
+                    break;
+            }
         }
     });
 }
@@ -137,10 +199,23 @@ function updateLectureInfo(req, res) {
         let lectureInfoData = new lectureInfo_resource_1.LectureInfoResource(req.body);
         try {
             const result = yield lectureInfo_model_1.lectureInfo.updateLectureInfo(lectureInfoIndex, lectureInfoData);
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'updateLectureInfo: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'updateLectureInfo: 50000'
+                    });
+                    break;
+            }
         }
     });
 }
@@ -155,10 +230,23 @@ function deleteLectureInfo(req, res) {
         let lectureInfoIndex = req.params.lectureInfoIndex;
         try {
             const result = yield lectureInfo_model_1.lectureInfo.deleteLectureInfo(lectureInfoIndex);
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'deleteLectureInfo: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'deleteLectureInfo: 50000'
+                    });
+                    break;
+            }
         }
     });
 }
