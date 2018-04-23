@@ -17,13 +17,13 @@ class UserValidation {
     /**
      * model: 인증코드 생성
      * @param {string} userId
-     * @param {string} email
+     * @param {string} userEmail
      * @param validationCode
      * @returns {Promise<any>}
      */
-    createValidationCode(userId, email, validationCode) {
+    createValidationCode(userId, userEmail, validationCode) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield email_util_1.emailUtil.sendEmail('kingdom0608@gmail.com', `${email}@naver.com`, 'test', validationCode);
+            yield email_util_1.emailUtil.sendEmail('kingdom0608@gmail.com', `${userEmail}@naver.com`, 'test', validationCode);
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`UPDATE usersValidation SET validationCode = '${validationCode}' WHERE userId = '${userId}'`, function (err) {
@@ -75,7 +75,7 @@ class UserValidation {
     checkValidationCode(userId, userData, validationCode) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             const getValidationCode = yield this.getValidationCode(userId);
-            if (userData[0].email == null) {
+            if (userData[0].userEmail == null) {
                 throw new Error('The email does not exist.');
             }
             else {
@@ -123,7 +123,6 @@ class UserValidation {
      * @returns {Promise<any>}
      */
     checkUserId(userId) {
-        let result;
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
@@ -139,7 +138,7 @@ class UserValidation {
                             }
                             else {
                                 connection.release();
-                                return resolve(result);
+                                return resolve(rows);
                             }
                         }
                     });
@@ -149,15 +148,14 @@ class UserValidation {
     }
     /**
      * model: 이메일 중복 검사
-     * @param {string} email
+     * @param {string} userEmail
      * @returns {Promise<any>}
      */
-    checkEmail(email) {
-        let result;
+    checkUserEmail(userEmail) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT * FROM users WHERE email = '${email}'`, function (err, rows) {
+                    yield connection.query(`SELECT * FROM users WHERE userEmail = '${userEmail}'`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
                                 connection.release();
@@ -170,7 +168,33 @@ class UserValidation {
                                 }
                                 else {
                                     yield connection.release();
-                                    return resolve(result);
+                                    return resolve(rows);
+                                }
+                            }
+                        });
+                    });
+                });
+            });
+        }));
+    }
+    checkUserNickName(userNickName) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`SELECT * FROM users WHERE userNickName = '${userNickName}'`, function (err, rows) {
+                        return __awaiter(this, void 0, void 0, function* () {
+                            if (err) {
+                                connection.release();
+                                reject(err);
+                            }
+                            else {
+                                if (rows[0] != null) {
+                                    yield connection.release();
+                                    return reject('NickName already exists');
+                                }
+                                else {
+                                    yield connection.release();
+                                    return resolve(rows);
                                 }
                             }
                         });

@@ -21,7 +21,8 @@ class UserValidationRoutes {
         this.userValidationRouter.post('/userValidation/sendValidationCode/:userId', sendValidationCode);
         this.userValidationRouter.post('/userValidation/checkValidationCode/:userId', checkValidationCode);
         this.userValidationRouter.get('/userValidation/checkUserId/:userId', checkUserId);
-        this.userValidationRouter.get('/userValidation/checkEmail/:email', checkEmail);
+        this.userValidationRouter.get('/userValidation/checkUserNickName/:userNickName', checkUserNickName);
+        this.userValidationRouter.get('/userValidation/checkEmail/:userEmail', checkEmail);
     }
 }
 exports.UserValidationRoutes = UserValidationRoutes;
@@ -36,9 +37,9 @@ function sendValidationCode(req, res) {
         try {
             const userId = req.params.userId;
             const userData = yield user_model_1.user.getUser(userId);
-            const email = userData[0].email;
+            const userEmail = userData[0].userEmail;
             const validationCode = yield String(inviteCode_util_1.getRandomInt());
-            const result = yield userValidation_model_1.userValidation.createValidationCode(userId, email, validationCode);
+            const result = yield userValidation_model_1.userValidation.createValidationCode(userId, userEmail, validationCode);
             res.send(result);
         }
         catch (err) {
@@ -104,6 +105,43 @@ function checkUserId(req, res) {
     });
 }
 /**
+ * route: 닉네임 중복 체크
+ * @param req
+ * @param res
+ * @returns {Promise<any>}
+ */
+function checkUserNickName(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const userNickName = req.params.userNickName;
+        try {
+            yield userValidation_model_1.userValidation.checkUserNickName(userNickName);
+            res.send({
+                success: true,
+                statusCode: 200,
+                message: 'checkUserNickName: 200'
+            });
+        }
+        catch (err) {
+            switch (err) {
+                case 'NickName already exists':
+                    res.send({
+                        success: false,
+                        statusCode: 409,
+                        message: 'checkUserNickName: 40901'
+                    });
+                    break;
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'checkUserNickName: 50000'
+                    });
+                    break;
+            }
+        }
+    });
+}
+/**
  * route: 이메일 중복 체크
  * @param req
  * @param res
@@ -111,9 +149,9 @@ function checkUserId(req, res) {
  */
 function checkEmail(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const email = req.params.email;
+        const userEmail = req.params.userEmail;
         try {
-            yield userValidation_model_1.userValidation.checkEmail(email);
+            yield userValidation_model_1.userValidation.checkUserEmail(userEmail);
             res.send({
                 success: true,
                 statusCode: 200,

@@ -14,7 +14,8 @@ export class UserValidationRoutes {
 		this.userValidationRouter.post('/userValidation/sendValidationCode/:userId', sendValidationCode);
 		this.userValidationRouter.post('/userValidation/checkValidationCode/:userId', checkValidationCode);
 		this.userValidationRouter.get('/userValidation/checkUserId/:userId', checkUserId);
-		this.userValidationRouter.get('/userValidation/checkEmail/:email', checkEmail);
+		this.userValidationRouter.get('/userValidation/checkUserNickName/:userNickName', checkUserNickName);
+		this.userValidationRouter.get('/userValidation/checkEmail/:userEmail', checkEmail);
 	}
 }
 
@@ -28,9 +29,9 @@ async function sendValidationCode(req, res): Promise<void> {
 	try {
 		const userId: string = req.params.userId;
 		const userData: any = await user.getUser(userId);
-		const email: string = userData[0].email;
+		const userEmail: string = userData[0].userEmail;
 		const validationCode: any = await String(getRandomInt());
-		const result = await userValidation.createValidationCode(userId, email, validationCode);
+		const result = await userValidation.createValidationCode(userId, userEmail, validationCode);
 		res.send(result);
 	} catch (err) {
 		res.send(err);
@@ -91,15 +92,50 @@ async function checkUserId(req, res): Promise<void> {
 }
 
 /**
+ * route: 닉네임 중복 체크
+ * @param req
+ * @param res
+ * @returns {Promise<any>}
+ */
+async function checkUserNickName(req, res): Promise<any> {
+	const userNickName: string = req.params.userNickName;
+	try {
+		await userValidation.checkUserNickName(userNickName);
+		res.send({
+			success: true,
+			statusCode: 200,
+			message: 'checkUserNickName: 200'
+		});
+	} catch (err) {
+		switch (err) {
+			case 'NickName already exists':
+				res.send({
+					success: false,
+					statusCode: 409,
+					message: 'checkUserNickName: 40901'
+				});
+				break;
+			default :
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'checkUserNickName: 50000'
+				});
+				break;
+		}
+	}
+}
+
+/**
  * route: 이메일 중복 체크
  * @param req
  * @param res
  * @returns {Promise<any>}
  */
 async function checkEmail(req, res): Promise<any> {
-	const email: string = req.params.email;
+	const userEmail: string = req.params.userEmail;
 	try {
-		await userValidation.checkEmail(email);
+		await userValidation.checkUserEmail(userEmail);
 		res.send({
 			success: true,
 			statusCode: 200,

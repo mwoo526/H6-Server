@@ -32,7 +32,7 @@ class SignIn {
 										tokenIndex:rows[0].userIndex,
 										tokenId: rows[0].userId,
 										tokenNickname: rows[0].userNickName,
-										tokenEmail:rows[0].email,
+										tokenEmail:rows[0].userEmail,
 										tokenMajor:rows[0].major,
 										tokenMinor:rows[0].minor,
 										tokenDoubleMajor : rows[0].doubleMajor,

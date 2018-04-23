@@ -10,13 +10,13 @@ export class UserValidation {
 	/**
 	 * model: 인증코드 생성
 	 * @param {string} userId
-	 * @param {string} email
+	 * @param {string} userEmail
 	 * @param validationCode
 	 * @returns {Promise<any>}
 	 */
-	createValidationCode(userId: string, email: string, validationCode: any): Promise<any> {
+	createValidationCode(userId: string, userEmail: string, validationCode: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
-			await emailUtil.sendEmail('kingdom0608@gmail.com', `${email}@naver.com`, 'test', validationCode);
+			await emailUtil.sendEmail('kingdom0608@gmail.com', `${userEmail}@naver.com`, 'test', validationCode);
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`UPDATE usersValidation SET validationCode = '${validationCode}' WHERE userId = '${userId}'`, async function(err) {
 					if (err) {
@@ -62,7 +62,7 @@ export class UserValidation {
 	checkValidationCode(userId: string, userData: any, validationCode: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			const getValidationCode: any = await this.getValidationCode(userId);
-			if (userData[0].email == null) {
+			if (userData[0].userEmail == null) {
 				throw new Error('The email does not exist.');
 			}
 			else {
@@ -109,7 +109,6 @@ export class UserValidation {
 	 * @returns {Promise<any>}
 	 */
 	checkUserId(userId: string): Promise<any> {
-		let result: any;
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT * FROM users WHERE userId = '${userId}'`, function(err, rows) {
@@ -122,7 +121,7 @@ export class UserValidation {
 							return reject('Id already exists');
 						} else {
 							connection.release();
-							return resolve(result);
+							return resolve(rows);
 						}
 					}
 				})
@@ -132,14 +131,13 @@ export class UserValidation {
 
 	/**
 	 * model: 이메일 중복 검사
-	 * @param {string} email
+	 * @param {string} userEmail
 	 * @returns {Promise<any>}
 	 */
-	checkEmail(email: string): Promise<any> {
-		let result: any;
+	checkUserEmail(userEmail: string): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM users WHERE email = '${email}'`, async function(err, rows) {
+				await connection.query(`SELECT * FROM users WHERE userEmail = '${userEmail}'`, async function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -149,7 +147,28 @@ export class UserValidation {
 							return reject('Email already exists');
 						} else {
 							await connection.release();
-							return resolve(result);
+							return resolve(rows);
+						}
+					}
+				})
+			})
+		})
+	}
+
+	checkUserNickName(userNickName: string): Promise<any> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`SELECT * FROM users WHERE userNickName = '${userNickName}'`, async function(err, rows) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						if (rows[0] != null) {
+							await connection.release();
+							return reject('NickName already exists');
+						} else {
+							await connection.release();
+							return resolve(rows);
 						}
 					}
 				})

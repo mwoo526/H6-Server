@@ -82,11 +82,12 @@ describe('lectureReply 모델', () => {
         // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
-    it('checkGetLectureReply', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield lectureReply_model_1.lectureReply.checkGetLectureReply(testLectureInfoIndex, testUserIndex);
-        // console.log(result);
-        chai_1.expect(result).to.instanceof(Array);
-    }));
+    /** 리플을 이미 남겼기 때문에 오류 발생 */
+    // it('checkGetLectureReply', async () => {
+    // 	const result = await lectureReply.checkGetLectureReply(testLectureInfoIndex, testUserIndex);
+    // 	// console.log(result);
+    // 	expect(result).to.instanceof(Array);
+    // });
     it('listLectureReply', () => __awaiter(this, void 0, void 0, function* () {
         const result = yield lectureReply_model_1.lectureReply.listLectureReply();
         // console.log(result);

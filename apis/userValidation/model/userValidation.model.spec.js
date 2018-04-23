@@ -16,7 +16,8 @@ describe('userValidation 모델', () => {
     let testUserId = '이미 존재하는 아이디';
     let testUserId2 = '사용 가능한 아이디';
     let testUserPw = 'marine1164';
-    let testUserNickName = 'JadeAhn';
+    let testUserNickName = '이미 존재하는 닉네임';
+    let testUserNickName2 = '사용 가능한 닉네임';
     let testEmail = '이미 존재하는 이메일';
     let testEmail2 = '사용 가능한 이메일';
     let testMajor = '산업경영공학과';
@@ -27,7 +28,7 @@ describe('userValidation 모델', () => {
                 userId: testUserId,
                 userPw: testUserPw,
                 userNickName: testUserNickName,
-                email: testEmail,
+                userEmail: testEmail,
                 major: testMajor,
                 admissionYear: testAdmissionYear
             });
@@ -46,23 +47,18 @@ describe('userValidation 모델', () => {
             console.error('err', err);
         }
     }));
-    it('checkUserId - 이미 존재하는 아이디', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield userValidation_model_1.userValidation.checkUserId(resultCreateUser.userId);
-        // console.log(result);
-        chai_1.expect(result).instanceof(Object);
-    }));
     it('checkUserId - 사용 가능한 아이디', () => __awaiter(this, void 0, void 0, function* () {
         const result = yield userValidation_model_1.userValidation.checkUserId(testUserId2);
         // console.log(result);
         chai_1.expect(result).instanceof(Object);
     }));
-    it('checkEmail - 이미 존재하는 이메일', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield userValidation_model_1.userValidation.checkEmail(resultCreateUser.email);
+    it('checkUserEmail - 사용 가능한 이메일', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield userValidation_model_1.userValidation.checkUserEmail(testEmail2);
         // console.log(result);
         chai_1.expect(result).instanceof(Object);
     }));
-    it('checkEmail - 사용 가능한 이메일', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield userValidation_model_1.userValidation.checkEmail(testEmail2);
+    it('checkUserNickName - 사용 가능한 닉네임', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield userValidation_model_1.userValidation.checkUserNickName(testUserNickName2);
         // console.log(result);
         chai_1.expect(result).instanceof(Object);
     }));
