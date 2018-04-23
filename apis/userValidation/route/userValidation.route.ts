@@ -15,7 +15,7 @@ export class UserValidationRoutes {
 		this.userValidationRouter.post('/userValidation/checkValidationCode/:userId', checkValidationCode);
 		this.userValidationRouter.get('/userValidation/checkUserId/:userId', checkUserId);
 		this.userValidationRouter.get('/userValidation/checkUserNickName/:userNickName', checkUserNickName);
-		this.userValidationRouter.get('/userValidation/checkEmail/:userEmail', checkEmail);
+		this.userValidationRouter.get('/userValidation/checkUserEmail/:userEmail', checkEmail);
 	}
 }
 
