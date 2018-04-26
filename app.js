@@ -23,6 +23,7 @@ class Server {
         /** 라우터 추가 */
         this.app.use(signUp_route_1.signUpRoutes.signUpRouter);
         this.app.use(signIn_route_1.signInRoutes.signInRouter);
+        this.app.use(userValidation_route_1.userValidationRoutes.userValidationRouter);
         /** 라우터 토큰 검증 */
         this.app.use(tokenVerify_middleware_1.verify);
         this.app.use(test_route_1.testRoutes.testRouter);
@@ -31,8 +32,7 @@ class Server {
         this.app.use(lecture_route_1.lectureRoutes.lectureRouter);
         this.app.use(lectureInfo_route_1.lectureInfoRoutes.lectureInfoRouter);
         this.app.use(lectureReply_route_1.lectureReplyRoutes.lectureReplyRouter);
-        this.app.use(userValidation_route_1.userValidationRoutes.userValidationRouter);
-        /** 미들웨어 처리 */
+        /** 라우터 오류 처리 */
         this.app.use(error_middleware_1.notFoundError);
         this.app.use(error_middleware_1.serverError);
     }

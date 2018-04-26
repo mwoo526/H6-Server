@@ -25,6 +25,7 @@ export class Server {
 		/** 라우터 추가 */
 		this.app.use(signUpRoutes.signUpRouter);
 		this.app.use(signInRoutes.signInRouter);
+		this.app.use(userValidationRoutes.userValidationRouter);
 		/** 라우터 토큰 검증 */
 		this.app.use(verify);
 		this.app.use(testRoutes.testRouter);
@@ -33,9 +34,8 @@ export class Server {
 		this.app.use(lectureRoutes.lectureRouter);
 		this.app.use(lectureInfoRoutes.lectureInfoRouter);
 		this.app.use(lectureReplyRoutes.lectureReplyRouter);
-		this.app.use(userValidationRoutes.userValidationRouter);
 
-		/** 미들웨어 처리 */
+		/** 라우터 오류 처리 */
 		this.app.use(notFoundError);
 		this.app.use(serverError);
 	}
