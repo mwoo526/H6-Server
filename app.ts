@@ -8,6 +8,7 @@ import { signInRoutes } from './apis/sign/route/signIn.route';
 import { signUpRoutes } from './apis/sign/route/signUp.route';
 import { testRoutes } from './apis/test/route/test.route';
 import { userRoutes } from './apis/user/route/user.route';
+import { trackRoutes } from './apis/track/route/track.route';
 import { userValidationRoutes } from './apis/userValidation/route/userValidation.route';
 import { notFoundError, serverError } from './middlewares/error.middleware';
 import { verify } from './middlewares/tokenVerify.middleware';
@@ -30,6 +31,7 @@ export class Server {
 		this.app.use(verify);
 		this.app.use(testRoutes.testRouter);
 		this.app.use(userRoutes.userRouter);
+		this.app.use(trackRoutes.trackRouter);
 		this.app.use(professorRoutes.professorRouter);
 		this.app.use(lectureRoutes.lectureRouter);
 		this.app.use(lectureInfoRoutes.lectureInfoRouter);

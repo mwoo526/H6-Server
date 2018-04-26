@@ -10,6 +10,7 @@ const signIn_route_1 = require("./apis/sign/route/signIn.route");
 const signUp_route_1 = require("./apis/sign/route/signUp.route");
 const test_route_1 = require("./apis/test/route/test.route");
 const user_route_1 = require("./apis/user/route/user.route");
+const track_route_1 = require("./apis/track/route/track.route");
 const userValidation_route_1 = require("./apis/userValidation/route/userValidation.route");
 const error_middleware_1 = require("./middlewares/error.middleware");
 const tokenVerify_middleware_1 = require("./middlewares/tokenVerify.middleware");
@@ -28,6 +29,7 @@ class Server {
         this.app.use(tokenVerify_middleware_1.verify);
         this.app.use(test_route_1.testRoutes.testRouter);
         this.app.use(user_route_1.userRoutes.userRouter);
+        this.app.use(track_route_1.trackRoutes.trackRouter);
         this.app.use(professor_route_1.professorRoutes.professorRouter);
         this.app.use(lecture_route_1.lectureRoutes.lectureRouter);
         this.app.use(lectureInfo_route_1.lectureInfoRoutes.lectureInfoRouter);
