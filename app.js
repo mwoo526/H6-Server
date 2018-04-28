@@ -18,6 +18,9 @@ class Server {
     constructor() {
         /** express 설정을 위한 express 선언 */
         this.app = express();
+        this.app.get('/console', function (req, res) {
+            res.send('H6-server Running');
+        });
         /** bodyParser 선언 */
         this.app.use(bodyParser.urlencoded({ extended: false }));
         this.app.use(bodyParser.json());
@@ -27,6 +30,7 @@ class Server {
         this.app.use(userValidation_route_1.userValidationRoutes.userValidationRouter);
         /** 라우터 토큰 검증 */
         this.app.use(tokenVerify_middleware_1.verify);
+        /** 라우터 추가 */
         this.app.use(test_route_1.testRoutes.testRouter);
         this.app.use(user_route_1.userRoutes.userRouter);
         this.app.use(track_route_1.trackRoutes.trackRouter);

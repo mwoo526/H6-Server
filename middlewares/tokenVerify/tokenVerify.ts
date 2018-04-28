@@ -1,4 +1,4 @@
-import * as jwt from 'Jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
 import { jwtToken } from '../../packages/utils/jwt.util';
 
 export function verifyUser(token: any): Promise<any> {

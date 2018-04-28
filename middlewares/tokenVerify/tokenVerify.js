@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const jwt = require("Jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const jwt_util_1 = require("../../packages/utils/jwt.util");
 function verifyUser(token) {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
