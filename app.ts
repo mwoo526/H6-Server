@@ -6,6 +6,7 @@ import { lectureReplyRoutes } from './apis/lecture/route/lectureReply.route';
 import { professorRoutes } from './apis/professor/route/professor.route';
 import { signInRoutes } from './apis/sign/route/signIn.route';
 import { signUpRoutes } from './apis/sign/route/signUp.route';
+import { termsRoutes } from './apis/terms/route/terms.route';
 import { testRoutes } from './apis/test/route/test.route';
 import { userRoutes } from './apis/user/route/user.route';
 import { trackRoutes } from './apis/track/route/track.route';
@@ -29,6 +30,7 @@ export class Server {
 		/** 라우터 추가 */
 		this.app.use(signUpRoutes.signUpRouter);
 		this.app.use(signInRoutes.signInRouter);
+		this.app.use(termsRoutes.termsRouter);
 		this.app.use(userValidationRoutes.userValidationRouter);
 		/** 라우터 토큰 검증 */
 		this.app.use(verify);
@@ -40,7 +42,6 @@ export class Server {
 		this.app.use(lectureRoutes.lectureRouter);
 		this.app.use(lectureInfoRoutes.lectureInfoRouter);
 		this.app.use(lectureReplyRoutes.lectureReplyRouter);
-
 		/** 라우터 오류 처리 */
 		this.app.use(notFoundError);
 		this.app.use(serverError);

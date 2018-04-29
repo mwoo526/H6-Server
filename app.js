@@ -8,6 +8,7 @@ const lectureReply_route_1 = require("./apis/lecture/route/lectureReply.route");
 const professor_route_1 = require("./apis/professor/route/professor.route");
 const signIn_route_1 = require("./apis/sign/route/signIn.route");
 const signUp_route_1 = require("./apis/sign/route/signUp.route");
+const terms_route_1 = require("./apis/terms/route/terms.route");
 const test_route_1 = require("./apis/test/route/test.route");
 const user_route_1 = require("./apis/user/route/user.route");
 const track_route_1 = require("./apis/track/route/track.route");
@@ -27,6 +28,7 @@ class Server {
         /** 라우터 추가 */
         this.app.use(signUp_route_1.signUpRoutes.signUpRouter);
         this.app.use(signIn_route_1.signInRoutes.signInRouter);
+        this.app.use(terms_route_1.termsRoutes.termsRouter);
         this.app.use(userValidation_route_1.userValidationRoutes.userValidationRouter);
         /** 라우터 토큰 검증 */
         this.app.use(tokenVerify_middleware_1.verify);

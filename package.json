@@ -10,17 +10,19 @@
   "license": "ISC",
   "dependencies": {
     "@types/mocha": "^2.2.48",
+    "@types/node": "^10.0.0",
     "body-parser": "^1.18.2",
     "boom": "^7.1.1",
     "chai": "^4.1.2",
+    "chalk": "^2.3.2",
     "express": "^4.16.2",
+    "graceful-fs": "^4.1.11",
     "jsonwebtoken": "^8.2.0",
     "logger": "0.0.1",
     "mocha": "^2.5.3",
     "node-mysql": "^0.4.2",
     "node-uuid": "^1.4.8",
     "nodemailer": "^4.4.2",
-    "pbkdf2": "^3.0.14",
-    "chalk": "^2.3.2"
+    "pbkdf2": "^3.0.14"
   }
 }
