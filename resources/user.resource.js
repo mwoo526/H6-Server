@@ -6,7 +6,6 @@ class UserResource {
         this.setUserId(signUpData.userId);
         this.setUserPw(signUpData.userPw);
         this.setUserNickName(signUpData.userNickName);
-        this.setUserEmail(signUpData.userEmail);
         this.setMajor(signUpData.major);
         this.setMinor(signUpData.minor);
         this.setDoubleMajor(signUpData.doubleMajor);
@@ -30,12 +29,6 @@ class UserResource {
     }
     setUserNickName(userNickName) {
         this.userNickName = userNickName;
-    }
-    getUserEmail() {
-        return this.userEmail;
-    }
-    setUserEmail(userEmail) {
-        this.userEmail = userEmail;
     }
     getMajor() {
         return this.major;
@@ -72,7 +65,6 @@ class UserResource {
             userId: this.getUserId(),
             userPw: this.getUserPw(),
             userNickName: this.getUserNickName(),
-            userEmail: this.getUserEmail(),
             major: this.getMajor(),
             minor: this.getMinor(),
             doubleMajor: this.getDoubleMajor(),

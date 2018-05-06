@@ -15,7 +15,6 @@ export class UserValidationRoutes {
 		this.userValidationRouter.post('/userValidation/checkValidationCode/:userId', checkValidationCode);
 		this.userValidationRouter.get('/userValidation/checkUserId/:userId', checkUserId);
 		this.userValidationRouter.get('/userValidation/checkUserNickName/:userNickName', checkUserNickName);
-		this.userValidationRouter.get('/userValidation/checkUserEmail/:userEmail', checkEmail);
 	}
 }
 
@@ -120,41 +119,6 @@ async function checkUserNickName(req, res): Promise<any> {
 					success: false,
 					statusCode: 500,
 					message: 'checkUserNickName: 50000'
-				});
-				break;
-		}
-	}
-}
-
-/**
- * route: 이메일 중복 체크
- * @param req
- * @param res
- * @returns {Promise<any>}
- */
-async function checkEmail(req, res): Promise<any> {
-	const userEmail: string = req.params.userEmail;
-	try {
-		await userValidation.checkUserEmail(userEmail);
-		res.send({
-			success: true,
-			statusCode: 200,
-			message: 'checkEmail: 200'
-		});
-	} catch (err) {
-		switch (err) {
-			case 'Email already exists':
-				res.send({
-					success: false,
-					statusCode: 409,
-					message: 'checkEmail: 40901'
-				});
-				break;
-			default :
-				res.send({
-					success: false,
-					statusCode: 500,
-					message: 'checkEmail: 50000'
 				});
 				break;
 		}

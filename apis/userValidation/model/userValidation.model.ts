@@ -129,32 +129,6 @@ export class UserValidation {
 		})
 	}
 
-	/**
-	 * model: 이메일 중복 검사
-	 * @param {string} userEmail
-	 * @returns {Promise<any>}
-	 */
-	checkUserEmail(userEmail: string): Promise<any> {
-		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM users WHERE userEmail = '${userEmail}'`, async function(err, rows) {
-					if (err) {
-						connection.release();
-						reject(err);
-					} else {
-						if (rows[0] != null) {
-							await connection.release();
-							return reject('Email already exists');
-						} else {
-							await connection.release();
-							return resolve(rows);
-						}
-					}
-				})
-			})
-		})
-	}
-
 	checkUserNickName(userNickName: string): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
