@@ -20,7 +20,7 @@ describe('lectureInfo 모델', () => {
 	});
 
 	it('pageListLectureInfo', async () => {
-		const result = await lectureInfo.pageListLectureInfo(1, 3);
+		const result = await lectureInfo.pageListLectureInfo(3, 3);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});

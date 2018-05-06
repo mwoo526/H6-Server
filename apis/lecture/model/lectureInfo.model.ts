@@ -34,9 +34,10 @@ export class LectureInfo {
 	listLectureInfo(): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
+				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t1.updatedAt, t2.lectureName, t2.track, t3.professorName 
 					FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
-					INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex`, async function(err, rows) {
+					INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex
+					ORDER BY t1.updatedAt DESC`, async function(err, rows) {
 					if (err) {
 						await connection.release();
 						reject(err);
@@ -60,11 +61,11 @@ export class LectureInfo {
 				if (start < 0) {
 					start = 0;
 				}
-				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName
+				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t1.updatedAt, t2.lectureName, t2.track, t3.professorName
           FROM lecturesInfo AS t1 
           INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
           INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
-          ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
+          ORDER BY t1.updatedAt DESC LIMIT ${start}, ${count}`, async function(err, rows) {
 					if (err) {
 						await connection.release();
 						reject(err);

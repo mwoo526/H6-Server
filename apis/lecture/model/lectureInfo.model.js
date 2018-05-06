@@ -46,9 +46,10 @@ class LectureInfo {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
+                    yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t1.updatedAt, t2.lectureName, t2.track, t3.professorName 
 					FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
-					INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex`, function (err, rows) {
+					INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex
+					ORDER BY t1.updatedAt DESC`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
                                 yield connection.release();
@@ -76,11 +77,11 @@ class LectureInfo {
                     if (start < 0) {
                         start = 0;
                     }
-                    yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName
+                    yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t1.updatedAt, t2.lectureName, t2.track, t3.professorName
           FROM lecturesInfo AS t1 
           INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
           INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
-          ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
+          ORDER BY t1.updatedAt DESC LIMIT ${start}, ${count}`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
                                 yield connection.release();
