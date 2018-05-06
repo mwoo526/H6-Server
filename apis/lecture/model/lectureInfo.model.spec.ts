@@ -25,6 +25,18 @@ describe('lectureInfo 모델', () => {
 		expect(result).to.instanceof(Array);
 	});
 
+	it('listLectureInfoBySearchTerm', async () => {
+		const result = await lectureInfo.listLectureInfoBySearchTerm('os');
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
+	it('pageListLectureInfoBySearchTerm', async () => {
+		const result = await lectureInfo.pageListLectureInfoBySearchTerm('os', 1,3);
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
 	it('getLectureInfoByLectureInfoIndex', async () => {
 		const result = await lectureInfo.getLectureInfoByLectureInfoIndex(1);
 		// console.log(result);

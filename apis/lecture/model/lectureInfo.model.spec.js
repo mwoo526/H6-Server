@@ -31,6 +31,16 @@ describe('lectureInfo 모델', () => {
         // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
+    it('listLectureInfoBySearchTerm', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield lectureInfo_model_1.lectureInfo.listLectureInfoBySearchTerm('os');
+        // console.log(result);
+        chai_1.expect(result).to.instanceof(Array);
+    }));
+    it('pageListLectureInfoBySearchTerm', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield lectureInfo_model_1.lectureInfo.pageListLectureInfoBySearchTerm('os', 1, 3);
+        // console.log(result);
+        chai_1.expect(result).to.instanceof(Array);
+    }));
     it('getLectureInfoByLectureInfoIndex', () => __awaiter(this, void 0, void 0, function* () {
         const result = yield lectureInfo_model_1.lectureInfo.getLectureInfoByLectureInfoIndex(1);
         // console.log(result);

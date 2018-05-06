@@ -101,6 +101,75 @@ class LectureInfo {
         }));
     }
     /**
+     * model: lectureInfo searchTerm 리스트 조회
+     * @param {string} searchTerm
+     * @returns {Promise<void>}
+     */
+    listLectureInfoBySearchTerm(searchTerm) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureCode, t2.lectureName, t2.track, t3.professorName 
+				FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
+				INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
+				WHERE t2.lectureCode LIKE '%${searchTerm}%' 
+				OR t2.lectureName LIKE '%${searchTerm}%' 
+				OR t2.track LIKE '%${searchTerm}%' 
+				OR t3.professorName LIKE '%${searchTerm}%'`, function (err, rows) {
+                        return __awaiter(this, void 0, void 0, function* () {
+                            if (err) {
+                                yield connection.release();
+                                reject(err);
+                            }
+                            else {
+                                yield connection.release();
+                                resolve(rows);
+                            }
+                        });
+                    });
+                });
+            });
+        }));
+    }
+    /**
+     * model: lectureInfo searchTerm page 리스트 조회
+     * @param {string} searchTerm
+     * @param {number} page
+     * @param {number} count
+     * @returns {Promise<void>}
+     */
+    pageListLectureInfoBySearchTerm(searchTerm, page, count) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    let start = (page - 1) * count;
+                    if (start < 0) {
+                        start = 0;
+                    }
+                    yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureCode, t2.lectureName, t2.track, t3.professorName 
+				FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
+				INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
+				WHERE t2.lectureCode LIKE '%${searchTerm}%' 
+				OR t2.lectureName LIKE '%${searchTerm}%' 
+				OR t2.track LIKE '%${searchTerm}%' 
+				OR t3.professorName LIKE '%${searchTerm}%'
+				ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
+                        return __awaiter(this, void 0, void 0, function* () {
+                            if (err) {
+                                yield connection.release();
+                                reject(err);
+                            }
+                            else {
+                                yield connection.release();
+                                resolve(rows);
+                            }
+                        });
+                    });
+                });
+            });
+        }));
+    }
+    /**
      * model: lectureInfo index 조회
      * @param lectureInfoIndex
      * @returns {Promise<void>}

@@ -82,6 +82,67 @@ export class LectureInfo {
 	}
 
 	/**
+	 * model: lectureInfo searchTerm 리스트 조회
+	 * @param {string} searchTerm
+	 * @returns {Promise<void>}
+	 */
+	listLectureInfoBySearchTerm(searchTerm: string): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureCode, t2.lectureName, t2.track, t3.professorName 
+				FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
+				INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
+				WHERE t2.lectureCode LIKE '%${searchTerm}%' 
+				OR t2.lectureName LIKE '%${searchTerm}%' 
+				OR t2.track LIKE '%${searchTerm}%' 
+				OR t3.professorName LIKE '%${searchTerm}%'`, async function(err, rows) {
+					if (err) {
+						await connection.release();
+						reject(err);
+					} else {
+						await connection.release();
+						resolve(rows);
+					}
+				});
+			})
+		})
+	}
+
+	/**
+	 * model: lectureInfo searchTerm page 리스트 조회
+	 * @param {string} searchTerm
+	 * @param {number} page
+	 * @param {number} count
+	 * @returns {Promise<void>}
+	 */
+	pageListLectureInfoBySearchTerm(searchTerm: string, page: number, count: number): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				let start = (page - 1) * count;
+				if (start < 0) {
+					start = 0;
+				}
+				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureCode, t2.lectureName, t2.track, t3.professorName 
+				FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
+				INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
+				WHERE t2.lectureCode LIKE '%${searchTerm}%' 
+				OR t2.lectureName LIKE '%${searchTerm}%' 
+				OR t2.track LIKE '%${searchTerm}%' 
+				OR t3.professorName LIKE '%${searchTerm}%'
+				ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
+					if (err) {
+						await connection.release();
+						reject(err);
+					} else {
+						await connection.release();
+						resolve(rows);
+					}
+				});
+			})
+		})
+	}
+
+	/**
 	 * model: lectureInfo index 조회
 	 * @param lectureInfoIndex
 	 * @returns {Promise<void>}

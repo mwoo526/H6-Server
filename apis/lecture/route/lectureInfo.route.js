@@ -19,6 +19,7 @@ class LectureInfoRoutes {
     router() {
         this.lectureInfoRouter.post('/lecturesInfo', createLectureInfo);
         this.lectureInfoRouter.get('/lecturesInfo', pageListLectureInfo);
+        this.lectureInfoRouter.get('/pageListLectureInfoBySearchTerm/:searchTerm', pageListLectureInfoBySearchTerm);
         this.lectureInfoRouter.get('/lecturesInfo/lectureInfoIndex/:lectureInfoIndex', getLectureInfoByLectureInfoIndex);
         this.lectureInfoRouter.get('/lecturesInfo/lectureName/:lectureName', pageGetLectureInfoByLectureName);
         this.lectureInfoRouter.get('/lecturesInfo/professorName/:professorName', pageGetLectureInfoByProfessorName);
@@ -84,6 +85,39 @@ function pageListLectureInfo(req, res) {
                         success: false,
                         statusCode: 500,
                         message: 'pageListLectureInfo: 50000'
+                    });
+                    break;
+            }
+        }
+    });
+}
+/**
+ * route: lectureInfo searchTerm 리스트 조회
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+function pageListLectureInfoBySearchTerm(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let searchTerm = req.params.searchTerm;
+        let page = parseInt(req.query.page);
+        let count = parseInt(req.query.count);
+        try {
+            const result = yield lectureInfo_model_1.lectureInfo.pageListLectureInfoBySearchTerm(searchTerm, page, count);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'listLectureInfoBySearchTerm: 200'
+            });
+        }
+        catch (err) {
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'listLectureInfoBySearchTerm: 50000'
                     });
                     break;
             }
