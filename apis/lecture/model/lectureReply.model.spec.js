@@ -32,11 +32,11 @@ describe('lectureReply 모델', () => {
             /** validation 체크 */
             chai_1.expect(result).to.instanceof(Object);
             /** lectureReply lectureInfoIndex 조회 */
-            const resultGetLectureReplyByLectureInfoIndex = yield lectureReply_model_1.lectureReply.getLectureReplyByLectureInfoIndex(1);
+            const resultListLectureReplyByLectureInfoIndex = yield lectureReply_model_1.lectureReply.listLectureReplyByLectureInfoIndex(1);
             /** validation 체크 */
-            chai_1.expect(resultGetLectureReplyByLectureInfoIndex).to.instanceof(Array);
+            chai_1.expect(resultListLectureReplyByLectureInfoIndex).to.instanceof(Array);
             /** lectureReply 칼럼 값 */
-            const lectureReplyData = resultGetLectureReplyByLectureInfoIndex;
+            const lectureReplyData = resultListLectureReplyByLectureInfoIndex;
             testLectureReplyIndex = lectureReplyData[0].lectureReplyIndex;
             testLectureInfoIndex = lectureReplyData[0].lectureInfoIndex;
             testUserIndex = lectureReplyData[0].userIndex;
