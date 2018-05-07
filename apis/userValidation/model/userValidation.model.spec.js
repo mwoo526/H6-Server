@@ -18,8 +18,6 @@ describe('userValidation 모델', () => {
     let testUserPw = 'marine1164';
     let testUserNickName = '이미 존재하는 닉네임';
     let testUserNickName2 = '사용 가능한 닉네임';
-    let testEmail = '이미 존재하는 이메일';
-    let testEmail2 = '사용 가능한 이메일';
     let testMajor = '산업경영공학과';
     let testAdmissionYear = 2012;
     before(() => __awaiter(this, void 0, void 0, function* () {
@@ -28,7 +26,6 @@ describe('userValidation 모델', () => {
                 userId: testUserId,
                 userPw: testUserPw,
                 userNickName: testUserNickName,
-                userEmail: testEmail,
                 major: testMajor,
                 admissionYear: testAdmissionYear
             });
@@ -49,11 +46,6 @@ describe('userValidation 모델', () => {
     }));
     it('checkUserId - 사용 가능한 아이디', () => __awaiter(this, void 0, void 0, function* () {
         const result = yield userValidation_model_1.userValidation.checkUserId(testUserId2);
-        // console.log(result);
-        chai_1.expect(result).instanceof(Object);
-    }));
-    it('checkUserEmail - 사용 가능한 이메일', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield userValidation_model_1.userValidation.checkUserEmail(testEmail2);
         // console.log(result);
         chai_1.expect(result).instanceof(Object);
     }));

@@ -9,8 +9,6 @@ describe('userValidation 모델', () => {
 	let testUserPw: string = 'marine1164';
 	let testUserNickName: string = '이미 존재하는 닉네임';
 	let testUserNickName2: string = '사용 가능한 닉네임';
-	let testEmail: string = '이미 존재하는 이메일';
-	let testEmail2: string = '사용 가능한 이메일';
 	let testMajor: string = '산업경영공학과';
 	let testAdmissionYear: number  = 2012;
 
@@ -20,7 +18,6 @@ describe('userValidation 모델', () => {
 				userId: testUserId,
 				userPw: testUserPw,
 				userNickName: testUserNickName,
-				userEmail: testEmail,
 				major: testMajor,
 				admissionYear: testAdmissionYear
 			});
@@ -41,12 +38,6 @@ describe('userValidation 모델', () => {
 
 	it('checkUserId - 사용 가능한 아이디', async () => {
 		const result = await userValidation.checkUserId(testUserId2);
-		// console.log(result);
-		expect(result).instanceof(Object);
-	});
-
-	it('checkUserEmail - 사용 가능한 이메일', async () => {
-		const result = await userValidation.checkUserEmail(testEmail2);
 		// console.log(result);
 		expect(result).instanceof(Object);
 	});
