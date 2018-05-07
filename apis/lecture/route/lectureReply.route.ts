@@ -15,8 +15,9 @@ export class LectureReplyRoutes {
 		this.lectureReplyRouter.get('/lecturesReply/lectureInfoIndex/:lectureInfoIndex/userIndex/:userIndex', checkGetLectureReply);
 		this.lectureReplyRouter.get('/lecturesReply', pageListLectureReply);
 		this.lectureReplyRouter.get('/lecturesReply/lectureReplyIndex/:lectureReplyIndex', getLectureReplyByLectureReplyIndex);
-		this.lectureReplyRouter.get('/lecturesReply/userId/:userId', pageGetLectureReplyByUserId);
-		this.lectureReplyRouter.get('/lecturesReply/userNickName/:userNickName', pageGetLectureReplyByUserNickName);
+		this.lectureReplyRouter.get('/lecturesReply/lectureInfoIndex/:lectureInfoIndex', pageListLectureReplyByLectureInfoIndex);
+		this.lectureReplyRouter.get('/lecturesReply/userId/:userId', pageListLectureReplyByUserId);
+		this.lectureReplyRouter.get('/lecturesReply/userNickName/:userNickName', pageListLectureReplyByUserNickName);
 		this.lectureReplyRouter.put('/lecturesReply/lectureReplyIndex/:lectureReplyIndex', updateLectureReply);
 		this.lectureReplyRouter.delete('/lecturesReply/lectureReplyIndex/:lectureReplyIndex', deleteLectureReply);
 	}
@@ -100,10 +101,12 @@ async function pageListLectureReply(req, res): Promise<void> {
 	let page: number = parseInt(req.query.page);
 	let count: number = parseInt(req.query.count);
 	try {
+		const resultCount = await lectureReply.listLectureReply();
 		const result: number = await lectureReply.pageListLectureReply(page, count);
 		res.send({
 			success: true,
 			statusCode: 200,
+			resultCount: resultCount.length,
 			result: result,
 			message: 'pageListLectureReply: 200'
 		});
@@ -150,20 +153,55 @@ async function getLectureReplyByLectureReplyIndex(req, res): Promise<void> {
 }
 
 /**
- * route: lectureReply userId 조회
+ * route: lectureReply lectureInfoIndex page 리스트 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
-async function pageGetLectureReplyByUserId(req, res): Promise<void> {
+async function pageListLectureReplyByLectureInfoIndex(req, res): Promise<void> {
+	const lectureInfoIndex: number = req.params.lectureInfoIndex;
+	let page: number = parseInt(req.query.page);
+	let count: number = parseInt(req.query.count);
+	try {
+		const resultCount = await lectureReply.listLectureReplyByLectureInfoIndex(lectureInfoIndex);
+		const result = await lectureReply.pageListLectureReplyByLectureInfoIndex(lectureInfoIndex, page, count);
+		res.send({
+			success: true,
+			statusCode: 200,
+			resultCount: resultCount.length,
+			result: result,
+			message: 'pageListLectureReplyByLectureInfoIndex: 200'
+		});
+	} catch (err) {
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'pageListLectureReplyByLectureInfoIndex: 50000'
+				});
+				break;
+		}
+	}
+}
+
+/**
+ * route: lectureReply userId 리스트 조회
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function pageListLectureReplyByUserId(req, res): Promise<void> {
 	const userId: string = req.params.userId;
 	let page: number = parseInt(req.query.page);
 	let count: number = parseInt(req.query.count);
 	try {
-		const result = await lectureReply.pageGetLectureReplyByUserId(userId, page, count);
+		const resultCount = await lectureReply.listLectureReplyByUserId(userId);
+		const result = await lectureReply.pageListLectureReplyByUserId(userId, page, count);
 		res.send({
 			success: true,
 			statusCode: 200,
+			resultCount: resultCount.length,
 			result: result,
 			message: 'pageGetLectureReplyByUserId: 200'
 		});
@@ -181,20 +219,22 @@ async function pageGetLectureReplyByUserId(req, res): Promise<void> {
 }
 
 /**
- * route: lectureReply userNickName 조회
+ * route: lectureReply userNickName page 리스트 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
-async function pageGetLectureReplyByUserNickName(req, res): Promise<void> {
+async function pageListLectureReplyByUserNickName(req, res): Promise<void> {
 	const userNickName: string = req.params.userNickName;
 	let page: number = parseInt(req.query.page);
 	let count: number = parseInt(req.query.count);
 	try {
-		const result = await lectureReply.pageGetLectureReplyByUserNickName(userNickName, page, count);
+		const resultCount = await lectureReply.listLectureReplyByUserNickName(userNickName);
+		const result = await lectureReply.pageListLectureReplyByUserNickName(userNickName, page, count);
 		res.send({
 			success: true,
 			statusCode: 200,
+			resultCount: resultCount.length,
 			result: result,
 			message: 'pageGetLectureReplyByUserNickName: 200'
 		});

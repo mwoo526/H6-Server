@@ -21,8 +21,8 @@ class LectureInfoRoutes {
         this.lectureInfoRouter.get('/lecturesInfo', pageListLectureInfo);
         this.lectureInfoRouter.get('/pageListLectureInfoBySearchTerm/:searchTerm', pageListLectureInfoBySearchTerm);
         this.lectureInfoRouter.get('/lecturesInfo/lectureInfoIndex/:lectureInfoIndex', getLectureInfoByLectureInfoIndex);
-        this.lectureInfoRouter.get('/lecturesInfo/lectureName/:lectureName', pageGetLectureInfoByLectureName);
-        this.lectureInfoRouter.get('/lecturesInfo/professorName/:professorName', pageGetLectureInfoByProfessorName);
+        this.lectureInfoRouter.get('/lecturesInfo/lectureName/:lectureName', pageListLectureInfoByLectureName);
+        this.lectureInfoRouter.get('/lecturesInfo/professorName/:professorName', pageListLectureInfoByProfessorName);
         this.lectureInfoRouter.put('/lecturesInfo/lectureInfoIndex/:lectureInfoIndex', updateLectureInfo);
         this.lectureInfoRouter.delete('/lecturesInfo/lectureInfoIndex/:lectureInfoIndex', deleteLectureInfo);
     }
@@ -67,13 +67,15 @@ function createLectureInfo(req, res) {
  */
 function pageListLectureInfo(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        let page = parseInt(req.query.page);
+        let count = parseInt(req.query.count);
         try {
-            let page = parseInt(req.query.page);
-            let count = parseInt(req.query.count);
+            const resultCount = yield lectureInfo_model_1.lectureInfo.listLectureInfo();
             const result = yield lectureInfo_model_1.lectureInfo.pageListLectureInfo(page, count);
             res.send({
                 success: true,
                 statusCode: 200,
+                resultCount: resultCount.length,
                 result: result,
                 message: 'pageListLectureInfo: 200'
             });
@@ -103,10 +105,12 @@ function pageListLectureInfoBySearchTerm(req, res) {
         let page = parseInt(req.query.page);
         let count = parseInt(req.query.count);
         try {
+            const resultCount = yield lectureInfo_model_1.lectureInfo.listLectureInfoBySearchTerm(searchTerm);
             const result = yield lectureInfo_model_1.lectureInfo.pageListLectureInfoBySearchTerm(searchTerm, page, count);
             res.send({
                 success: true,
                 statusCode: 200,
+                resultCount: resultCount.length,
                 result: result,
                 message: 'listLectureInfoBySearchTerm: 200'
             });
@@ -156,21 +160,23 @@ function getLectureInfoByLectureInfoIndex(req, res) {
     });
 }
 /**
- * route: lectureInfo lectureName page 조회
+ * route: lectureInfo lectureName page 리스트 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
-function pageGetLectureInfoByLectureName(req, res) {
+function pageListLectureInfoByLectureName(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let lectureName = req.params.lectureName;
         let page = parseInt(req.query.page);
         let count = parseInt(req.query.count);
         try {
-            const result = yield lectureInfo_model_1.lectureInfo.pageGetLectureInfoByLectureName(lectureName, page, count);
+            const resultCount = yield lectureInfo_model_1.lectureInfo.listLectureInfoByLectureName(lectureName);
+            const result = yield lectureInfo_model_1.lectureInfo.pageListLectureInfoByLectureName(lectureName, page, count);
             res.send({
                 success: true,
                 statusCode: 200,
+                resultCount: resultCount.length,
                 result: result,
                 message: 'pageGetLectureInfoByLectureName: 200'
             });
@@ -189,21 +195,23 @@ function pageGetLectureInfoByLectureName(req, res) {
     });
 }
 /**
- * route: lectureInfo professorName page 조회
+ * route: lectureInfo professorName page 리스트 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
-function pageGetLectureInfoByProfessorName(req, res) {
+function pageListLectureInfoByProfessorName(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let professorName = req.params.professorName;
         let page = parseInt(req.query.page);
         let count = parseInt(req.query.count);
         try {
-            const result = yield lectureInfo_model_1.lectureInfo.pageGetLectureInfoByProfessorName(professorName, page, count);
+            const resultCount = yield lectureInfo_model_1.lectureInfo.listLectureInfoByProfessorName(professorName);
+            const result = yield lectureInfo_model_1.lectureInfo.pageListLectureInfoByProfessorName(professorName, page, count);
             res.send({
                 success: true,
                 statusCode: 200,
+                resultCount: resultCount.length,
                 result: result,
                 message: 'pageGetLectureInfoByProfessorName: 200'
             });

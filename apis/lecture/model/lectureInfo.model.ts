@@ -172,11 +172,11 @@ export class LectureInfo {
 	}
 
 	/**
-	 * model: lectureInfo lectureName 조회
+	 * model: lectureInfo lectureName 리스트 조회
 	 * @param lectureName
 	 * @returns {Promise<void>}
 	 */
-	getLectureInfoByLectureName(lectureName: any): Promise<void> {
+	listLectureInfoByLectureName(lectureName: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
@@ -196,11 +196,11 @@ export class LectureInfo {
 	}
 
 	/**
-	 * model: lectureInfo lectureName page 조회
+	 * model: lectureInfo lectureName page 리스트 조회
 	 * @param lectureName
 	 * @returns {Promise<void>}
 	 */
-	pageGetLectureInfoByLectureName(lectureName: any, page: number, count: number): Promise<void> {
+	pageListLectureInfoByLectureName(lectureName: any, page: number, count: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				let start = (page - 1) * count;
@@ -230,11 +230,11 @@ export class LectureInfo {
 	}
 
 	/**
-	 * model: lectureInfo professorName 조회
+	 * model: lectureInfo professorName 리스트 조회
 	 * @param professorName
 	 * @returns {Promise<void>}
 	 */
-	getLectureInfoByProfessorName(professorName: any): Promise<void> {
+	listLectureInfoByProfessorName(professorName: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
@@ -258,11 +258,11 @@ export class LectureInfo {
 	}
 
 	/**
-	 * model: lectureInfo professorName page 조회
+	 * model: lectureInfo professorName page 리스트 조회
 	 * @param professorName
 	 * @returns {Promise<void>}
 	 */
-	pageGetLectureInfoByProfessorName(professorName: any, page: number, count: number): Promise<void> {
+	pageListLectureInfoByProfessorName(professorName: any, page: number, count: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				let start = (page - 1) * count;

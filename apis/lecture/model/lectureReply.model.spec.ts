@@ -109,13 +109,13 @@ describe('lectureReply 모델', () => {
 	});
 
 	it('getLectureReplyByLectureInfoIndex', async () => {
-		const result = await lectureReply.getLectureReplyByLectureInfoIndex(testLectureInfoIndex);
+		const result = await lectureReply.listLectureReplyByLectureInfoIndex(testLectureInfoIndex);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});
 
 	it('pageGetLectureReplyByLectureInfoIndex', async () => {
-		const result = await lectureReply.pageGetLectureReplyByLectureInfoIndex(testLectureInfoIndex, 1, 3);
+		const result = await lectureReply.pageListLectureReplyByLectureInfoIndex(testLectureInfoIndex, 1, 3);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});
@@ -133,25 +133,25 @@ describe('lectureReply 모델', () => {
 	});
 
 	it('getLectureReplyUserId', async () => {
-		const result = await lectureReply.getLectureReplyByUserId(testUserId);
+		const result = await lectureReply.listLectureReplyByUserId(testUserId);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});
 
 	it('pageGetLectureReplyByUserId', async () => {
-		const result = await lectureReply.pageGetLectureReplyByUserId(testUserId, 1, 3);
+		const result = await lectureReply.pageListLectureReplyByUserId(testUserId, 1, 3);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});
 
 	it('getLectureReplyByUserNickName', async () => {
-		const result = await lectureReply.getLectureReplyByUserNickName(testUserNickName);
+		const result = await lectureReply.listLectureReplyByUserNickName(testUserNickName);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});
 
 	it('pageGetLectureReplyByUserNickName', async () => {
-		const result = await lectureReply.pageGetLectureReplyByUserNickName(testUserNickName, 1, 3);
+		const result = await lectureReply.pageListLectureReplyByUserNickName(testUserNickName, 1, 3);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});

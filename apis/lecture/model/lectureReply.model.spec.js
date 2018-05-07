@@ -109,12 +109,12 @@ describe('lectureReply 모델', () => {
         chai_1.expect(result).to.instanceof(Array);
     }));
     it('getLectureReplyByLectureInfoIndex', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield lectureReply_model_1.lectureReply.getLectureReplyByLectureInfoIndex(testLectureInfoIndex);
+        const result = yield lectureReply_model_1.lectureReply.listLectureReplyByLectureInfoIndex(testLectureInfoIndex);
         // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
     it('pageGetLectureReplyByLectureInfoIndex', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield lectureReply_model_1.lectureReply.pageGetLectureReplyByLectureInfoIndex(testLectureInfoIndex, 1, 3);
+        const result = yield lectureReply_model_1.lectureReply.pageListLectureReplyByLectureInfoIndex(testLectureInfoIndex, 1, 3);
         // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
@@ -129,22 +129,22 @@ describe('lectureReply 모델', () => {
         chai_1.expect(result).to.instanceof(Array);
     }));
     it('getLectureReplyUserId', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield lectureReply_model_1.lectureReply.getLectureReplyByUserId(testUserId);
+        const result = yield lectureReply_model_1.lectureReply.listLectureReplyByUserId(testUserId);
         // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
     it('pageGetLectureReplyByUserId', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield lectureReply_model_1.lectureReply.pageGetLectureReplyByUserId(testUserId, 1, 3);
+        const result = yield lectureReply_model_1.lectureReply.pageListLectureReplyByUserId(testUserId, 1, 3);
         // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
     it('getLectureReplyByUserNickName', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield lectureReply_model_1.lectureReply.getLectureReplyByUserNickName(testUserNickName);
+        const result = yield lectureReply_model_1.lectureReply.listLectureReplyByUserNickName(testUserNickName);
         // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
     it('pageGetLectureReplyByUserNickName', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield lectureReply_model_1.lectureReply.pageGetLectureReplyByUserNickName(testUserNickName, 1, 3);
+        const result = yield lectureReply_model_1.lectureReply.pageListLectureReplyByUserNickName(testUserNickName, 1, 3);
         // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));

@@ -22,8 +22,9 @@ class LectureReplyRoutes {
         this.lectureReplyRouter.get('/lecturesReply/lectureInfoIndex/:lectureInfoIndex/userIndex/:userIndex', checkGetLectureReply);
         this.lectureReplyRouter.get('/lecturesReply', pageListLectureReply);
         this.lectureReplyRouter.get('/lecturesReply/lectureReplyIndex/:lectureReplyIndex', getLectureReplyByLectureReplyIndex);
-        this.lectureReplyRouter.get('/lecturesReply/userId/:userId', pageGetLectureReplyByUserId);
-        this.lectureReplyRouter.get('/lecturesReply/userNickName/:userNickName', pageGetLectureReplyByUserNickName);
+        this.lectureReplyRouter.get('/lecturesReply/lectureInfoIndex/:lectureInfoIndex', pageListLectureReplyByLectureInfoIndex);
+        this.lectureReplyRouter.get('/lecturesReply/userId/:userId', pageListLectureReplyByUserId);
+        this.lectureReplyRouter.get('/lecturesReply/userNickName/:userNickName', pageListLectureReplyByUserNickName);
         this.lectureReplyRouter.put('/lecturesReply/lectureReplyIndex/:lectureReplyIndex', updateLectureReply);
         this.lectureReplyRouter.delete('/lecturesReply/lectureReplyIndex/:lectureReplyIndex', deleteLectureReply);
     }
@@ -112,10 +113,12 @@ function pageListLectureReply(req, res) {
         let page = parseInt(req.query.page);
         let count = parseInt(req.query.count);
         try {
+            const resultCount = yield lectureReply_model_1.lectureReply.listLectureReply();
             const result = yield lectureReply_model_1.lectureReply.pageListLectureReply(page, count);
             res.send({
                 success: true,
                 statusCode: 200,
+                resultCount: resultCount.length,
                 result: result,
                 message: 'pageListLectureReply: 200'
             });
@@ -165,21 +168,58 @@ function getLectureReplyByLectureReplyIndex(req, res) {
     });
 }
 /**
- * route: lectureReply userId 조회
+ * route: lectureReply lectureInfoIndex page 리스트 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
-function pageGetLectureReplyByUserId(req, res) {
+function pageListLectureReplyByLectureInfoIndex(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const lectureInfoIndex = req.params.lectureInfoIndex;
+        let page = parseInt(req.query.page);
+        let count = parseInt(req.query.count);
+        try {
+            const resultCount = yield lectureReply_model_1.lectureReply.listLectureReplyByLectureInfoIndex(lectureInfoIndex);
+            const result = yield lectureReply_model_1.lectureReply.pageListLectureReplyByLectureInfoIndex(lectureInfoIndex, page, count);
+            res.send({
+                success: true,
+                statusCode: 200,
+                resultCount: resultCount.length,
+                result: result,
+                message: 'pageListLectureReplyByLectureInfoIndex: 200'
+            });
+        }
+        catch (err) {
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'pageListLectureReplyByLectureInfoIndex: 50000'
+                    });
+                    break;
+            }
+        }
+    });
+}
+/**
+ * route: lectureReply userId 리스트 조회
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+function pageListLectureReplyByUserId(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const userId = req.params.userId;
         let page = parseInt(req.query.page);
         let count = parseInt(req.query.count);
         try {
-            const result = yield lectureReply_model_1.lectureReply.pageGetLectureReplyByUserId(userId, page, count);
+            const resultCount = yield lectureReply_model_1.lectureReply.listLectureReplyByUserId(userId);
+            const result = yield lectureReply_model_1.lectureReply.pageListLectureReplyByUserId(userId, page, count);
             res.send({
                 success: true,
                 statusCode: 200,
+                resultCount: resultCount.length,
                 result: result,
                 message: 'pageGetLectureReplyByUserId: 200'
             });
@@ -198,21 +238,23 @@ function pageGetLectureReplyByUserId(req, res) {
     });
 }
 /**
- * route: lectureReply userNickName 조회
+ * route: lectureReply userNickName page 리스트 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
-function pageGetLectureReplyByUserNickName(req, res) {
+function pageListLectureReplyByUserNickName(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const userNickName = req.params.userNickName;
         let page = parseInt(req.query.page);
         let count = parseInt(req.query.count);
         try {
-            const result = yield lectureReply_model_1.lectureReply.pageGetLectureReplyByUserNickName(userNickName, page, count);
+            const resultCount = yield lectureReply_model_1.lectureReply.listLectureReplyByUserNickName(userNickName);
+            const result = yield lectureReply_model_1.lectureReply.pageListLectureReplyByUserNickName(userNickName, page, count);
             res.send({
                 success: true,
                 statusCode: 200,
+                resultCount: resultCount.length,
                 result: result,
                 message: 'pageGetLectureReplyByUserNickName: 200'
             });

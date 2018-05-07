@@ -14,8 +14,8 @@ export class LectureInfoRoutes {
 		this.lectureInfoRouter.get('/lecturesInfo', pageListLectureInfo);
 		this.lectureInfoRouter.get('/pageListLectureInfoBySearchTerm/:searchTerm', pageListLectureInfoBySearchTerm);
 		this.lectureInfoRouter.get('/lecturesInfo/lectureInfoIndex/:lectureInfoIndex', getLectureInfoByLectureInfoIndex);
-		this.lectureInfoRouter.get('/lecturesInfo/lectureName/:lectureName', pageGetLectureInfoByLectureName);
-		this.lectureInfoRouter.get('/lecturesInfo/professorName/:professorName', pageGetLectureInfoByProfessorName);
+		this.lectureInfoRouter.get('/lecturesInfo/lectureName/:lectureName', pageListLectureInfoByLectureName);
+		this.lectureInfoRouter.get('/lecturesInfo/professorName/:professorName', pageListLectureInfoByProfessorName);
 		this.lectureInfoRouter.put('/lecturesInfo/lectureInfoIndex/:lectureInfoIndex', updateLectureInfo);
 		this.lectureInfoRouter.delete('/lecturesInfo/lectureInfoIndex/:lectureInfoIndex', deleteLectureInfo);
 	}
@@ -57,13 +57,15 @@ async function createLectureInfo(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function pageListLectureInfo(req, res): Promise<void> {
+	let page: number = parseInt(req.query.page);
+	let count: number = parseInt(req.query.count);
 	try {
-		let page: number = parseInt(req.query.page);
-		let count: number = parseInt(req.query.count);
+		const resultCount = await lectureInfo.listLectureInfo();
 		const result: any = await lectureInfo.pageListLectureInfo(page, count);
 		res.send({
 			success: true,
 			statusCode: 200,
+			resultCount: resultCount.length,
 			result: result,
 			message: 'pageListLectureInfo: 200'
 		});
@@ -91,10 +93,12 @@ async function pageListLectureInfoBySearchTerm(req, res): Promise<void> {
 	let page: number = parseInt(req.query.page);
 	let count: number = parseInt(req.query.count);
 	try {
+		const resultCount = await lectureInfo.listLectureInfoBySearchTerm(searchTerm);
 		const result = await lectureInfo.pageListLectureInfoBySearchTerm(searchTerm, page, count);
 		res.send({
 			success: true,
 			statusCode: 200,
+			resultCount: resultCount.length,
 			result: result,
 			message: 'listLectureInfoBySearchTerm: 200'
 		});
@@ -141,20 +145,22 @@ async function getLectureInfoByLectureInfoIndex(req, res): Promise<void> {
 }
 
 /**
- * route: lectureInfo lectureName page 조회
+ * route: lectureInfo lectureName page 리스트 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
-async function pageGetLectureInfoByLectureName(req, res): Promise<void> {
+async function pageListLectureInfoByLectureName(req, res): Promise<void> {
 	let lectureName: string = req.params.lectureName;
 	let page: number = parseInt(req.query.page);
 	let count: number = parseInt(req.query.count);
 	try {
-		const result = await lectureInfo.pageGetLectureInfoByLectureName(lectureName, page, count);
+		const resultCount = await lectureInfo.listLectureInfoByLectureName(lectureName);
+		const result = await lectureInfo.pageListLectureInfoByLectureName(lectureName, page, count);
 		res.send({
 			success: true,
 			statusCode: 200,
+			resultCount: resultCount.length,
 			result: result,
 			message: 'pageGetLectureInfoByLectureName: 200'
 		});
@@ -172,20 +178,22 @@ async function pageGetLectureInfoByLectureName(req, res): Promise<void> {
 }
 
 /**
- * route: lectureInfo professorName page 조회
+ * route: lectureInfo professorName page 리스트 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
-async function pageGetLectureInfoByProfessorName(req, res): Promise<void> {
+async function pageListLectureInfoByProfessorName(req, res): Promise<void> {
 	let professorName: string = req.params.professorName;
 	let page: number = parseInt(req.query.page);
 	let count: number = parseInt(req.query.count);
 	try {
-		const result = await lectureInfo.pageGetLectureInfoByProfessorName(professorName, page, count);
+		const resultCount = await lectureInfo.listLectureInfoByProfessorName(professorName);
+		const result = await lectureInfo.pageListLectureInfoByProfessorName(professorName, page, count);
 		res.send({
 			success: true,
 			statusCode: 200,
+			resultCount: resultCount.length,
 			result: result,
 			message: 'pageGetLectureInfoByProfessorName: 200'
 		});

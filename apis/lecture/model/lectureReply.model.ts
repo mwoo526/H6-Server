@@ -96,7 +96,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply 페이지 리스트 조회
+	 * model: lectureReply page 리스트 조회
 	 * @param {number} page
 	 * @param {number} count
 	 * @returns {Promise<any>}
@@ -149,7 +149,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply replyIndex 페이지 조회
+	 * model: lectureReply replyIndex page 조회
 	 * @param {number} lectureReplyIndex
 	 * @param {number} page
 	 * @param {number} count
@@ -180,11 +180,11 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply lectureInfoIndex 조회
+	 * model: lectureReply lectureInfoIndex 리스트 조회
 	 * @param {number} lectureInfoIndex
 	 * @returns {Promise<void>}
 	 */
-	getLectureReplyByLectureInfoIndex(lectureInfoIndex: number): Promise<void> {
+	listLectureReplyByLectureInfoIndex(lectureInfoIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
@@ -204,13 +204,13 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply lectureInfoIndex 페이지 조회
+	 * model: lectureReply lectureInfoIndex page 리스트 조회
 	 * @param {number} lectureInfoIndex
 	 * @param {number} page
 	 * @param {number} count
 	 * @returns {Promise<any>}
 	 */
-	pageGetLectureReplyByLectureInfoIndex(lectureInfoIndex: number, page: number, count: number): Promise<any> {
+	pageListLectureReplyByLectureInfoIndex(lectureInfoIndex: number, page: number, count: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				let start = (page - 1) * count;
@@ -258,7 +258,7 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply userIndex 페이지 조회
+	 * model: lectureReply userIndex page 조회
 	 * @param {number} userIndex
 	 * @param {number} page
 	 * @param {number} count
@@ -288,11 +288,11 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply userId 조회
+	 * model: lectureReply userId 리스트 조회
 	 * @param {string} userId
 	 * @returns {Promise<void>}
 	 */
-	getLectureReplyByUserId(userId: string): Promise<void> {
+	listLectureReplyByUserId(userId: string): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
@@ -312,13 +312,13 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply userId 페이지 조회
+	 * model: lectureReply userId page 리스트 조회
 	 * @param {number} userId
 	 * @param {number} page
 	 * @param {number} count
 	 * @returns {Promise<any>}
 	 */
-	pageGetLectureReplyByUserId(userId: number, page: number, count: number): Promise<any> {
+	pageListLectureReplyByUserId(userId: string, page: number, count: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				let start = (page - 1) * count;
@@ -342,11 +342,11 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply userNickName 조회
+	 * model: lectureReply userNickName 리스트 조회
 	 * @param {string} userNickName
 	 * @returns {Promise<void>}
 	 */
-	getLectureReplyByUserNickName(userNickName: string): Promise<void> {
+	listLectureReplyByUserNickName(userNickName: string): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
@@ -366,13 +366,13 @@ export class LectureReply {
 	}
 
 	/**
-	 * model: lectureReply userNickName 페이지 조회
+	 * model: lectureReply userNickName page 리스트 조회
 	 * @param {number} userNickName
 	 * @param {number} page
 	 * @param {number} count
 	 * @returns {Promise<any>}
 	 */
-	pageGetLectureReplyByUserNickName(userNickName: number, page: number, count: number): Promise<any> {
+	pageListLectureReplyByUserNickName(userNickName: string, page: number, count: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				let start = (page - 1) * count;

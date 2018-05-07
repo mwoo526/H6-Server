@@ -121,7 +121,7 @@ class LectureReply {
         }));
     }
     /**
-     * model: lectureReply 페이지 리스트 조회
+     * model: lectureReply page 리스트 조회
      * @param {number} page
      * @param {number} count
      * @returns {Promise<any>}
@@ -182,7 +182,7 @@ class LectureReply {
         }));
     }
     /**
-     * model: lectureReply replyIndex 페이지 조회
+     * model: lectureReply replyIndex page 조회
      * @param {number} lectureReplyIndex
      * @param {number} page
      * @param {number} count
@@ -217,11 +217,11 @@ class LectureReply {
         }));
     }
     /**
-     * model: lectureReply lectureInfoIndex 조회
+     * model: lectureReply lectureInfoIndex 리스트 조회
      * @param {number} lectureInfoIndex
      * @returns {Promise<void>}
      */
-    getLectureReplyByLectureInfoIndex(lectureInfoIndex) {
+    listLectureReplyByLectureInfoIndex(lectureInfoIndex) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
@@ -245,13 +245,13 @@ class LectureReply {
         }));
     }
     /**
-     * model: lectureReply lectureInfoIndex 페이지 조회
+     * model: lectureReply lectureInfoIndex page 리스트 조회
      * @param {number} lectureInfoIndex
      * @param {number} page
      * @param {number} count
      * @returns {Promise<any>}
      */
-    pageGetLectureReplyByLectureInfoIndex(lectureInfoIndex, page, count) {
+    pageListLectureReplyByLectureInfoIndex(lectureInfoIndex, page, count) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
@@ -307,7 +307,7 @@ class LectureReply {
         }));
     }
     /**
-     * model: lectureReply userIndex 페이지 조회
+     * model: lectureReply userIndex page 조회
      * @param {number} userIndex
      * @param {number} page
      * @param {number} count
@@ -341,11 +341,11 @@ class LectureReply {
         }));
     }
     /**
-     * model: lectureReply userId 조회
+     * model: lectureReply userId 리스트 조회
      * @param {string} userId
      * @returns {Promise<void>}
      */
-    getLectureReplyByUserId(userId) {
+    listLectureReplyByUserId(userId) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
@@ -369,13 +369,13 @@ class LectureReply {
         }));
     }
     /**
-     * model: lectureReply userId 페이지 조회
+     * model: lectureReply userId page 리스트 조회
      * @param {number} userId
      * @param {number} page
      * @param {number} count
      * @returns {Promise<any>}
      */
-    pageGetLectureReplyByUserId(userId, page, count) {
+    pageListLectureReplyByUserId(userId, page, count) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
@@ -403,11 +403,11 @@ class LectureReply {
         }));
     }
     /**
-     * model: lectureReply userNickName 조회
+     * model: lectureReply userNickName 리스트 조회
      * @param {string} userNickName
      * @returns {Promise<void>}
      */
-    getLectureReplyByUserNickName(userNickName) {
+    listLectureReplyByUserNickName(userNickName) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
@@ -431,13 +431,13 @@ class LectureReply {
         }));
     }
     /**
-     * model: lectureReply userNickName 페이지 조회
+     * model: lectureReply userNickName page 리스트 조회
      * @param {number} userNickName
      * @param {number} page
      * @param {number} count
      * @returns {Promise<any>}
      */
-    pageGetLectureReplyByUserNickName(userNickName, page, count) {
+    pageListLectureReplyByUserNickName(userNickName, page, count) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {

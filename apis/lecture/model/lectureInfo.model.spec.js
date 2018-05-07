@@ -46,23 +46,23 @@ describe('lectureInfo 모델', () => {
         // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
-    it('getLectureInfoByLectureName', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield lectureInfo_model_1.lectureInfo.getLectureInfoByLectureName('os');
+    it('listLectureInfoByLectureName', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield lectureInfo_model_1.lectureInfo.listLectureInfoByLectureName('os');
         // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
     it('pageGetLectureInfoByLectureName', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield lectureInfo_model_1.lectureInfo.pageGetLectureInfoByLectureName('os', 1, 3);
+        const result = yield lectureInfo_model_1.lectureInfo.pageListLectureInfoByLectureName('os', 1, 3);
         // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
-    it('getLectureInfoByProfessorName', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield lectureInfo_model_1.lectureInfo.getLectureInfoByProfessorName('안재성');
+    it('listLectureInfoByProfessorName', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield lectureInfo_model_1.lectureInfo.listLectureInfoByProfessorName('안재성');
         // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
     it('pageGetLectureInfoByProfessorName', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield lectureInfo_model_1.lectureInfo.pageGetLectureInfoByProfessorName('안재성', 1, 3);
+        const result = yield lectureInfo_model_1.lectureInfo.pageListLectureInfoByProfessorName('안재성', 1, 3);
         // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
