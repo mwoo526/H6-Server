@@ -178,6 +178,26 @@ class User {
             });
         }));
     }
+    /**
+     * model: 인증여부 업데이트
+     * @param {string} userId
+     * @returns {Promise<any>}
+     */
+    updateIsValidation(userId) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection((err, connection) => __awaiter(this, void 0, void 0, function* () {
+                yield connection.query(`UPDATE users set isValidation='${1}' WHERE userId=?`, [userId], (err, rows) => {
+                    connection.release();
+                    if (err) {
+                        reject(err);
+                    }
+                    else {
+                        resolve(rows);
+                    }
+                });
+            }));
+        }));
+    }
 }
 exports.User = User;
 exports.user = new User();

@@ -9,19 +9,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
-const inviteCode_util_1 = require("../../../packages/utils/inviteCode.util");
 const user_model_1 = require("../../user/model/user.model");
 const userValidation_model_1 = require("../model/userValidation.model");
+const uuid_util_1 = require("../../../../H6-server_new/packages/utils/uuid.util");
 class UserValidationRoutes {
     constructor() {
         this.userValidationRouter = express.Router();
         this.router();
     }
     router() {
-        this.userValidationRouter.post('/userValidation/sendValidationCode/:userId', sendValidationCode);
+        //this.userValidationRouter.post('/userValidation/sendValidationCode/:userId', sendValidationCode);
         this.userValidationRouter.post('/userValidation/checkValidationCode/:userId', checkValidationCode);
         this.userValidationRouter.get('/userValidation/checkUserId/:userId', checkUserId);
         this.userValidationRouter.get('/userValidation/checkUserNickName/:userNickName', checkUserNickName);
+        this.userValidationRouter.post('/userValidation/sendValidationMail/', sendValidationMail);
+        this.userValidationRouter.get('/userValidation/verify/:uuid', verify);
     }
 }
 exports.UserValidationRoutes = UserValidationRoutes;
@@ -30,22 +32,20 @@ exports.UserValidationRoutes = UserValidationRoutes;
  * @param req
  * @param res
  * @returns {Promise<void>}
- */
-function sendValidationCode(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const userId = req.params.userId;
-            const userData = yield user_model_1.user.getUser(userId);
-            const userEmail = userData[0].userEmail;
-            const validationCode = yield String(inviteCode_util_1.getRandomInt());
-            const result = yield userValidation_model_1.userValidation.createValidationCode(userId, userEmail, validationCode);
-            res.send(result);
-        }
-        catch (err) {
-            res.send(err);
-        }
-    });
+
+async function sendValidationCode(req, res): Promise<void> {
+    try {
+        const userId: string = req.params.userId;
+        const userData: any = await user.getUser(userId);
+        const userEmail: string = userData[0].userEmail;
+        const validationCode: any = await String(getRandomInt());
+        const result = await userValidation.createValidationCode(userId, userEmail, validationCode);
+        res.send(result);
+    } catch (err) {
+        res.send(err);
+    }
 }
+ */
 /**
  * route: 인증코드 체크
  * @param req
@@ -139,6 +139,113 @@ function checkUserNickName(req, res) {
             }
         }
     });
+}
+/**
+ * route: 인증코드 전송
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+function sendValidationMail(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            var host = req.get('host');
+            var uuid = uuid_util_1.uuidV1();
+            console.log("uuid : " + uuid);
+            //var userId: string = "Test"; // getUserID();
+            var userId = req.body.userId;
+            var link = "http://" + host + "/userValidation/verify/" + uuid;
+            var email = req.body.email;
+            console.log("userId: " + userId);
+            // DB에 userId를 통해 uuid 삽입하기
+            const resSetUUID = yield userValidation_model_1.userValidation.setUUID(userId, uuid);
+            var html = userId + "님 안녕하세요.<br><br> H6 App 을 정상적으로 이용하기 위해서는 이메일 인증을 해주세요. <br><br>";
+            html = html + "아래 링크를 누르시면 인증이 완료 됩니다.<br><br>";
+            html = html + "<a href=" + link + ">" + link + "</a>";
+            var mailOptions = {
+                to: email,
+                subject: "H6 이메일 인증",
+                html: html
+            };
+            const resultMail = yield userValidation_model_1.userValidation.sendValidationMail(mailOptions);
+            //console.log(resultMail);
+            res.send(resultMail);
+        }
+        catch (err) {
+            res.send(err);
+        }
+    });
+}
+/**
+ * route: 인증코드 검증
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+function verify(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            var host = req.get('host');
+            if (req.protocol == "http") {
+                //var userId = "Test"; // getUserId();
+                //var userId = req.params.userId;
+                var verifiedUUID = req.params.uuid;
+                if (verifiedUUID == "validated")
+                    res.end("Unvalidated code Error!!");
+                var uvUserId = yield userValidation_model_1.userValidation.getUserIDdata(verifiedUUID);
+                uvUserId = JSON.stringify(uvUserId);
+                if (uvUserId == "[]")
+                    res.end("Unvalidated code Error!!");
+                var userId = uvUserId.split('"')[3];
+                //var uvValidationCode = await userValidation.getUUIDdata(userId); // userValidationData
+                //uvValidationCode = JSON.stringify(uvValidationCode);
+                //console.log("from userId: "+uvValidationCode);
+                //res.end("Email is been Successfully verified");
+                //uvValidationCode = uvValidationCode.split('"')[3];
+                var uvUpdatedAt = yield userValidation_model_1.userValidation.getUpdatedAt(userId);
+                uvUpdatedAt = JSON.stringify(uvUpdatedAt);
+                uvUpdatedAt = uvUpdatedAt.split('"')[3];
+                var uvDate = uvUpdatedAt.split("T")[0].split("-");
+                var uvYearUpdatedAt = parseInt(uvDate[0]);
+                var uvMonthUpdatedAt = parseInt(uvDate[1]);
+                var uvDayUpdatedAt = parseInt(uvDate[2]);
+                if (isValidOnDate(uvYearUpdatedAt, uvMonthUpdatedAt, uvDayUpdatedAt)) {
+                    yield userValidation_model_1.userValidation.updateIsValidation(userId);
+                    yield user_model_1.user.updateIsValidation(userId);
+                    yield userValidation_model_1.userValidation.setUUID(userId, "validated");
+                    console.log("Email is been Successfully verified");
+                    res.end("Email is been Successfully verified");
+                }
+                else {
+                    res.end("validation date expired.");
+                }
+            }
+            else {
+                res.end("Requset is from unkown source");
+            }
+        }
+        catch (err) {
+            res.send(err);
+        }
+    });
+}
+function isValidOnDate(year, month, day) {
+    var date = new Date();
+    var curYear = date.getFullYear();
+    var curMonth = date.getMonth() + 1;
+    var curDay = date.getDate();
+    var diffYear = curYear - year;
+    var diffMonth = curMonth - month;
+    var diffDay = curDay - day;
+    if (diffYear == 1 && curMonth == 1 && curDay == 1)
+        return true;
+    if (diffYear == 0) {
+        if (diffMonth == 1 && curDay == 1)
+            return true;
+        if (diffMonth == 0 && diffDay <= 1)
+            return true;
+    }
+    return false;
 }
 exports.userValidationRoutes = new UserValidationRoutes();
 //# sourceMappingURL=userValidation.route.js.map
