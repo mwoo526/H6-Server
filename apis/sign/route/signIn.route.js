@@ -30,6 +30,11 @@ function getUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const result = yield signIn_model_1.signIn.getUser(req.body);
+            /** userLog 성공 */
+            yield signIn_model_1.signIn.createUserLog({
+                userId: req.body.userId,
+                log: 'logIn Success'
+            });
             res.send({
                 success: true,
                 statusCode: 200,
@@ -38,6 +43,11 @@ function getUser(req, res) {
             });
         }
         catch (err) {
+            /** userLog 실패 */
+            yield signIn_model_1.signIn.createUserLog({
+                userId: req.body.userId,
+                log: 'logIn Fail'
+            });
             switch (err) {
                 case 'The ID does not exist':
                     res.send({
