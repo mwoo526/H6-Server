@@ -22,11 +22,12 @@ export class SignInRoutes {
 async function getUser(req, res): Promise<void> {
 	try {
 		const result: any = await signIn.getUser(req.body);
-		/** userLog 성공 */
-		await signIn.createUserLog({
-			userId: req.body.userId,
-			log: 'logIn Success'
-		});
+		// TODO(@jade): 버그 해결 후 주석 해제  date: 2018. 5. 20. 오후 11:10
+		// /** userLog 성공 */
+		// await signIn.createUserLog({
+		// 	userId: req.body.userId,
+		// 	log: 'logIn Success'
+		// });
 		res.send({
 			success: true,
 			statusCode: 200,
@@ -34,11 +35,6 @@ async function getUser(req, res): Promise<void> {
 			message: 'getUser: 200'
 		});
 	} catch (err) {
-		/** userLog 실패 */
-		await signIn.createUserLog({
-			userId: req.body.userId,
-			log: 'logIn Fail'
-		});
 		switch (err) {
 			case 'The ID does not exist':
 				res.send({
