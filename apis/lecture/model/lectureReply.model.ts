@@ -80,7 +80,7 @@ export class LectureReply {
 	listLectureReply(): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
+				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
 				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex`, async function(err, rows) {
 					if (err) {
@@ -108,7 +108,7 @@ export class LectureReply {
 				if (start < 0) {
 					start = 0;
 				}
-				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
+				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
 				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
@@ -132,7 +132,7 @@ export class LectureReply {
 	getLectureReplyByLectureReplyIndex(lectureReplyIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
+				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
 				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
 				WHERE t1.lectureReplyIndex = ${lectureReplyIndex}`, async function(err, rows) {
@@ -162,7 +162,7 @@ export class LectureReply {
 				if (start < 0) {
 					start = 0;
 				}
-				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
+				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
 				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t1.lectureReplyIndex LIKE '%${lectureReplyIndex}%'
@@ -187,7 +187,7 @@ export class LectureReply {
 	listLectureReplyByLectureInfoIndex(lectureInfoIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
+				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
 				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
 				WHERE t1.lectureInfoIndex = ${lectureInfoIndex}`, async function(err, rows) {
@@ -217,7 +217,7 @@ export class LectureReply {
 				if (start < 0) {
 					start = 0;
 				}
-				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
+				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t1.lectureInfoIndex LIKE '%${lectureInfoIndex}%'
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
@@ -241,7 +241,7 @@ export class LectureReply {
 	getLectureReplyByUserIndex(userIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
+				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
 				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
 				WHERE t2.userIndex = ${userIndex}`, async function(err, rows) {
@@ -271,7 +271,7 @@ export class LectureReply {
 				if (start < 0) {
 					start = 0;
 				}
-				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
+				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t1.userIndex LIKE '%${userIndex}%'
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
@@ -295,7 +295,7 @@ export class LectureReply {
 	listLectureReplyByUserId(userId: string): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
+				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
 				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
 				WHERE t2.userId LIKE '%${userId}%'`, async function(err, rows) {
@@ -325,7 +325,7 @@ export class LectureReply {
 				if (start < 0) {
 					start = 0;
 				}
-				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
+				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t2.userId LIKE '%${userId}%'
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
@@ -349,7 +349,7 @@ export class LectureReply {
 	listLectureReplyByUserNickName(userNickName: string): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
+				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
 				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
 				WHERE t2.userNickName LIKE '%${userNickName}%'`, async function(err, rows) {
@@ -379,7 +379,7 @@ export class LectureReply {
 				if (start < 0) {
 					start = 0;
 				}
-				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t2.userId, t2.userNickName 
+				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t2.userNickName LIKE '%${userNickName}%'
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
