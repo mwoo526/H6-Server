@@ -52,13 +52,15 @@ async function createTrack(req, res) {
  * @returns {Promise<void>}
  */
 async function pageListTrack(req, res): Promise<void> {
+	let page: number = parseInt(req.query.page);
+	let count: number = parseInt(req.query.count);
 	try {
-		let page: number = parseInt(req.query.page);
-		let count: number = parseInt(req.query.count);
+		const resultCount = await track.listTrack();
 		const result: any = await track.pageListTrack(page, count);
 		res.send({
 			success: true,
 			statusCode: 200,
+			resultCount: resultCount.length,
 			result: result,
 			message: 'pageListTrack: 200'
 		})
