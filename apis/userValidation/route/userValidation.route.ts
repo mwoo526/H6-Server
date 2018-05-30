@@ -12,13 +12,13 @@ export class UserValidationRoutes {
 	}
 
 	public router() {
-		//this.userValidationRouter.post('/userValidation/sendValidationCode/:userId', sendValidationCode);
-		this.userValidationRouter.post('/userValidation/checkValidationCode/:userId', checkValidationCode);
-		this.userValidationRouter.get('/userValidation/checkUserId/:userId', checkUserId);
+		// this.userValidationRouter.post('/userValidation/sendValidationCode/:userId', sendValidationCode);
+		// this.userValidationRouter.post('/userValidation/checkValidationCode/:userId', checkValidationCode);
+        this.userValidationRouter.get('/userValidation/checkUserId/:userId', checkUserId);
 		this.userValidationRouter.get('/userValidation/checkUserNickName/:userNickName', checkUserNickName);
 
         this.userValidationRouter.post('/userValidation/sendValidationMail/', sendValidationMail);
-        this.userValidationRouter.get('/userValidation/verify/:uuid', verify)
+        this.userValidationRouter.get('/userValidation/verify/:uuid', verifyValidation);
 	}
 }
 
@@ -141,18 +141,13 @@ async function checkUserNickName(req, res): Promise<any> {
 async function sendValidationMail(req, res): Promise<void> {
     try {
         var host: any = req.get('host');
-
         var uuid = uuidV1();
-        console.log("uuid : "+uuid);
 
-        //var userId: string = "Test"; // getUserID();
         var userId: string = req.body.userId;
         var link: any = "http://"+host+"/userValidation/verify/"+uuid;
         var email: string = req.body.email;
-        console.log("userId: "+userId);
 
-        // DB에 userId를 통해 uuid 삽입하기
-        const resSetUUID = await userValidation.setUUID(userId, uuid);
+        const resSetUuid = await userValidation.setUuid(userId, uuid);
 
         var html: any = userId + "님 안녕하세요.<br><br> H6 App 을 정상적으로 이용하기 위해서는 이메일 인증을 해주세요. <br><br>";
         html = html + "아래 링크를 누르시면 인증이 완료 됩니다.<br><br>";
@@ -165,7 +160,6 @@ async function sendValidationMail(req, res): Promise<void> {
         };
 
         const resultMail = await userValidation.sendValidationMail(mailOptions);
-        //console.log(resultMail);
         res.send(resultMail);
     } catch (err) {
         res.send(err);
@@ -179,17 +173,13 @@ async function sendValidationMail(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 
-async function verify(req, res) : Promise<void> {
+async function verifyValidation(req, res) : Promise<void> {
     try {
-        //var host: any = req.get('host');
-
         if(req.protocol == "http") {
 
-            var verifiedUUID: any = req.params.uuid;
-            if(verifiedUUID == "validated")
-                res.end("Unvalidated code Error!!");
+            var verifiedUuid: any = req.params.uuid;
 
-            var uvUserId = await userValidation.getUserIDdata(verifiedUUID);
+            var uvUserId = await userValidation.getUserIdData(verifiedUuid);
             uvUserId = JSON.stringify(uvUserId);
 
             if(uvUserId == "[]")	// 해당 데이터가 없으면 []
@@ -208,9 +198,8 @@ async function verify(req, res) : Promise<void> {
 
             if(isValidOnDate(uvYearUpdatedAt, uvMonthUpdatedAt, uvDayUpdatedAt)) {
                 await userValidation.updateIsValidation(userId);
+                await userValidation.deleteUsersValidationRecord(userId);
                 await user.updateIsValidation(userId);
-                await userValidation.setUUID(userId, "validated");
-                //console.log("Email is been Successfully verified");
                 res.end("Email is been Successfully verified");
             }
             else {

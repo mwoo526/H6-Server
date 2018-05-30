@@ -165,30 +165,12 @@ export class UserValidation {
     }
 
     /**
-     * model: DB에 저장된 uuid 가져오기
-     * @param
-     * @returns {Promise<any>}
-     */
-
-    getUUIDdata(userId: any): Promise<any> {
-        return new Promise(async (resolve, reject) => {
-            await pool.getConnection(async (err, connection) => {
-                await connection.query(`SELECT validationCode FROM usersValidation where userId=?`, [userId], (err, rows) => {
-                    connection.release();
-                    if(err) { reject(err); }
-                    else { resolve(rows); }
-                })
-            })
-        })
-    }
-
-    /**
      * model: uuid 를 통해 DB에 저장된 userId 가져오기
      * @param
      * @returns {Promise<any>}
      */
 
-    getUserIDdata(uuid: any): Promise<any> {
+    getUserIdData(uuid: any): Promise<any> {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async (err, connection) => {
                 await connection.query(`SELECT userId FROM usersValidation where validationCode=?`, [uuid], (err, rows) => {
@@ -200,15 +182,13 @@ export class UserValidation {
         })
     }
 
-
-
     /**
      * model: DB usersValidation table에 uuid 저장하기
      * @param
      * @returns {Promise<any>}
      */
 
-    setUUID(userId: any, uuid: any): Promise<any> {
+    setUuid(userId: any, uuid: any): Promise<any> {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async (err, connection) => {
                 await connection.query(`UPDATE usersValidation set validationCode='${uuid}' WHERE userId = ?`, [userId], (err, rows) => {
@@ -248,6 +228,24 @@ export class UserValidation {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async (err, connection) => {
                 await connection.query(`UPDATE usersValidation set isValidation='${1}' WHERE userId=?`, [userId], (err, rows) => {
+                    connection.release();
+                    if(err) { reject(err); }
+                    else { resolve(rows); }
+                })
+            })
+        })
+    }
+
+    /**
+     * model: 레코드 삭제
+     * @param {string} userId
+     * @returns {Promise<any>}
+     */
+
+    deleteUsersValidationRecord(userId: any): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            await pool.getConnection(async (err, connection) => {
+                await connection.query(`DELETE FROM usersValidation WHERE userId=?`, [userId], (err, rows) => {
                     connection.release();
                     if(err) { reject(err); }
                     else { resolve(rows); }

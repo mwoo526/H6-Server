@@ -46,7 +46,8 @@ class SignIn {
                                             tokenMinor: rows[0].minor,
                                             tokenDoubleMajor: rows[0].doubleMajor,
                                             tokenConnectedMajor: rows[0].connectedMajor,
-                                            tokenAdmissionYear: rows[0].year
+                                            tokenAdmissionYear: rows[0].year,
+                                            tokenInValidation: rows[0].isValidations
                                         }, jwt_util_1.jwtToken.secret, {
                                             algorithm: jwt_util_1.jwtToken.algorithm,
                                             expiresIn: jwt_util_1.jwtToken.expiresln
