@@ -2,7 +2,7 @@ import * as express from 'express';
 import { getRandomInt } from '../../../packages/utils/inviteCode.util';
 import { user } from '../../user/model/user.model';
 import { userValidation } from '../model/userValidation.model';
-import { uuidV1 } from "../../../../H6-server_new/packages/utils/uuid.util";
+import { uuidV1 } from "../../../packages/utils/uuid.util";
 
 export class UserValidationRoutes {
 	public userValidationRouter: express.Router = express.Router();
