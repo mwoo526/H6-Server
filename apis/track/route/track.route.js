@@ -62,13 +62,15 @@ function createTrack(req, res) {
  */
 function pageListTrack(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        let page = parseInt(req.query.page);
+        let count = parseInt(req.query.count);
         try {
-            let page = parseInt(req.query.page);
-            let count = parseInt(req.query.count);
+            const resultCount = yield track_model_1.track.listTrack();
             const result = yield track_model_1.track.pageListTrack(page, count);
             res.send({
                 success: true,
                 statusCode: 200,
+                resultCount: resultCount.length,
                 result: result,
                 message: 'pageListTrack: 200'
             });

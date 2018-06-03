@@ -30,6 +30,12 @@ function getUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const result = yield signIn_model_1.signIn.getUser(req.body);
+            // TODO(@jade): 버그 해결 후 주석 해제  date: 2018. 5. 20. 오후 11:10
+            // /** userLog 성공 */
+            // await signIn.createUserLog({
+            // 	userId: req.body.userId,
+            // 	log: 'logIn Success'
+            // });
             res.send({
                 success: true,
                 statusCode: 200,

@@ -66,20 +66,34 @@ class Track {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    let start = (page - 1) * count;
-                    if (start < 0) {
-                        start = 0;
+                    if (page && count) {
+                        let start = (page - 1) * count;
+                        if (start < 0) {
+                            start = 0;
+                        }
+                        yield connection.query(`SELECT * FROM tracks ORDER BY trackName ASC LIMIT ${start}, ${count}`, function (err, rows) {
+                            if (err) {
+                                connection.release();
+                                reject(err);
+                            }
+                            else {
+                                connection.release();
+                                resolve(rows);
+                            }
+                        });
                     }
-                    yield connection.query(`SELECT * FROM tracks ORDER BY trackName ASC LIMIT ${start}, ${count}`, function (err, rows) {
-                        if (err) {
-                            connection.release();
-                            reject(err);
-                        }
-                        else {
-                            connection.release();
-                            resolve(rows);
-                        }
-                    });
+                    else {
+                        yield connection.query(`SELECT * FROM tracks ORDER BY trackName`, function (err, rows) {
+                            if (err) {
+                                connection.release();
+                                reject(err);
+                            }
+                            else {
+                                connection.release();
+                                resolve(rows);
+                            }
+                        });
+                    }
                 });
             });
         }));

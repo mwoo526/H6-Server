@@ -6,6 +6,28 @@ import { mysqlUtil } from '../../../packages/utils/mysql.util';
 const pool = mysqlUtil.pool;
 
 class SignIn {
+
+	/**
+	 * model: userLog 생성
+	 * @param usersLogData
+	 * @returns {Promise<any>}
+	 */
+	createUserLog(usersLogData: any): Promise<any> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query('INSERT INTO usersLog SET ?', [usersLogData], function(err) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						connection.release();
+						resolve(usersLogData);
+					}
+				})
+			})
+		})
+	}
+
 	/**
 	 * model: 로그인
 	 * @param userData

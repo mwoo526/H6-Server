@@ -50,22 +50,34 @@ export class Track {
 	 * @param {number} count
 	 * @returns {Promise<any>}
 	 */
-	pageListTrack(page: number, count: number): Promise<any> {
+	pageListTrack(page?: number, count?: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				let start = (page - 1) * count;
-				if (start < 0) {
-					start = 0;
-				}
-				await connection.query(`SELECT * FROM tracks ORDER BY trackName ASC LIMIT ${start}, ${count}`, function(err, rows) {
-					if (err) {
-						connection.release();
-						reject(err);
-					} else {
-						connection.release();
-						resolve(rows);
+				if (page && count) {
+					let start = (page - 1) * count;
+					if (start < 0) {
+						start = 0;
 					}
-				})
+					await connection.query(`SELECT * FROM tracks ORDER BY trackName ASC LIMIT ${start}, ${count}`, function(err, rows) {
+						if (err) {
+							connection.release();
+							reject(err);
+						} else {
+							connection.release();
+							resolve(rows);
+						}
+					})
+				} else {
+					await connection.query(`SELECT * FROM tracks ORDER BY trackName`, function(err, rows) {
+						if (err) {
+							connection.release();
+							reject(err);
+						} else {
+							connection.release();
+							resolve(rows);
+						}
+					})
+				}
 			})
 		})
 	}
