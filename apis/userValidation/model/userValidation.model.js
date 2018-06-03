@@ -20,28 +20,24 @@ class UserValidation {
      * @param {string} userEmail
      * @param validationCode
      * @returns {Promise<any>}
-     */
-    createValidationCode(userId, userEmail, validationCode) {
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield email_util_1.emailUtil.sendEmail('kingdom0608@gmail.com', `${userEmail}@naver.com`, 'test', validationCode);
-            yield pool.getConnection(function (err, connection) {
-                return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`UPDATE usersValidation SET validationCode = '${validationCode}' WHERE userId = '${userId}'`, function (err) {
-                        return __awaiter(this, void 0, void 0, function* () {
-                            if (err) {
-                                yield connection.release();
-                                reject(err);
-                            }
-                            else {
-                                yield connection.release();
-                                resolve(validationCode);
-                            }
-                        });
-                    });
-                });
-            });
-        }));
+
+    createValidationCode(userId: string, userEmail: string, validationCode: any): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            await emailUtil.sendEmail('kingdom0608@gmail.com', `${userEmail}@naver.com`, 'test', validationCode);
+            await pool.getConnection(async function(err, connection) {
+                await connection.query(`UPDATE usersValidation SET validationCode = '${validationCode}' WHERE userId = '${userId}'`, async function(err) {
+                    if (err) {
+                        await connection.release();
+                        reject(err);
+                    } else {
+                        await connection.release();
+                        resolve(validationCode);
+                    }
+                })
+            })
+        })
     }
+     */
     /**
      * model: 인증코드 조회
      * @param {string} userId
@@ -97,26 +93,24 @@ class UserValidation {
      * model: 인증여부 업데이트
      * @param {string} userId
      * @returns {Promise<any>}
-     */
-    updateIsValidation(userId) {
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield pool.getConnection(function (err, connection) {
-                return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`UPDATE usersValidation SET isValidation = true WHERE userId = '${userId}'`, function (err) {
-                        if (err) {
-                            console.log(err);
-                            connection.release();
-                            reject(err);
-                        }
-                        else {
-                            connection.release();
-                            resolve(userId);
-                        }
-                    });
-                });
-            });
-        }));
+
+    updateIsValidation(userId: string): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            await pool.getConnection(async function(err, connection) {
+                await connection.query(`UPDATE usersValidation SET isValidation = true WHERE userId = '${userId}'`, function(err) {
+                    if (err) {
+                        console.log(err);
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(userId);
+                    }
+                })
+            })
+        })
     }
+     */
     /**
      * model: 아이디 중복 검사
      * @param {string} userId
@@ -170,6 +164,116 @@ class UserValidation {
                     });
                 });
             });
+        }));
+    }
+    /**
+     * model: 인증메일 발송
+     * @param
+     * @returns {Promise<any>}
+     */
+    sendValidationMail(mailOptions) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield email_util_1.emailUtil.sendEmail(mailOptions, resolve, reject);
+        }));
+    }
+    /**
+     * model: uuid 를 통해 DB에 저장된 userId 가져오기
+     * @param
+     * @returns {Promise<any>}
+     */
+    getUserIdData(uuid) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection((err, connection) => __awaiter(this, void 0, void 0, function* () {
+                yield connection.query(`SELECT userId FROM usersValidation where validationCode=?`, [uuid], (err, rows) => {
+                    connection.release();
+                    if (err) {
+                        reject(err);
+                    }
+                    else {
+                        resolve(rows);
+                    }
+                });
+            }));
+        }));
+    }
+    /**
+     * model: DB usersValidation table에 uuid 저장하기
+     * @param
+     * @returns {Promise<any>}
+     */
+    setUuid(userId, uuid) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection((err, connection) => __awaiter(this, void 0, void 0, function* () {
+                yield connection.query(`UPDATE usersValidation set validationCode='${uuid}' WHERE userId = ?`, [userId], (err, rows) => {
+                    connection.release();
+                    if (err) {
+                        reject(err);
+                    }
+                    else {
+                        resolve(rows);
+                    }
+                });
+            }));
+        }));
+    }
+    /**
+     * model: 최근에 업데이트된 날짜 가져오기
+     * @param
+     * @returns {Promise<any>}
+     */
+    getUpdatedAt(userId) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection((err, connection) => __awaiter(this, void 0, void 0, function* () {
+                yield connection.query(`SELECT updatedAt FROM usersValidation where userId=?`, [userId], (err, rows) => {
+                    connection.release();
+                    if (err) {
+                        reject(err);
+                    }
+                    else {
+                        resolve(rows);
+                    }
+                });
+            }));
+        }));
+    }
+    /**
+     * model: 인증여부 업데이트
+     * @param {string} userId
+     * @returns {Promise<any>}
+     */
+    updateIsValidation(userId) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection((err, connection) => __awaiter(this, void 0, void 0, function* () {
+                yield connection.query(`UPDATE usersValidation set isValidation='${1}' WHERE userId=?`, [userId], (err, rows) => {
+                    connection.release();
+                    if (err) {
+                        reject(err);
+                    }
+                    else {
+                        resolve(rows);
+                    }
+                });
+            }));
+        }));
+    }
+    /**
+     * model: 레코드 삭제
+     * @param {string} userId
+     * @returns {Promise<any>}
+     */
+    deleteUsersValidationRecord(userId) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection((err, connection) => __awaiter(this, void 0, void 0, function* () {
+                yield connection.query(`DELETE FROM usersValidation WHERE userId=?`, [userId], (err, rows) => {
+                    connection.release();
+                    if (err) {
+                        reject(err);
+                    }
+                    else {
+                        resolve(rows);
+                    }
+                });
+            }));
         }));
     }
 }

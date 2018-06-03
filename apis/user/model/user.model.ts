@@ -156,6 +156,24 @@ export class User {
 			})
 		})
 	}
+
+    /**
+     * model: 인증여부 업데이트
+     * @param {string} userId
+     * @returns {Promise<any>}
+     */
+
+    updateIsValidation(userId: any): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            await pool.getConnection(async (err, connection) => {
+                await connection.query(`UPDATE users set isValidation='${1}' WHERE userId=?`, [userId], (err, rows) => {
+                    connection.release();
+                    if(err) { reject(err); }
+                    else { resolve(rows); }
+                })
+            })
+        })
+    }
 }
 
 export const user: any = new User();
