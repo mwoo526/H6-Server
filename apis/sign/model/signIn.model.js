@@ -78,7 +78,9 @@ class SignIn {
                                             if (err) {
                                                 return reject('The jwt is incorrect');
                                             }
-                                            resolve(token);
+                                            delete rows[0].userPw;
+                                            rows[0].token = token;
+                                            resolve(rows);
                                         });
                                     }
                                     else {
