@@ -15,30 +15,6 @@ class UserValidation {
     constructor() {
     }
     /**
-     * model: 인증코드 생성
-     * @param {string} userId
-     * @param {string} userEmail
-     * @param validationCode
-     * @returns {Promise<any>}
-
-    createValidationCode(userId: string, userEmail: string, validationCode: any): Promise<any> {
-        return new Promise(async (resolve, reject) => {
-            await emailUtil.sendEmail('kingdom0608@gmail.com', `${userEmail}@naver.com`, 'test', validationCode);
-            await pool.getConnection(async function(err, connection) {
-                await connection.query(`UPDATE usersValidation SET validationCode = '${validationCode}' WHERE userId = '${userId}'`, async function(err) {
-                    if (err) {
-                        await connection.release();
-                        reject(err);
-                    } else {
-                        await connection.release();
-                        resolve(validationCode);
-                    }
-                })
-            })
-        })
-    }
-     */
-    /**
      * model: 인증코드 조회
      * @param {string} userId
      * @returns {Promise<any>}
@@ -90,28 +66,6 @@ class UserValidation {
         }));
     }
     /**
-     * model: 인증여부 업데이트
-     * @param {string} userId
-     * @returns {Promise<any>}
-
-    updateIsValidation(userId: string): Promise<any> {
-        return new Promise(async (resolve, reject) => {
-            await pool.getConnection(async function(err, connection) {
-                await connection.query(`UPDATE usersValidation SET isValidation = true WHERE userId = '${userId}'`, function(err) {
-                    if (err) {
-                        console.log(err);
-                        connection.release();
-                        reject(err);
-                    } else {
-                        connection.release();
-                        resolve(userId);
-                    }
-                })
-            })
-        })
-    }
-     */
-    /**
      * model: 아이디 중복 검사
      * @param {string} userId
      * @returns {Promise<any>}
@@ -140,6 +94,11 @@ class UserValidation {
             });
         }));
     }
+    /**
+     * model:
+     * @param {string} userNickName
+     * @returns {Promise<any>}
+     */
     checkUserNickName(userNickName) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
@@ -168,7 +127,7 @@ class UserValidation {
     }
     /**
      * model: 인증메일 발송
-     * @param
+     * @param mailOptions
      * @returns {Promise<any>}
      */
     sendValidationMail(mailOptions) {
@@ -178,7 +137,7 @@ class UserValidation {
     }
     /**
      * model: uuid 를 통해 DB에 저장된 userId 가져오기
-     * @param
+     * @param uuid
      * @returns {Promise<any>}
      */
     getUserIdData(uuid) {
@@ -198,7 +157,8 @@ class UserValidation {
     }
     /**
      * model: DB usersValidation table에 uuid 저장하기
-     * @param
+     * @param userId
+     * @param uuid
      * @returns {Promise<any>}
      */
     setUuid(userId, uuid) {
@@ -218,7 +178,7 @@ class UserValidation {
     }
     /**
      * model: 최근에 업데이트된 날짜 가져오기
-     * @param
+     * @param userId
      * @returns {Promise<any>}
      */
     getUpdatedAt(userId) {
@@ -238,7 +198,7 @@ class UserValidation {
     }
     /**
      * model: 인증여부 업데이트
-     * @param {string} userId
+     * @param userId
      * @returns {Promise<any>}
      */
     updateIsValidation(userId) {

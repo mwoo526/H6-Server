@@ -1,8 +1,7 @@
 import * as express from 'express';
-import { getRandomInt } from '../../../packages/utils/inviteCode.util';
+import { uuidV1 } from '../../../packages/utils/uuid.util';
 import { user } from '../../user/model/user.model';
 import { userValidation } from '../model/userValidation.model';
-import { uuidV1 } from "../../../packages/utils/uuid.util";
 
 export class UserValidationRoutes {
 	public userValidationRouter: express.Router = express.Router();
@@ -14,33 +13,14 @@ export class UserValidationRoutes {
 	public router() {
 		// this.userValidationRouter.post('/userValidation/sendValidationCode/:userId', sendValidationCode);
 		// this.userValidationRouter.post('/userValidation/checkValidationCode/:userId', checkValidationCode);
-        this.userValidationRouter.get('/userValidation/checkUserId/:userId', checkUserId);
+		this.userValidationRouter.get('/userValidation/checkUserId/:userId', checkUserId);
 		this.userValidationRouter.get('/userValidation/checkUserNickName/:userNickName', checkUserNickName);
 
-        this.userValidationRouter.post('/userValidation/sendValidationMail/', sendValidationMail);
-        this.userValidationRouter.get('/userValidation/verify/:uuid', verifyValidation);
+		this.userValidationRouter.post('/userValidation/sendValidationMail/', sendValidationMail);
+		this.userValidationRouter.get('/userValidation/verify/:uuid', verifyValidation);
 	}
 }
 
-/**
- * route: 인증코드 전송
- * @param req
- * @param res
- * @returns {Promise<void>}
-
-async function sendValidationCode(req, res): Promise<void> {
-	try {
-		const userId: string = req.params.userId;
-		const userData: any = await user.getUser(userId);
-		const userEmail: string = userData[0].userEmail;
-		const validationCode: any = await String(getRandomInt());
-		const result = await userValidation.createValidationCode(userId, userEmail, validationCode);
-		res.send(result);
-	} catch (err) {
-		res.send(err);
-	}
-}
- */
 
 /**
  * route: 인증코드 체크
@@ -130,40 +110,38 @@ async function checkUserNickName(req, res): Promise<any> {
 	}
 }
 
-
 /**
  * route: 인증코드 전송
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
-
 async function sendValidationMail(req, res): Promise<void> {
-    try {
-        var host: any = req.get('host');
-        var uuid = uuidV1();
+	try {
+		let host: any = req.get('host');
+		let uuid = uuidV1();
 
-        var userId: string = req.body.userId;
-        var link: any = "http://"+host+"/userValidation/verify/"+uuid;
-        var email: string = req.body.email;
+		let userId: string = req.body.userId;
+		let link: any = 'http://' + host + '/userValidation/verify/' + uuid;
+		let email: string = req.body.email;
 
-        const resSetUuid = await userValidation.setUuid(userId, uuid);
+		const resSetUuid = await userValidation.setUuid(userId, uuid);
 
-        var html: any = userId + "님 안녕하세요.<br><br> H6 App 을 정상적으로 이용하기 위해서는 이메일 인증을 해주세요. <br><br>";
-        html = html + "아래 링크를 누르시면 인증이 완료 됩니다.<br><br>";
-        html = html + "<a href="+link+">"+link+"</a>";
+		let html: any = userId + '님 안녕하세요.<br><br> H6 App 을 정상적으로 이용하기 위해서는 이메일 인증을 해주세요. <br><br>';
+		html = html + '아래 링크를 누르시면 인증이 완료 됩니다.<br><br>';
+		html = html + '<a href=' + link + '>' + link + '</a>';
 
-        var mailOptions = {
-            to: email,
-            subject: "H6 이메일 인증",
-            html: html
-        };
+		let mailOptions = {
+			to: email,
+			subject: 'H6 이메일 인증',
+			html: html
+		};
 
-        const resultMail = await userValidation.sendValidationMail(mailOptions);
-        res.send(resultMail);
-    } catch (err) {
-        res.send(err);
-    }
+		const resultMail = await userValidation.sendValidationMail(mailOptions);
+		res.send(resultMail);
+	} catch (err) {
+		res.send(err);
+	}
 }
 
 /**
@@ -172,69 +150,75 @@ async function sendValidationMail(req, res): Promise<void> {
  * @param res
  * @returns {Promise<void>}
  */
+async function verifyValidation(req, res): Promise<void> {
+	try {
+		if (req.protocol == 'http') {
 
-async function verifyValidation(req, res) : Promise<void> {
-    try {
-        if(req.protocol == "http") {
+			let verifiedUuid: any = req.params.uuid;
 
-            var verifiedUuid: any = req.params.uuid;
+			let uvUserId = await userValidation.getUserIdData(verifiedUuid);
+			uvUserId = JSON.stringify(uvUserId);
 
-            var uvUserId = await userValidation.getUserIdData(verifiedUuid);
-            uvUserId = JSON.stringify(uvUserId);
+			if (uvUserId == '[]')	// 해당 데이터가 없으면 []
+			{
+				res.end('Unvalidated code Error!!');
+			}
 
-            if(uvUserId == "[]")	// 해당 데이터가 없으면 []
-                res.end("Unvalidated code Error!!");
+			let userId = uvUserId.split('"')[3];
 
-            var userId = uvUserId.split('"')[3];
+			let uvUpdatedAt = await userValidation.getUpdatedAt(userId);
+			uvUpdatedAt = JSON.stringify(uvUpdatedAt);
+			uvUpdatedAt = uvUpdatedAt.split('"')[3];
 
-            var uvUpdatedAt = await userValidation.getUpdatedAt(userId);
-            uvUpdatedAt = JSON.stringify(uvUpdatedAt);
-            uvUpdatedAt = uvUpdatedAt.split('"')[3];
+			let uvDate = uvUpdatedAt.split('T')[0].split('-');
+			let uvYearUpdatedAt = parseInt(uvDate[0]);
+			let uvMonthUpdatedAt = parseInt(uvDate[1]);
+			let uvDayUpdatedAt = parseInt(uvDate[2]);
 
-            var uvDate = uvUpdatedAt.split("T")[0].split("-");
-            var uvYearUpdatedAt = parseInt(uvDate[0]);
-            var uvMonthUpdatedAt = parseInt(uvDate[1]);
-            var uvDayUpdatedAt = parseInt(uvDate[2]);
-
-            if(isValidOnDate(uvYearUpdatedAt, uvMonthUpdatedAt, uvDayUpdatedAt)) {
-                await userValidation.updateIsValidation(userId);
-                await userValidation.deleteUsersValidationRecord(userId);
-                await user.updateIsValidation(userId);
-                res.end("Email is been Successfully verified");
-            }
-            else {
-                res.end("validation date expired.")
-            }
-        }
-        else {
-            res.end("Requset is from unkown source");
-        }
-    } catch (err) {
-        res.send(err);
-    }
+			if (isValidOnDate(uvYearUpdatedAt, uvMonthUpdatedAt, uvDayUpdatedAt)) {
+				await userValidation.updateIsValidation(userId);
+				await userValidation.deleteUsersValidationRecord(userId);
+				await user.updateIsValidation(userId);
+				res.end('Email is been Successfully verified');
+			}
+			else {
+				res.end('validation date expired.')
+			}
+		}
+		else {
+			res.end('Requset is from unkown source');
+		}
+	} catch (err) {
+		res.send(err);
+	}
 }
 
 /**
  * route: 인증기간 검증
  * @returns boolean
  */
-
 function isValidOnDate(year, month, day) {
-    var date = new Date();
-    var curYear = date.getFullYear();
-    var curMonth = date.getMonth()+1;
-    var curDay = date.getDate();
+	let date = new Date();
+	let curYear = date.getFullYear();
+	let curMonth = date.getMonth() + 1;
+	let curDay = date.getDate();
 
-    var diffYear = curYear - year;
-    var diffMonth = curMonth - month;
-    var diffDay = curDay - day;
+	let diffYear = curYear - year;
+	let diffMonth = curMonth - month;
+	let diffDay = curDay - day;
 
-    if(diffYear == 1 && curMonth == 1 && curDay == 1) return true;
-    if(diffYear == 0) {
-        if(diffMonth == 1 && curDay == 1) return true;
-        if(diffMonth == 0 && diffDay <= 1) return true;
-    }
-    return false;
+	if (diffYear == 1 && curMonth == 1 && curDay == 1) {
+		return true;
+	}
+	if (diffYear == 0) {
+		if (diffMonth == 1 && curDay == 1) {
+			return true;
+		}
+		if (diffMonth == 0 && diffDay <= 1) {
+			return true;
+		}
+	}
+	return false;
 }
 
 export const userValidationRoutes: UserValidationRoutes = new UserValidationRoutes();

@@ -10,7 +10,7 @@ describe('userValidation 모델', () => {
 	let testUserNickName: string = '이미 존재하는 닉네임';
 	let testUserNickName2: string = '사용 가능한 닉네임';
 	let testMajor: string = '산업경영공학과';
-	let testAdmissionYear: number  = 2012;
+	let testAdmissionYear: number = 2012;
 
 	before(async () => {
 		try {
