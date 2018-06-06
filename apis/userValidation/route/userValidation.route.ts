@@ -11,32 +11,10 @@ export class UserValidationRoutes {
 	}
 
 	public router() {
-		// this.userValidationRouter.post('/userValidation/sendValidationCode/:userId', sendValidationCode);
-		// this.userValidationRouter.post('/userValidation/checkValidationCode/:userId', checkValidationCode);
 		this.userValidationRouter.get('/userValidation/checkUserId/:userId', checkUserId);
 		this.userValidationRouter.get('/userValidation/checkUserNickName/:userNickName', checkUserNickName);
-
 		this.userValidationRouter.post('/userValidation/sendValidationMail/', sendValidationMail);
 		this.userValidationRouter.get('/userValidation/verify/:uuid', verifyValidation);
-	}
-}
-
-
-/**
- * route: 인증코드 체크
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-async function checkValidationCode(req, res): Promise<void> {
-	const userId: string = req.params.userId;
-	const validationCode: any = req.body.validationCode;
-	const userData: any = await user.getUser(userId);
-	try {
-		const result = await userValidation.checkValidationCode(userId, userData, validationCode);
-		res.send(result);
-	} catch (err) {
-		res.send(err);
 	}
 }
 

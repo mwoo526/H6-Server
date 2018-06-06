@@ -9,7 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
-const encryption_utli_1 = require("../../../packages/utils/encryption.utli");
 const user_resource_1 = require("../../../resources/user.resource");
 const user_model_1 = require("../model/user.model");
 class UserRoutes {
@@ -120,19 +119,33 @@ function updateUserPassword(req, res) {
         let userId = req.params.userId;
         let userPw = req.body.userPw;
         let userNewPw = req.body.userNewPw;
-        const getUserPw = yield user_model_1.user.getUser(userId);
         try {
-            if (encryption_utli_1.encriptionPw.getHash(userPw) === getUserPw[0].userPw) {
-                const userPw = encryption_utli_1.encriptionPw.getHash(userNewPw);
-                const result = yield user_model_1.user.updateUserPassword(userId, userPw);
-                res.send(result);
-            }
-            else {
-                throw new Error('The password is incorrect');
-            }
+            yield user_model_1.user.getUserPassword(userId, userPw);
+            yield user_model_1.user.updateUserPassword(userId, userNewPw);
+            res.send({
+                success: true,
+                statusCode: 200,
+                message: 'updateUserPassword: 200'
+            });
         }
         catch (err) {
-            res.send(err.message);
+            console.log(err);
+            switch (err) {
+                case 'The password is incorrect':
+                    res.send({
+                        success: false,
+                        statusCode: 404,
+                        message: 'getUser: 40401'
+                    });
+                    break;
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'getUser: 50000'
+                    });
+                    break;
+            }
         }
     });
 }

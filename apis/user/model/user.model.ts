@@ -1,3 +1,4 @@
+import { encriptionPw } from '../../../packages/utils/encryption.utli';
 import { mysqlUtil } from '../../../packages/utils/mysql.util';
 
 const pool = mysqlUtil.pool;
@@ -7,7 +8,7 @@ export class User {
 	}
 
 	/**
-	 * verify: user 생성
+	 * model: user 생성
 	 * @param userData
 	 * @returns {Promise<any>}
 	 */
@@ -28,7 +29,7 @@ export class User {
 	}
 
 	/**
-	 * verify: user 리스트 조회
+	 * model: user 리스트 조회
 	 * @returns {Promise<any>}
 	 */
 	listUser(): Promise<any> {
@@ -48,7 +49,7 @@ export class User {
 	}
 
 	/**
-	 * verify: user page 리스트 조회
+	 * model: user page 리스트 조회
 	 * @returns {Promise<any>}
 	 */
 	pageListUser(page: number, count: number): Promise<any> {
@@ -72,7 +73,7 @@ export class User {
 	}
 
 	/**
-	 * verify: user studentId 조회
+	 * model: user studentId 조회
 	 * @param {number} studentId
 	 * @returns {Promise<any>}
 	 */
@@ -93,7 +94,7 @@ export class User {
 	}
 
 	/**
-	 * verify: user 업데이트
+	 * model: user 업데이트
 	 * @param {number} studentId
 	 * @param userData
 	 * @returns {Promise<any>}
@@ -115,7 +116,34 @@ export class User {
 	}
 
 	/**
-	 * verify: user 비밀번호 업데이트
+	 * model: user 비밀번호 조회
+	 * @param {string} userId
+	 * @param userPw
+	 * @returns {Promise<any>}
+	 */
+	getUserPassword(userId: string, userPw: any): Promise<any> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`SELECT * from users WHERE userId = ?`, [userId], async function(err, rows) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						if (rows[0].userPw === await encriptionPw.getHash(userPw)) {
+							connection.release();
+							resolve(rows);
+						} else {
+							await connection.release();
+							return reject('The password is incorrect');
+						}
+					}
+				})
+			})
+		})
+	}
+
+	/**
+	 * model: user 비밀번호 업데이트
 	 * @param {string} userId
 	 * @param userPw
 	 * @returns {Promise<any>}
@@ -123,6 +151,7 @@ export class User {
 	updateUserPassword(userId: string, userPw: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
+				userPw = encriptionPw.getHash(userPw);
 				await connection.query(`UPDATE users SET userPw=? WHERE userId=?`, [userPw, userId], function(err, rows) {
 					if (err) {
 						connection.release();
@@ -137,7 +166,7 @@ export class User {
 	}
 
 	/**
-	 * verify: user 삭제
+	 * model: user 삭제
 	 * @param {number} studentId
 	 * @returns {Promise<any>}
 	 */
@@ -157,23 +186,26 @@ export class User {
 		})
 	}
 
-    /**
-     * model: 인증여부 업데이트
-     * @param {string} userId
-     * @returns {Promise<any>}
-     */
-
-    updateIsValidation(userId: any): Promise<any> {
-        return new Promise(async (resolve, reject) => {
-            await pool.getConnection(async (err, connection) => {
-                await connection.query(`UPDATE users set isValidation='${1}' WHERE userId=?`, [userId], (err, rows) => {
-                    connection.release();
-                    if(err) { reject(err); }
-                    else { resolve(rows); }
-                })
-            })
-        })
-    }
+	/**
+	 * model: 인증여부 업데이트
+	 * @param {string} userId
+	 * @returns {Promise<any>}
+	 */
+	updateIsValidation(userId: any): Promise<any> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async (err, connection) => {
+				await connection.query(`UPDATE users set isValidation='${1}' WHERE userId=?`, [userId], (err, rows) => {
+					connection.release();
+					if (err) {
+						reject(err);
+					}
+					else {
+						resolve(rows);
+					}
+				})
+			})
+		})
+	}
 }
 
 export const user: any = new User();

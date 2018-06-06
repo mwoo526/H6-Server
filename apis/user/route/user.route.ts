@@ -1,5 +1,4 @@
 import * as express from 'express';
-import { encriptionPw } from '../../../packages/utils/encryption.utli';
 import { UserResource } from '../../../resources/user.resource';
 import { user } from '../model/user.model';
 
@@ -104,17 +103,32 @@ async function updateUserPassword(req, res): Promise<void> {
 	let userId: string = req.params.userId;
 	let userPw: string = req.body.userPw;
 	let userNewPw: string = req.body.userNewPw;
-	const getUserPw: any = await user.getUser(userId);
 	try {
-		if (encriptionPw.getHash(userPw) === getUserPw[0].userPw) {
-			const userPw: any = encriptionPw.getHash(userNewPw);
-			const result: any = await user.updateUserPassword(userId, userPw);
-			res.send(result);
-		} else {
-			throw new Error('The password is incorrect');
-		}
+		await user.getUserPassword(userId, userPw);
+		await user.updateUserPassword(userId, userNewPw);
+		res.send({
+			success: true,
+			statusCode: 200,
+			message: 'updateUserPassword: 200'
+		});
 	} catch (err) {
-		res.send(err.message);
+		console.log(err);
+		switch (err) {
+			case 'The password is incorrect':
+				res.send({
+					success: false,
+					statusCode: 404,
+					message: 'getUser: 40401'
+				});
+				break;
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'getUser: 50000'
+				});
+				break;
+		}
 	}
 }
 

@@ -18,8 +18,6 @@ class UserValidationRoutes {
         this.router();
     }
     router() {
-        // this.userValidationRouter.post('/userValidation/sendValidationCode/:userId', sendValidationCode);
-        // this.userValidationRouter.post('/userValidation/checkValidationCode/:userId', checkValidationCode);
         this.userValidationRouter.get('/userValidation/checkUserId/:userId', checkUserId);
         this.userValidationRouter.get('/userValidation/checkUserNickName/:userNickName', checkUserNickName);
         this.userValidationRouter.post('/userValidation/sendValidationMail/', sendValidationMail);
@@ -27,26 +25,6 @@ class UserValidationRoutes {
     }
 }
 exports.UserValidationRoutes = UserValidationRoutes;
-/**
- * route: 인증코드 체크
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-function checkValidationCode(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const userId = req.params.userId;
-        const validationCode = req.body.validationCode;
-        const userData = yield user_model_1.user.getUser(userId);
-        try {
-            const result = yield userValidation_model_1.userValidation.checkValidationCode(userId, userData, validationCode);
-            res.send(result);
-        }
-        catch (err) {
-            res.send(err);
-        }
-    });
-}
 /**
  * route: 아이디 중복 체크
  * @param req

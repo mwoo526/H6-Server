@@ -8,13 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const encryption_utli_1 = require("../../../packages/utils/encryption.utli");
 const mysql_util_1 = require("../../../packages/utils/mysql.util");
 const pool = mysql_util_1.mysqlUtil.pool;
 class User {
     constructor() {
     }
     /**
-     * verify: user 생성
+     * model: user 생성
      * @param userData
      * @returns {Promise<any>}
      */
@@ -37,7 +38,7 @@ class User {
         }));
     }
     /**
-     * verify: user 리스트 조회
+     * model: user 리스트 조회
      * @returns {Promise<any>}
      */
     listUser() {
@@ -59,7 +60,7 @@ class User {
         }));
     }
     /**
-     * verify: user page 리스트 조회
+     * model: user page 리스트 조회
      * @returns {Promise<any>}
      */
     pageListUser(page, count) {
@@ -85,7 +86,7 @@ class User {
         }));
     }
     /**
-     * verify: user studentId 조회
+     * model: user studentId 조회
      * @param {number} studentId
      * @returns {Promise<any>}
      */
@@ -108,7 +109,7 @@ class User {
         }));
     }
     /**
-     * verify: user 업데이트
+     * model: user 업데이트
      * @param {number} studentId
      * @param userData
      * @returns {Promise<any>}
@@ -132,7 +133,39 @@ class User {
         }));
     }
     /**
-     * verify: user 비밀번호 업데이트
+     * model: user 비밀번호 조회
+     * @param {string} userId
+     * @param userPw
+     * @returns {Promise<any>}
+     */
+    getUserPassword(userId, userPw) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`SELECT * from users WHERE userId = ?`, [userId], function (err, rows) {
+                        return __awaiter(this, void 0, void 0, function* () {
+                            if (err) {
+                                connection.release();
+                                reject(err);
+                            }
+                            else {
+                                if (rows[0].userPw === (yield encryption_utli_1.encriptionPw.getHash(userPw))) {
+                                    connection.release();
+                                    resolve(rows);
+                                }
+                                else {
+                                    yield connection.release();
+                                    return reject('The password is incorrect');
+                                }
+                            }
+                        });
+                    });
+                });
+            });
+        }));
+    }
+    /**
+     * model: user 비밀번호 업데이트
      * @param {string} userId
      * @param userPw
      * @returns {Promise<any>}
@@ -141,6 +174,7 @@ class User {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
+                    userPw = encryption_utli_1.encriptionPw.getHash(userPw);
                     yield connection.query(`UPDATE users SET userPw=? WHERE userId=?`, [userPw, userId], function (err, rows) {
                         if (err) {
                             connection.release();
@@ -156,7 +190,7 @@ class User {
         }));
     }
     /**
-     * verify: user 삭제
+     * model: user 삭제
      * @param {number} studentId
      * @returns {Promise<any>}
      */
