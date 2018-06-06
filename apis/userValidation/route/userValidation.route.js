@@ -165,8 +165,7 @@ function verifyValidation(req, res) {
                 let verifiedUuid = req.params.uuid;
                 let uvUserId = yield userValidation_model_1.userValidation.getUserIdData(verifiedUuid);
                 uvUserId = JSON.stringify(uvUserId);
-                if (uvUserId == '[]') // 해당 데이터가 없으면 []
-                 {
+                if (uvUserId == '[]') {
                     res.end('Unvalidated code Error!!');
                 }
                 let userId = uvUserId.split('"')[3];
