@@ -112,7 +112,6 @@ async function updateUserPassword(req, res): Promise<void> {
 			message: 'updateUserPassword: 200'
 		});
 	} catch (err) {
-		console.log(err);
 		switch (err) {
 			case 'The password is incorrect':
 				res.send({

@@ -129,7 +129,6 @@ function updateUserPassword(req, res) {
             });
         }
         catch (err) {
-            console.log(err);
             switch (err) {
                 case 'The password is incorrect':
                     res.send({
