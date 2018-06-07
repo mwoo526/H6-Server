@@ -104,14 +104,14 @@ async function sendValidationMail(req, res): Promise<void> {
 		let email: string = req.body.email;
 
 		try {
-            await userValidation.setUuid(userId, uuid);
-        } catch (err) {
-            res.send({
-                success: false,
-                statusCode: 500,
-                message: 'setUuid: 500'
-            });
-        }
+			await userValidation.setUuid(userId, uuid);
+		} catch (err) {
+			res.send({
+				success: false,
+				statusCode: 500,
+				message: 'setUuid: 500'
+			});
+		}
 
 		let html: any = userId + '님 안녕하세요.<br><br> H6 App 을 정상적으로 이용하기 위해서는 이메일 인증을 해주세요. <br><br>';
 		html = html + '아래 링크를 누르시면 인증이 완료 됩니다.<br><br>';
@@ -124,25 +124,25 @@ async function sendValidationMail(req, res): Promise<void> {
 		};
 
 		try {
-            await userValidation.sendValidationMail(mailOptions);
-            res.send({
-                success: true,
-                statusCode: 200,
-                message: 'sendValidationMail: 200'
-            });
-        } catch (err) {
-            res.send({
-                success: false,
-                statusCode: 500,
-                message: 'sendValidationMail: 500'
-            });
-        }
+			await userValidation.sendValidationMail(mailOptions);
+			res.send({
+				success: true,
+				statusCode: 200,
+				message: 'sendValidationMail: 200'
+			});
+		} catch (err) {
+			res.send({
+				success: false,
+				statusCode: 500,
+				message: 'sendValidationMail: 500'
+			});
+		}
 	} catch (err) {
-        res.send({
-            success: false,
-            statusCode: 500,
-            message: 'sendValidationMail(): 500'
-        });
+		res.send({
+			success: false,
+			statusCode: 500,
+			message: 'sendValidationMail(): 500'
+		});
 	}
 }
 

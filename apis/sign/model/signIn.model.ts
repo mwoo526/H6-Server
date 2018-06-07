@@ -71,7 +71,7 @@ class SignIn {
 										}
 										delete rows[0].userPw;
 										rows[0].token = token;
-										resolve(rows);
+										resolve(rows[0]);
 									})
 							} else {
 								await connection.release();

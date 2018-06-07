@@ -113,7 +113,16 @@ function sendValidationMail(req, res) {
             let userId = req.body.userId;
             let link = 'http://' + host + '/userValidation/verify/' + uuid;
             let email = req.body.email;
-            const resSetUuid = yield userValidation_model_1.userValidation.setUuid(userId, uuid);
+            try {
+                yield userValidation_model_1.userValidation.setUuid(userId, uuid);
+            }
+            catch (err) {
+                res.send({
+                    success: false,
+                    statusCode: 500,
+                    message: 'setUuid: 500'
+                });
+            }
             let html = userId + '님 안녕하세요.<br><br> H6 App 을 정상적으로 이용하기 위해서는 이메일 인증을 해주세요. <br><br>';
             html = html + '아래 링크를 누르시면 인증이 완료 됩니다.<br><br>';
             html = html + '<a href=' + link + '>' + link + '</a>';
@@ -122,11 +131,28 @@ function sendValidationMail(req, res) {
                 subject: 'H6 이메일 인증',
                 html: html
             };
-            const resultMail = yield userValidation_model_1.userValidation.sendValidationMail(mailOptions);
-            res.send(resultMail);
+            try {
+                yield userValidation_model_1.userValidation.sendValidationMail(mailOptions);
+                res.send({
+                    success: true,
+                    statusCode: 200,
+                    message: 'sendValidationMail: 200'
+                });
+            }
+            catch (err) {
+                res.send({
+                    success: false,
+                    statusCode: 500,
+                    message: 'sendValidationMail: 500'
+                });
+            }
         }
         catch (err) {
-            res.send(err);
+            res.send({
+                success: false,
+                statusCode: 500,
+                message: 'sendValidationMail(): 500'
+            });
         }
     });
 }
@@ -143,7 +169,8 @@ function verifyValidation(req, res) {
                 let verifiedUuid = req.params.uuid;
                 let uvUserId = yield userValidation_model_1.userValidation.getUserIdData(verifiedUuid);
                 uvUserId = JSON.stringify(uvUserId);
-                if (uvUserId == '[]') {
+                if (uvUserId == '[]') // 해당 데이터가 없으면 []
+                 {
                     res.end('Unvalidated code Error!!');
                 }
                 let userId = uvUserId.split('"')[3];
