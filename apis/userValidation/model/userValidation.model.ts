@@ -1,5 +1,6 @@
 import { emailUtil } from '../../../packages/utils/email.util';
 import { mysqlUtil } from '../../../packages/utils/mysql.util';
+import smtpTransport = emailUtil.smtpTransport;
 
 const pool = mysqlUtil.pool;
 
@@ -116,7 +117,13 @@ export class UserValidation {
 	 */
 	sendValidationMail(mailOptions: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
-			await emailUtil.sendEmail(mailOptions, resolve, reject);
+			await smtpTransport.sendMail(mailOptions, (err, res) => {
+				if(err) {
+					reject('sendValidationMail error');
+				}
+				else
+					resolve("send ok");
+			});
 		})
 	}
 
@@ -153,7 +160,7 @@ export class UserValidation {
 				await connection.query(`UPDATE usersValidation set validationCode='${uuid}' WHERE userId = ?`, [userId], (err, rows) => {
 					connection.release();
 					if (err) {
-						reject(err);
+						reject('setUuid query error');
 					}
 					else {
 						resolve(rows);

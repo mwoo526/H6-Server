@@ -8,20 +8,7 @@ export module emailUtil {
             pass: "starbucks0123"
         }
     });
-
-    export function sendEmail(mailOptions: any, resolve: any, reject: any) {
-        smtpTransport.sendMail(mailOptions , function(err, res) {
-            if(err) {
-                console.log(err);
-                reject(err);
-            } else {
-                console.log('Email sent: ' + res.response);
-                resolve("Sent ok!!");
-            }
-        })
-    }
 }
-
 
 /*
 export module emailUtil {
