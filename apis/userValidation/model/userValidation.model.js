@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const email_util_1 = require("../../../packages/utils/email.util");
 const mysql_util_1 = require("../../../packages/utils/mysql.util");
+var smtpTransport = email_util_1.emailUtil.smtpTransport;
 const pool = mysql_util_1.mysqlUtil.pool;
 class UserValidation {
     constructor() {
@@ -126,13 +127,37 @@ class UserValidation {
         }));
     }
     /**
+     * model: 새로운 비밀번호 발송
+     * @param mailOptions
+     * @returns {Promise<any>}
+     */
+    sendPasswordMail(mailOptions) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield smtpTransport.sendMail(mailOptions, (err, res) => {
+                if (err) {
+                    reject('sendPasswordMail error');
+                }
+                else {
+                    resolve('send ok');
+                }
+            });
+        }));
+    }
+    /**
      * model: 인증메일 발송
      * @param mailOptions
      * @returns {Promise<any>}
      */
     sendValidationMail(mailOptions) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield email_util_1.emailUtil.sendEmail(mailOptions, resolve, reject);
+            yield smtpTransport.sendMail(mailOptions, (err, res) => {
+                if (err) {
+                    reject('sendValidationMail error');
+                }
+                else {
+                    resolve('send ok');
+                }
+            });
         }));
     }
     /**
@@ -156,7 +181,7 @@ class UserValidation {
         }));
     }
     /**
-     * model: DB usersValidation table에 uuid 저장하기
+     * model: DB usersValidation 테이블에 uuid 저장하기
      * @param userId
      * @param uuid
      * @returns {Promise<any>}
@@ -167,7 +192,7 @@ class UserValidation {
                 yield connection.query(`UPDATE usersValidation set validationCode='${uuid}' WHERE userId = ?`, [userId], (err, rows) => {
                     connection.release();
                     if (err) {
-                        reject(err);
+                        reject('setUuid query error');
                     }
                     else {
                         resolve(rows);

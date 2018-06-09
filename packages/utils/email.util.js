@@ -10,19 +10,6 @@ var emailUtil;
             pass: "starbucks0123"
         }
     });
-    function sendEmail(mailOptions, resolve, reject) {
-        emailUtil.smtpTransport.sendMail(mailOptions, function (err, res) {
-            if (err) {
-                console.log(err);
-                reject(err);
-            }
-            else {
-                console.log('Email sent: ' + res.response);
-                resolve("Sent ok!!");
-            }
-        });
-    }
-    emailUtil.sendEmail = sendEmail;
 })(emailUtil = exports.emailUtil || (exports.emailUtil = {}));
 /*
 export module emailUtil {
