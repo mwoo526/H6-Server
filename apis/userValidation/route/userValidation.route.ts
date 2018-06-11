@@ -226,7 +226,7 @@ async function verifyValidation(req, res): Promise<void> {
 			let uvMonthUpdatedAt = parseInt(uvDate[1]);
 			let uvDayUpdatedAt = parseInt(uvDate[2]);
 
-			if (isValidOnDate(uvYearUpdatedAt, uvMonthUpdatedAt, uvDayUpdatedAt)) {
+			if (user.isValidOnDate(uvYearUpdatedAt, uvMonthUpdatedAt, uvDayUpdatedAt)) {
 				await userValidation.updateIsValidation(userId);
 				await userValidation.deleteUsersValidationRecord(userId);
 				await user.updateIsValidation(userId);
@@ -242,34 +242,6 @@ async function verifyValidation(req, res): Promise<void> {
 	} catch (err) {
 		res.send(err);
 	}
-}
-
-/**
- * route: 인증기간 검증
- * @returns boolean
- */
-function isValidOnDate(year, month, day) {
-	let date = new Date();
-	let curYear = date.getFullYear();
-	let curMonth = date.getMonth() + 1;
-	let curDay = date.getDate();
-
-	let diffYear = curYear - year;
-	let diffMonth = curMonth - month;
-	let diffDay = curDay - day;
-
-	if (diffYear == 1 && curMonth == 1 && curDay == 1) {
-		return true;
-	}
-	if (diffYear == 0) {
-		if (diffMonth == 1 && curDay == 1) {
-			return true;
-		}
-		if (diffMonth == 0 && diffDay <= 1) {
-			return true;
-		}
-	}
-	return false;
 }
 
 export const userValidationRoutes: UserValidationRoutes = new UserValidationRoutes();
