@@ -103,6 +103,7 @@ async function updateUserPassword(req, res): Promise<void> {
 	let userId: string = req.params.userId;
 	let userPw: string = req.body.userPw;
 	let userNewPw: string = req.body.userNewPw;
+
 	try {
 		await user.getUserPassword(userId, userPw);
 		await user.updateUserPassword(userId, userNewPw);

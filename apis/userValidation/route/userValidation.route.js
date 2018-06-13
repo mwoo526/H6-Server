@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
+const randomInt_util_1 = require("../../../packages/utils/randomInt.util");
 const uuid_util_1 = require("../../../packages/utils/uuid.util");
 const user_model_1 = require("../../user/model/user.model");
 const userValidation_model_1 = require("../model/userValidation.model");
@@ -20,7 +21,8 @@ class UserValidationRoutes {
     router() {
         this.userValidationRouter.get('/userValidation/checkUserId/:userId', checkUserId);
         this.userValidationRouter.get('/userValidation/checkUserNickName/:userNickName', checkUserNickName);
-        this.userValidationRouter.post('/userValidation/sendValidationMail/', sendValidationMail);
+        this.userValidationRouter.get('/userValidation/sendPasswordMail/:userId', sendPasswordMail);
+        this.userValidationRouter.post('/userValidation/sendValidationMail', sendValidationMail);
         this.userValidationRouter.get('/userValidation/verify/:uuid', verifyValidation);
     }
 }
@@ -100,6 +102,50 @@ function checkUserNickName(req, res) {
     });
 }
 /**
+ * route: 새로운 비밀번호 이메일 전송
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+function sendPasswordMail(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            let newPassword = yield String(randomInt_util_1.getRandomInt());
+            let userId = req.params.userId;
+            let html = `${userId} 님 안녕하세요.<br><br> 임시비밀번호 ${newPassword} <br><br>`;
+            yield user_model_1.user.updateUserPassword(userId, newPassword);
+            let mailOptions = {
+                to: userId,
+                subject: '한담 비밀번호 재발급 매일',
+                html: html
+            };
+            yield userValidation_model_1.userValidation.sendPasswordMail(mailOptions);
+            res.send({
+                success: true,
+                statusCode: 200,
+                message: 'sendPasswordMail'
+            });
+        }
+        catch (err) {
+            switch (err) {
+                case 'sendPasswordMail error':
+                    res.send({
+                        success: false,
+                        statusCode: 40001,
+                        message: 'sendPasswordMail: 40001'
+                    });
+                    break;
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'sendPasswordMail: 50000'
+                    });
+            }
+        }
+    });
+}
+/**
  * route: 인증코드 전송
  * @param req
  * @param res
@@ -113,46 +159,45 @@ function sendValidationMail(req, res) {
             let userId = req.body.userId;
             let link = 'http://' + host + '/userValidation/verify/' + uuid;
             let email = req.body.email;
-            try {
-                yield userValidation_model_1.userValidation.setUuid(userId, uuid);
-            }
-            catch (err) {
-                res.send({
-                    success: false,
-                    statusCode: 500,
-                    message: 'setUuid: 500'
-                });
-            }
-            let html = userId + '님 안녕하세요.<br><br> H6 App 을 정상적으로 이용하기 위해서는 이메일 인증을 해주세요. <br><br>';
+            yield userValidation_model_1.userValidation.setUuid(userId, uuid);
+            let html = userId + '님 안녕하세요.<br><br> 한담을 정상적으로 이용하기 위해서는 이메일 인증을 해주세요. <br><br>';
             html = html + '아래 링크를 누르시면 인증이 완료 됩니다.<br><br>';
             html = html + '<a href=' + link + '>' + link + '</a>';
             let mailOptions = {
                 to: email,
-                subject: 'H6 이메일 인증',
+                subject: '한담 한성인 인증 메일',
                 html: html
             };
-            try {
-                yield userValidation_model_1.userValidation.sendValidationMail(mailOptions);
-                res.send({
-                    success: true,
-                    statusCode: 200,
-                    message: 'sendValidationMail: 200'
-                });
-            }
-            catch (err) {
-                res.send({
-                    success: false,
-                    statusCode: 500,
-                    message: 'sendValidationMail: 500'
-                });
-            }
+            yield userValidation_model_1.userValidation.sendValidationMail(mailOptions);
+            res.send({
+                success: true,
+                statusCode: 200,
+                message: 'sendValidationMail: 200'
+            });
         }
         catch (err) {
-            res.send({
-                success: false,
-                statusCode: 500,
-                message: 'sendValidationMail(): 500'
-            });
+            switch (err) {
+                case 'setUuid query error':
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'setUuid: 500'
+                    });
+                    break;
+                case 'sendValidationMail error':
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'sendValidationMail: 500'
+                    });
+                    break;
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'sendValidationMail(): 500'
+                    });
+            }
         }
     });
 }
@@ -181,7 +226,7 @@ function verifyValidation(req, res) {
                 let uvYearUpdatedAt = parseInt(uvDate[0]);
                 let uvMonthUpdatedAt = parseInt(uvDate[1]);
                 let uvDayUpdatedAt = parseInt(uvDate[2]);
-                if (isValidOnDate(uvYearUpdatedAt, uvMonthUpdatedAt, uvDayUpdatedAt)) {
+                if (user_model_1.user.isValidOnDate(uvYearUpdatedAt, uvMonthUpdatedAt, uvDayUpdatedAt)) {
                     yield userValidation_model_1.userValidation.updateIsValidation(userId);
                     yield userValidation_model_1.userValidation.deleteUsersValidationRecord(userId);
                     yield user_model_1.user.updateIsValidation(userId);
@@ -199,31 +244,6 @@ function verifyValidation(req, res) {
             res.send(err);
         }
     });
-}
-/**
- * route: 인증기간 검증
- * @returns boolean
- */
-function isValidOnDate(year, month, day) {
-    let date = new Date();
-    let curYear = date.getFullYear();
-    let curMonth = date.getMonth() + 1;
-    let curDay = date.getDate();
-    let diffYear = curYear - year;
-    let diffMonth = curMonth - month;
-    let diffDay = curDay - day;
-    if (diffYear == 1 && curMonth == 1 && curDay == 1) {
-        return true;
-    }
-    if (diffYear == 0) {
-        if (diffMonth == 1 && curDay == 1) {
-            return true;
-        }
-        if (diffMonth == 0 && diffDay <= 1) {
-            return true;
-        }
-    }
-    return false;
 }
 exports.userValidationRoutes = new UserValidationRoutes();
 //# sourceMappingURL=userValidation.route.js.map

@@ -111,6 +111,23 @@ export class UserValidation {
 	}
 
 	/**
+	 * model: 새로운 비밀번호 발송
+	 * @param mailOptions
+	 * @returns {Promise<any>}
+	 */
+	sendPasswordMail(mailOptions: any): Promise<any> {
+		return new Promise(async (resolve, reject) => {
+			await smtpTransport.sendMail(mailOptions, (err, res) => {
+				if (err) {
+					reject('sendPasswordMail error');
+				} else {
+					resolve('send ok');
+				}
+			})
+		});
+	}
+
+	/**
 	 * model: 인증메일 발송
 	 * @param mailOptions
 	 * @returns {Promise<any>}
@@ -118,11 +135,12 @@ export class UserValidation {
 	sendValidationMail(mailOptions: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await smtpTransport.sendMail(mailOptions, (err, res) => {
-				if(err) {
+				if (err) {
 					reject('sendValidationMail error');
 				}
-				else
-					resolve("send ok");
+				else {
+					resolve('send ok');
+				}
 			});
 		})
 	}
@@ -149,7 +167,7 @@ export class UserValidation {
 	}
 
 	/**
-	 * model: DB usersValidation table에 uuid 저장하기
+	 * model: DB usersValidation 테이블에 uuid 저장하기
 	 * @param userId
 	 * @param uuid
 	 * @returns {Promise<any>}
