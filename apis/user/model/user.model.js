@@ -232,6 +232,34 @@ class User {
             }));
         }));
     }
+    /**
+     * model: 인증기간 검증
+     * @param year
+     * @param month
+     * @param day
+     * @returns {boolean}
+     */
+    isValidOnDate(year, month, day) {
+        let date = new Date();
+        let curYear = date.getFullYear();
+        let curMonth = date.getMonth() + 1;
+        let curDay = date.getDate();
+        let diffYear = curYear - year;
+        let diffMonth = curMonth - month;
+        let diffDay = curDay - day;
+        if (diffYear == 1 && curMonth == 1 && curDay == 1) {
+            return true;
+        }
+        if (diffYear == 0) {
+            if (diffMonth == 1 && curDay == 1) {
+                return true;
+            }
+            if (diffMonth == 0 && diffDay <= 1) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 exports.User = User;
 exports.user = new User();
