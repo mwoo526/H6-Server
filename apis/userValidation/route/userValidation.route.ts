@@ -174,22 +174,22 @@ async function sendValidationMail(req, res): Promise<void> {
 			case 'setUuid query error':
 				res.send({
 					success: false,
-					statusCode: 500,
-					message: 'setUuid: 500'
+					statusCode: 400,
+					message: 'setUuid: 40001'
 				});
 				break;
 			case 'sendValidationMail error':
 				res.send({
 					success: false,
-					statusCode: 500,
-					message: 'sendValidationMail: 500'
+					statusCode: 400,
+					message: 'sendValidationMail: 40002'
 				});
 				break;
 			default:
 				res.send({
 					success: false,
 					statusCode: 500,
-					message: 'sendValidationMail(): 500'
+					message: 'sendValidationMail: 50000'
 				});
 		}
 	}
@@ -210,7 +210,8 @@ async function verifyValidation(req, res): Promise<void> {
 			let uvUserId = await userValidation.getUserIdData(verifiedUuid);
 			uvUserId = JSON.stringify(uvUserId);
 
-			if (uvUserId == '[]')	// 해당 데이터가 없으면 []
+			/** 해당 데이터가 없으면 [] */
+			if (uvUserId == '[]')
 			{
 				res.end('Unvalidated code Error!!');
 			}
@@ -237,7 +238,7 @@ async function verifyValidation(req, res): Promise<void> {
 			}
 		}
 		else {
-			res.end('Requset is from unkown source');
+			res.end('Request is from unknown source');
 		}
 	} catch (err) {
 		res.send(err);

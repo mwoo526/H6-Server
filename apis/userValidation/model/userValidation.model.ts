@@ -111,6 +111,32 @@ export class UserValidation {
 	}
 
 	/**
+	 * model: DB usersValidation 테이블에 uuid 저장하기
+	 * @param userId
+	 * @param uuid
+	 * @returns {Promise<any>}
+	 */
+	setUuid(userId: any, uuid: any): Promise<any> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async (err, connection) => {
+				await connection.query(`UPDATE usersValidation set validationCode='${uuid}' WHERE userId = ?`, [userId], (err, rows) => {
+					connection.release();
+					if (err) {
+						reject('setUuid query error');
+					}
+					else {
+						resolve(rows);
+					}
+				})
+			})
+		})
+	}
+
+	verifyValidation(): Promise<any> {
+		return
+	}
+
+	/**
 	 * model: 새로운 비밀번호 발송
 	 * @param mailOptions
 	 * @returns {Promise<any>}
@@ -157,28 +183,6 @@ export class UserValidation {
 					connection.release();
 					if (err) {
 						reject(err);
-					}
-					else {
-						resolve(rows);
-					}
-				})
-			})
-		})
-	}
-
-	/**
-	 * model: DB usersValidation 테이블에 uuid 저장하기
-	 * @param userId
-	 * @param uuid
-	 * @returns {Promise<any>}
-	 */
-	setUuid(userId: any, uuid: any): Promise<any> {
-		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async (err, connection) => {
-				await connection.query(`UPDATE usersValidation set validationCode='${uuid}' WHERE userId = ?`, [userId], (err, rows) => {
-					connection.release();
-					if (err) {
-						reject('setUuid query error');
 					}
 					else {
 						resolve(rows);

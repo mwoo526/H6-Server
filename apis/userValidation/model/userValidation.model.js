@@ -127,6 +127,30 @@ class UserValidation {
         }));
     }
     /**
+     * model: DB usersValidation 테이블에 uuid 저장하기
+     * @param userId
+     * @param uuid
+     * @returns {Promise<any>}
+     */
+    setUuid(userId, uuid) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection((err, connection) => __awaiter(this, void 0, void 0, function* () {
+                yield connection.query(`UPDATE usersValidation set validationCode='${uuid}' WHERE userId = ?`, [userId], (err, rows) => {
+                    connection.release();
+                    if (err) {
+                        reject('setUuid query error');
+                    }
+                    else {
+                        resolve(rows);
+                    }
+                });
+            }));
+        }));
+    }
+    verifyValidation() {
+        return;
+    }
+    /**
      * model: 새로운 비밀번호 발송
      * @param mailOptions
      * @returns {Promise<any>}
@@ -172,27 +196,6 @@ class UserValidation {
                     connection.release();
                     if (err) {
                         reject(err);
-                    }
-                    else {
-                        resolve(rows);
-                    }
-                });
-            }));
-        }));
-    }
-    /**
-     * model: DB usersValidation 테이블에 uuid 저장하기
-     * @param userId
-     * @param uuid
-     * @returns {Promise<any>}
-     */
-    setUuid(userId, uuid) {
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            yield pool.getConnection((err, connection) => __awaiter(this, void 0, void 0, function* () {
-                yield connection.query(`UPDATE usersValidation set validationCode='${uuid}' WHERE userId = ?`, [userId], (err, rows) => {
-                    connection.release();
-                    if (err) {
-                        reject('setUuid query error');
                     }
                     else {
                         resolve(rows);
