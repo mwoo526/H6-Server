@@ -172,4 +172,11 @@ describe('lectureReply 모델', () => {
 	// 	// console.log(result);
 	// 	expect(result).to.instanceof(Object);
 	// });
+
+	/** 테스트 용도로 사용 */
+	// it('deleteLectureReplyByUserIndex', async () => {
+	// 	const result = await lectureReply.deleteLectureReplyByUserIndex(9);
+	// 	// console.log(result);
+	// 	expect(result).to.instanceof(Object);
+	// });
 });

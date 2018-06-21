@@ -454,6 +454,27 @@ export class LectureReply {
 	}
 
 	/**
+	 * model: lectureReply userIndex 로 삭제
+	 * @param {number} userIndex
+	 * @returns {Promise<void>}
+	 */
+	deleteLectureReplyByUserIndex(userIndex: number): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query('DELETE FROM lecturesReply WHERE userIndex = ?', userIndex, async function(err, rows) {
+					if (err) {
+						await connection.release();
+						reject(err);
+					} else {
+						await connection.release();
+						resolve(rows);
+					}
+				})
+			})
+		})
+	}
+
+	/**
 	 * model: lectureReply 점수 조회
 	 * @param {string} lectureInfoIndex
 	 * @returns {Promise<void>}

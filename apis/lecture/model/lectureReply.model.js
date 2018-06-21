@@ -531,6 +531,31 @@ class LectureReply {
         }));
     }
     /**
+     * model: lectureReply userIndex 로 삭제
+     * @param {number} userIndex
+     * @returns {Promise<void>}
+     */
+    deleteLectureReplyByUserIndex(userIndex) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query('DELETE FROM lecturesReply WHERE userIndex = ?', userIndex, function (err, rows) {
+                        return __awaiter(this, void 0, void 0, function* () {
+                            if (err) {
+                                yield connection.release();
+                                reject(err);
+                            }
+                            else {
+                                yield connection.release();
+                                resolve(rows);
+                            }
+                        });
+                    });
+                });
+            });
+        }));
+    }
+    /**
      * model: lectureReply 점수 조회
      * @param {string} lectureInfoIndex
      * @returns {Promise<void>}
