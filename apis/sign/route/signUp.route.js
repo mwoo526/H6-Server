@@ -36,7 +36,7 @@ function createUser(req, res) {
                 success: true,
                 statusCode: 200,
                 result: result,
-                message: 'createUser: 2001'
+                message: 'createUser: 200'
             });
         }
         catch (err) {
