@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { encriptionPw } from '../../../packages/utils/encryption.utli';
 import { user } from '../../user/model/user.model';
 import { userValidation } from './userValidation.model';
 
@@ -16,7 +17,7 @@ describe('userValidation 모델', () => {
 		try {
 			resultCreateUser = await user.createUser({
 				userId: testUserId,
-				userPw: testUserPw,
+				userPw: await encriptionPw.getHash(testUserPw),
 				userNickName: testUserNickName,
 				major: testMajor,
 				admissionYear: testAdmissionYear
@@ -47,4 +48,10 @@ describe('userValidation 모델', () => {
 		// console.log(result);
 		expect(result).instanceof(Object);
 	});
+
+	it('checkUserPw', async () => {
+		const result = await userValidation.checkUserPw(testUserPw);
+		// console.log(result);
+		expect(result).instanceof(Array);
+	})
 });

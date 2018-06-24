@@ -1,4 +1,5 @@
 import { emailUtil } from '../../../packages/utils/email.util';
+import { encriptionPw } from '../../../packages/utils/encryption.utli';
 import { mysqlUtil } from '../../../packages/utils/mysql.util';
 import smtpTransport = emailUtil.smtpTransport;
 
@@ -85,7 +86,7 @@ export class UserValidation {
 	}
 
 	/**
-	 * model:
+	 * model: 닉네임 중복검사
 	 * @param {string} userNickName
 	 * @returns {Promise<any>}
 	 */
@@ -104,6 +105,28 @@ export class UserValidation {
 							await connection.release();
 							return resolve(rows);
 						}
+					}
+				})
+			})
+		})
+	}
+
+	/**
+	 * model: 비밀번호 중복검사
+	 * @param {string} userPw
+	 * @returns {Promise<any>}
+	 */
+	checkUserPw(userPw: string): Promise<any> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				userPw = await encriptionPw.getHash(userPw);
+				await connection.query(`SELECT * FROM users WHERE userPw = '${userPw}'`, async function(err, rows) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						await connection.release();
+						return resolve(rows);
 					}
 				})
 			})
@@ -130,10 +153,6 @@ export class UserValidation {
 				})
 			})
 		})
-	}
-
-	verifyValidation(): Promise<any> {
-		return
 	}
 
 	/**

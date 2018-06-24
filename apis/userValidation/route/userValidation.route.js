@@ -21,6 +21,7 @@ class UserValidationRoutes {
     router() {
         this.userValidationRouter.get('/userValidation/checkUserId/:userId', checkUserId);
         this.userValidationRouter.get('/userValidation/checkUserNickName/:userNickName', checkUserNickName);
+        this.userValidationRouter.get('/userValidation/checkUserPw', checkUserPw);
         this.userValidationRouter.get('/userValidation/sendPasswordMail/:userId', sendPasswordMail);
         this.userValidationRouter.post('/userValidation/sendValidationMail', sendValidationMail);
         this.userValidationRouter.get('/userValidation/verify/:uuid', verifyValidation);
@@ -95,6 +96,36 @@ function checkUserNickName(req, res) {
                         success: false,
                         statusCode: 500,
                         message: 'checkUserNickName: 50000'
+                    });
+                    break;
+            }
+        }
+    });
+}
+/**
+ * route: 비밀번호 중복 체크
+ * @param req
+ * @param res
+ * @returns {Promise<any>}
+ */
+function checkUserPw(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const userPw = req.body.userPw;
+        try {
+            yield userValidation_model_1.userValidation.checkUserPw(userPw);
+            res.send({
+                success: true,
+                statusCode: 200,
+                message: 'checkUserPw: 200'
+            });
+        }
+        catch (err) {
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'checkUserPw: 50000'
                     });
                     break;
             }
