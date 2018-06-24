@@ -32,9 +32,18 @@ describe('userValidation 모델', () => {
 	after(async () => {
 		try {
 			await user.deleteUser(resultCreateUser.userId);
+			await userValidation.deleteUsersValidation(resultCreateUser.userId);
 		} catch (err) {
 			console.error('err', err);
 		}
+	});
+
+	it('createUserValidation', async () => {
+		const result = await userValidation.createUserValidation({
+			userId: testUserId
+		});
+		// console.log(result);
+		expect(result).instanceof(Object);
 	});
 
 	it('checkUserId - 사용 가능한 아이디', async () => {

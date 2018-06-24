@@ -10,6 +10,27 @@ export class UserValidation {
 	}
 
 	/**
+	 * model: userValidation 생성
+	 * @param userData
+	 * @returns {Promise<any>}
+	 */
+	createUserValidation(userData: any): Promise<any> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`INSERT INTO usersValidation SET ?`, [userData], async function(err, rows) {
+					if (err) {
+						await connection.release();
+						return reject(err);
+					} else {
+						await connection.release();
+						return resolve(rows);
+					}
+				});
+			})
+		})
+	}
+
+	/**
 	 * model: 인증코드 조회
 	 * @param {string} userId
 	 * @returns {Promise<any>}
@@ -254,11 +275,11 @@ export class UserValidation {
 	}
 
 	/**
-	 * model: 레코드 삭제
+	 * model: userValidation 삭제
 	 * @param {string} userId
 	 * @returns {Promise<any>}
 	 */
-	deleteUsersValidationRecord(userId: any): Promise<any> {
+	deleteUsersValidation(userId: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`DELETE FROM usersValidation WHERE userId=?`, [userId], (err, rows) => {

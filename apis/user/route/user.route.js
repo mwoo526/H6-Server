@@ -11,6 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const user_resource_1 = require("../../../resources/user.resource");
 const lectureReply_model_1 = require("../../lecture/model/lectureReply.model");
+const userValidation_model_1 = require("../../userValidation/model/userValidation.model");
 const user_model_1 = require("../model/user.model");
 class UserRoutes {
     constructor() {
@@ -160,6 +161,7 @@ function deleteUser(req, res) {
         let userId = req.params.userId;
         try {
             const resultUser = yield user_model_1.user.getUser(userId);
+            yield userValidation_model_1.userValidation.deleteUsersValidation(userId);
             yield lectureReply_model_1.lectureReply.deleteLectureReplyByUserIndex(resultUser[0].userIndex);
             yield user_model_1.user.deleteUser(userId);
             res.send({

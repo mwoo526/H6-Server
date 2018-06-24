@@ -259,7 +259,7 @@ function verifyValidation(req, res) {
                 let uvDayUpdatedAt = parseInt(uvDate[2]);
                 if (user_model_1.user.isValidOnDate(uvYearUpdatedAt, uvMonthUpdatedAt, uvDayUpdatedAt)) {
                     yield userValidation_model_1.userValidation.updateIsValidation(userId);
-                    yield userValidation_model_1.userValidation.deleteUsersValidationRecord(userId);
+                    yield userValidation_model_1.userValidation.deleteUsersValidation(userId);
                     yield user_model_1.user.updateIsValidation(userId);
                     res.end('Email is been Successfully verified');
                 }

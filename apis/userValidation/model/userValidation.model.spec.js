@@ -40,10 +40,18 @@ describe('userValidation 모델', () => {
     after(() => __awaiter(this, void 0, void 0, function* () {
         try {
             yield user_model_1.user.deleteUser(resultCreateUser.userId);
+            yield userValidation_model_1.userValidation.deleteUsersValidation(resultCreateUser.userId);
         }
         catch (err) {
             console.error('err', err);
         }
+    }));
+    it('createUserValidation', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield userValidation_model_1.userValidation.createUserValidation({
+            userId: testUserId
+        });
+        // console.log(result);
+        chai_1.expect(result).instanceof(Object);
     }));
     it('checkUserId - 사용 가능한 아이디', () => __awaiter(this, void 0, void 0, function* () {
         const result = yield userValidation_model_1.userValidation.checkUserId(testUserId2);

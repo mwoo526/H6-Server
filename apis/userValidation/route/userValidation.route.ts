@@ -258,7 +258,7 @@ async function verifyValidation(req, res): Promise<void> {
 
 			if (user.isValidOnDate(uvYearUpdatedAt, uvMonthUpdatedAt, uvDayUpdatedAt)) {
 				await userValidation.updateIsValidation(userId);
-				await userValidation.deleteUsersValidationRecord(userId);
+				await userValidation.deleteUsersValidation(userId);
 				await user.updateIsValidation(userId);
 				res.end('Email is been Successfully verified');
 			}

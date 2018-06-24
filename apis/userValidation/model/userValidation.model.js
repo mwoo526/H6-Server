@@ -17,6 +17,31 @@ class UserValidation {
     constructor() {
     }
     /**
+     * model: userValidation 생성
+     * @param userData
+     * @returns {Promise<any>}
+     */
+    createUserValidation(userData) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`INSERT INTO usersValidation SET ?`, [userData], function (err, rows) {
+                        return __awaiter(this, void 0, void 0, function* () {
+                            if (err) {
+                                yield connection.release();
+                                return reject(err);
+                            }
+                            else {
+                                yield connection.release();
+                                return resolve(rows);
+                            }
+                        });
+                    });
+                });
+            });
+        }));
+    }
+    /**
      * model: 인증코드 조회
      * @param {string} userId
      * @returns {Promise<any>}
@@ -269,11 +294,11 @@ class UserValidation {
         }));
     }
     /**
-     * model: 레코드 삭제
+     * model: userValidation 삭제
      * @param {string} userId
      * @returns {Promise<any>}
      */
-    deleteUsersValidationRecord(userId) {
+    deleteUsersValidation(userId) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection((err, connection) => __awaiter(this, void 0, void 0, function* () {
                 yield connection.query(`DELETE FROM usersValidation WHERE userId=?`, [userId], (err, rows) => {

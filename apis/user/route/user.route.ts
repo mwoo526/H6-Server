@@ -1,6 +1,7 @@
 import * as express from 'express';
 import { UserResource } from '../../../resources/user.resource';
 import { lectureReply } from '../../lecture/model/lectureReply.model';
+import { userValidation } from '../../userValidation/model/userValidation.model';
 import { user } from '../model/user.model';
 
 export class UserRoutes {
@@ -143,6 +144,7 @@ async function deleteUser(req, res): Promise<void> {
 	let userId: string = req.params.userId;
 	try {
 		const resultUser = await user.getUser(userId);
+		await userValidation.deleteUsersValidation(userId);
 		await lectureReply.deleteLectureReplyByUserIndex(resultUser[0].userIndex);
 		await user.deleteUser(userId);
 		res.send({
