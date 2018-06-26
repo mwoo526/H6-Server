@@ -64,7 +64,7 @@ describe('userValidation 모델', () => {
         chai_1.expect(result).instanceof(Object);
     }));
     it('checkUserPw', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield userValidation_model_1.userValidation.checkUserPw(testUserPw);
+        const result = yield userValidation_model_1.userValidation.checkUserPw(testUserId, testUserPw);
         // console.log(result);
         chai_1.expect(result).instanceof(Array);
     }));

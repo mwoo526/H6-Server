@@ -12,9 +12,9 @@ export class UserValidationRoutes {
 	}
 
 	public router() {
-		this.userValidationRouter.get('/userValidation/checkUserId/:userId', checkUserId);
-		this.userValidationRouter.get('/userValidation/checkUserNickName/:userNickName', checkUserNickName);
-		this.userValidationRouter.get('/userValidation/checkUserPw', checkUserPw);
+		this.userValidationRouter.get('/userValidation/userId/:userId', checkUserId);
+		this.userValidationRouter.get('/userValidation/userNickName/:userNickName', checkUserNickName);
+		this.userValidationRouter.get('/userValidation/userId/:userId/userPw', checkUserPw);
 		this.userValidationRouter.get('/userValidation/sendPasswordMail/:userId', sendPasswordMail);
 		this.userValidationRouter.post('/userValidation/sendValidationMail', sendValidationMail);
 		this.userValidationRouter.get('/userValidation/verify/:uuid', verifyValidation);
@@ -98,9 +98,10 @@ async function checkUserNickName(req, res): Promise<any> {
  * @returns {Promise<any>}
  */
 async function checkUserPw(req, res): Promise<any> {
+	const userId: string = req.params.user;
 	const userPw: string = req.body.userPw;
 	try {
-		await userValidation.checkUserPw(userPw);
+		await userValidation.checkUserPw(userId, userPw);
 		res.send({
 			success: true,
 			statusCode: 200,
@@ -108,6 +109,13 @@ async function checkUserPw(req, res): Promise<any> {
 		});
 	} catch (err) {
 		switch (err) {
+			case 'The ID does not exist':
+				res.send({
+					success: false,
+					statusCode: 404,
+					message: 'checkUserPw: 40401'
+				});
+				break;
 			default :
 				res.send({
 					success: false,

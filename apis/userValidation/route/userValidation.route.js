@@ -19,9 +19,9 @@ class UserValidationRoutes {
         this.router();
     }
     router() {
-        this.userValidationRouter.get('/userValidation/checkUserId/:userId', checkUserId);
-        this.userValidationRouter.get('/userValidation/checkUserNickName/:userNickName', checkUserNickName);
-        this.userValidationRouter.get('/userValidation/checkUserPw', checkUserPw);
+        this.userValidationRouter.get('/userValidation/userId/:userId', checkUserId);
+        this.userValidationRouter.get('/userValidation/userNickName/:userNickName', checkUserNickName);
+        this.userValidationRouter.get('/userValidation/userId/:userId/userPw', checkUserPw);
         this.userValidationRouter.get('/userValidation/sendPasswordMail/:userId', sendPasswordMail);
         this.userValidationRouter.post('/userValidation/sendValidationMail', sendValidationMail);
         this.userValidationRouter.get('/userValidation/verify/:uuid', verifyValidation);
@@ -110,9 +110,10 @@ function checkUserNickName(req, res) {
  */
 function checkUserPw(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        const userId = req.params.user;
         const userPw = req.body.userPw;
         try {
-            yield userValidation_model_1.userValidation.checkUserPw(userPw);
+            yield userValidation_model_1.userValidation.checkUserPw(userId, userPw);
             res.send({
                 success: true,
                 statusCode: 200,
@@ -121,6 +122,13 @@ function checkUserPw(req, res) {
         }
         catch (err) {
             switch (err) {
+                case 'The ID does not exist':
+                    res.send({
+                        success: false,
+                        statusCode: 404,
+                        message: 'checkUserPw: 40401'
+                    });
+                    break;
                 default:
                     res.send({
                         success: false,

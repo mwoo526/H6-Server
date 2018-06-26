@@ -137,17 +137,20 @@ export class UserValidation {
 	 * @param {string} userPw
 	 * @returns {Promise<any>}
 	 */
-	checkUserPw(userPw: string): Promise<any> {
+	checkUserPw(userId: string, userPw: string): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				userPw = await encriptionPw.getHash(userPw);
-				await connection.query(`SELECT * FROM users WHERE userPw = '${userPw}'`, async function(err, rows) {
+				await connection.query(`SELECT * FROM users WHERE userId = '${userId}' AND userPw = '${userPw}'`, async function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
 					} else {
+						if (rows[0] == null) {
+							reject('The ID does not exist');
+						}
 						await connection.release();
-						return resolve(rows);
+						resolve(rows);
 					}
 				})
 			})

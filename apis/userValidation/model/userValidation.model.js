@@ -157,20 +157,23 @@ class UserValidation {
      * @param {string} userPw
      * @returns {Promise<any>}
      */
-    checkUserPw(userPw) {
+    checkUserPw(userId, userPw) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
                     userPw = yield encryption_utli_1.encriptionPw.getHash(userPw);
-                    yield connection.query(`SELECT * FROM users WHERE userPw = '${userPw}'`, function (err, rows) {
+                    yield connection.query(`SELECT * FROM users WHERE userId = '${userId}' AND userPw = '${userPw}'`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
                                 connection.release();
                                 reject(err);
                             }
                             else {
+                                if (rows[0] == null) {
+                                    reject('The ID does not exist');
+                                }
                                 yield connection.release();
-                                return resolve(rows);
+                                resolve(rows);
                             }
                         });
                     });

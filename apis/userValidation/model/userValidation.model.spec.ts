@@ -59,7 +59,7 @@ describe('userValidation 모델', () => {
 	});
 
 	it('checkUserPw', async () => {
-		const result = await userValidation.checkUserPw(testUserPw);
+		const result = await userValidation.checkUserPw(testUserId, testUserPw);
 		// console.log(result);
 		expect(result).instanceof(Array);
 	})
