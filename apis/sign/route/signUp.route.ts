@@ -35,7 +35,6 @@ async function createUser(req, res): Promise<void> {
 			message: 'createUser: 200'
 		});
 	} catch (err) {
-		console.log(err.message);
 		switch (err) {
 			default:
 				res.send({

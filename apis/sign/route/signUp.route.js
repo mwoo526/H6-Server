@@ -44,7 +44,6 @@ function createUser(req, res) {
             });
         }
         catch (err) {
-            console.log(err.message);
             switch (err) {
                 default:
                     res.send({
