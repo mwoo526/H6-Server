@@ -21,7 +21,7 @@ class UserValidationRoutes {
     router() {
         this.userValidationRouter.get('/userValidation/userId/:userId', checkUserId);
         this.userValidationRouter.get('/userValidation/userNickName/:userNickName', checkUserNickName);
-        this.userValidationRouter.get('/userValidation/userId/:userId/userPw', checkUserPw);
+        this.userValidationRouter.post('/userValidation/userId/:userId/userPw', checkUserPw);
         this.userValidationRouter.get('/userValidation/sendPasswordMail/:userId', sendPasswordMail);
         this.userValidationRouter.post('/userValidation/sendValidationMail', sendValidationMail);
         this.userValidationRouter.get('/userValidation/verify/:uuid', verifyValidation);
