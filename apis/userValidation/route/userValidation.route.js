@@ -110,7 +110,7 @@ function checkUserNickName(req, res) {
  */
 function checkUserPw(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const userId = req.params.user;
+        const userId = req.params.userId;
         const userPw = req.body.userPw;
         try {
             yield userValidation_model_1.userValidation.checkUserPw(userId, userPw);

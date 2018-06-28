@@ -98,7 +98,7 @@ async function checkUserNickName(req, res): Promise<any> {
  * @returns {Promise<any>}
  */
 async function checkUserPw(req, res): Promise<any> {
-	const userId: string = req.params.user;
+	const userId: string = req.params.userId;
 	const userPw: string = req.body.userPw;
 	try {
 		await userValidation.checkUserPw(userId, userPw);
