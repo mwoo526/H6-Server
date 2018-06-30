@@ -51,4 +51,12 @@ describe('user 모델', () => {
 			isValidation: 0
 		}]);
 	});
+
+	it('updateUser', async () => {
+		const result = await user.updateUser(userId, {
+			major: 'updateTestMajor'
+		});
+		// console.log(result);
+		expect(result).to.instanceof(Object);
+	})
 });

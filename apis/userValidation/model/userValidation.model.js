@@ -284,7 +284,7 @@ class UserValidation {
     updateIsValidation(userId) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection((err, connection) => __awaiter(this, void 0, void 0, function* () {
-                yield connection.query(`UPDATE usersValidation set isValidation='${1}' WHERE userId=?`, [userId], (err, rows) => {
+                yield connection.query(`UPDATE users set isValidation='${1}' WHERE userId=?`, [userId], (err, rows) => {
                     connection.release();
                     if (err) {
                         reject(err);

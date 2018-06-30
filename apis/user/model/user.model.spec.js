@@ -58,5 +58,12 @@ describe('user 모델', () => {
                 isValidation: 0
             }]);
     }));
+    it('updateUser', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield user_model_1.user.updateUser(userId, {
+            major: 'updateTestMajor'
+        });
+        // console.log(result);
+        chai_1.expect(result).to.instanceof(Object);
+    }));
 });
 //# sourceMappingURL=user.model.spec.js.map

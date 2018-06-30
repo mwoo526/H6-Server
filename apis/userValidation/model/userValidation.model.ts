@@ -264,7 +264,7 @@ export class UserValidation {
 	updateIsValidation(userId: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`UPDATE usersValidation set isValidation='${1}' WHERE userId=?`, [userId], (err, rows) => {
+				await connection.query(`UPDATE users set isValidation='${1}' WHERE userId=?`, [userId], (err, rows) => {
 					connection.release();
 					if (err) {
 						reject(err);
