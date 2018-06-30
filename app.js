@@ -29,13 +29,13 @@ class Server {
         this.app.use(signUp_route_1.signUpRoutes.signUpRouter);
         this.app.use(signIn_route_1.signInRoutes.signInRouter);
         this.app.use(terms_route_1.termsRoutes.termsRouter);
+        this.app.use(track_route_1.trackRoutes.trackRouter);
         this.app.use(userValidation_route_1.userValidationRoutes.userValidationRouter);
         /** 라우터 토큰 검증 */
         this.app.use(tokenVerify_middleware_1.verify);
         /** 라우터 추가 */
         this.app.use(test_route_1.testRoutes.testRouter);
         this.app.use(user_route_1.userRoutes.userRouter);
-        this.app.use(track_route_1.trackRoutes.trackRouter);
         this.app.use(professor_route_1.professorRoutes.professorRouter);
         this.app.use(lecture_route_1.lectureRoutes.lectureRouter);
         this.app.use(lectureInfo_route_1.lectureInfoRoutes.lectureInfoRouter);

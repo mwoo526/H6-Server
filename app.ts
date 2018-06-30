@@ -31,13 +31,13 @@ export class Server {
 		this.app.use(signUpRoutes.signUpRouter);
 		this.app.use(signInRoutes.signInRouter);
 		this.app.use(termsRoutes.termsRouter);
+		this.app.use(trackRoutes.trackRouter);
 		this.app.use(userValidationRoutes.userValidationRouter);
 		/** 라우터 토큰 검증 */
 		this.app.use(verify);
 		/** 라우터 추가 */
 		this.app.use(testRoutes.testRouter);
 		this.app.use(userRoutes.userRouter);
-		this.app.use(trackRoutes.trackRouter);
 		this.app.use(professorRoutes.professorRouter);
 		this.app.use(lectureRoutes.lectureRouter);
 		this.app.use(lectureInfoRoutes.lectureInfoRouter);
