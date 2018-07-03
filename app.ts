@@ -11,6 +11,7 @@ import { testRoutes } from './apis/test/route/test.route';
 import { userRoutes } from './apis/user/route/user.route';
 import { trackRoutes } from './apis/track/route/track.route';
 import { userValidationRoutes } from './apis/userValidation/route/userValidation.route';
+import { voteRoutes } from './apis/vote/route/vote.route';
 import { notFoundError, serverError } from './middlewares/error.middleware';
 import { verify } from './middlewares/tokenVerify.middleware';
 
@@ -36,6 +37,7 @@ export class Server {
 		/** 라우터 토큰 검증 */
 		this.app.use(verify);
 		/** 라우터 추가 */
+		this.app.use(voteRoutes.voteRouter);
 		this.app.use(testRoutes.testRouter);
 		this.app.use(userRoutes.userRouter);
 		this.app.use(professorRoutes.professorRouter);
