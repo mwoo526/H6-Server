@@ -3,13 +3,17 @@ import { vote } from './vote';
 
 describe('vote 모델', () => {
 	let testVoteTopicIndex: number;
+	let testVoteItemIndex: number;
+	let testVoteItemIndex2: number;
 	let testVoteTopicName: string = '한성대학교를 상징하는 동물은 무엇입니까?';
 
 	before(async () => {
 		try {
 			/** voteTopic 생성 */
 			const result = await vote.createVoteTopic({
-				topicName: testVoteTopicName
+				topicName: testVoteTopicName,
+				status: 'ACTIVE',
+				dueDate: '2018-07-01'
 			});
 			/** validation 체크 */
 			expect(result).instanceof(Object);
@@ -18,7 +22,6 @@ describe('vote 모델', () => {
 			/** validation 체크 */
 			expect(resultVoteTopicByTopicName).to.instanceof(Array);
 			testVoteTopicIndex = resultVoteTopicByTopicName[0].voteTopicIndex;
-			console.log(testVoteTopicIndex);
 		} catch (err) {
 			console.error('err', err);
 		}
@@ -27,6 +30,7 @@ describe('vote 모델', () => {
 	after(async () => {
 		try {
 			const result = await vote.deleteVoteTopic(testVoteTopicIndex);
+			// console.log(result);
 			expect(result).instanceof(Object);
 		} catch (err) {
 			console.error('err', err);
@@ -42,8 +46,73 @@ describe('vote 모델', () => {
 	// 	expect(result).instanceof(Object);
 	// });
 
+	it('createVoteItem', async () => {
+		const result = await vote.createVoteItem({
+			voteTopicIndex: testVoteTopicIndex,
+			itemName: '호랑이',
+			itemOrder: 1
+		});
+		// console.log(result);
+		expect(result).instanceof(Object);
+	});
+
+	it('createVoteItem2', async () => {
+		const result = await vote.createVoteItem({
+			voteTopicIndex: testVoteTopicIndex,
+			itemName: '거북이',
+			itemOrder: 2
+		});
+		// console.log(result);
+		expect(result).instanceof(Object);
+	});
+
+	it('getVoteItem', async () => {
+		const result = await vote.getVoteItem(testVoteTopicIndex);
+		// console.log(result);
+		testVoteItemIndex = result[0].voteItemIndex;
+		testVoteItemIndex2 = result[1].voteItemIndex;
+	});
+
+	it('createVoteUser', async () => {
+		const result = await vote.createVoteUser({
+			voteTopicIndex: testVoteTopicIndex,
+			voteItemIndex: testVoteItemIndex,
+			voteUserId: 'kingdom0608@gmail.com'
+		});
+		// console.log(result);
+		expect(result).instanceof(Object);
+	});
+
+	it('createVoteUser2', async () => {
+		const result = await vote.createVoteUser({
+			voteTopicIndex: testVoteTopicIndex,
+			voteItemIndex: testVoteItemIndex2,
+			voteUserId: 'kingdom0608@gmail.com'
+		});
+		// console.log(result);
+		expect(result).instanceof(Object);
+	});
+
 	it('getVoteTopic', async () => {
-		const result = await vote.getVoteTopic(testVoteTopicIndex);
+		const result = await vote.getVoteTopic();
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
+	it('getVoteUser', async () => {
+		const result = await vote.getVoteUser(testVoteTopicIndex, testVoteItemIndex);
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
+	it('listVoteUSer', async () => {
+		const result = await vote.listVoteUser(testVoteTopicIndex);
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
+	it('getVoteUser2', async () => {
+		const result = await vote.getVoteUser(testVoteTopicIndex, testVoteItemIndex2);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});
