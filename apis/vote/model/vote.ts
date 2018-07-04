@@ -1,5 +1,4 @@
 import { mysqlUtil } from '../../../packages/utils/mysql.util';
-import { LectureReply } from '../../lecture/model/lectureReply.model';
 
 const pool = mysqlUtil.pool;
 
@@ -109,14 +108,35 @@ export class Vote {
 	}
 
 	/**
-	 * model: voteItem 조회
+	 * model: voteItem 리스트 조회
 	 * @param {number} voteTopicIndex
 	 * @returns {Promise<void>}
 	 */
-	getVoteItem(voteTopicIndex: number): Promise<void> {
+	listVoteItem(voteTopicIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query('SELECT * FROM voteItem WHERE voteTopicIndex = ? ORDER BY itemOrder ASC', voteTopicIndex, function(err, rows) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						connection.release();
+						resolve(rows);
+					}
+				})
+			})
+		});
+	}
+
+	/**
+	 * model: voteItem 조회
+	 * @param {number} voteItemIndex
+	 * @returns {Promise<void>}
+	 */
+	getVoteItem(voteItemIndex: number): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query('SELECT * FROM voteItem WHERE voteItemIndex = ? ORDER BY itemOrder ASC', voteItemIndex, function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -164,6 +184,31 @@ export class Vote {
 						connection.release();
 						reject(err);
 					} else {
+						connection.release();
+						resolve(rows);
+					}
+				})
+			})
+		});
+	}
+
+	/**
+	 * model: vote 체크
+	 * @param {number} voteTopicIndex
+	 * @param {string} voteUserId
+	 * @returns {Promise<void>}
+	 */
+	checkVote(voteTopicIndex: number, voteUserId: string): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query('SELECT * FROM voteUser WHERE voteTopicIndex = ? AND voteUserId = ?', [voteTopicIndex, voteUserId], function(err, rows) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						if (rows[0]) {
+							reject('userId already exists');
+						}
 						connection.release();
 						resolve(rows);
 					}

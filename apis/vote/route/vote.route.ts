@@ -9,7 +9,44 @@ export class VoteRoutes {
 	}
 
 	public router() {
+		this.voteRouter.post('/vote', createVote);
 		this.voteRouter.get('/vote', getVote);
+		this.voteRouter.get('/checkVote/voteTopicIndex/:voteTopicIndex/voteUserId/:userId', checkVote);
+	}
+}
+
+/**
+ * route: vote 생성
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function createVote(req, res): Promise<void> {
+	try {
+		const voteTopicIndex: number = req.body.voteTopicIndex;
+		const voteItemIndex: number = req.body.voteItemIndex;
+		const voteUserId: string = req.body.userId;
+		const result: string = await vote.createVoteUser({
+			voteTopicIndex: voteTopicIndex,
+			voteItemIndex: voteItemIndex,
+			voteUserId: voteUserId
+		});
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'createVote: 200'
+		});
+	} catch (err) {
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'createVote: 50000'
+				});
+				break;
+		}
 	}
 }
 
@@ -23,7 +60,7 @@ async function getVote(req, res): Promise<void> {
 	try {
 		let voteTopic = await vote.getVoteTopic();
 		let voteTopicIndex = voteTopic[0].voteTopicIndex;
-		let voteItem = await vote.getVoteItem(voteTopicIndex);
+		let voteItem = await vote.listVoteItem(voteTopicIndex);
 		let voteListUser = await vote.listVoteUser(voteTopicIndex);
 		let temp: Array<any> = [];
 		let resultArray: Array<any> = [];
@@ -47,6 +84,13 @@ async function getVote(req, res): Promise<void> {
 			resultArray.push(a);
 		}
 
+		/** voteUser 추가 데이터 */
+		for (let i = 0; i < resultArray.length; i++) {
+			const resultVoteItemData = await vote.getVoteItem(resultArray[i].voteItemIndex);
+			resultArray[i].itemName = resultVoteItemData[0].itemName;
+			resultArray[i].itemOrder =  resultVoteItemData[0].itemOrder;
+		}
+
 		/** 결과값 구조화 */
 		const result = {
 			voteTopic: voteTopic,
@@ -67,6 +111,42 @@ async function getVote(req, res): Promise<void> {
 					success: false,
 					statusCode: 500,
 					message: 'getVote: 50000'
+				});
+				break;
+		}
+	}
+}
+
+/**
+ * route: vote 체크
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function checkVote(req, res): Promise<void> {
+	try {
+		const voteTopicIndex = req.params.voteTopicIndex;
+		const voteUserId = req.params.userId;
+		await vote.checkVote(voteTopicIndex, voteUserId);
+		res.send({
+			success: true,
+			statusCode: 200,
+			message: 'checkVote: 200'
+		});
+	}	catch (err) {
+		switch (err) {
+			case 'userId already exists':
+				res.send({
+					success: false,
+					statusCode: 409,
+					message: 'checkVote: 40901'
+				});
+				break;
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'checkVote: 50000'
 				});
 				break;
 		}
