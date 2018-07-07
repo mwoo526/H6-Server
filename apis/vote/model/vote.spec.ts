@@ -88,7 +88,7 @@ describe('vote 모델', () => {
 		const result = await vote.createVoteUser({
 			voteTopicIndex: testVoteTopicIndex,
 			voteItemIndex: testVoteItemIndex2,
-			voteUserId: 'kingdom0608@gmail.com'
+			voteUserId: 'tlswnsxo@naver.com'
 		});
 		// console.log(result);
 		expect(result).instanceof(Object);
@@ -125,9 +125,9 @@ describe('vote 모델', () => {
 	});
 
 	it('checkVote', async () => {
-		const result = await vote.checkVote(testVoteTopicIndex, 'kingdom0609@gmail.com');
+		const result = await vote.checkVote(testVoteTopicIndex, 'kingdom0608@gmail.com');
 		// console.log(result);
-		expect(result).to.instanceof(Array);
+		expect(result).to.instanceof(Object);
 	});
 
 	it('getVoteUser2', async () => {

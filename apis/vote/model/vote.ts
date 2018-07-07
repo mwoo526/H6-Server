@@ -199,22 +199,6 @@ export class Vote {
 		});
 	}
 
-	getVoteUserCount(voteTopicIndex: number): Promise<void> {
-		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function(err, connection) {
-				await connection.query('SELECT voteItemIndex, COUNT(itemName) AS voteUserCount FROM voteItem WHERE voteTopicIndex = ? GROUP BY itemName', voteTopicIndex, function(err, rows) {
-					if (err) {
-						connection.release();
-						reject(err);
-					} else {
-						connection.release();
-						resolve(rows);
-					}
-				})
-			})
-		});
-	}
-
 	/**
 	 * model: voteUser 리스트 조회
 	 * @param {number} voteTopicIndex
@@ -250,11 +234,11 @@ export class Vote {
 						connection.release();
 						reject(err);
 					} else {
-						if (rows[0]) {
-							reject('userId already exists');
-						}
 						connection.release();
-						resolve(rows);
+						if (rows[0]) {
+							resolve(rows[0]);
+						}
+						reject('userId does not exist');
 					}
 				})
 			})

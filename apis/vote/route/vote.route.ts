@@ -107,19 +107,20 @@ async function checkVote(req, res): Promise<void> {
 	try {
 		const voteTopicIndex = req.params.voteTopicIndex;
 		const voteUserId = req.params.userId;
-		await vote.checkVote(voteTopicIndex, voteUserId);
+		const result  = await vote.checkVote(voteTopicIndex, voteUserId);
 		res.send({
 			success: true,
 			statusCode: 200,
+			result: result,
 			message: 'checkVote: 200'
 		});
 	}	catch (err) {
 		switch (err) {
-			case 'userId already exists':
+			case 'userId does not exist':
 				res.send({
 					success: false,
-					statusCode: 409,
-					message: 'checkVote: 40901'
+					statusCode: 404,
+					message: 'checkVote: 40401'
 				});
 				break;
 			default:
