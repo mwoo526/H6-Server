@@ -19,20 +19,20 @@ describe('lectureReply 모델', () => {
     before(() => __awaiter(this, void 0, void 0, function* () {
         try {
             const result = yield lectureReply_model_1.lectureReply.createLectureReply({
-                lectureInfoIndex: 1,
+                lectureInfoIndex: 179,
                 userIndex: 9,
                 semester: '17년도 2학기',
                 homework: '보통',
-                homeworkType: 1,
+                homeworkType: '팀 프로젝트',
                 testCount: 2,
-                receivedGrade: 2,
+                receivedGrade: 'A',
                 review: '노광현 교수님 휴강이 많지만 좋아요',
                 score: 4
             });
             /** validation 체크 */
             chai_1.expect(result).to.instanceof(Object);
             /** lectureReply lectureInfoIndex 조회 */
-            const resultListLectureReplyByLectureInfoIndex = yield lectureReply_model_1.lectureReply.listLectureReplyByLectureInfoIndex(1);
+            const resultListLectureReplyByLectureInfoIndex = yield lectureReply_model_1.lectureReply.listLectureReplyByLectureInfoIndex(179);
             /** validation 체크 */
             chai_1.expect(resultListLectureReplyByLectureInfoIndex).to.instanceof(Array);
             /** lectureReply 칼럼 값 */
@@ -78,16 +78,16 @@ describe('lectureReply 모델', () => {
         chai_1.expect(result).to.instanceof(Array);
     }));
     it('countGetLectureReplyByLectureInfoIndex', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield lectureReply_model_1.lectureReply.countGetLectureReplyByLectureInfoIndex(15);
+        const result = yield lectureReply_model_1.lectureReply.countGetLectureReplyByLectureInfoIndex(187);
         // console.log(result);
         chai_1.expect(result).to.instanceof(Array);
     }));
     /** 리플을 이미 남겼기 때문에 오류 발생 */
-    // it('checkGetLectureReply', async () => {
-    // 	const result = await lectureReply.checkGetLectureReply(testLectureInfoIndex, testUserIndex);
-    // 	// console.log(result);
-    // 	expect(result).to.instanceof(Array);
-    // });
+    it('checkGetLectureReply', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield lectureReply_model_1.lectureReply.checkGetLectureReply(testLectureInfoIndex, 0);
+        // console.log(result);
+        chai_1.expect(result).to.instanceof(Array);
+    }));
     it('listLectureReply', () => __awaiter(this, void 0, void 0, function* () {
         const result = yield lectureReply_model_1.lectureReply.listLectureReply();
         // console.log(result);

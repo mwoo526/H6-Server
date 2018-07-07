@@ -192,6 +192,7 @@ function pageListLectureReplyByLectureInfoIndex(req, res) {
         catch (err) {
             switch (err) {
                 default:
+                    console.log(err.message);
                     res.send({
                         success: false,
                         statusCode: 500,
