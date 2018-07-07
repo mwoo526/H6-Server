@@ -149,7 +149,7 @@ export class Vote {
 						reject(err);
 					} else {
 						connection.release();
-						resolve(rows);
+						resolve(rows[0]);
 					}
 				})
 			})

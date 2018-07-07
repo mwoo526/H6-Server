@@ -66,7 +66,7 @@ async function getVote(req, res): Promise<void> {
 
 		for (let i = 0; i < voteItemIndex.length; i++) {
 			let voteItem = await vote.listVoteItem(voteTopicIndex, voteItemIndex[i].voteItemIndex);
-			totalCount = totalCount + voteItem[0].count;
+			totalCount = totalCount + voteItem.count;
 			temp.push(voteItem);
 		}
 

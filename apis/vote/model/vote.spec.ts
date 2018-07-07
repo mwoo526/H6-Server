@@ -97,7 +97,7 @@ describe('vote 모델', () => {
 	it('listVoteItem', async () => {
 		const result = await vote.listVoteItem(testVoteTopicIndex, testVoteItemIndex);
 		// console.log(result);
-		expect(result).instanceof(Array);
+		expect(result).instanceof(Object);
 	});
 
 	it('getVoteItem', async () => {
