@@ -59,43 +59,23 @@ async function createVote(req, res): Promise<void> {
 async function getVote(req, res): Promise<void> {
 	try {
 		let voteTopic = await vote.getVoteTopic();
-		let voteTopicIndex = voteTopic[0].voteTopicIndex;
-		let voteItem = await vote.listVoteItem(voteTopicIndex);
-		let voteListUser = await vote.listVoteUser(voteTopicIndex);
+		let voteTopicIndex = voteTopic.voteTopicIndex;
+		let voteItemIndex = await vote.listVoteItemIndex(voteTopicIndex);
+		let totalCount: number = 0;
 		let temp: Array<any> = [];
-		let resultArray: Array<any> = [];
 
-		/** 투표자 리스트 출력 후 임시배열에 저장 */
-		for (let i = 0; i < voteListUser.length; i++) {
-			temp.push(voteListUser[i].voteItemIndex);
-		}
-		/** 공통 인자 추출하여 객체화 */
-		let voteUserObj = temp.reduce(function(x, y) {
-			x[y] = ++x[y]|| 1;
-			return x;
-		}, {});
-
-		/** key-value 분리 후 배열 푸시 */
-		for (let key in voteUserObj) {
-			let a = {
-				voteItemIndex: key,
-				voteItemCount: voteUserObj[key]
-			};
-			resultArray.push(a);
+		for (let i = 0; i < voteItemIndex.length; i++) {
+			let voteItem = await vote.listVoteItem(voteTopicIndex, voteItemIndex[i].voteItemIndex);
+			totalCount = totalCount + voteItem[0].count;
+			temp.push(voteItem);
 		}
 
-		/** voteUser 추가 데이터 */
-		for (let i = 0; i < resultArray.length; i++) {
-			const resultVoteItemData = await vote.getVoteItem(resultArray[i].voteItemIndex);
-			resultArray[i].itemName = resultVoteItemData[0].itemName;
-			resultArray[i].itemOrder =  resultVoteItemData[0].itemOrder;
-		}
+		voteTopic.totalCount = totalCount;
 
 		/** 결과값 구조화 */
 		const result = {
 			voteTopic: voteTopic,
-			voteItem: voteItem,
-			voteUser: resultArray
+			voteItem: temp
 		};
 
 		res.send({

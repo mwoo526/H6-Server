@@ -66,17 +66,12 @@ describe('vote 모델', () => {
 		expect(result).instanceof(Object);
 	});
 
-	it('listVoteItem', async () => {
-		const result = await vote.listVoteItem(testVoteTopicIndex);
+	it('listVoteItemIndex', async () => {
+		const result = await vote.listVoteItemIndex(testVoteTopicIndex);
 		// console.log(result);
 		testVoteItemIndex = result[0].voteItemIndex;
 		testVoteItemIndex2 = result[1].voteItemIndex;
-	});
-
-	it('getVoteItem', async () => {
-		const result = await vote.getVoteItem(testVoteItemIndex);
-		// console.log(result);
-		expect(result).to.instanceof(Array);
+		expect(result).instanceof(Array);
 	});
 
 	it('createVoteUser', async () => {
@@ -99,10 +94,22 @@ describe('vote 모델', () => {
 		expect(result).instanceof(Object);
 	});
 
+	it('listVoteItem', async () => {
+		const result = await vote.listVoteItem(testVoteTopicIndex, testVoteItemIndex);
+		// console.log(result);
+		expect(result).instanceof(Array);
+	});
+
+	it('getVoteItem', async () => {
+		const result = await vote.getVoteItem(testVoteItemIndex);
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
 	it('getVoteTopic', async () => {
 		const result = await vote.getVoteTopic();
 		// console.log(result);
-		expect(result).to.instanceof(Array);
+		expect(result).to.instanceof(Object);
 	});
 
 	it('getVoteUser', async () => {
@@ -118,8 +125,9 @@ describe('vote 모델', () => {
 	});
 
 	it('checkVote', async () => {
-		const result = await vote.checkVote(testVoteTopicIndex, 'kingdom0608@gmail.com');
-		console.log(result);
+		const result = await vote.checkVote(testVoteTopicIndex, 'kingdom0609@gmail.com');
+		// console.log(result);
+		expect(result).to.instanceof(Array);
 	});
 
 	it('getVoteUser2', async () => {

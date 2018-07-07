@@ -79,7 +79,7 @@ export class Vote {
 						reject(err);
 					} else {
 						connection.release();
-						resolve(rows);
+						resolve(rows[0]);
 					}
 				})
 			})
@@ -108,14 +108,42 @@ export class Vote {
 	}
 
 	/**
+	 * model: voteItem voteItemIndex 리스트 조회
+	 * @param {number} voteTopicIndex
+	 * @returns {Promise<void>}
+	 */
+	listVoteItemIndex(voteTopicIndex: number): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`SELECT voteItemIndex FROM voteItem WHERE voteTopicIndex = ${voteTopicIndex}`, function(err, rows) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						connection.release();
+						resolve(rows);
+					}
+				})
+			})
+		});
+	}
+
+	/**
 	 * model: voteItem 리스트 조회
 	 * @param {number} voteTopicIndex
 	 * @returns {Promise<void>}
 	 */
-	listVoteItem(voteTopicIndex: number): Promise<void> {
+	listVoteItem(voteTopicIndex: number, voteItemIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query('SELECT * FROM voteItem WHERE voteTopicIndex = ? ORDER BY itemOrder ASC', voteTopicIndex, function(err, rows) {
+				await connection.query(`SELECT voteTopicIndex, voteItemIndex, itemName, itemOrder, createdAt, updatedAt, 
+				( 
+					SELECT 
+					COUNT(voteItemIndex) AS count
+					FROM voteUser
+					WHERE voteItemIndex = ${voteItemIndex}
+				) count
+				FROM voteItem WHERE voteTopicIndex = ${voteTopicIndex} AND voteItemIndex = ${voteItemIndex}`, function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -159,6 +187,22 @@ export class Vote {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query('SELECT * FROM voteUser WHERE voteTopicIndex = ? AND voteItemIndex = ?', [voteTopicIndex, voteItemIndex], function(err, rows) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						connection.release();
+						resolve(rows);
+					}
+				})
+			})
+		});
+	}
+
+	getVoteUserCount(voteTopicIndex: number): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query('SELECT voteItemIndex, COUNT(itemName) AS voteUserCount FROM voteItem WHERE voteTopicIndex = ? GROUP BY itemName', voteTopicIndex, function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
