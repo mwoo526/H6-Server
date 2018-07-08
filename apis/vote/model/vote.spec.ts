@@ -66,6 +66,18 @@ describe('vote 모델', () => {
 		expect(result).instanceof(Object);
 	});
 
+	it('getVoteTopicByTopicIndex', async () => {
+		const result = await vote.getVoteTopicByTopicIndex(testVoteTopicIndex);
+		// console.log(result);
+		expect(result).instanceof(Object);
+	});
+
+	it('listVotePastTopic', async () => {
+		const result = await vote.listVotePastTopic();
+		// console.log(result);
+		expect(result).instanceof(Object);
+	});
+
 	it('listVoteItemIndex', async () => {
 		const result = await vote.listVoteItemIndex(testVoteTopicIndex);
 		// console.log(result);

@@ -86,6 +86,22 @@ export class Vote {
 		});
 	}
 
+	getVoteTopicByTopicIndex(voteTopicIndex: number): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`SELECT * FROM voteTopic WHERE voteTopicIndex = ${voteTopicIndex}`, function(err, rows) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						connection.release();
+						resolve(rows[0]);
+					}
+				})
+			})
+		});
+	}
+
 	/**
 	 * model: voteTopic topicName 조회
 	 * @param {string} topicName
@@ -95,6 +111,26 @@ export class Vote {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT * FROM voteTopic WHERE topicName = ? AND status = 'ACTIVE'`, topicName, function(err, rows) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						connection.release();
+						resolve(rows);
+					}
+				})
+			})
+		});
+	}
+
+	/**
+	 * model: pastVote 리스트 조회
+	 * @returns {Promise<void>}
+	 */
+	listVotePastTopic(): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`SELECT * FROM voteTopic WHERE status = 'INACTIVE'`, function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);

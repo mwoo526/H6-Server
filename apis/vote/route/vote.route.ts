@@ -11,6 +11,8 @@ export class VoteRoutes {
 	public router() {
 		this.voteRouter.post('/vote', createVote);
 		this.voteRouter.get('/vote', getVote);
+		this.voteRouter.get('/pastVote', listPastVote);
+		this.voteRouter.get('/pastVote/pastVoteTopicIndex/:pastVoteTopicIndex', getPastVote);
 		this.voteRouter.get('/checkVote/voteTopicIndex/:voteTopicIndex/voteUserId/:userId', checkVote);
 	}
 }
@@ -98,15 +100,90 @@ async function getVote(req, res): Promise<void> {
 }
 
 /**
+ * route: pastVote 리스트 조회
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function listPastVote(req, res) {
+	try {
+		const result = await vote.listVotePastTopic();
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'listPastVote: 200'
+		});
+	} catch (err) {
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'listPastVote: 50000'
+				});
+				break;
+		}
+	}
+}
+
+/**
+ * route: pastVote 조회
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function getPastVote(req, res) {
+	const voteTopicIndex = req.params.pastVoteTopicIndex;
+	try {
+		let voteTopic = await vote.getVoteTopicByTopicIndex(voteTopicIndex);
+		let voteItemIndex = await vote.listVoteItemIndex(voteTopicIndex);
+		let totalCount: number = 0;
+		let temp: Array<any> = [];
+
+		for (let i = 0; i < voteItemIndex.length; i++) {
+			let voteItem = await vote.listVoteItem(voteTopicIndex, voteItemIndex[i].voteItemIndex);
+			totalCount = totalCount + voteItem.count;
+			temp.push(voteItem);
+		}
+
+		voteTopic.totalCount = totalCount;
+
+		/** 결과값 구조화 */
+		const result = {
+			voteTopic: voteTopic,
+			voteItem: temp
+		};
+
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'getPastVote: 200'
+		});
+	} catch (err) {
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'getPastVote: 50000'
+				});
+				break;
+		}
+	}
+}
+
+/**
  * route: vote 체크
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
 async function checkVote(req, res): Promise<void> {
+	const voteTopicIndex = req.params.voteTopicIndex;
+	const voteUserId = req.params.userId;
 	try {
-		const voteTopicIndex = req.params.voteTopicIndex;
-		const voteUserId = req.params.userId;
 		const result  = await vote.checkVote(voteTopicIndex, voteUserId);
 		res.send({
 			success: true,
