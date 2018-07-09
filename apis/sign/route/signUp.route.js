@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const user_resource_1 = require("../../../resources/user.resource");
+const userValidation_model_1 = require("../../userValidation/model/userValidation.model");
 const signUp_model_1 = require("../model/signUp.model");
 class SignUpRoutes {
     constructor() {
@@ -32,11 +33,14 @@ function createUser(req, res) {
         let userResource = new user_resource_1.UserResource(req.body);
         try {
             const result = yield signUp_model_1.signUp.createUser(userResource.getSignUp());
+            yield userValidation_model_1.userValidation.createUserValidation({
+                userId: req.body.userId
+            });
             res.send({
                 success: true,
                 statusCode: 200,
                 result: result,
-                message: 'createUser: 2001'
+                message: 'createUser: 200'
             });
         }
         catch (err) {

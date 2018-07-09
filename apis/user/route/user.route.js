@@ -10,6 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const user_resource_1 = require("../../../resources/user.resource");
+const lectureReply_model_1 = require("../../lecture/model/lectureReply.model");
+const userValidation_model_1 = require("../../userValidation/model/userValidation.model");
 const user_model_1 = require("../model/user.model");
 class UserRoutes {
     constructor() {
@@ -158,11 +160,26 @@ function deleteUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let userId = req.params.userId;
         try {
-            const result = yield user_model_1.user.deleteUser(userId);
-            res.send(result);
+            const resultUser = yield user_model_1.user.getUser(userId);
+            yield userValidation_model_1.userValidation.deleteUsersValidation(userId);
+            yield lectureReply_model_1.lectureReply.deleteLectureReplyByUserIndex(resultUser[0].userIndex);
+            yield user_model_1.user.deleteUser(userId);
+            res.send({
+                success: true,
+                statusCode: 200,
+                message: 'deleteUser: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'deleteUser: 50000'
+                    });
+                    break;
+            }
         }
     });
 }

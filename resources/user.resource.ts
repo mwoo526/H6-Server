@@ -94,7 +94,8 @@ export class UserResource {
 			minor: this.getMinor(),
 			doubleMajor: this.getDoubleMajor(),
 			connectedMajor: this.getConnectedMajor(),
-			admissionYear: this.getAdmissionYear()
+			admissionYear: this.getAdmissionYear(),
+			isValidation: false
 		};
 		return userResource;
 	}

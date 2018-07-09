@@ -31,7 +31,7 @@ export class LectureReply {
 	 * @param {string} lectureInfoIndex
 	 * @returns {Promise<void>}
 	 */
-	countGetLectureReplyByLectureInfoIndex(lectureInfoIndex: string): Promise<void> {
+	countGetLectureReplyByLectureInfoIndex(lectureInfoIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT COUNT(*) AS replyCount FROM lecturesReply WHERE lecturesReply.lectureInfoIndex = ${lectureInfoIndex}`, async function(err, rows) {
@@ -220,7 +220,7 @@ export class LectureReply {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t1.lectureInfoIndex LIKE '%${lectureInfoIndex}%'
-				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
+				ORDER BY t1.lectureReplyIndex DESC LIMIT ${start}, ${count}`, async function(err, rows) {
 					if (err) {
 						await connection.release();
 						reject(err);
@@ -449,6 +449,27 @@ export class LectureReply {
 						resolve(result);
 					}
 				});
+			})
+		})
+	}
+
+	/**
+	 * model: lectureReply userIndex 로 삭제
+	 * @param {number} userIndex
+	 * @returns {Promise<void>}
+	 */
+	deleteLectureReplyByUserIndex(userIndex: number): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query('DELETE FROM lecturesReply WHERE userIndex = ?', userIndex, async function(err, rows) {
+					if (err) {
+						await connection.release();
+						reject(err);
+					} else {
+						await connection.release();
+						resolve(rows);
+					}
+				})
 			})
 		})
 	}

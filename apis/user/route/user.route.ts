@@ -1,5 +1,7 @@
 import * as express from 'express';
 import { UserResource } from '../../../resources/user.resource';
+import { lectureReply } from '../../lecture/model/lectureReply.model';
+import { userValidation } from '../../userValidation/model/userValidation.model';
 import { user } from '../model/user.model';
 
 export class UserRoutes {
@@ -141,10 +143,25 @@ async function updateUserPassword(req, res): Promise<void> {
 async function deleteUser(req, res): Promise<void> {
 	let userId: string = req.params.userId;
 	try {
-		const result: any = await user.deleteUser(userId);
-		res.send(result);
+		const resultUser = await user.getUser(userId);
+		await userValidation.deleteUsersValidation(userId);
+		await lectureReply.deleteLectureReplyByUserIndex(resultUser[0].userIndex);
+		await user.deleteUser(userId);
+		res.send({
+			success: true,
+			statusCode: 200,
+			message: 'deleteUser: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'deleteUser: 50000'
+				});
+				break;
+		}
 	}
 }
 

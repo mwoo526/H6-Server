@@ -9,11 +9,37 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const email_util_1 = require("../../../packages/utils/email.util");
+const encryption_utli_1 = require("../../../packages/utils/encryption.utli");
 const mysql_util_1 = require("../../../packages/utils/mysql.util");
 var smtpTransport = email_util_1.emailUtil.smtpTransport;
 const pool = mysql_util_1.mysqlUtil.pool;
 class UserValidation {
     constructor() {
+    }
+    /**
+     * model: userValidation 생성
+     * @param userData
+     * @returns {Promise<any>}
+     */
+    createUserValidation(userData) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`INSERT INTO usersValidation SET ?`, [userData], function (err, rows) {
+                        return __awaiter(this, void 0, void 0, function* () {
+                            if (err) {
+                                yield connection.release();
+                                return reject(err);
+                            }
+                            else {
+                                yield connection.release();
+                                return resolve(rows);
+                            }
+                        });
+                    });
+                });
+            });
+        }));
     }
     /**
      * model: 인증코드 조회
@@ -96,7 +122,7 @@ class UserValidation {
         }));
     }
     /**
-     * model:
+     * model: 닉네임 중복검사
      * @param {string} userNickName
      * @returns {Promise<any>}
      */
@@ -127,6 +153,35 @@ class UserValidation {
         }));
     }
     /**
+     * model: 비밀번호 중복검사
+     * @param {string} userPw
+     * @returns {Promise<any>}
+     */
+    checkUserPw(userId, userPw) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    userPw = yield encryption_utli_1.encriptionPw.getHash(userPw);
+                    yield connection.query(`SELECT * FROM users WHERE userId = '${userId}' AND userPw = '${userPw}'`, function (err, rows) {
+                        return __awaiter(this, void 0, void 0, function* () {
+                            if (err) {
+                                connection.release();
+                                reject(err);
+                            }
+                            else {
+                                if (rows[0] == null) {
+                                    reject('The ID does not exist');
+                                }
+                                yield connection.release();
+                                resolve(rows);
+                            }
+                        });
+                    });
+                });
+            });
+        }));
+    }
+    /**
      * model: DB usersValidation 테이블에 uuid 저장하기
      * @param userId
      * @param uuid
@@ -146,9 +201,6 @@ class UserValidation {
                 });
             }));
         }));
-    }
-    verifyValidation() {
-        return;
     }
     /**
      * model: 새로운 비밀번호 발송
@@ -232,7 +284,7 @@ class UserValidation {
     updateIsValidation(userId) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection((err, connection) => __awaiter(this, void 0, void 0, function* () {
-                yield connection.query(`UPDATE usersValidation set isValidation='${1}' WHERE userId=?`, [userId], (err, rows) => {
+                yield connection.query(`UPDATE users set isValidation='${1}' WHERE userId=?`, [userId], (err, rows) => {
                     connection.release();
                     if (err) {
                         reject(err);
@@ -245,11 +297,11 @@ class UserValidation {
         }));
     }
     /**
-     * model: 레코드 삭제
+     * model: userValidation 삭제
      * @param {string} userId
      * @returns {Promise<any>}
      */
-    deleteUsersValidationRecord(userId) {
+    deleteUsersValidation(userId) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection((err, connection) => __awaiter(this, void 0, void 0, function* () {
                 yield connection.query(`DELETE FROM usersValidation WHERE userId=?`, [userId], (err, rows) => {

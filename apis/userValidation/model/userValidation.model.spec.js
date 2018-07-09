@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const chai_1 = require("chai");
+const encryption_utli_1 = require("../../../packages/utils/encryption.utli");
 const user_model_1 = require("../../user/model/user.model");
 const userValidation_model_1 = require("./userValidation.model");
 describe('userValidation 모델', () => {
@@ -24,7 +25,7 @@ describe('userValidation 모델', () => {
         try {
             resultCreateUser = yield user_model_1.user.createUser({
                 userId: testUserId,
-                userPw: testUserPw,
+                userPw: yield encryption_utli_1.encriptionPw.getHash(testUserPw),
                 userNickName: testUserNickName,
                 major: testMajor,
                 admissionYear: testAdmissionYear
@@ -39,10 +40,18 @@ describe('userValidation 모델', () => {
     after(() => __awaiter(this, void 0, void 0, function* () {
         try {
             yield user_model_1.user.deleteUser(resultCreateUser.userId);
+            yield userValidation_model_1.userValidation.deleteUsersValidation(resultCreateUser.userId);
         }
         catch (err) {
             console.error('err', err);
         }
+    }));
+    it('createUserValidation', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield userValidation_model_1.userValidation.createUserValidation({
+            userId: testUserId
+        });
+        // console.log(result);
+        chai_1.expect(result).instanceof(Object);
     }));
     it('checkUserId - 사용 가능한 아이디', () => __awaiter(this, void 0, void 0, function* () {
         const result = yield userValidation_model_1.userValidation.checkUserId(testUserId2);
@@ -53,6 +62,11 @@ describe('userValidation 모델', () => {
         const result = yield userValidation_model_1.userValidation.checkUserNickName(testUserNickName2);
         // console.log(result);
         chai_1.expect(result).instanceof(Object);
+    }));
+    it('checkUserPw', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield userValidation_model_1.userValidation.checkUserPw(testUserId, testUserPw);
+        // console.log(result);
+        chai_1.expect(result).instanceof(Array);
     }));
 });
 //# sourceMappingURL=userValidation.model.spec.js.map

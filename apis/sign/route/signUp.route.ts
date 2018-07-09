@@ -1,5 +1,6 @@
 import * as express from 'express';
 import { UserResource } from '../../../resources/user.resource';
+import { userValidation } from '../../userValidation/model/userValidation.model';
 import { signUp } from '../model/signUp.model';
 
 export class SignUpRoutes {
@@ -24,11 +25,14 @@ async function createUser(req, res): Promise<void> {
 	let userResource = new UserResource(req.body);
 	try {
 		const result: any = await signUp.createUser(userResource.getSignUp());
+		await userValidation.createUserValidation({
+			userId: req.body.userId
+		});
 		res.send({
 			success: true,
 			statusCode: 200,
 			result: result,
-			message: 'createUser: 2001'
+			message: 'createUser: 200'
 		});
 	} catch (err) {
 		switch (err) {

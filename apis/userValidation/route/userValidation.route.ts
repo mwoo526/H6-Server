@@ -12,8 +12,9 @@ export class UserValidationRoutes {
 	}
 
 	public router() {
-		this.userValidationRouter.get('/userValidation/checkUserId/:userId', checkUserId);
-		this.userValidationRouter.get('/userValidation/checkUserNickName/:userNickName', checkUserNickName);
+		this.userValidationRouter.get('/userValidation/userId/:userId', checkUserId);
+		this.userValidationRouter.get('/userValidation/userNickName/:userNickName', checkUserNickName);
+		this.userValidationRouter.post('/userValidation/userId/:userId/userPw', checkUserPw);
 		this.userValidationRouter.get('/userValidation/sendPasswordMail/:userId', sendPasswordMail);
 		this.userValidationRouter.post('/userValidation/sendValidationMail', sendValidationMail);
 		this.userValidationRouter.get('/userValidation/verify/:uuid', verifyValidation);
@@ -84,6 +85,42 @@ async function checkUserNickName(req, res): Promise<any> {
 					success: false,
 					statusCode: 500,
 					message: 'checkUserNickName: 50000'
+				});
+				break;
+		}
+	}
+}
+
+/**
+ * route: 비밀번호 중복 체크
+ * @param req
+ * @param res
+ * @returns {Promise<any>}
+ */
+async function checkUserPw(req, res): Promise<any> {
+	const userId: string = req.params.userId;
+	const userPw: string = req.body.userPw;
+	try {
+		await userValidation.checkUserPw(userId, userPw);
+		res.send({
+			success: true,
+			statusCode: 200,
+			message: 'checkUserPw: 200'
+		});
+	} catch (err) {
+		switch (err) {
+			case 'The ID does not exist':
+				res.send({
+					success: false,
+					statusCode: 404,
+					message: 'checkUserPw: 40401'
+				});
+				break;
+			default :
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'checkUserPw: 50000'
 				});
 				break;
 		}
@@ -229,7 +266,7 @@ async function verifyValidation(req, res): Promise<void> {
 
 			if (user.isValidOnDate(uvYearUpdatedAt, uvMonthUpdatedAt, uvDayUpdatedAt)) {
 				await userValidation.updateIsValidation(userId);
-				await userValidation.deleteUsersValidationRecord(userId);
+				await userValidation.deleteUsersValidation(userId);
 				await user.updateIsValidation(userId);
 				res.end('Email is been Successfully verified');
 			}

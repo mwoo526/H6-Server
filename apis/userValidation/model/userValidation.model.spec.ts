@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { encriptionPw } from '../../../packages/utils/encryption.utli';
 import { user } from '../../user/model/user.model';
 import { userValidation } from './userValidation.model';
 
@@ -16,7 +17,7 @@ describe('userValidation 모델', () => {
 		try {
 			resultCreateUser = await user.createUser({
 				userId: testUserId,
-				userPw: testUserPw,
+				userPw: await encriptionPw.getHash(testUserPw),
 				userNickName: testUserNickName,
 				major: testMajor,
 				admissionYear: testAdmissionYear
@@ -31,9 +32,18 @@ describe('userValidation 모델', () => {
 	after(async () => {
 		try {
 			await user.deleteUser(resultCreateUser.userId);
+			await userValidation.deleteUsersValidation(resultCreateUser.userId);
 		} catch (err) {
 			console.error('err', err);
 		}
+	});
+
+	it('createUserValidation', async () => {
+		const result = await userValidation.createUserValidation({
+			userId: testUserId
+		});
+		// console.log(result);
+		expect(result).instanceof(Object);
 	});
 
 	it('checkUserId - 사용 가능한 아이디', async () => {
@@ -47,4 +57,10 @@ describe('userValidation 모델', () => {
 		// console.log(result);
 		expect(result).instanceof(Object);
 	});
+
+	it('checkUserPw', async () => {
+		const result = await userValidation.checkUserPw(testUserId, testUserPw);
+		// console.log(result);
+		expect(result).instanceof(Array);
+	})
 });

@@ -175,6 +175,7 @@ async function pageListLectureReplyByLectureInfoIndex(req, res): Promise<void> {
 	} catch (err) {
 		switch (err) {
 			default:
+				console.log(err.message);
 				res.send({
 					success: false,
 					statusCode: 500,

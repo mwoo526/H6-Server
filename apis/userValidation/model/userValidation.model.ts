@@ -1,4 +1,5 @@
 import { emailUtil } from '../../../packages/utils/email.util';
+import { encriptionPw } from '../../../packages/utils/encryption.utli';
 import { mysqlUtil } from '../../../packages/utils/mysql.util';
 import smtpTransport = emailUtil.smtpTransport;
 
@@ -6,6 +7,27 @@ const pool = mysqlUtil.pool;
 
 export class UserValidation {
 	constructor() {
+	}
+
+	/**
+	 * model: userValidation 생성
+	 * @param userData
+	 * @returns {Promise<any>}
+	 */
+	createUserValidation(userData: any): Promise<any> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`INSERT INTO usersValidation SET ?`, [userData], async function(err, rows) {
+					if (err) {
+						await connection.release();
+						return reject(err);
+					} else {
+						await connection.release();
+						return resolve(rows);
+					}
+				});
+			})
+		})
 	}
 
 	/**
@@ -85,7 +107,7 @@ export class UserValidation {
 	}
 
 	/**
-	 * model:
+	 * model: 닉네임 중복검사
 	 * @param {string} userNickName
 	 * @returns {Promise<any>}
 	 */
@@ -104,6 +126,31 @@ export class UserValidation {
 							await connection.release();
 							return resolve(rows);
 						}
+					}
+				})
+			})
+		})
+	}
+
+	/**
+	 * model: 비밀번호 중복검사
+	 * @param {string} userPw
+	 * @returns {Promise<any>}
+	 */
+	checkUserPw(userId: string, userPw: string): Promise<any> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				userPw = await encriptionPw.getHash(userPw);
+				await connection.query(`SELECT * FROM users WHERE userId = '${userId}' AND userPw = '${userPw}'`, async function(err, rows) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						if (rows[0] == null) {
+							reject('The ID does not exist');
+						}
+						await connection.release();
+						resolve(rows);
 					}
 				})
 			})
@@ -130,10 +177,6 @@ export class UserValidation {
 				})
 			})
 		})
-	}
-
-	verifyValidation(): Promise<any> {
-		return
 	}
 
 	/**
@@ -221,7 +264,7 @@ export class UserValidation {
 	updateIsValidation(userId: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`UPDATE usersValidation set isValidation='${1}' WHERE userId=?`, [userId], (err, rows) => {
+				await connection.query(`UPDATE users set isValidation='${1}' WHERE userId=?`, [userId], (err, rows) => {
 					connection.release();
 					if (err) {
 						reject(err);
@@ -235,11 +278,11 @@ export class UserValidation {
 	}
 
 	/**
-	 * model: 레코드 삭제
+	 * model: userValidation 삭제
 	 * @param {string} userId
 	 * @returns {Promise<any>}
 	 */
-	deleteUsersValidationRecord(userId: any): Promise<any> {
+	deleteUsersValidation(userId: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`DELETE FROM usersValidation WHERE userId=?`, [userId], (err, rows) => {

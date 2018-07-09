@@ -262,7 +262,7 @@ class LectureReply {
                     yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t1.lectureInfoIndex LIKE '%${lectureInfoIndex}%'
-				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
+				ORDER BY t1.lectureReplyIndex DESC LIMIT ${start}, ${count}`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
                                 yield connection.release();
@@ -523,6 +523,31 @@ class LectureReply {
                                     message: 'createLectureReply: 리플 삭제 성공'
                                 };
                                 resolve(result);
+                            }
+                        });
+                    });
+                });
+            });
+        }));
+    }
+    /**
+     * model: lectureReply userIndex 로 삭제
+     * @param {number} userIndex
+     * @returns {Promise<void>}
+     */
+    deleteLectureReplyByUserIndex(userIndex) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query('DELETE FROM lecturesReply WHERE userIndex = ?', userIndex, function (err, rows) {
+                        return __awaiter(this, void 0, void 0, function* () {
+                            if (err) {
+                                yield connection.release();
+                                reject(err);
+                            }
+                            else {
+                                yield connection.release();
+                                resolve(rows);
                             }
                         });
                     });
