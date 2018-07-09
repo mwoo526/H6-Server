@@ -282,13 +282,16 @@ function pageListLectureReplyByUserNickName(req, res) {
 function updateLectureReply(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const lectureReplyIndex = req.params.lectureReplyIndex;
-        let lectureReplyData = new lectureReply_resource_1.LectureReplyResource(req.body);
+        let lectureReplyData = req.body;
         try {
-            const result = yield lectureReply_model_1.lectureReply.updateLectureReply(lectureReplyIndex, lectureReplyData);
+            yield lectureReply_model_1.lectureReply.updateLectureReply(lectureReplyIndex, lectureReplyData);
+            const result = yield lectureReply_model_1.lectureReply.getLectureReplyByLectureReplyIndex(lectureReplyIndex);
+            const resultTotalScore = yield lectureReply_model_1.lectureReply.scoreGetLectureReply(result[0].lectureInfoIndex);
+            yield lectureInfo_model_1.lectureInfo.updateLectureInfoAverage(result[0].lectureInfoIndex, resultTotalScore[0].totalScore);
             res.send({
                 success: true,
                 statusCode: 200,
-                result: result,
+                result: result[0],
                 message: 'updateLectureReply: 200'
             });
         }
@@ -315,11 +318,14 @@ function deleteLectureReply(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const lectureReplyIndex = req.params.lectureReplyIndex;
         try {
-            const result = yield lectureReply_model_1.lectureReply.deleteLectureReply(lectureReplyIndex);
+            const result = yield lectureReply_model_1.lectureReply.getLectureReplyByLectureReplyIndex(lectureReplyIndex);
+            yield lectureReply_model_1.lectureReply.deleteLectureReply(lectureReplyIndex);
+            const resultTotalScore = yield lectureReply_model_1.lectureReply.scoreGetLectureReply(result[0].lectureInfoIndex);
+            yield lectureInfo_model_1.lectureInfo.updateLectureInfoAverage(result[0].lectureInfoIndex, resultTotalScore[0].totalScore);
             res.send({
                 success: true,
                 statusCode: 200,
-                result: result,
+                result: result[0],
                 message: 'deleteLectureReply: 200'
             });
         }
