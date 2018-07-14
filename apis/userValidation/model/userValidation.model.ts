@@ -1,6 +1,8 @@
+import * as express from 'express';
 import { emailUtil } from '../../../packages/utils/email.util';
 import { encriptionPw } from '../../../packages/utils/encryption.util';
 import { mysqlUtil } from '../../../packages/utils/mysql.util';
+import { user } from '../../user/model/user.model';
 import smtpTransport = emailUtil.smtpTransport;
 
 const pool = mysqlUtil.pool;
@@ -297,6 +299,54 @@ export class UserValidation {
 			})
 		})
 	}
+
+    /**
+     * route: 인증코드 검증
+     * @param req
+     * @param res
+     * @returns {Promise<void>}
+     */
+    async verifyValidation(req, res): Promise<void> {
+        try {
+            if (req.protocol == 'http') {
+
+                let verifiedUuid: any = req.params.uuid;
+
+                let uvUserId = await userValidation.getUserIdData(verifiedUuid);
+                uvUserId = JSON.stringify(uvUserId);
+
+                /** 해당 데이터가 없으면 [] */
+                if (uvUserId == '[]')
+                {
+                    res.send('Unvalidated code Error!!');
+                }
+
+                let userId = uvUserId.split('"')[3];
+                let uvUpdatedAt = await userValidation.getUpdatedAt(userId);
+
+                if(user.isValidOnData(uvUpdatedAt)) {
+                    await userValidation.updateIsValidation(userId);
+                    await userValidation.deleteUsersValidation(userId);
+                    await user.updateIsValidation(userId);
+                    res.send('Email is been Successfully verified');
+                }
+                else {
+                    res.send('validation date expired.')
+                }
+            }
+            else {
+                res.send('Request is from unknown source');
+            }
+        } catch (err) {
+            res.send(err);
+        }
+    }
+
+
 }
 
+
+
 export const userValidation: UserValidation = new UserValidation();
+
+
