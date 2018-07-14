@@ -330,22 +330,15 @@ async function verifyValidation(req, res): Promise<void> {
             uvUserId = JSON.stringify(uvUserId);
 
             /** 해당 데이터가 없으면 [] */
-            if (uvUserId == '[]') {
+            if (uvUserId == '[]')
+            {
                 res.send('Unvalidated code Error!!');
             }
 
             let userId = uvUserId.split('"')[3];
-
             let uvUpdatedAt = await userValidation.getUpdatedAt(userId);
-            uvUpdatedAt = JSON.stringify(uvUpdatedAt);
-            uvUpdatedAt = uvUpdatedAt.split('"')[3];
 
-            let uvDate = uvUpdatedAt.split('T')[0].split('-');
-            let uvYearUpdatedAt = parseInt(uvDate[0]);
-            let uvMonthUpdatedAt = parseInt(uvDate[1]);
-            let uvDayUpdatedAt = parseInt(uvDate[2]);
-
-            if (user.isValidOnDate(uvYearUpdatedAt, uvMonthUpdatedAt, uvDayUpdatedAt)) {
+			if(user.isValidOnData(uvUpdatedAt)) {
                 await userValidation.updateIsValidation(userId);
                 await userValidation.deleteUsersValidation(userId);
                 await user.updateIsValidation(userId);
