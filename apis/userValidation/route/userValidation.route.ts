@@ -250,7 +250,7 @@ async function verifyValidation(req, res): Promise<void> {
 			/** 해당 데이터가 없으면 [] */
 			if (uvUserId == '[]')
 			{
-				res.end('Unvalidated code Error!!');
+				res.send('Unvalidated code Error!!');
 			}
 
 			let userId = uvUserId.split('"')[3];
@@ -268,14 +268,14 @@ async function verifyValidation(req, res): Promise<void> {
 				await userValidation.updateIsValidation(userId);
 				await userValidation.deleteUsersValidation(userId);
 				await user.updateIsValidation(userId);
-				res.end('Email is been Successfully verified');
+				res.send('Email is been Successfully verified');
 			}
 			else {
-				res.end('validation date expired.')
+				res.send('validation date expired.')
 			}
 		}
 		else {
-			res.end('Request is from unknown source');
+			res.send('Request is from unknown source');
 		}
 	} catch (err) {
 		res.send(err);
