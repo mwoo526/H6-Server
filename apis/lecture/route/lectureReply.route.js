@@ -19,7 +19,8 @@ class LectureReplyRoutes {
     }
     router() {
         this.lectureReplyRouter.post('/lecturesReply', createLectureReply);
-        this.lectureReplyRouter.get('/lecturesReply/lectureInfoIndex/:lectureInfoIndex/userIndex/:userIndex', checkGetLectureReply);
+        this.lectureReplyRouter.get('/lecturesReply/checkGetLectureReply/lectureInfoIndex/:lectureInfoIndex/userIndex/:userIndex', checkGetLectureReply);
+        this.lectureReplyRouter.get('/lecturesReply/checkUpdateLectureReply/lectureInfoIndex/:lectureInfoIndex/userIndex/:userIndex', checkUpdateLectureReply);
         this.lectureReplyRouter.get('/lecturesReply', pageListLectureReply);
         this.lectureReplyRouter.get('/lecturesReply/lectureReplyIndex/:lectureReplyIndex', getLectureReplyByLectureReplyIndex);
         this.lectureReplyRouter.get('/lecturesReply/lectureInfoIndex/:lectureInfoIndex', pageListLectureReplyByLectureInfoIndex);
@@ -64,7 +65,7 @@ function createLectureReply(req, res) {
     });
 }
 /**
- * route: lectureReply 중복 검사
+ * route: lectureReply 등록 중복 검사
  * @param req
  * @param res
  * @returns {Promise<void>}
@@ -96,6 +97,45 @@ function checkGetLectureReply(req, res) {
                         success: false,
                         statusCode: 500,
                         message: 'checkGetLectureReply: 50000'
+                    });
+                    break;
+            }
+        }
+    });
+}
+/**
+ * route: lectureReply 업데이스 중복 검사
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+function checkUpdateLectureReply(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let lectureInfoIndex = req.params.lectureInfoIndex;
+        let userIndex = req.params.userIndex;
+        try {
+            const result = yield lectureReply_model_1.lectureReply.checkUpdateLectureReply(lectureInfoIndex, userIndex);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'checkUpdateLectureReply: 200'
+            });
+        }
+        catch (err) {
+            switch (err) {
+                case 'LectureReply does not exist':
+                    res.send({
+                        success: false,
+                        statusCode: 409,
+                        message: 'checkUpdateLectureReply: 40401'
+                    });
+                    break;
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'checkUpdateLectureReply: 50000'
                     });
                     break;
             }

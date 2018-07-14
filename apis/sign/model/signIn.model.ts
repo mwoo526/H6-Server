@@ -1,5 +1,5 @@
 import * as jwt from 'jsonwebtoken';
-import { encriptionPw } from '../../../packages/utils/encryption.utli';
+import { encriptionPw } from '../../../packages/utils/encryption.util';
 import { jwtToken } from '../../../packages/utils/jwt.util';
 import { mysqlUtil } from '../../../packages/utils/mysql.util';
 

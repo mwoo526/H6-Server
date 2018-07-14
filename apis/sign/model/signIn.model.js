@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const jwt = require("jsonwebtoken");
-const encryption_utli_1 = require("../../../packages/utils/encryption.utli");
+const encryption_util_1 = require("../../../packages/utils/encryption.util");
 const jwt_util_1 = require("../../../packages/utils/jwt.util");
 const mysql_util_1 = require("../../../packages/utils/mysql.util");
 const pool = mysql_util_1.mysqlUtil.pool;
@@ -59,7 +59,7 @@ class SignIn {
                                     return reject(err);
                                 }
                                 else {
-                                    if (rows[0].userPw === encryption_utli_1.encriptionPw.getHash(userData.userPw)) {
+                                    if (rows[0].userPw === encryption_util_1.encriptionPw.getHash(userData.userPw)) {
                                         connection.release();
                                         jwt.sign({
                                             tokenIndex: rows[0].userIndex,

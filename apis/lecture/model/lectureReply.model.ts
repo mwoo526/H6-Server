@@ -63,9 +63,29 @@ export class LectureReply {
 					} else {
 						await connection.release();
 						if (rows[0].replyCount === 0) {
-							return resolve(rows);
+							return resolve(rows[0]);
 						} else {
 							return reject('LectureReply already exists');
+						}
+					}
+				});
+			})
+		})
+	}
+
+	checkUpdateLectureReply(lectureInfoIndex: number, userIndex: number): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`SELECT * FROM lecturesReply WHERE lecturesReply.lectureInfoIndex = ${lectureInfoIndex} AND lecturesReply.userIndex = ${userIndex}`, async function(err, rows) {
+					if (err) {
+						await connection.release();
+						reject(err);
+					} else {
+						await connection.release();
+						if (rows[0] === undefined) {
+							return reject('LectureReply does not exist');
+						} else {
+							return resolve(rows[0]);
 						}
 					}
 				});

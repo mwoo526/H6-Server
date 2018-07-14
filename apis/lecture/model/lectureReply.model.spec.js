@@ -86,7 +86,12 @@ describe('lectureReply 모델', () => {
     it('checkGetLectureReply', () => __awaiter(this, void 0, void 0, function* () {
         const result = yield lectureReply_model_1.lectureReply.checkGetLectureReply(testLectureInfoIndex, 0);
         // console.log(result);
-        chai_1.expect(result).to.instanceof(Array);
+        chai_1.expect(result).to.instanceof(Object);
+    }));
+    it('checkUpdateLectureReply', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield lectureReply_model_1.lectureReply.checkUpdateLectureReply(testLectureInfoIndex, testUserIndex);
+        // console.log(result);
+        chai_1.expect(result).to.instanceof(Object);
     }));
     it('listLectureReply', () => __awaiter(this, void 0, void 0, function* () {
         const result = yield lectureReply_model_1.lectureReply.listLectureReply();

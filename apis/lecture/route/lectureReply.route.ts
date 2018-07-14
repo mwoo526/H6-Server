@@ -12,7 +12,8 @@ export class LectureReplyRoutes {
 
 	public router() {
 		this.lectureReplyRouter.post('/lecturesReply', createLectureReply);
-		this.lectureReplyRouter.get('/lecturesReply/lectureInfoIndex/:lectureInfoIndex/userIndex/:userIndex', checkGetLectureReply);
+		this.lectureReplyRouter.get('/lecturesReply/checkGetLectureReply/lectureInfoIndex/:lectureInfoIndex/userIndex/:userIndex', checkGetLectureReply);
+		this.lectureReplyRouter.get('/lecturesReply/checkUpdateLectureReply/lectureInfoIndex/:lectureInfoIndex/userIndex/:userIndex', checkUpdateLectureReply);
 		this.lectureReplyRouter.get('/lecturesReply', pageListLectureReply);
 		this.lectureReplyRouter.get('/lecturesReply/lectureReplyIndex/:lectureReplyIndex', getLectureReplyByLectureReplyIndex);
 		this.lectureReplyRouter.get('/lecturesReply/lectureInfoIndex/:lectureInfoIndex', pageListLectureReplyByLectureInfoIndex);
@@ -55,7 +56,7 @@ async function createLectureReply(req, res): Promise<void> {
 }
 
 /**
- * route: lectureReply 중복 검사
+ * route: lectureReply 등록 중복 검사
  * @param req
  * @param res
  * @returns {Promise<void>}
@@ -85,6 +86,43 @@ async function checkGetLectureReply(req, res): Promise<void> {
 					success: false,
 					statusCode: 500,
 					message: 'checkGetLectureReply: 50000'
+				});
+				break;
+		}
+	}
+}
+
+/**
+ * route: lectureReply 업데이스 중복 검사
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function checkUpdateLectureReply(req, res): Promise<void> {
+	let lectureInfoIndex = req.params.lectureInfoIndex;
+	let userIndex = req.params.userIndex;
+	try {
+		const result = await lectureReply.checkUpdateLectureReply(lectureInfoIndex, userIndex);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'checkUpdateLectureReply: 200'
+		});
+	} catch (err) {
+		switch (err) {
+			case 'LectureReply does not exist':
+				res.send({
+					success: false,
+					statusCode: 409,
+					message: 'checkUpdateLectureReply: 40401'
+				});
+				break;
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'checkUpdateLectureReply: 50000'
 				});
 				break;
 		}

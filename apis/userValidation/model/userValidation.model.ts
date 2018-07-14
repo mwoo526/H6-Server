@@ -1,5 +1,5 @@
 import { emailUtil } from '../../../packages/utils/email.util';
-import { encriptionPw } from '../../../packages/utils/encryption.utli';
+import { encriptionPw } from '../../../packages/utils/encryption.util';
 import { mysqlUtil } from '../../../packages/utils/mysql.util';
 import smtpTransport = emailUtil.smtpTransport;
 
