@@ -318,7 +318,7 @@ class UserValidation {
         }));
     }
     /**
-     * route: 인증코드 검증
+     * model: 인증코드 검증
      * @param req
      * @param res
      * @returns {Promise<void>}
