@@ -1,5 +1,6 @@
 import * as bodyParser from 'body-parser';
 import * as express from 'express';
+import { admissionRoutes } from './apis/admissionYear/route/admissionYear.route';
 import { lectureRoutes } from './apis/lecture/route/lecture.route';
 import { lectureInfoRoutes } from './apis/lecture/route/lectureInfo.route';
 import { lectureReplyRoutes } from './apis/lecture/route/lectureReply.route';
@@ -33,6 +34,7 @@ export class Server {
 		this.app.use(signInRoutes.signInRouter);
 		this.app.use(termsRoutes.termsRouter);
 		this.app.use(trackRoutes.trackRouter);
+		this.app.use(admissionRoutes.admissionYearRouter);
 		this.app.use(userValidationRoutes.userValidationRouter);
 		/** 라우터 토큰 검증 */
 		this.app.use(verify);

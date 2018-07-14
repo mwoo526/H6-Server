@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const bodyParser = require("body-parser");
 const express = require("express");
+const admissionYear_route_1 = require("./apis/admissionYear/route/admissionYear.route");
 const lecture_route_1 = require("./apis/lecture/route/lecture.route");
 const lectureInfo_route_1 = require("./apis/lecture/route/lectureInfo.route");
 const lectureReply_route_1 = require("./apis/lecture/route/lectureReply.route");
@@ -31,6 +32,7 @@ class Server {
         this.app.use(signIn_route_1.signInRoutes.signInRouter);
         this.app.use(terms_route_1.termsRoutes.termsRouter);
         this.app.use(track_route_1.trackRoutes.trackRouter);
+        this.app.use(admissionYear_route_1.admissionRoutes.admissionYearRouter);
         this.app.use(userValidation_route_1.userValidationRoutes.userValidationRouter);
         /** 라우터 토큰 검증 */
         this.app.use(tokenVerify_middleware_1.verify);
