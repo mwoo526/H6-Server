@@ -32,7 +32,7 @@ describe('lectureInfo 모델', () => {
 	});
 
 	it('pageListLectureInfoBySearchTerm', async () => {
-		const result = await lectureInfo.pageListLectureInfoBySearchTerm('os', 1,3);
+		const result = await lectureInfo.pageListLectureInfoBySearchTerm('os', 1, 3);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});

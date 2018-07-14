@@ -214,14 +214,14 @@ export class User {
 	 * @param day
 	 * @returns {boolean}
 	 */
-	isValidOnData(uvUpdatedAt: any) : boolean {
-        uvUpdatedAt = JSON.stringify(uvUpdatedAt);
-        uvUpdatedAt = uvUpdatedAt.split('"')[3];
+	isValidOnData(uvUpdatedAt: any): boolean {
+		uvUpdatedAt = JSON.stringify(uvUpdatedAt);
+		uvUpdatedAt = uvUpdatedAt.split('"')[3];
 
-        let uvDate = uvUpdatedAt.split('T')[0].split('-');
-        let year = parseInt(uvDate[0]);
-        let month = parseInt(uvDate[1]);
-        let day = parseInt(uvDate[2]);
+		let uvDate = uvUpdatedAt.split('T')[0].split('-');
+		let year = parseInt(uvDate[0]);
+		let month = parseInt(uvDate[1]);
+		let day = parseInt(uvDate[2]);
 
 		let date = new Date();
 		let curYear = date.getFullYear();

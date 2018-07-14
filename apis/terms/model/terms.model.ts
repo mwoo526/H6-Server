@@ -13,7 +13,7 @@ export function loadTermsHtml(termsName: string): any {
 		if (!fs.existsSync(file)) {
 			return reject('Terms does not exist');
 		}
-		const result =  fs.readFileSync(file, 'utf8');
+		const result = fs.readFileSync(file, 'utf8');
 		return resolve(result);
 	});
 }

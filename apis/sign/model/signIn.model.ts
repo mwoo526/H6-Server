@@ -51,15 +51,15 @@ class SignIn {
 
 								jwt.sign(
 									{
-										tokenIndex:rows[0].userIndex,
+										tokenIndex: rows[0].userIndex,
 										tokenId: rows[0].userId,
 										tokenNickname: rows[0].userNickName,
-										tokenMajor:rows[0].major,
-										tokenMinor:rows[0].minor,
-										tokenDoubleMajor : rows[0].doubleMajor,
-										tokenConnectedMajor : rows[0].connectedMajor,
-										tokenAdmissionYear : rows[0].year,
-										tokenInValidation : rows[0].isValidations
+										tokenMajor: rows[0].major,
+										tokenMinor: rows[0].minor,
+										tokenDoubleMajor: rows[0].doubleMajor,
+										tokenConnectedMajor: rows[0].connectedMajor,
+										tokenAdmissionYear: rows[0].year,
+										tokenInValidation: rows[0].isValidations
 									},
 									jwtToken.secret,
 									{
