@@ -11,7 +11,7 @@ export class VoteRoutes {
 	public router() {
 		this.voteRouter.post('/vote', createVote);
 		this.voteRouter.get('/vote', getVote);
-		this.voteRouter.get('/pastVote', listPastVote);
+		this.voteRouter.get('/pastVote', pageListPastVote);
 		this.voteRouter.get('/pastVote/pastVoteTopicIndex/:pastVoteTopicIndex', getPastVote);
 		this.voteRouter.get('/checkVote/voteTopicIndex/:voteTopicIndex/voteUserId/:userId', checkVote);
 	}
@@ -100,21 +100,23 @@ async function getVote(req, res): Promise<void> {
 }
 
 /**
- * route: pastVote 리스트 조회
+ * route: pastVote page 리스트 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
-async function listPastVote(req, res) {
+async function pageListPastVote(req, res) {
 	let page: number = parseInt(req.query.page);
 	let count: number = parseInt(req.query.count);
 	try {
-		const result = await vote.listVotePastTopic(page, count);
+		const resultCount = await vote.listVotePastTopic();
+		const result = await vote.pageListVotePastTopic(page, count);
 		res.send({
 			success: true,
 			statusCode: 200,
+			resultCount: resultCount.length,
 			result: result,
-			message: 'listPastVote: 200'
+			message: 'pageListPastVote: 200'
 		});
 	} catch (err) {
 		switch (err) {
@@ -122,7 +124,7 @@ async function listPastVote(req, res) {
 				res.send({
 					success: false,
 					statusCode: 500,
-					message: 'listPastVote: 50000'
+					message: 'pageListPastVote: 50000'
 				});
 				break;
 		}
