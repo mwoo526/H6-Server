@@ -1,10 +1,1 @@
-<<<<<<< HEAD
-*.js
-*.map
-=======
-node_modules
-dest
-*.js
-*.js.map
-*.d.ts
->>>>>>> 6cc9c8156e854cfa0a9f9d940853c20bdef8bc7c
+
