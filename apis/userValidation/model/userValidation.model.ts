@@ -1,3 +1,4 @@
+import * as express from 'express';
 import { emailUtil } from '../../../packages/utils/email.util';
 import { encriptionPw } from '../../../packages/utils/encryption.util';
 import { mysqlUtil } from '../../../packages/utils/mysql.util';
@@ -339,7 +340,6 @@ export class UserValidation {
 			res.send(err);
 		}
 	}
-
 }
 
 export const userValidation: UserValidation = new UserValidation();
