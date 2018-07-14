@@ -106,8 +106,10 @@ async function getVote(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function listPastVote(req, res) {
+	let page: number = parseInt(req.query.page);
+	let count: number = parseInt(req.query.count);
 	try {
-		const result = await vote.listVotePastTopic();
+		const result = await vote.listVotePastTopic(page, count);
 		res.send({
 			success: true,
 			statusCode: 200,
