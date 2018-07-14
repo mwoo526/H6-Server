@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const chai_1 = require("chai");
-const encryption_utli_1 = require("../../../packages/utils/encryption.utli");
+const encryption_util_1 = require("../../../packages/utils/encryption.util");
 const user_model_1 = require("../../user/model/user.model");
 const userValidation_model_1 = require("./userValidation.model");
 describe('userValidation 모델', () => {
@@ -25,7 +25,7 @@ describe('userValidation 모델', () => {
         try {
             resultCreateUser = yield user_model_1.user.createUser({
                 userId: testUserId,
-                userPw: yield encryption_utli_1.encriptionPw.getHash(testUserPw),
+                userPw: yield encryption_util_1.encriptionPw.getHash(testUserPw),
                 userNickName: testUserNickName,
                 major: testMajor,
                 admissionYear: testAdmissionYear

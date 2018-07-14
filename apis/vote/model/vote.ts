@@ -125,12 +125,18 @@ export class Vote {
 
 	/**
 	 * model: pastVote 리스트 조회
+	 * @param {number} page
+	 * @param {number} count
 	 * @returns {Promise<void>}
 	 */
-	listVotePastTopic(): Promise<void> {
+	listVotePastTopic(page: number, count: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM voteTopic WHERE status = 'INACTIVE'`, function(err, rows) {
+				let start = (page - 1) * count;
+				if (start < 0) {
+					start = 0;
+				}
+				await connection.query(`SELECT * FROM voteTopic WHERE status = 'INACTIVE' ORDER BY createdAt DESC LIMIT ${start}, ${count}`, function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);

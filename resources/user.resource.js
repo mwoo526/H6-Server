@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const encryption_utli_1 = require("../packages/utils/encryption.utli");
+const encryption_util_1 = require("../packages/utils/encryption.util");
 class UserResource {
     constructor(signUpData) {
         this.setUserId(signUpData.userId);
@@ -22,7 +22,7 @@ class UserResource {
         return this.userPw;
     }
     setUserPw(userPw) {
-        this.userPw = encryption_utli_1.encriptionPw.getHash(userPw);
+        this.userPw = encryption_util_1.encriptionPw.getHash(userPw);
     }
     getUserNickName() {
         return this.userNickName;

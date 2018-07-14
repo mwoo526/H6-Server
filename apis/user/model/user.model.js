@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const encryption_utli_1 = require("../../../packages/utils/encryption.utli");
+const encryption_util_1 = require("../../../packages/utils/encryption.util");
 const mysql_util_1 = require("../../../packages/utils/mysql.util");
 const pool = mysql_util_1.mysqlUtil.pool;
 class User {
@@ -149,7 +149,7 @@ class User {
                                 reject(err);
                             }
                             else {
-                                if (rows[0].userPw === (yield encryption_utli_1.encriptionPw.getHash(userPw))) {
+                                if (rows[0].userPw === (yield encryption_util_1.encriptionPw.getHash(userPw))) {
                                     connection.release();
                                     resolve(rows);
                                 }
@@ -174,7 +174,7 @@ class User {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    userPw = encryption_utli_1.encriptionPw.getHash(userPw);
+                    userPw = encryption_util_1.encriptionPw.getHash(userPw);
                     yield connection.query(`UPDATE users SET userPw=? WHERE userId=?`, [userPw, userId], function (err, rows) {
                         if (err) {
                             connection.release();

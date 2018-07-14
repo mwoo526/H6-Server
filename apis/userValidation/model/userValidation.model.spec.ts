@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { encriptionPw } from '../../../packages/utils/encryption.utli';
+import { encriptionPw } from '../../../packages/utils/encryption.util';
 import { user } from '../../user/model/user.model';
 import { userValidation } from './userValidation.model';
 

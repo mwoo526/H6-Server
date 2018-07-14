@@ -73,7 +73,7 @@ describe('vote 모델', () => {
 	});
 
 	it('listVotePastTopic', async () => {
-		const result = await vote.listVotePastTopic();
+		const result = await vote.listVotePastTopic(1, 3);
 		// console.log(result);
 		expect(result).instanceof(Object);
 	});

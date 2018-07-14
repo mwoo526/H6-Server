@@ -82,10 +82,35 @@ class LectureReply {
                             else {
                                 yield connection.release();
                                 if (rows[0].replyCount === 0) {
-                                    return resolve(rows);
+                                    return resolve(rows[0]);
                                 }
                                 else {
                                     return reject('LectureReply already exists');
+                                }
+                            }
+                        });
+                    });
+                });
+            });
+        }));
+    }
+    checkUpdateLectureReply(lectureInfoIndex, userIndex) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`SELECT * FROM lecturesReply WHERE lecturesReply.lectureInfoIndex = ${lectureInfoIndex} AND lecturesReply.userIndex = ${userIndex}`, function (err, rows) {
+                        return __awaiter(this, void 0, void 0, function* () {
+                            if (err) {
+                                yield connection.release();
+                                reject(err);
+                            }
+                            else {
+                                yield connection.release();
+                                if (rows[0] === undefined) {
+                                    return reject('LectureReply does not exist');
+                                }
+                                else {
+                                    return resolve(rows[0]);
                                 }
                             }
                         });

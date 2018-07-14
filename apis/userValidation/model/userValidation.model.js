@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const email_util_1 = require("../../../packages/utils/email.util");
-const encryption_utli_1 = require("../../../packages/utils/encryption.utli");
+const encryption_util_1 = require("../../../packages/utils/encryption.util");
 const mysql_util_1 = require("../../../packages/utils/mysql.util");
 var smtpTransport = email_util_1.emailUtil.smtpTransport;
 const pool = mysql_util_1.mysqlUtil.pool;
@@ -161,7 +161,7 @@ class UserValidation {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    userPw = yield encryption_utli_1.encriptionPw.getHash(userPw);
+                    userPw = yield encryption_util_1.encriptionPw.getHash(userPw);
                     yield connection.query(`SELECT * FROM users WHERE userId = '${userId}' AND userPw = '${userPw}'`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
