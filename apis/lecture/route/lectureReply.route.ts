@@ -260,13 +260,16 @@ async function pageListLectureReplyByUserNickName(req, res): Promise<void> {
  */
 async function updateLectureReply(req, res): Promise<void> {
 	const lectureReplyIndex: number = req.params.lectureReplyIndex;
-	let lectureReplyData: any = new LectureReplyResource(req.body);
+	let lectureReplyData: any = req.body;
 	try {
-		const result = await lectureReply.updateLectureReply(lectureReplyIndex, lectureReplyData);
+		await lectureReply.updateLectureReply(lectureReplyIndex, lectureReplyData);
+		const result = await lectureReply.getLectureReplyByLectureReplyIndex(lectureReplyIndex);
+		const resultTotalScore = await lectureReply.scoreGetLectureReply(result[0].lectureInfoIndex);
+		await lectureInfo.updateLectureInfoAverage(result[0].lectureInfoIndex, resultTotalScore[0].totalScore);
 		res.send({
 			success: true,
 			statusCode: 200,
-			result: result,
+			result: result[0],
 			message: 'updateLectureReply: 200'
 		});
 	} catch (err) {
@@ -291,11 +294,14 @@ async function updateLectureReply(req, res): Promise<void> {
 async function deleteLectureReply(req, res): Promise<void> {
 	const lectureReplyIndex: number = req.params.lectureReplyIndex;
 	try {
-		const result = await lectureReply.deleteLectureReply(lectureReplyIndex);
+		const result = await lectureReply.getLectureReplyByLectureReplyIndex(lectureReplyIndex);
+		await lectureReply.deleteLectureReply(lectureReplyIndex);
+		const resultTotalScore = await lectureReply.scoreGetLectureReply(result[0].lectureInfoIndex);
+		await lectureInfo.updateLectureInfoAverage(result[0].lectureInfoIndex, resultTotalScore[0].totalScore)
 		res.send({
 			success: true,
 			statusCode: 200,
-			result: result,
+			result: result[0],
 			message: 'deleteLectureReply: 200'
 		});
 	} catch (err) {

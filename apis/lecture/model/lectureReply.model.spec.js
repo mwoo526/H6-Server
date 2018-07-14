@@ -149,7 +149,7 @@ describe('lectureReply 모델', () => {
         chai_1.expect(result).to.instanceof(Array);
     }));
     it('updateLectureReply', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield lectureReply_model_1.lectureReply.updateLectureReply(testLectureInfoIndex, {
+        const result = yield lectureReply_model_1.lectureReply.updateLectureReply(testLectureReplyIndex, {
             receivedGrade: 1,
             review: '노광현 교수님 수업은 재매있지만 휴강이 많아요ㅠㅠㅠ',
             score: 1

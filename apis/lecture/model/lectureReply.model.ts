@@ -10,7 +10,7 @@ export class LectureReply {
 	 */
 	createLectureReply(lectureReplyData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
-			const preview = await lectureReplyData.review.substring(0, 20);
+			const preview = await lectureReplyData.review.substring(0, 50);
 			lectureReplyData.preview = preview;
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`INSERT INTO lecturesReply SET ?`, lectureReplyData, async function(err) {
@@ -404,8 +404,10 @@ export class LectureReply {
 	updateLectureReply(lectureReplyIndex: number, lectureReplyData: any): Promise<void> {
 		let result: any;
 		return new Promise(async (resolve, reject) => {
-			const preview = await lectureReplyData.review.substring(0, 20);
-			lectureReplyData.preview = preview;
+			if (lectureReplyData.review) {
+				const preview = await lectureReplyData.review.substring(0, 50);
+				lectureReplyData.preview = preview;
+			}
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`UPDATE lecturesReply SET ? WHERE lectureReplyIndex = ?`, [lectureReplyData,
 					lectureReplyIndex], async function(err) {

@@ -18,7 +18,7 @@ class LectureReply {
      */
     createLectureReply(lectureReplyData) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            const preview = yield lectureReplyData.review.substring(0, 20);
+            const preview = yield lectureReplyData.review.substring(0, 50);
             lectureReplyData.preview = preview;
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
@@ -473,8 +473,10 @@ class LectureReply {
     updateLectureReply(lectureReplyIndex, lectureReplyData) {
         let result;
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            const preview = yield lectureReplyData.review.substring(0, 20);
-            lectureReplyData.preview = preview;
+            if (lectureReplyData.review) {
+                const preview = yield lectureReplyData.review.substring(0, 50);
+                lectureReplyData.preview = preview;
+            }
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`UPDATE lecturesReply SET ? WHERE lectureReplyIndex = ?`, [lectureReplyData,
