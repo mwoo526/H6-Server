@@ -24,7 +24,7 @@ class UserValidationRoutes {
         this.userValidationRouter.post('/userValidation/userId/:userId/userPw', checkUserPw);
         this.userValidationRouter.get('/userValidation/sendPasswordMail/:userId', sendPasswordMail);
         this.userValidationRouter.post('/userValidation/sendValidationMail', sendValidationMail);
-        this.userValidationRouter.get('/userValidation/verify/:uuid', verifyValidation);
+        this.userValidationRouter.get('/userValidation/verify/:uuid', userValidation_model_1.userValidation.verifyValidation);
     }
 }
 exports.UserValidationRoutes = UserValidationRoutes;
@@ -237,50 +237,6 @@ function sendValidationMail(req, res) {
                         message: 'sendValidationMail: 50000'
                     });
             }
-        }
-    });
-}
-/**
- * route: 인증코드 검증
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-function verifyValidation(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            if (req.protocol == 'http') {
-                let verifiedUuid = req.params.uuid;
-                let uvUserId = yield userValidation_model_1.userValidation.getUserIdData(verifiedUuid);
-                uvUserId = JSON.stringify(uvUserId);
-                /** 해당 데이터가 없으면 [] */
-                if (uvUserId == '[]') {
-                    res.end('Unvalidated code Error!!');
-                }
-                let userId = uvUserId.split('"')[3];
-                let uvUpdatedAt = yield userValidation_model_1.userValidation.getUpdatedAt(userId);
-                uvUpdatedAt = JSON.stringify(uvUpdatedAt);
-                uvUpdatedAt = uvUpdatedAt.split('"')[3];
-                let uvDate = uvUpdatedAt.split('T')[0].split('-');
-                let uvYearUpdatedAt = parseInt(uvDate[0]);
-                let uvMonthUpdatedAt = parseInt(uvDate[1]);
-                let uvDayUpdatedAt = parseInt(uvDate[2]);
-                if (user_model_1.user.isValidOnDate(uvYearUpdatedAt, uvMonthUpdatedAt, uvDayUpdatedAt)) {
-                    yield userValidation_model_1.userValidation.updateIsValidation(userId);
-                    yield userValidation_model_1.userValidation.deleteUsersValidation(userId);
-                    yield user_model_1.user.updateIsValidation(userId);
-                    res.end('Email is been Successfully verified');
-                }
-                else {
-                    res.end('validation date expired.');
-                }
-            }
-            else {
-                res.end('Request is from unknown source');
-            }
-        }
-        catch (err) {
-            res.send(err);
         }
     });
 }
