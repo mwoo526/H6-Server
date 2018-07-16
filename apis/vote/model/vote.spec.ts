@@ -130,10 +130,22 @@ describe('vote 모델', () => {
 		expect(result).to.instanceof(Object);
 	});
 
+	it('getVoteTopicByStatus', async () => {
+		const result = await vote.getVoteTopicByStatus('WAITING');
+		// console.log(result);
+		expect(result).to.instanceof(Object);
+	});
+
 	it('getVoteUser', async () => {
 		const result = await vote.getVoteUser(testVoteTopicIndex, testVoteItemIndex);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
+	});
+
+	it('getVoteDateDiff', async () => {
+		const result = await vote.getVoteDateDiff('2018-07-16T21:28:00+0900', '2018-07-15T21:28:00+0900');
+		// console.log(result);
+		expect(result).to.instanceof(Object);
 	});
 
 	it('listVoteUser', async () => {
@@ -152,6 +164,14 @@ describe('vote 모델', () => {
 		const result = await vote.getVoteUser(testVoteTopicIndex, testVoteItemIndex2);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
+	});
+
+	it('updateVoteTopic', async () => {
+		const result = await vote.updateVoteTopic(36, {
+			status: 'INACTIVE'
+		});
+		// console.log(result);
+		expect(result).to.instanceof(Object);
 	});
 
 	/** 테스트 용도로 사용 */

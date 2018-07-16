@@ -1,0 +1,32 @@
+import * as cron from 'node-cron';
+import * as dateFormat from 'dateformat';
+import { vote } from '../../apis/vote/model/vote';
+
+export class VoteScheduler {
+	constructor() {
+	}
+
+	task() {
+		cron.schedule('0 0 * * *', async function(){
+			const now = new Date();
+			const nowDate = await dateFormat(now, "isoDateTime");
+			const ActiveVoteTopic = await vote.getVoteTopic();
+			const dueDate = await dateFormat(ActiveVoteTopic.dueDate, "isoDateTime");
+			const resultDate = await vote.getVoteDateDiff(dueDate, nowDate);
+
+			/** 마감기한이 지나면 데이터 업데이트 */
+			if (resultDate.dateDiff < 0) {
+				await vote.updateVoteTopic(ActiveVoteTopic.voteTopicIndex, {
+					status: 'INACTIVE'
+				});
+
+				const WaitingVoteTopic = await vote.getVoteTopicByStatus('WAITING');
+				await vote.updateVoteTopic(WaitingVoteTopic.voteTopicIndex, {
+					status: 'ACTIVE'
+				});
+			}
+		});
+	}
+}
+
+export const voteScheduler: VoteScheduler = new VoteScheduler();

@@ -86,6 +86,32 @@ export class Vote {
 		});
 	}
 
+	/**
+	 * model: voteTopic status 조회
+	 * @param {string} status
+	 * @returns {Promise<void>}
+	 */
+	getVoteTopicByStatus(status: string): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`SELECT * FROM voteTopic WHERE status = '${status}'`, function(err, rows) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						connection.release();
+						resolve(rows[0]);
+					}
+				})
+			})
+		});
+	}
+
+	/**
+	 * model: voteTopic voteTopicIndex 조회
+	 * @param {number} voteTopicIndex
+	 * @returns {Promise<void>}
+	 */
 	getVoteTopicByTopicIndex(voteTopicIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
@@ -117,6 +143,28 @@ export class Vote {
 					} else {
 						connection.release();
 						resolve(rows);
+					}
+				})
+			})
+		});
+	}
+
+	/**
+	 * model: 시간 차이 조회
+	 * @param dueDate
+	 * @param nowDate
+	 * @returns {Promise<void>}
+	 */
+	getVoteDateDiff(dueDate: any, nowDate: any): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`SELECT DATEDIFF('${dueDate}', '${nowDate}') AS dateDiff`, function(err, rows) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						connection.release();
+						resolve(rows[0]);
 					}
 				})
 			})
@@ -283,6 +331,28 @@ export class Vote {
 				})
 			})
 		});
+	}
+
+	/**
+	 * model: voteTopic 업데이트
+	 * @param {number} voteTopicIndex
+	 * @param voteTopicData
+	 * @returns {Promise<void>}
+	 */
+	updateVoteTopic(voteTopicIndex: number, voteTopicData: any): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query('UPDATE voteTopic SET ? WHERE voteTopicIndex = ?', [voteTopicData, voteTopicIndex], function(err, rows) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						connection.release();
+						resolve(rows);
+					}
+				})
+			});
+		})
 	}
 
 	/**

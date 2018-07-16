@@ -17,10 +17,12 @@ const userValidation_route_1 = require("./apis/userValidation/route/userValidati
 const vote_route_1 = require("./apis/vote/route/vote.route");
 const error_middleware_1 = require("./middlewares/error.middleware");
 const tokenVerify_middleware_1 = require("./middlewares/tokenVerify.middleware");
+const voteScheduler_1 = require("./schedulers/vote/voteScheduler");
 class Server {
     constructor() {
         /** express 설정을 위한 express 선언 */
         this.app = express();
+        voteScheduler_1.voteScheduler.task();
         this.app.get('/console', function (req, res) {
             res.send('H6-server Running');
         });

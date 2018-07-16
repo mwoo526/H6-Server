@@ -15,6 +15,7 @@ import { userValidationRoutes } from './apis/userValidation/route/userValidation
 import { voteRoutes } from './apis/vote/route/vote.route';
 import { notFoundError, serverError } from './middlewares/error.middleware';
 import { verify } from './middlewares/tokenVerify.middleware';
+import { voteScheduler } from './schedulers/vote/voteScheduler';
 
 export class Server {
 	/** app 에 대한 타입 설정 */
@@ -23,6 +24,7 @@ export class Server {
 	constructor() {
 		/** express 설정을 위한 express 선언 */
 		this.app = express();
+		voteScheduler.task();
 		this.app.get('/console', function(req, res) {
 			res.send('H6-server Running');
 		});
