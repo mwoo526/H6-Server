@@ -14,6 +14,7 @@ const test_route_1 = require("./apis/test/route/test.route");
 const user_route_1 = require("./apis/user/route/user.route");
 const track_route_1 = require("./apis/track/route/track.route");
 const userValidation_route_1 = require("./apis/userValidation/route/userValidation.route");
+const version_route_1 = require("./apis/version/route/version.route");
 const vote_route_1 = require("./apis/vote/route/vote.route");
 const error_middleware_1 = require("./middlewares/error.middleware");
 const tokenVerify_middleware_1 = require("./middlewares/tokenVerify.middleware");
@@ -46,6 +47,7 @@ class Server {
         this.app.use(lecture_route_1.lectureRoutes.lectureRouter);
         this.app.use(lectureInfo_route_1.lectureInfoRoutes.lectureInfoRouter);
         this.app.use(lectureReply_route_1.lectureReplyRoutes.lectureReplyRouter);
+        this.app.use(version_route_1.versionRoutes.versionRouter);
         /** 라우터 오류 처리 */
         this.app.use(error_middleware_1.notFoundError);
         this.app.use(error_middleware_1.serverError);
