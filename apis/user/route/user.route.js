@@ -93,8 +93,6 @@ function updateUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let userId = req.params.userId;
         let userData = {
-            userNickName: req.body.userNickName,
-            userEmail: req.body.userEmail,
             major: req.body.major,
             minor: req.body.minor,
             doubleMajor: req.body.doubleMajor,
