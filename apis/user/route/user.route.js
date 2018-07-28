@@ -92,15 +92,8 @@ function getUser(req, res) {
 function updateUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let userId = req.params.userId;
-        let userData = {
-            major: req.body.major,
-            minor: req.body.minor,
-            doubleMajor: req.body.doubleMajor,
-            connectedMajor: req.body.connectedMajor,
-            admissionYear: req.body.admissionYear
-        };
         try {
-            const result = yield user_model_1.user.updateUser(userId, userData);
+            const result = yield user_model_1.user.updateUser(userId, req.body);
             res.send(result);
         }
         catch (err) {

@@ -78,15 +78,8 @@ async function getUser(req, res): Promise<void> {
  */
 async function updateUser(req, res): Promise<void> {
 	let userId: string = req.params.userId;
-	let userData = {
-		major: req.body.major,
-		minor: req.body.minor,
-		doubleMajor: req.body.doubleMajor,
-		connectedMajor: req.body.connectedMajor,
-		admissionYear: req.body.admissionYear
-	};
 	try {
-		const result: any = await user.updateUser(userId, userData);
+		const result: any = await user.updateUser(userId, req.body);
 		res.send(result);
 	} catch (err) {
 		res.send(err);
