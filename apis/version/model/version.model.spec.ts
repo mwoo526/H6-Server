@@ -16,7 +16,7 @@ describe('version 모델', () => {
 
 	it('getVersion', async () => {
 		const result = await version.getVersion();
-		console.log(result);
+		// console.log(result);
 		testVersionIndex = result.versionIndex;
 		expect(result).instanceof(Object);
 	});
@@ -26,7 +26,7 @@ describe('version 모델', () => {
 			android: '1.0.1',
 			ios: '1.0.1'
 		});
-		console.log(result);
+		// console.log(result);
 		expect(result).instanceof(Object);
 	});
 
