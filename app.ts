@@ -25,10 +25,12 @@ export class Server {
 	constructor() {
 		/** express 설정을 위한 express 선언 */
 		this.app = express();
-		voteScheduler.task();
+		/** 서버 헬스체크 */
 		this.app.get('/console', function(req, res) {
 			res.send('H6-server Running');
 		});
+		/** vote 스케줄러 */
+		voteScheduler.task();
 		/** bodyParser 선언 */
 		this.app.use(bodyParser.urlencoded({extended: false}));
 		this.app.use(bodyParser.json());
