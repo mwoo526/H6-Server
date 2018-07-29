@@ -27,7 +27,7 @@ export class Server {
 		this.app = express();
 		/** 서버 헬스체크 */
 		this.app.get('/console', function(req, res) {
-			res.send('H6-server Running');
+			res.send('H6-server is Running');
 		});
 		/** vote 스케줄러 */
 		voteScheduler.task();
