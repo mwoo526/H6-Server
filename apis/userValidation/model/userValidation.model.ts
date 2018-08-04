@@ -1,4 +1,3 @@
-import * as express from 'express';
 import { emailUtil } from '../../../packages/utils/email.util';
 import { encriptionPw } from '../../../packages/utils/encryption.util';
 import { mysqlUtil } from '../../../packages/utils/mysql.util';
@@ -300,41 +299,40 @@ export class UserValidation {
 		})
 	}
 
+	/**
+	 * model: 인증코드 검증
+	 * @param req
+	 * @param res
+	 * @returns {Promise<void>}
+	 */
+	verifyValidation(verifiedUuid: any): Promise<any> {
+		return new Promise(async (resolve, reject) => {
+			try {
+				let uvUserId = await this.getUserIdData(verifiedUuid);
+				uvUserId = JSON.stringify(uvUserId);
 
-    /**
-     * model: 인증코드 검증
-     * @param req
-     * @param res
-     * @returns {Promise<void>}
-     */
-    verifyValidation(verifiedUuid: any): Promise<any> {
-        return new Promise(async (resolve, reject) => {
-            try {
-                let uvUserId = await this.getUserIdData(verifiedUuid);
-                uvUserId = JSON.stringify(uvUserId);
+				/** 해당 데이터가 없으면 [] */
+				if (uvUserId == '[]') {
+					reject('Unvalidated code Error!');
+				}
 
-                /** 해당 데이터가 없으면 [] */
-                if (uvUserId == '[]') {
-                    reject('Unvalidated code Error!');
-                }
+				let userId = uvUserId.split('"')[3];
+				let uvUpdatedAt = await this.getUpdatedAt(userId);
 
-                let userId = uvUserId.split('"')[3];
-                let uvUpdatedAt = await this.getUpdatedAt(userId);
-
-                if (user.isValidOnData(uvUpdatedAt)) {
-                    await this.updateIsValidation(userId);
-                    await this.deleteUsersValidation(userId);
-                    await user.updateIsValidation(userId);
-                    resolve('Email is been Successfully verified');
-                }
-                else {
-                    reject('Validation date expired.');
-                }
-            } catch (err) {
-                reject(err);
-            }
-        })
-    }
+				if (user.isValidOnData(uvUpdatedAt)) {
+					await this.updateIsValidation(userId);
+					await this.deleteUsersValidation(userId);
+					await user.updateIsValidation(userId);
+					resolve('Email is been Successfully verified');
+				}
+				else {
+					reject('Validation date expired.');
+				}
+			} catch (err) {
+				reject(err);
+			}
+		})
+	}
 }
 
 export const userValidation: UserValidation = new UserValidation();

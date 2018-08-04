@@ -323,37 +323,31 @@ class UserValidation {
      * @param res
      * @returns {Promise<void>}
      */
-    verifyValidation(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
+    verifyValidation(verifiedUuid) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             try {
-                if (req.protocol == 'http') {
-                    let verifiedUuid = req.params.uuid;
-                    let uvUserId = yield exports.userValidation.getUserIdData(verifiedUuid);
-                    uvUserId = JSON.stringify(uvUserId);
-                    /** 해당 데이터가 없으면 [] */
-                    if (uvUserId == '[]') {
-                        res.send('Unvalidated code Error!!');
-                    }
-                    let userId = uvUserId.split('"')[3];
-                    let uvUpdatedAt = yield exports.userValidation.getUpdatedAt(userId);
-                    if (user_model_1.user.isValidOnData(uvUpdatedAt)) {
-                        yield exports.userValidation.updateIsValidation(userId);
-                        yield exports.userValidation.deleteUsersValidation(userId);
-                        yield user_model_1.user.updateIsValidation(userId);
-                        res.send('Email is been Successfully verified');
-                    }
-                    else {
-                        res.send('validation date expired.');
-                    }
+                let uvUserId = yield this.getUserIdData(verifiedUuid);
+                uvUserId = JSON.stringify(uvUserId);
+                /** 해당 데이터가 없으면 [] */
+                if (uvUserId == '[]') {
+                    reject('Unvalidated code Error!');
+                }
+                let userId = uvUserId.split('"')[3];
+                let uvUpdatedAt = yield this.getUpdatedAt(userId);
+                if (user_model_1.user.isValidOnData(uvUpdatedAt)) {
+                    yield this.updateIsValidation(userId);
+                    yield this.deleteUsersValidation(userId);
+                    yield user_model_1.user.updateIsValidation(userId);
+                    resolve('Email is been Successfully verified');
                 }
                 else {
-                    res.send('Request is from unknown source');
+                    reject('Validation date expired.');
                 }
             }
             catch (err) {
-                res.send(err);
+                reject(err);
             }
-        });
+        }));
     }
 }
 exports.UserValidation = UserValidation;

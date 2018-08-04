@@ -24,7 +24,7 @@ class UserValidationRoutes {
         this.userValidationRouter.post('/userValidation/userId/:userId/userPw', checkUserPw);
         this.userValidationRouter.get('/userValidation/sendPasswordMail/:userId', sendPasswordMail);
         this.userValidationRouter.post('/userValidation/sendValidationMail', sendValidationMail);
-        this.userValidationRouter.get('/userValidation/verify/:uuid', userValidation_model_1.userValidation.verifyValidation);
+        this.userValidationRouter.get('/userValidation/verify/:uuid', verifyValidation);
     }
 }
 exports.UserValidationRoutes = UserValidationRoutes;
@@ -236,6 +236,50 @@ function sendValidationMail(req, res) {
                         statusCode: 500,
                         message: 'sendValidationMail: 50000'
                     });
+            }
+        }
+    });
+}
+/**
+ * route: 인증코드 검증
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+function verifyValidation(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            let verifiedUuid = req.params.uuid;
+            yield userValidation_model_1.userValidation.verifyValidation(verifiedUuid);
+            res.send({
+                success: true,
+                statusCode: 200,
+                message: 'verifyValidation:200'
+            });
+        }
+        catch (err) {
+            switch (err) {
+                case 'Unvalidated code Error!':
+                    res.send({
+                        success: false,
+                        statusCode: 403,
+                        message: 'verifyValidation:40301'
+                    });
+                    break;
+                case 'Validation date expired.':
+                    res.send({
+                        success: false,
+                        statusCode: 403,
+                        message: 'verifyValidation:40302'
+                    });
+                    break;
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'verifyValidation:500'
+                    });
+                    break;
             }
         }
     });

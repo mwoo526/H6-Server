@@ -232,26 +232,46 @@ async function sendValidationMail(req, res): Promise<void> {
 	}
 }
 
-
 /**
  * route: 인증코드 검증
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
-
-async function verifyValidation(req, res) : Promise<void> {
-    try {
-        let verifiedUuid: any = req.params.uuid;
-        await userValidation.verifyValidation(verifiedUuid);
-        res.send('이메일 인증이 성공적으로 완료되었습니다.')
-    } catch (err) {
-        switch(err) {
-            case 'Unvalidated code Error!': res.send('이미 인증되었거나, 유효하지 않은 인증코드 입니다.'); break;
-            case 'Validation date expired.': res.send('인증기간이 만료되었습니다.'); break;
-            default: res.send("관리자에게 문의해주세요.");
-        }
-    }
+async function verifyValidation(req, res): Promise<void> {
+	try {
+		let verifiedUuid: any = req.params.uuid;
+		await userValidation.verifyValidation(verifiedUuid);
+		res.send({
+			success: true,
+			statusCode: 200,
+			message: 'verifyValidation:200'
+		});
+	} catch (err) {
+		switch (err) {
+			case 'Unvalidated code Error!':
+				res.send({
+					success: false,
+					statusCode: 403,
+					message: 'verifyValidation:40301'
+				});
+				break;
+			case 'Validation date expired.':
+				res.send({
+					success: false,
+					statusCode: 403,
+					message: 'verifyValidation:40302'
+				});
+				break;
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'verifyValidation:500'
+				});
+				break;
+		}
+	}
 }
 
 export const userValidationRoutes: UserValidationRoutes = new UserValidationRoutes();
