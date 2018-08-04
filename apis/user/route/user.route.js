@@ -9,10 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
+const s3_util_1 = require("../../../packages/utils/s3.util");
 const user_resource_1 = require("../../../resources/user.resource");
 const lectureReply_model_1 = require("../../lecture/model/lectureReply.model");
 const userValidation_model_1 = require("../../userValidation/model/userValidation.model");
 const user_model_1 = require("../model/user.model");
+let avatar = s3_util_1.s3Util.upload.single('avatar');
 class UserRoutes {
     constructor() {
         this.userRouter = express.Router();
@@ -20,6 +22,7 @@ class UserRoutes {
     }
     router() {
         this.userRouter.post('/users', createUser);
+        this.userRouter.post('/users/userId/:userId/uploadAvatar', uploadAvatar);
         this.userRouter.get('/users', pageListUser);
         this.userRouter.get('/users/userId/:userId', getUser);
         this.userRouter.put('/users/userId/:userId', updateUser);
@@ -172,6 +175,61 @@ function deleteUser(req, res) {
                     break;
             }
         }
+    });
+}
+/**
+ * route: user avatar 업로드
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+function uploadAvatar(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let userId = req.params.userId;
+        avatar(req, res, function (err) {
+            return __awaiter(this, void 0, void 0, function* () {
+                if (err) {
+                    if (err.message === 'The AWS Access Key Id you provided does not exist in our records.') {
+                        res.send({
+                            success: false,
+                            statusCode: 403,
+                            message: 'uploadAvatar: 40301'
+                        });
+                    }
+                    if (err.message === 'The request signature we calculated does not match the signature you provided. Check your key and signing method.') {
+                        res.send({
+                            success: false,
+                            statusCode: 403,
+                            message: 'uploadAvatar: 40302'
+                        });
+                    }
+                }
+                try {
+                    let result = req.file;
+                    /** 아바타 등록 */
+                    yield user_model_1.user.updateUser(userId, {
+                        avatar: result.location
+                    });
+                    res.send({
+                        success: true,
+                        statusCode: 200,
+                        result: result.location,
+                        message: 'uploadAvatar: 200'
+                    });
+                }
+                catch (err) {
+                    switch (err) {
+                        default:
+                            res.send({
+                                success: false,
+                                statusCode: 500,
+                                message: 'uploadAvatar: 50000'
+                            });
+                            break;
+                    }
+                }
+            });
+        });
     });
 }
 exports.userRoutes = new UserRoutes();
