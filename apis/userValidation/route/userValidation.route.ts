@@ -17,7 +17,7 @@ export class UserValidationRoutes {
 		this.userValidationRouter.post('/userValidation/userId/:userId/userPw', checkUserPw);
 		this.userValidationRouter.get('/userValidation/sendPasswordMail/:userId', sendPasswordMail);
 		this.userValidationRouter.post('/userValidation/sendValidationMail', sendValidationMail);
-		this.userValidationRouter.get('/userValidation/verify/:uuid', userValidation.verifyValidation);
+		this.userValidationRouter.get('/userValidation/verify/:uuid', verifyValidation);
 	}
 }
 
@@ -230,6 +230,28 @@ async function sendValidationMail(req, res): Promise<void> {
 				});
 		}
 	}
+}
+
+
+/**
+ * route: 인증코드 검증
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+
+async function verifyValidation(req, res) : Promise<void> {
+    try {
+        let verifiedUuid: any = req.params.uuid;
+        await userValidation.verifyValidation(verifiedUuid);
+        res.send('이메일 인증이 성공적으로 완료되었습니다.')
+    } catch (err) {
+        switch(err) {
+            case 'Unvalidated code Error!': res.send('이미 인증되었거나, 유효하지 않은 인증코드 입니다.'); break;
+            case 'Validation date expired.': res.send('인증기간이 만료되었습니다.'); break;
+            default: res.send("관리자에게 문의해주세요.");
+        }
+    }
 }
 
 export const userValidationRoutes: UserValidationRoutes = new UserValidationRoutes();

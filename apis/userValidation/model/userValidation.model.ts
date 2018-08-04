@@ -300,46 +300,41 @@ export class UserValidation {
 		})
 	}
 
-	/**
-	 * model: 인증코드 검증
-	 * @param req
-	 * @param res
-	 * @returns {Promise<void>}
-	 */
-	async verifyValidation(req, res): Promise<void> {
-		try {
-			if (req.protocol == 'http') {
 
-				let verifiedUuid: any = req.params.uuid;
+    /**
+     * model: 인증코드 검증
+     * @param req
+     * @param res
+     * @returns {Promise<void>}
+     */
+    verifyValidation(verifiedUuid: any): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                let uvUserId = await this.getUserIdData(verifiedUuid);
+                uvUserId = JSON.stringify(uvUserId);
 
-				let uvUserId = await userValidation.getUserIdData(verifiedUuid);
-				uvUserId = JSON.stringify(uvUserId);
+                /** 해당 데이터가 없으면 [] */
+                if (uvUserId == '[]') {
+                    reject('Unvalidated code Error!');
+                }
 
-				/** 해당 데이터가 없으면 [] */
-				if (uvUserId == '[]') {
-					res.send('Unvalidated code Error!!');
-				}
+                let userId = uvUserId.split('"')[3];
+                let uvUpdatedAt = await this.getUpdatedAt(userId);
 
-				let userId = uvUserId.split('"')[3];
-				let uvUpdatedAt = await userValidation.getUpdatedAt(userId);
-
-				if (user.isValidOnData(uvUpdatedAt)) {
-					await userValidation.updateIsValidation(userId);
-					await userValidation.deleteUsersValidation(userId);
-					await user.updateIsValidation(userId);
-					res.send('Email is been Successfully verified');
-				}
-				else {
-					res.send('validation date expired.')
-				}
-			}
-			else {
-				res.send('Request is from unknown source');
-			}
-		} catch (err) {
-			res.send(err);
-		}
-	}
+                if (user.isValidOnData(uvUpdatedAt)) {
+                    await this.updateIsValidation(userId);
+                    await this.deleteUsersValidation(userId);
+                    await user.updateIsValidation(userId);
+                    resolve('Email is been Successfully verified');
+                }
+                else {
+                    reject('Validation date expired.');
+                }
+            } catch (err) {
+                reject(err);
+            }
+        })
+    }
 }
 
 export const userValidation: UserValidation = new UserValidation();
