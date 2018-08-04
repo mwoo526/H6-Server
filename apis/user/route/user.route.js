@@ -177,6 +177,12 @@ function deleteUser(req, res) {
         }
     });
 }
+/**
+ * route: user avatar 업로드
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
 function uploadAvatar(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let userId = req.params.userId;

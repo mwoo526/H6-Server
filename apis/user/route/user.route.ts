@@ -160,6 +160,12 @@ async function deleteUser(req, res): Promise<void> {
 	}
 }
 
+/**
+ * route: user avatar 업로드
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
 async function uploadAvatar(req, res): Promise<void> {
 	let userId: string = req.params.userId;
 	avatar(req, res, async function (err) {
