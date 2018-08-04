@@ -1,8 +1,11 @@
 import * as express from 'express';
+import { s3Util } from '../../../packages/utils/s3.util';
 import { UserResource } from '../../../resources/user.resource';
 import { lectureReply } from '../../lecture/model/lectureReply.model';
 import { userValidation } from '../../userValidation/model/userValidation.model';
 import { user } from '../model/user.model';
+
+let avatar = s3Util.upload.single('avatar');
 
 export class UserRoutes {
 	public userRouter: express.Router = express.Router();
@@ -13,6 +16,7 @@ export class UserRoutes {
 
 	public router() {
 		this.userRouter.post('/users', createUser);
+		this.userRouter.post('/users/userId/:userId/uploadAvatar', uploadAvatar);
 		this.userRouter.get('/users', pageListUser);
 		this.userRouter.get('/users/userId/:userId', getUser);
 		this.userRouter.put('/users/userId/:userId', updateUser);
@@ -154,6 +158,51 @@ async function deleteUser(req, res): Promise<void> {
 				break;
 		}
 	}
+}
+
+async function uploadAvatar(req, res): Promise<void> {
+	let userId: string = req.params.userId;
+	avatar(req, res, async function (err) {
+		if (err) {
+			if (err.message === 'The AWS Access Key Id you provided does not exist in our records.') {
+				res.send({
+					success: false,
+					statusCode: 403,
+					message: 'uploadAvatar: 40301'
+				});
+			}
+			if (err.message === 'The request signature we calculated does not match the signature you provided. Check your key and signing method.') {
+				res.send({
+					success: false,
+					statusCode: 403,
+					message: 'uploadAvatar: 40302'
+				});
+			}
+		}
+		try {
+			let result = req.file;
+			/** 아바타 등록 */
+			await user.updateUser(userId, {
+				avatar: result.location
+			});
+			res.send({
+				success: true,
+				statusCode: 200,
+				result: result.location,
+				message: 'uploadAvatar: 200'
+			});
+		} catch (err) {
+			switch (err) {
+				default:
+					res.send({
+						success: false,
+						statusCode: 500,
+						message: 'uploadAvatar: 50000'
+					});
+					break;
+			}
+		}
+	});
 }
 
 export const userRoutes: UserRoutes = new UserRoutes();

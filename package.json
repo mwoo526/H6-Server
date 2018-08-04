@@ -11,6 +11,8 @@
   "dependencies": {
     "@types/mocha": "^2.2.48",
     "@types/node": "^10.0.0",
+    "async": "^2.6.1",
+    "aws-sdk": "^2.286.2",
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
     "chalk": "^2.3.2",
@@ -20,6 +22,8 @@
     "jsonwebtoken": "^8.2.0",
     "logger": "0.0.1",
     "mocha": "^2.5.3",
+    "multer": "^1.3.1",
+    "multer-s3": "^2.7.0",
     "node-cron": "^1.2.1",
     "node-mysql": "^0.4.2",
     "node-uuid": "^1.4.8",
