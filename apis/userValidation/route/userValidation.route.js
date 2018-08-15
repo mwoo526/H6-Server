@@ -195,7 +195,7 @@ function sendValidationMail(req, res) {
         try {
             let host = req.get('host');
             let uuid = uuid_util_1.uuidV1();
-            let userId = req.body.userId;
+            let userId = req.body.userId.toLowerCase();
             let link = 'http://' + host + '/userValidation/verify/' + uuid;
             let email = req.body.email;
             yield userValidation_model_1.userValidation.setUuid(userId, uuid);

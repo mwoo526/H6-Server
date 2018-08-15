@@ -183,7 +183,7 @@ async function sendValidationMail(req, res): Promise<void> {
 		let host: any = req.get('host');
 		let uuid = uuidV1();
 
-		let userId: string = req.body.userId;
+		let userId: string = req.body.userId.toLowerCase();
 		let link: any = 'http://' + host + '/userValidation/verify/' + uuid;
 		let email: string = req.body.email;
 

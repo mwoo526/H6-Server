@@ -30,6 +30,7 @@ exports.SignUpRoutes = SignUpRoutes;
  */
 function createUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        req.body.userId = req.body.userId.toLowerCase();
         let userResource = new user_resource_1.UserResource(req.body);
         try {
             const result = yield signUp_model_1.signUp.createUser(userResource.getSignUp());

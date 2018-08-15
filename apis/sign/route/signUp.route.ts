@@ -22,6 +22,7 @@ export class SignUpRoutes {
  * @returns {Promise<void>}
  */
 async function createUser(req, res): Promise<void> {
+	req.body.userId = req.body.userId.toLowerCase();
 	let userResource = new UserResource(req.body);
 	try {
 		const result: any = await signUp.createUser(userResource.getSignUp());
