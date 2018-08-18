@@ -14,7 +14,7 @@ describe('lecture 모델', () => {
     let testLectureIndex;
     let testLectureCode = 'IDE001';
     let testLectureName = 'Node.js';
-    let testTrack = 'IT';
+    let testTrack = '영미문학문화 트랙';
     before(() => __awaiter(this, void 0, void 0, function* () {
         try {
             /** lecture 생성 */

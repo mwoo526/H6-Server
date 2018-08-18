@@ -5,7 +5,7 @@ describe('lecture 모델', () => {
 	let testLectureIndex: any;
 	let testLectureCode: string = 'IDE001';
 	let testLectureName: string = 'Node.js';
-	let testTrack: string = 'IT';
+	let testTrack: string = '영미문학문화 트랙';
 
 	before(async () => {
 		try {
