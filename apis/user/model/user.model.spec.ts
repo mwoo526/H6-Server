@@ -33,6 +33,18 @@ describe('user 모델', () => {
 		expect(result).to.instanceof(Object);
 	});
 
+	it('createUserLog', async () => {
+		const result = await user.createUserLog({
+			userId: userId,
+			log: 'SignIn success'
+		});
+		// console.log(result);
+		expect(result).to.be.eqls({
+			userId: userId,
+			log: 'SignIn success'
+		});
+	});
+
 	it('getUser', async () => {
 		const result = await user.getUser(userId);
 		// console.log(result);

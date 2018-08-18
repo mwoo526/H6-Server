@@ -1,4 +1,5 @@
 import * as express from 'express';
+import { user } from '../../user/model/user.model';
 import { signIn } from '../model/signIn.model';
 
 export class SignInRoutes {
@@ -22,12 +23,11 @@ export class SignInRoutes {
 async function getUser(req, res): Promise<void> {
 	try {
 		const result: any = await signIn.getUser(req.body);
-		// TODO(@jade): 버그 해결 후 주석 해제  date: 2018. 5. 20. 오후 11:10
-		// /** userLog 성공 */
-		// await signIn.createUserLog({
-		// 	userId: req.body.userId,
-		// 	log: 'logIn Success'
-		// });
+		/** userLog */
+		await user.createUserLog({
+			userId: req.body.userId,
+			log: 'SignIn success'
+		});
 		res.send({
 			success: true,
 			statusCode: 200,
@@ -58,6 +58,7 @@ async function getUser(req, res): Promise<void> {
 				});
 				break;
 			default:
+				console.log(err);
 				res.send({
 					success: false,
 					statusCode: 500,

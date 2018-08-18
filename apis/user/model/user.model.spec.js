@@ -40,6 +40,17 @@ describe('user 모델', () => {
         // console.log(result);
         chai_1.expect(result).to.instanceof(Object);
     }));
+    it('createUserLog', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield user_model_1.user.createUserLog({
+            userId: userId,
+            log: 'SignIn success'
+        });
+        // console.log(result);
+        chai_1.expect(result).to.be.eqls({
+            userId: userId,
+            log: 'SignIn success'
+        });
+    }));
     it('getUser', () => __awaiter(this, void 0, void 0, function* () {
         const result = yield user_model_1.user.getUser(userId);
         // console.log(result);

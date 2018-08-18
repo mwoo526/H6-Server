@@ -38,6 +38,29 @@ class User {
         }));
     }
     /**
+     * model: userLog 생성
+     * @param userLogData
+     * @returns {Promise<any>}
+     */
+    createUserLog(userLogData) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`INSERT INTO userLog SET ?`, [userLogData], function (err) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            resolve(userLogData);
+                        }
+                    });
+                });
+            });
+        }));
+    }
+    /**
      * model: user 리스트 조회
      * @returns {Promise<any>}
      */

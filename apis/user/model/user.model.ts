@@ -29,6 +29,27 @@ export class User {
 	}
 
 	/**
+	 * model: userLog 생성
+	 * @param userLogData
+	 * @returns {Promise<any>}
+	 */
+	createUserLog(userLogData: any): Promise<any> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`INSERT INTO userLog SET ?`, [userLogData], function(err) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						connection.release();
+						resolve(userLogData);
+					}
+				})
+			})
+		})
+	}
+
+	/**
 	 * model: user 리스트 조회
 	 * @returns {Promise<any>}
 	 */

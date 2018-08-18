@@ -1,5 +1,6 @@
 import * as express from 'express';
 import { UserResource } from '../../../resources/user.resource';
+import { user } from '../../user/model/user.model';
 import { userValidation } from '../../userValidation/model/userValidation.model';
 import { signUp } from '../model/signUp.model';
 
@@ -28,6 +29,11 @@ async function createUser(req, res): Promise<void> {
 		const result: any = await signUp.createUser(userResource.getSignUp());
 		await userValidation.createUserValidation({
 			userId: req.body.userId
+		});
+		/** userLog */
+		await user.createUserLog({
+			userId: req.body.userId,
+			log: 'SignUp success'
 		});
 		res.send({
 			success: true,

@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
+const user_model_1 = require("../../user/model/user.model");
 const signIn_model_1 = require("../model/signIn.model");
 class SignInRoutes {
     constructor() {
@@ -30,12 +31,11 @@ function getUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const result = yield signIn_model_1.signIn.getUser(req.body);
-            // TODO(@jade): 버그 해결 후 주석 해제  date: 2018. 5. 20. 오후 11:10
-            // /** userLog 성공 */
-            // await signIn.createUserLog({
-            // 	userId: req.body.userId,
-            // 	log: 'logIn Success'
-            // });
+            /** userLog */
+            yield user_model_1.user.createUserLog({
+                userId: req.body.userId,
+                log: 'SignIn success'
+            });
             res.send({
                 success: true,
                 statusCode: 200,
@@ -67,6 +67,7 @@ function getUser(req, res) {
                     });
                     break;
                 default:
+                    console.log(err);
                     res.send({
                         success: false,
                         statusCode: 500,
