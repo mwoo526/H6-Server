@@ -129,7 +129,7 @@ class LectureReply {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
-				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex`, function (err, rows) {
+				INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
                                 yield connection.release();
@@ -161,7 +161,7 @@ class LectureReply {
                     }
                     yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
-				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
+				INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
@@ -189,7 +189,7 @@ class LectureReply {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
-				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
+				INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex 
 				WHERE t1.lectureReplyIndex = ${lectureReplyIndex}`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
@@ -223,7 +223,7 @@ class LectureReply {
                     }
                     yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
-				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
+				INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t1.lectureReplyIndex LIKE '%${lectureReplyIndex}%'
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
@@ -252,7 +252,7 @@ class LectureReply {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
-				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
+				INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex 
 				WHERE t1.lectureInfoIndex = ${lectureInfoIndex}`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
@@ -285,7 +285,7 @@ class LectureReply {
                         start = 0;
                     }
                     yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
-				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
+				FROM lecturesReply AS t1 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t1.lectureInfoIndex LIKE '%${lectureInfoIndex}%'
 				ORDER BY t1.lectureReplyIndex DESC LIMIT ${start}, ${count}`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
@@ -314,7 +314,7 @@ class LectureReply {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
-				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
+				INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex 
 				WHERE t2.userIndex = ${userIndex}`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
@@ -347,7 +347,7 @@ class LectureReply {
                         start = 0;
                     }
                     yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
-				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
+				FROM lecturesReply AS t1 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t1.userIndex LIKE '%${userIndex}%'
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
@@ -376,7 +376,7 @@ class LectureReply {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
-				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
+				INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex 
 				WHERE t2.userId LIKE '%${userId}%'`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
@@ -409,7 +409,7 @@ class LectureReply {
                         start = 0;
                     }
                     yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
-				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
+				FROM lecturesReply AS t1 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t2.userId LIKE '%${userId}%'
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
@@ -438,7 +438,7 @@ class LectureReply {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
-				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
+				INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex 
 				WHERE t2.userNickName LIKE '%${userNickName}%'`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
@@ -471,7 +471,7 @@ class LectureReply {
                         start = 0;
                     }
                     yield connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
-				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
+				FROM lecturesReply AS t1 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t2.userNickName LIKE '%${userNickName}%'
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {

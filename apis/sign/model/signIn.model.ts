@@ -8,20 +8,20 @@ const pool = mysqlUtil.pool;
 class SignIn {
 
 	/**
-	 * model: userLog 생성
-	 * @param usersLogData
+	 * model: useLog 생성
+	 * @param userLogData
 	 * @returns {Promise<any>}
 	 */
-	createUserLog(usersLogData: any): Promise<any> {
+	createUserLog(userLogData: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query('INSERT INTO usersLog SET ?', [usersLogData], function(err) {
+				await connection.query('INSERT INTO userLog SET ?', [userLogData], function(err) {
 					if (err) {
 						connection.release();
 						reject(err);
 					} else {
 						connection.release();
-						resolve(usersLogData);
+						resolve(userLogData);
 					}
 				})
 			})
@@ -36,7 +36,7 @@ class SignIn {
 	getUser(userData: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * from users WHERE userId = ?`, [userData.userId], async function(err, rows) {
+				await connection.query(`SELECT * from user WHERE userId = ?`, [userData.userId], async function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);

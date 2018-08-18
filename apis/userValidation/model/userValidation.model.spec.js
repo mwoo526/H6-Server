@@ -40,7 +40,7 @@ describe('userValidation 모델', () => {
     after(() => __awaiter(this, void 0, void 0, function* () {
         try {
             yield user_model_1.user.deleteUser(resultCreateUser.userId);
-            yield userValidation_model_1.userValidation.deleteUsersValidation(resultCreateUser.userId);
+            yield userValidation_model_1.userValidation.deleteUserValidation(resultCreateUser.userId);
         }
         catch (err) {
             console.error('err', err);

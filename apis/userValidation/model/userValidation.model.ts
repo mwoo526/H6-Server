@@ -18,7 +18,7 @@ export class UserValidation {
 	createUserValidation(userData: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`INSERT INTO usersValidation SET ?`, [userData], async function(err, rows) {
+				await connection.query(`INSERT INTO userValidation SET ?`, [userData], async function(err, rows) {
 					if (err) {
 						await connection.release();
 						return reject(err);
@@ -39,7 +39,7 @@ export class UserValidation {
 	getValidationCode(userId: string): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM usersValidation WHERE userId=?`, [userId], function(err, rows) {
+				await connection.query(`SELECT * FROM userValidation WHERE userId=?`, [userId], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -89,7 +89,7 @@ export class UserValidation {
 	checkUserId(userId: string): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM users WHERE userId = '${userId}'`, function(err, rows) {
+				await connection.query(`SELECT * FROM user WHERE userId = '${userId}'`, function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -115,7 +115,7 @@ export class UserValidation {
 	checkUserNickName(userNickName: string): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM users WHERE userNickName = '${userNickName}'`, async function(err, rows) {
+				await connection.query(`SELECT * FROM user WHERE userNickName = '${userNickName}'`, async function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -142,7 +142,7 @@ export class UserValidation {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				userPw = await encriptionPw.getHash(userPw);
-				await connection.query(`SELECT * FROM users WHERE userId = '${userId}' AND userPw = '${userPw}'`, async function(err, rows) {
+				await connection.query(`SELECT * FROM user WHERE userId = '${userId}' AND userPw = '${userPw}'`, async function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -159,7 +159,7 @@ export class UserValidation {
 	}
 
 	/**
-	 * model: DB usersValidation 테이블에 uuid 저장하기
+	 * model: DB userValidation 테이블에 uuid 저장하기
 	 * @param userId
 	 * @param uuid
 	 * @returns {Promise<any>}
@@ -167,7 +167,7 @@ export class UserValidation {
 	setUuid(userId: any, uuid: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`UPDATE usersValidation set validationCode='${uuid}' WHERE userId = ?`, [userId], (err, rows) => {
+				await connection.query(`UPDATE userValidation set validationCode='${uuid}' WHERE userId = ?`, [userId], (err, rows) => {
 					connection.release();
 					if (err) {
 						reject('setUuid query error');
@@ -223,7 +223,7 @@ export class UserValidation {
 	getUserIdData(uuid: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`SELECT userId FROM usersValidation where validationCode=?`, [uuid], (err, rows) => {
+				await connection.query(`SELECT userId FROM userValidation where validationCode=?`, [uuid], (err, rows) => {
 					connection.release();
 					if (err) {
 						reject(err);
@@ -244,7 +244,7 @@ export class UserValidation {
 	getUpdatedAt(userId: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`SELECT updatedAt FROM usersValidation where userId=?`, [userId], (err, rows) => {
+				await connection.query(`SELECT updatedAt FROM userValidation where userId=?`, [userId], (err, rows) => {
 					connection.release();
 					if (err) {
 						reject(err);
@@ -265,7 +265,7 @@ export class UserValidation {
 	updateIsValidation(userId: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`UPDATE users set isValidation='${1}' WHERE userId=?`, [userId], (err, rows) => {
+				await connection.query(`UPDATE user set isValidation='${1}' WHERE userId=?`, [userId], (err, rows) => {
 					connection.release();
 					if (err) {
 						reject(err);
@@ -283,10 +283,10 @@ export class UserValidation {
 	 * @param {string} userId
 	 * @returns {Promise<any>}
 	 */
-	deleteUsersValidation(userId: any): Promise<any> {
+	deleteUserValidation(userId: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`DELETE FROM usersValidation WHERE userId=?`, [userId], (err, rows) => {
+				await connection.query(`DELETE FROM userValidation WHERE userId=?`, [userId], (err, rows) => {
 					connection.release();
 					if (err) {
 						reject(err);
@@ -321,7 +321,7 @@ export class UserValidation {
 
 				if (user.isValidOnData(uvUpdatedAt)) {
 					await this.updateIsValidation(userId);
-					await this.deleteUsersValidation(userId);
+					await this.deleteUserValidation(userId);
 					await user.updateIsValidation(userId);
 					resolve('Email is been Successfully verified');
 				}

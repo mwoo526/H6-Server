@@ -22,7 +22,7 @@ class SignUp {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`INSERT INTO users SET ?`, [userData], function (err, rows) {
+                    yield connection.query(`INSERT INTO user SET ?`, [userData], function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
                                 yield connection.release();

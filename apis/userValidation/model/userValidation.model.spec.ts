@@ -32,7 +32,7 @@ describe('userValidation 모델', () => {
 	after(async () => {
 		try {
 			await user.deleteUser(resultCreateUser.userId);
-			await userValidation.deleteUsersValidation(resultCreateUser.userId);
+			await userValidation.deleteUserValidation(resultCreateUser.userId);
 		} catch (err) {
 			console.error('err', err);
 		}

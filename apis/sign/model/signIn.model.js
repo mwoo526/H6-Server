@@ -15,22 +15,22 @@ const mysql_util_1 = require("../../../packages/utils/mysql.util");
 const pool = mysql_util_1.mysqlUtil.pool;
 class SignIn {
     /**
-     * model: userLog 생성
-     * @param usersLogData
+     * model: useLog 생성
+     * @param userLogData
      * @returns {Promise<any>}
      */
-    createUserLog(usersLogData) {
+    createUserLog(userLogData) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query('INSERT INTO usersLog SET ?', [usersLogData], function (err) {
+                    yield connection.query('INSERT INTO userLog SET ?', [userLogData], function (err) {
                         if (err) {
                             connection.release();
                             reject(err);
                         }
                         else {
                             connection.release();
-                            resolve(usersLogData);
+                            resolve(userLogData);
                         }
                     });
                 });
@@ -46,7 +46,7 @@ class SignIn {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT * from users WHERE userId = ?`, [userData.userId], function (err, rows) {
+                    yield connection.query(`SELECT * from user WHERE userId = ?`, [userData.userId], function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
                                 connection.release();

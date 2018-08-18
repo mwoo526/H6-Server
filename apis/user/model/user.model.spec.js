@@ -54,6 +54,7 @@ describe('user 모델', () => {
                 minor: null,
                 doubleMajor: null,
                 connectedMajor: null,
+                avatar: null,
                 admissionYear: 2018,
                 isValidation: 0
             }]);

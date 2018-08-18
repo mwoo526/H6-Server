@@ -26,7 +26,7 @@ class UserValidation {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`INSERT INTO usersValidation SET ?`, [userData], function (err, rows) {
+                    yield connection.query(`INSERT INTO userValidation SET ?`, [userData], function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
                                 yield connection.release();
@@ -51,7 +51,7 @@ class UserValidation {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT * FROM usersValidation WHERE userId=?`, [userId], function (err, rows) {
+                    yield connection.query(`SELECT * FROM userValidation WHERE userId=?`, [userId], function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -102,7 +102,7 @@ class UserValidation {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT * FROM users WHERE userId = '${userId}'`, function (err, rows) {
+                    yield connection.query(`SELECT * FROM user WHERE userId = '${userId}'`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -131,7 +131,7 @@ class UserValidation {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT * FROM users WHERE userNickName = '${userNickName}'`, function (err, rows) {
+                    yield connection.query(`SELECT * FROM user WHERE userNickName = '${userNickName}'`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
                                 connection.release();
@@ -163,7 +163,7 @@ class UserValidation {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
                     userPw = yield encryption_util_1.encriptionPw.getHash(userPw);
-                    yield connection.query(`SELECT * FROM users WHERE userId = '${userId}' AND userPw = '${userPw}'`, function (err, rows) {
+                    yield connection.query(`SELECT * FROM user WHERE userId = '${userId}' AND userPw = '${userPw}'`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
                                 connection.release();
@@ -183,7 +183,7 @@ class UserValidation {
         }));
     }
     /**
-     * model: DB usersValidation 테이블에 uuid 저장하기
+     * model: DB userValidation 테이블에 uuid 저장하기
      * @param userId
      * @param uuid
      * @returns {Promise<any>}
@@ -191,7 +191,7 @@ class UserValidation {
     setUuid(userId, uuid) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection((err, connection) => __awaiter(this, void 0, void 0, function* () {
-                yield connection.query(`UPDATE usersValidation set validationCode='${uuid}' WHERE userId = ?`, [userId], (err, rows) => {
+                yield connection.query(`UPDATE userValidation set validationCode='${uuid}' WHERE userId = ?`, [userId], (err, rows) => {
                     connection.release();
                     if (err) {
                         reject('setUuid query error');
@@ -245,7 +245,7 @@ class UserValidation {
     getUserIdData(uuid) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection((err, connection) => __awaiter(this, void 0, void 0, function* () {
-                yield connection.query(`SELECT userId FROM usersValidation where validationCode=?`, [uuid], (err, rows) => {
+                yield connection.query(`SELECT userId FROM userValidation where validationCode=?`, [uuid], (err, rows) => {
                     connection.release();
                     if (err) {
                         reject(err);
@@ -265,7 +265,7 @@ class UserValidation {
     getUpdatedAt(userId) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection((err, connection) => __awaiter(this, void 0, void 0, function* () {
-                yield connection.query(`SELECT updatedAt FROM usersValidation where userId=?`, [userId], (err, rows) => {
+                yield connection.query(`SELECT updatedAt FROM userValidation where userId=?`, [userId], (err, rows) => {
                     connection.release();
                     if (err) {
                         reject(err);
@@ -285,7 +285,7 @@ class UserValidation {
     updateIsValidation(userId) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection((err, connection) => __awaiter(this, void 0, void 0, function* () {
-                yield connection.query(`UPDATE users set isValidation='${1}' WHERE userId=?`, [userId], (err, rows) => {
+                yield connection.query(`UPDATE user set isValidation='${1}' WHERE userId=?`, [userId], (err, rows) => {
                     connection.release();
                     if (err) {
                         reject(err);
@@ -302,10 +302,10 @@ class UserValidation {
      * @param {string} userId
      * @returns {Promise<any>}
      */
-    deleteUsersValidation(userId) {
+    deleteUserValidation(userId) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection((err, connection) => __awaiter(this, void 0, void 0, function* () {
-                yield connection.query(`DELETE FROM usersValidation WHERE userId=?`, [userId], (err, rows) => {
+                yield connection.query(`DELETE FROM userValidation WHERE userId=?`, [userId], (err, rows) => {
                     connection.release();
                     if (err) {
                         reject(err);
@@ -336,7 +336,7 @@ class UserValidation {
                 let uvUpdatedAt = yield this.getUpdatedAt(userId);
                 if (user_model_1.user.isValidOnData(uvUpdatedAt)) {
                     yield this.updateIsValidation(userId);
-                    yield this.deleteUsersValidation(userId);
+                    yield this.deleteUserValidation(userId);
                     yield user_model_1.user.updateIsValidation(userId);
                     resolve('Email is been Successfully verified');
                 }

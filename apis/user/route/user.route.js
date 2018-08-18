@@ -155,7 +155,7 @@ function deleteUser(req, res) {
         let userId = req.params.userId;
         try {
             const resultUser = yield user_model_1.user.getUser(userId);
-            yield userValidation_model_1.userValidation.deleteUsersValidation(userId);
+            yield userValidation_model_1.userValidation.deleteUserValidation(userId);
             yield lectureReply_model_1.lectureReply.deleteLectureReplyByUserIndex(resultUser[0].userIndex);
             yield user_model_1.user.deleteUser(userId);
             res.send({

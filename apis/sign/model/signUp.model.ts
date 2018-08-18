@@ -14,7 +14,7 @@ export class SignUp {
 	createUser(userData: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`INSERT INTO users SET ?`, [userData], async function(err, rows) {
+				await connection.query(`INSERT INTO user SET ?`, [userData], async function(err, rows) {
 					if (err) {
 						await connection.release();
 						return reject(err);

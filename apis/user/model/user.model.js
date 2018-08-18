@@ -23,7 +23,7 @@ class User {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`INSERT INTO users SET ?`, [userData], function (err) {
+                    yield connection.query(`INSERT INTO user SET ?`, [userData], function (err) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -45,7 +45,7 @@ class User {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT * FROM users`, function (err, rows) {
+                    yield connection.query(`SELECT * FROM user`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -71,7 +71,7 @@ class User {
                     if (start < 0) {
                         start = 0;
                     }
-                    yield connection.query(`SELECT * FROM users ORDER BY userIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
+                    yield connection.query(`SELECT * FROM user ORDER BY userIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -94,7 +94,7 @@ class User {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT * FROM users WHERE userId = ?`, [userId], function (err, rows) {
+                    yield connection.query(`SELECT * FROM user WHERE userId = ?`, [userId], function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -118,7 +118,7 @@ class User {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`UPDATE users SET ? WHERE userId = ?`, [userData, userId], function (err, rows) {
+                    yield connection.query(`UPDATE user SET ? WHERE userId = ?`, [userData, userId], function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -142,7 +142,7 @@ class User {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT * from users WHERE userId = ?`, [userId], function (err, rows) {
+                    yield connection.query(`SELECT * from user WHERE userId = ?`, [userId], function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
                                 connection.release();
@@ -175,7 +175,7 @@ class User {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
                     userPw = encryption_util_1.encriptionPw.getHash(userPw);
-                    yield connection.query(`UPDATE users SET userPw=? WHERE userId=?`, [userPw, userId], function (err, rows) {
+                    yield connection.query(`UPDATE user SET userPw=? WHERE userId=?`, [userPw, userId], function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -198,7 +198,7 @@ class User {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`DELETE FROM users WHERE userId = ?`, userId, function (err, rows) {
+                    yield connection.query(`DELETE FROM user WHERE userId = ?`, userId, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -220,7 +220,7 @@ class User {
     updateIsValidation(userId) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection((err, connection) => __awaiter(this, void 0, void 0, function* () {
-                yield connection.query(`UPDATE users set isValidation='${1}' WHERE userId=?`, [userId], (err, rows) => {
+                yield connection.query(`UPDATE user set isValidation='${1}' WHERE userId=?`, [userId], (err, rows) => {
                     connection.release();
                     if (err) {
                         reject(err);

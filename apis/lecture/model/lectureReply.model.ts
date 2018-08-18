@@ -102,7 +102,7 @@ export class LectureReply {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
-				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex`, async function(err, rows) {
+				INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex`, async function(err, rows) {
 					if (err) {
 						await connection.release();
 						reject(err);
@@ -130,7 +130,7 @@ export class LectureReply {
 				}
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
-				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
+				INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
 					if (err) {
 						await connection.release();
@@ -154,7 +154,7 @@ export class LectureReply {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
-				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
+				INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex 
 				WHERE t1.lectureReplyIndex = ${lectureReplyIndex}`, async function(err, rows) {
 					if (err) {
 						await connection.release();
@@ -184,7 +184,7 @@ export class LectureReply {
 				}
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
-				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
+				INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t1.lectureReplyIndex LIKE '%${lectureReplyIndex}%'
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
 					if (err) {
@@ -209,7 +209,7 @@ export class LectureReply {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
-				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
+				INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex 
 				WHERE t1.lectureInfoIndex = ${lectureInfoIndex}`, async function(err, rows) {
 					if (err) {
 						await connection.release();
@@ -238,7 +238,7 @@ export class LectureReply {
 					start = 0;
 				}
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
-				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
+				FROM lecturesReply AS t1 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t1.lectureInfoIndex LIKE '%${lectureInfoIndex}%'
 				ORDER BY t1.lectureReplyIndex DESC LIMIT ${start}, ${count}`, async function(err, rows) {
 					if (err) {
@@ -263,7 +263,7 @@ export class LectureReply {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
-				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
+				INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex 
 				WHERE t2.userIndex = ${userIndex}`, async function(err, rows) {
 					if (err) {
 						await connection.release();
@@ -292,7 +292,7 @@ export class LectureReply {
 					start = 0;
 				}
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
-				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
+				FROM lecturesReply AS t1 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t1.userIndex LIKE '%${userIndex}%'
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
 					if (err) {
@@ -317,7 +317,7 @@ export class LectureReply {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
-				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
+				INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex 
 				WHERE t2.userId LIKE '%${userId}%'`, async function(err, rows) {
 					if (err) {
 						await connection.release();
@@ -346,7 +346,7 @@ export class LectureReply {
 					start = 0;
 				}
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
-				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
+				FROM lecturesReply AS t1 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t2.userId LIKE '%${userId}%'
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
 					if (err) {
@@ -371,7 +371,7 @@ export class LectureReply {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
 				FROM lecturesReply AS t1 
-				INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex 
+				INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex 
 				WHERE t2.userNickName LIKE '%${userNickName}%'`, async function(err, rows) {
 					if (err) {
 						await connection.release();
@@ -400,7 +400,7 @@ export class LectureReply {
 					start = 0;
 				}
 				await connection.query(`SELECT t1.lectureReplyIndex, t1.lectureInfoIndex, t1.userIndex, t1.semester, t1.homework, t1.homeworkType, t1.testCount, t1.receivedGrade, t1.preview, t1.review, t1.score, t1.createdAt, t2.userId, t2.userNickName 
-				FROM lecturesReply AS t1 INNER JOIN users AS t2 ON t1.userIndex = t2.userIndex
+				FROM lecturesReply AS t1 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
 				WHERE t2.userNickName LIKE '%${userNickName}%'
 				ORDER BY t1.lectureReplyIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
 					if (err) {

@@ -139,7 +139,7 @@ async function deleteUser(req, res): Promise<void> {
 	let userId: string = req.params.userId;
 	try {
 		const resultUser = await user.getUser(userId);
-		await userValidation.deleteUsersValidation(userId);
+		await userValidation.deleteUserValidation(userId);
 		await lectureReply.deleteLectureReplyByUserIndex(resultUser[0].userIndex);
 		await user.deleteUser(userId);
 		res.send({
