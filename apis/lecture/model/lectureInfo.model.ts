@@ -90,7 +90,7 @@ export class LectureInfo {
 	listLectureInfoBySearchTerm(searchTerm: string): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureCode, t2.lectureName, t2.track, t3.professorName 
+				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t1.updatedAt, t2.lectureCode, t2.lectureName, t2.track, t3.professorName 
 				FROM lectureInfo AS t1 INNER JOIN lecture AS t2 ON t1.lectureIndex = t2.lectureIndex 
 				INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex 
 				WHERE t2.lectureCode LIKE '%${searchTerm}%' 
@@ -123,7 +123,7 @@ export class LectureInfo {
 				if (start < 0) {
 					start = 0;
 				}
-				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureCode, t2.lectureName, t2.track, t3.professorName 
+				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t1.updatedAt, t2.lectureCode, t2.lectureName, t2.track, t3.professorName 
 				FROM lectureInfo AS t1 INNER JOIN lecture AS t2 ON t1.lectureIndex = t2.lectureIndex 
 				INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex 
 				WHERE t2.lectureCode LIKE '%${searchTerm}%' 
