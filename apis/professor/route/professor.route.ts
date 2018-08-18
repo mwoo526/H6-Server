@@ -10,12 +10,12 @@ export class ProfessorRoutes {
 	}
 
 	public router() {
-		this.professorRouter.post('/professors', createProfessor);
-		this.professorRouter.get('/professors', listProfessor);
-		this.professorRouter.get('/professors/professorIndex/:professorIndex/', getProfessorByProfessorIndex);
-		this.professorRouter.get('/professors/professorName/:professorName/', getProfessorByProfessorName);
-		this.professorRouter.put('/professors/professorIndex/:professorIndex', updateProfessor);
-		this.professorRouter.delete('/professors/professorIndex/:professorIndex', deleteProfessor);
+		this.professorRouter.post('/professor', createProfessor);
+		this.professorRouter.get('/professor', listProfessor);
+		this.professorRouter.get('/professor/professorIndex/:professorIndex/', getProfessorByProfessorIndex);
+		this.professorRouter.get('/professor/professorName/:professorName/', getProfessorByProfessorName);
+		this.professorRouter.put('/professor/professorIndex/:professorIndex', updateProfessor);
+		this.professorRouter.delete('/professor/professorIndex/:professorIndex', deleteProfessor);
 	}
 }
 

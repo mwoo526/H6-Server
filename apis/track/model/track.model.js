@@ -20,7 +20,7 @@ class Track {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query('INSERT INTO tracks SET ?', trackData, function (err) {
+                    yield connection.query('INSERT INTO track SET ?', trackData, function (err) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -42,7 +42,7 @@ class Track {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query('SELECT * FROM tracks', function (err, rows) {
+                    yield connection.query('SELECT * FROM track', function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -71,7 +71,7 @@ class Track {
                         if (start < 0) {
                             start = 0;
                         }
-                        yield connection.query(`SELECT * FROM tracks ORDER BY trackName ASC LIMIT ${start}, ${count}`, function (err, rows) {
+                        yield connection.query(`SELECT * FROM track ORDER BY trackName ASC LIMIT ${start}, ${count}`, function (err, rows) {
                             if (err) {
                                 connection.release();
                                 reject(err);
@@ -83,7 +83,7 @@ class Track {
                         });
                     }
                     else {
-                        yield connection.query(`SELECT * FROM tracks ORDER BY trackName`, function (err, rows) {
+                        yield connection.query(`SELECT * FROM track ORDER BY trackName`, function (err, rows) {
                             if (err) {
                                 connection.release();
                                 reject(err);
@@ -107,7 +107,7 @@ class Track {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query('DELETE FROM tracks WHERE trackName = ?', trackName, function (err, rows) {
+                    yield connection.query('DELETE FROM track WHERE trackName = ?', trackName, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
                                 yield connection.release();

@@ -14,7 +14,7 @@ export class Professor {
 	createProfessor(professorData: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`INSERT INTO professors SET ?`, professorData, function(err) {
+				await connection.query(`INSERT INTO professor SET ?`, professorData, function(err) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -34,7 +34,7 @@ export class Professor {
 	listProfessor(): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM professors`, function(err, rows) {
+				await connection.query(`SELECT * FROM professor`, function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -55,7 +55,7 @@ export class Professor {
 	getProfessorByProfessorIndex(professorIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM professors WHERE professorIndex = ?`, [professorIndex], function(err, rows) {
+				await connection.query(`SELECT * FROM professor WHERE professorIndex = ?`, [professorIndex], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -76,7 +76,7 @@ export class Professor {
 	getProfessorByProfessorName(professorName: string): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM professors WHERE professorName LIKE '%${professorName}%'`, function(err, rows) {
+				await connection.query(`SELECT * FROM professor WHERE professorName LIKE '%${professorName}%'`, function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -98,7 +98,7 @@ export class Professor {
 	updateProfessor(professorIndex: number, professorData: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`UPDATE professors SET ? WHERE professorIndex = ?`, [professorData,
+				await connection.query(`UPDATE professor SET ? WHERE professorIndex = ?`, [professorData,
 					professorIndex], function(err, rows) {
 					if (err) {
 						connection.release();
@@ -120,7 +120,7 @@ export class Professor {
 	deleteProfessor(professorIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`DELETE FROM professors WHERE professorIndex = ?`, professorIndex, function(err, rows) {
+				await connection.query(`DELETE FROM professor WHERE professorIndex = ?`, professorIndex, function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);

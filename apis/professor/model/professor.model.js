@@ -22,7 +22,7 @@ class Professor {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`INSERT INTO professors SET ?`, professorData, function (err) {
+                    yield connection.query(`INSERT INTO professor SET ?`, professorData, function (err) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -44,7 +44,7 @@ class Professor {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT * FROM professors`, function (err, rows) {
+                    yield connection.query(`SELECT * FROM professor`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -67,7 +67,7 @@ class Professor {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT * FROM professors WHERE professorIndex = ?`, [professorIndex], function (err, rows) {
+                    yield connection.query(`SELECT * FROM professor WHERE professorIndex = ?`, [professorIndex], function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -90,7 +90,7 @@ class Professor {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT * FROM professors WHERE professorName LIKE '%${professorName}%'`, function (err, rows) {
+                    yield connection.query(`SELECT * FROM professor WHERE professorName LIKE '%${professorName}%'`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -114,7 +114,7 @@ class Professor {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`UPDATE professors SET ? WHERE professorIndex = ?`, [professorData,
+                    yield connection.query(`UPDATE professor SET ? WHERE professorIndex = ?`, [professorData,
                         professorIndex], function (err, rows) {
                         if (err) {
                             connection.release();
@@ -138,7 +138,7 @@ class Professor {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`DELETE FROM professors WHERE professorIndex = ?`, professorIndex, function (err, rows) {
+                    yield connection.query(`DELETE FROM professor WHERE professorIndex = ?`, professorIndex, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);

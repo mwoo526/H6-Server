@@ -10,14 +10,14 @@ export class LectureInfoRoutes {
 	}
 
 	public router() {
-		this.lectureInfoRouter.post('/lecturesInfo', createLectureInfo);
-		this.lectureInfoRouter.get('/lecturesInfo', pageListLectureInfo);
-		this.lectureInfoRouter.get('/pageListLectureInfoBySearchTerm/:searchTerm', pageListLectureInfoBySearchTerm);
-		this.lectureInfoRouter.get('/lecturesInfo/lectureInfoIndex/:lectureInfoIndex', getLectureInfoByLectureInfoIndex);
-		this.lectureInfoRouter.get('/lecturesInfo/lectureName/:lectureName', pageListLectureInfoByLectureName);
-		this.lectureInfoRouter.get('/lecturesInfo/professorName/:professorName', pageListLectureInfoByProfessorName);
-		this.lectureInfoRouter.put('/lecturesInfo/lectureInfoIndex/:lectureInfoIndex', updateLectureInfo);
-		this.lectureInfoRouter.delete('/lecturesInfo/lectureInfoIndex/:lectureInfoIndex', deleteLectureInfo);
+		this.lectureInfoRouter.post('/lectureInfo', createLectureInfo);
+		this.lectureInfoRouter.get('/lectureInfo', pageListLectureInfo);
+		this.lectureInfoRouter.get('/lectureInfo/pageListLectureInfoBySearchTerm/:searchTerm', pageListLectureInfoBySearchTerm);
+		this.lectureInfoRouter.get('/lectureInfo/lectureInfoIndex/:lectureInfoIndex', getLectureInfoByLectureInfoIndex);
+		this.lectureInfoRouter.get('/lectureInfo/lectureName/:lectureName', pageListLectureInfoByLectureName);
+		this.lectureInfoRouter.get('/lectureInfo/professorName/:professorName', pageListLectureInfoByProfessorName);
+		this.lectureInfoRouter.put('/lectureInfo/lectureInfoIndex/:lectureInfoIndex', updateLectureInfo);
+		this.lectureInfoRouter.delete('/lectureInfo/lectureInfoIndex/:lectureInfoIndex', deleteLectureInfo);
 	}
 }
 

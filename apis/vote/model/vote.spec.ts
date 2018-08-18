@@ -131,7 +131,7 @@ describe('vote 모델', () => {
 	});
 
 	it('getVoteTopicByStatus', async () => {
-		const result = await vote.getVoteTopicByStatus('WAITING');
+		const result = await vote.getVoteTopicByStatus('ACTIVE');
 		// console.log(result);
 		expect(result).to.instanceof(Object);
 	});

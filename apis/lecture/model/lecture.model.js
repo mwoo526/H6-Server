@@ -20,7 +20,7 @@ class Lecture {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query('INSERT INTO lectures SET ?', lectureData, function (err) {
+                    yield connection.query('INSERT INTO lecture SET ?', lectureData, function (err) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -42,7 +42,7 @@ class Lecture {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query('SELECT * FROM lectures', function (err, rows) {
+                    yield connection.query('SELECT * FROM lecture', function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -65,7 +65,7 @@ class Lecture {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query('SELECT * FROM lectures WHERE lectureIndex = ?', lectureIndex, function (err, rows) {
+                    yield connection.query('SELECT * FROM lecture WHERE lectureIndex = ?', [lectureIndex], function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -88,7 +88,7 @@ class Lecture {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT * FROM lectures WHERE lectureCode LIKE '%${lectureCode}%'`, function (err, rows) {
+                    yield connection.query(`SELECT * FROM lecture WHERE lectureCode LIKE '%${lectureCode}%'`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -111,7 +111,7 @@ class Lecture {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT * FROM lectures WHERE lectureName LIKE '%${lectureName}%'`, function (err, rows) {
+                    yield connection.query(`SELECT * FROM lecture WHERE lectureName LIKE '%${lectureName}%'`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -134,7 +134,7 @@ class Lecture {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`SELECT * FROM lectures WHERE track LIKE '%${track}%'`, function (err, rows) {
+                    yield connection.query(`SELECT * FROM lecture WHERE track LIKE '%${track}%'`, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);
@@ -158,7 +158,7 @@ class Lecture {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query('UPDATE lectures SET ? WHERE lectureIndex = ?', [lectureData,
+                    yield connection.query('UPDATE lecture SET ? WHERE lectureIndex = ?', [lectureData,
                         lectureIndex], function (err, rows) {
                         if (err) {
                             connection.release();
@@ -182,7 +182,7 @@ class Lecture {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query('DELETE FROM lectures WHERE lectureIndex = ?', lectureIndex, function (err, rows) {
+                    yield connection.query('DELETE FROM lecture WHERE lectureIndex = ?', lectureIndex, function (err, rows) {
                         if (err) {
                             connection.release();
                             reject(err);

@@ -11,16 +11,16 @@ export class LectureReplyRoutes {
 	}
 
 	public router() {
-		this.lectureReplyRouter.post('/lecturesReply', createLectureReply);
-		this.lectureReplyRouter.get('/lecturesReply/checkGetLectureReply/lectureInfoIndex/:lectureInfoIndex/userIndex/:userIndex', checkGetLectureReply);
-		this.lectureReplyRouter.get('/lecturesReply/checkUpdateLectureReply/lectureInfoIndex/:lectureInfoIndex/userIndex/:userIndex', checkUpdateLectureReply);
-		this.lectureReplyRouter.get('/lecturesReply', pageListLectureReply);
-		this.lectureReplyRouter.get('/lecturesReply/lectureReplyIndex/:lectureReplyIndex', getLectureReplyByLectureReplyIndex);
-		this.lectureReplyRouter.get('/lecturesReply/lectureInfoIndex/:lectureInfoIndex', pageListLectureReplyByLectureInfoIndex);
-		this.lectureReplyRouter.get('/lecturesReply/userId/:userId', pageListLectureReplyByUserId);
-		this.lectureReplyRouter.get('/lecturesReply/userNickName/:userNickName', pageListLectureReplyByUserNickName);
-		this.lectureReplyRouter.put('/lecturesReply/lectureReplyIndex/:lectureReplyIndex', updateLectureReply);
-		this.lectureReplyRouter.delete('/lecturesReply/lectureReplyIndex/:lectureReplyIndex', deleteLectureReply);
+		this.lectureReplyRouter.post('/lectureReply', createLectureReply);
+		this.lectureReplyRouter.get('/lectureReply/checkGetLectureReply/lectureInfoIndex/:lectureInfoIndex/userIndex/:userIndex', checkGetLectureReply);
+		this.lectureReplyRouter.get('/lectureReply/checkUpdateLectureReply/lectureInfoIndex/:lectureInfoIndex/userIndex/:userIndex', checkUpdateLectureReply);
+		this.lectureReplyRouter.get('/lectureReply', pageListLectureReply);
+		this.lectureReplyRouter.get('/lectureReply/lectureReplyIndex/:lectureReplyIndex', getLectureReplyByLectureReplyIndex);
+		this.lectureReplyRouter.get('/lectureReply/lectureInfoIndex/:lectureInfoIndex', pageListLectureReplyByLectureInfoIndex);
+		this.lectureReplyRouter.get('/lectureReply/userId/:userId', pageListLectureReplyByUserId);
+		this.lectureReplyRouter.get('/lectureReply/userNickName/:userNickName', pageListLectureReplyByUserNickName);
+		this.lectureReplyRouter.put('/lectureReply/lectureReplyIndex/:lectureReplyIndex', updateLectureReply);
+		this.lectureReplyRouter.delete('/lectureReply/lectureReplyIndex/:lectureReplyIndex', deleteLectureReply);
 	}
 }
 

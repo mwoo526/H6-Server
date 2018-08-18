@@ -10,14 +10,14 @@ export class LectureRoutes {
 	}
 
 	public router() {
-		this.lectureRouter.post('/lectures', createLecture);
-		this.lectureRouter.get('/lectures', listLecture);
-		this.lectureRouter.get('/lectures/lectureIndex/:lectureIndex', getLectureByLectureIndex);
-		this.lectureRouter.get('/lectures/lectureCode/:lectureCode', getLectureByLectureCode);
-		this.lectureRouter.get('/lectures/lectureName/:lectureName', getLectureByLectureName);
-		this.lectureRouter.get('/lectures/track/:track', getLectureByTrack);
-		this.lectureRouter.put('/lectures/lectureIndex/:lectureIndex', updateLecture);
-		this.lectureRouter.delete('/lectures/lectureIndex/:lectureIndex', deleteLecture);
+		this.lectureRouter.post('/lecture', createLecture);
+		this.lectureRouter.get('/lecture', listLecture);
+		this.lectureRouter.get('/lecture/lectureIndex/:lectureIndex', getLectureByLectureIndex);
+		this.lectureRouter.get('/lecture/lectureCode/:lectureCode', getLectureByLectureCode);
+		this.lectureRouter.get('/lecture/lectureName/:lectureName', getLectureByLectureName);
+		this.lectureRouter.get('/lecture/track/:track', getLectureByTrack);
+		this.lectureRouter.put('/lecture/lectureIndex/:lectureIndex', updateLecture);
+		this.lectureRouter.delete('/lecture/lectureIndex/:lectureIndex', deleteLecture);
 	}
 }
 

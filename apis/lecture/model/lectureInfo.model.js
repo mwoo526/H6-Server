@@ -22,7 +22,7 @@ class LectureInfo {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`INSERT INTO lecturesInfo SET ?`, lectureInfoData, function (err) {
+                    yield connection.query(`INSERT INTO lectureInfo SET ?`, lectureInfoData, function (err) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
                                 yield connection.release();
@@ -47,8 +47,8 @@ class LectureInfo {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t1.updatedAt, t2.lectureName, t2.track, t3.professorName 
-					FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
-					INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex
+					FROM lectureInfo AS t1 INNER JOIN lecture AS t2 ON t1.lectureIndex = t2.lectureIndex 
+					INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex
 					ORDER BY t1.updatedAt DESC`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
@@ -78,9 +78,9 @@ class LectureInfo {
                         start = 0;
                     }
                     yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t1.updatedAt, t2.lectureName, t2.track, t3.professorName
-          FROM lecturesInfo AS t1 
-          INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
-          INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
+          FROM lectureInfo AS t1 
+          INNER JOIN lecture AS t2 ON t1.lectureIndex = t2.lectureIndex 
+          INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex 
           ORDER BY t1.updatedAt DESC LIMIT ${start}, ${count}`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
@@ -111,8 +111,8 @@ class LectureInfo {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureCode, t2.lectureName, t2.track, t3.professorName 
-				FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
-				INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
+				FROM lectureInfo AS t1 INNER JOIN lecture AS t2 ON t1.lectureIndex = t2.lectureIndex 
+				INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex 
 				WHERE t2.lectureCode LIKE '%${searchTerm}%' 
 				OR t2.lectureName LIKE '%${searchTerm}%' 
 				OR t2.track LIKE '%${searchTerm}%' 
@@ -148,8 +148,8 @@ class LectureInfo {
                         start = 0;
                     }
                     yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureCode, t2.lectureName, t2.track, t3.professorName 
-				FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
-				INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
+				FROM lectureInfo AS t1 INNER JOIN lecture AS t2 ON t1.lectureIndex = t2.lectureIndex 
+				INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex 
 				WHERE t2.lectureCode LIKE '%${searchTerm}%' 
 				OR t2.lectureName LIKE '%${searchTerm}%' 
 				OR t2.track LIKE '%${searchTerm}%' 
@@ -180,8 +180,8 @@ class LectureInfo {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
-				FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
-				INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
+				FROM lectureInfo AS t1 INNER JOIN lecture AS t2 ON t1.lectureIndex = t2.lectureIndex 
+				INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex 
 				WHERE t1.lectureInfoIndex = ${lectureInfoIndex}`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
@@ -212,8 +212,8 @@ class LectureInfo {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
-				FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
-				INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
+				FROM lectureInfo AS t1 INNER JOIN lecture AS t2 ON t1.lectureIndex = t2.lectureIndex 
+				INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex 
 				WHERE t2.lectureName LIKE '%${lectureName}%'`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
@@ -244,9 +244,9 @@ class LectureInfo {
                         start = 0;
                     }
                     yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
-                FROM lecturesInfo AS t1 
-                INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
-                INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
+                FROM lectureInfo AS t1 
+                INNER JOIN lecture AS t2 ON t1.lectureIndex = t2.lectureIndex 
+                INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex 
                 WHERE t2.lectureName LIKE '%${lectureName}%'
                 ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
@@ -278,8 +278,8 @@ class LectureInfo {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
-				FROM lecturesInfo AS t1 INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
-				INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
+				FROM lectureInfo AS t1 INNER JOIN lecture AS t2 ON t1.lectureIndex = t2.lectureIndex 
+				INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex 
 				WHERE t3.professorName LIKE '%${professorName}%'`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
@@ -314,9 +314,9 @@ class LectureInfo {
                         start = 0;
                     }
                     yield connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
-                FROM lecturesInfo AS t1 
-                INNER JOIN lectures AS t2 ON t1.lectureIndex = t2.lectureIndex 
-                INNER JOIN professors AS t3 ON t1.professorIndex = t3.professorIndex 
+                FROM lectureInfo AS t1 
+                INNER JOIN lecture AS t2 ON t1.lectureIndex = t2.lectureIndex 
+                INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex 
                 WHERE t3.professorName LIKE '%${professorName}%'
                 ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
@@ -348,7 +348,7 @@ class LectureInfo {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`UPDATE lecturesInfo SET ? WHERE lectureInfoIndex = ?`, [lectureInfoData,
+                    yield connection.query(`UPDATE lectureInfo SET ? WHERE lectureInfoIndex = ?`, [lectureInfoData,
                         lectureInfoIndex], function (err) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
@@ -375,7 +375,7 @@ class LectureInfo {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query(`UPDATE lecturesInfo SET average = ${average} WHERE lectureInfoIndex = ${lectureInfoIndex}`, function (err, rows) {
+                    yield connection.query(`UPDATE lectureInfo SET average = ${average} WHERE lectureInfoIndex = ${lectureInfoIndex}`, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
                                 yield connection.release();
@@ -400,7 +400,7 @@ class LectureInfo {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             yield pool.getConnection(function (err, connection) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    yield connection.query('DELETE FROM lecturesInfo WHERE lectureInfoIndex = ?', lectureInfoIndex, function (err, rows) {
+                    yield connection.query('DELETE FROM lectureInfo WHERE lectureInfoIndex = ?', lectureInfoIndex, function (err, rows) {
                         return __awaiter(this, void 0, void 0, function* () {
                             if (err) {
                                 yield connection.release();
