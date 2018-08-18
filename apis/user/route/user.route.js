@@ -21,13 +21,13 @@ class UserRoutes {
         this.router();
     }
     router() {
-        this.userRouter.post('/users', createUser);
-        this.userRouter.post('/users/userId/:userId/uploadAvatar', uploadAvatar);
-        this.userRouter.get('/users', pageListUser);
-        this.userRouter.get('/users/userId/:userId', getUser);
-        this.userRouter.put('/users/userId/:userId', updateUser);
-        this.userRouter.put('/users/userId/:userId/password', updateUserPassword);
-        this.userRouter.delete('/users/userId/:userId', deleteUser);
+        this.userRouter.post('/user', createUser);
+        this.userRouter.post('/user/userId/:userId/uploadAvatar', uploadAvatar);
+        this.userRouter.get('/user', pageListUser);
+        this.userRouter.get('/user/userId/:userId', getUser);
+        this.userRouter.put('/user/userId/:userId', updateUser);
+        this.userRouter.put('/user/userId/:userId/password', updateUserPassword);
+        this.userRouter.delete('/user/userId/:userId', deleteUser);
     }
 }
 exports.UserRoutes = UserRoutes;
