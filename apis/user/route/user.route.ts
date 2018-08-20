@@ -68,9 +68,22 @@ async function getUser(req, res): Promise<void> {
 	let userId: string = req.params.userId;
 	try {
 		const result: any = await user.getUser(userId);
-		res.send(result);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result[0],
+			message: 'getUser: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'getUser: 50000'
+				});
+				break;
+		}
 	}
 }
 
@@ -115,14 +128,14 @@ async function updateUserPassword(req, res): Promise<void> {
 				res.send({
 					success: false,
 					statusCode: 404,
-					message: 'getUser: 40401'
+					message: 'updateUserPassword: 40401'
 				});
 				break;
 			default:
 				res.send({
 					success: false,
 					statusCode: 500,
-					message: 'getUser: 50000'
+					message: 'updateUserPassword: 50000'
 				});
 				break;
 		}

@@ -79,10 +79,23 @@ function getUser(req, res) {
         let userId = req.params.userId;
         try {
             const result = yield user_model_1.user.getUser(userId);
-            res.send(result);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result[0],
+                message: 'getUser: 200'
+            });
         }
         catch (err) {
-            res.send(err);
+            switch (err) {
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'getUser: 50000'
+                    });
+                    break;
+            }
         }
     });
 }
@@ -130,14 +143,14 @@ function updateUserPassword(req, res) {
                     res.send({
                         success: false,
                         statusCode: 404,
-                        message: 'getUser: 40401'
+                        message: 'updateUserPassword: 40401'
                     });
                     break;
                 default:
                     res.send({
                         success: false,
                         statusCode: 500,
-                        message: 'getUser: 50000'
+                        message: 'updateUserPassword: 50000'
                     });
                     break;
             }
