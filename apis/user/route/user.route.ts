@@ -155,6 +155,10 @@ async function deleteUser(req, res): Promise<void> {
 		await userValidation.deleteUserValidation(userId);
 		await lectureReply.deleteLectureReplyByUserIndex(resultUser[0].userIndex);
 		await user.deleteUser(userId);
+		await user.createUserLog({
+			userId: req.params.userId,
+			log: 'Withdrawal success'
+		});
 		res.send({
 			success: true,
 			statusCode: 200,

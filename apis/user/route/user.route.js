@@ -171,6 +171,10 @@ function deleteUser(req, res) {
             yield userValidation_model_1.userValidation.deleteUserValidation(userId);
             yield lectureReply_model_1.lectureReply.deleteLectureReplyByUserIndex(resultUser[0].userIndex);
             yield user_model_1.user.deleteUser(userId);
+            yield user_model_1.user.createUserLog({
+                userId: req.params.userId,
+                log: 'Withdrawal success'
+            });
             res.send({
                 success: true,
                 statusCode: 200,
