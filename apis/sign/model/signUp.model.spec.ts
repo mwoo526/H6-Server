@@ -13,7 +13,7 @@ describe('signUp 모델', () => {
             userPw: testuserPw,
             userNickName: testuserNickName
         });
-        console.log(result);
+      //  console.log(result);
         expect(result).to.instanceof(Object);
     });
 });
