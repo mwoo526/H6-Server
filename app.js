@@ -16,6 +16,7 @@ const track_route_1 = require("./apis/track/route/track.route");
 const userValidation_route_1 = require("./apis/userValidation/route/userValidation.route");
 const version_route_1 = require("./apis/version/route/version.route");
 const vote_route_1 = require("./apis/vote/route/vote.route");
+const reportBoard_route_1 = require("./apis/board/route/reportBoard.route");
 const error_middleware_1 = require("./middlewares/error.middleware");
 const tokenVerify_middleware_1 = require("./middlewares/tokenVerify.middleware");
 const voteScheduler_1 = require("./schedulers/vote/voteScheduler");
@@ -39,6 +40,7 @@ class Server {
         this.app.use(track_route_1.trackRoutes.trackRouter);
         this.app.use(admissionYear_route_1.admissionRoutes.admissionYearRouter);
         this.app.use(userValidation_route_1.userValidationRoutes.userValidationRouter);
+        this.app.use(reportBoard_route_1.reportBoardRoutes.reportBoardRouter);
         /** 라우터 토큰 검증 */
         this.app.use(tokenVerify_middleware_1.verify);
         /** 라우터 추가 */
