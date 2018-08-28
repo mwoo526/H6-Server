@@ -109,8 +109,8 @@ class User {
         }));
     }
     /**
-     * model: user studentId 조회
-     * @param {number} studentId
+     * model: user userId 조회
+     * @param {number} userId
      * @returns {Promise<any>}
      */
     getUser(userId) {
@@ -132,8 +132,35 @@ class User {
         }));
     }
     /**
+     * model: blockUserNicName 조회
+     * @param userNickName
+     */
+    getBlockUserNickName(userNickName) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            yield pool.getConnection(function (err, connection) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield connection.query(`SELECT * FROM blockUserNickName WHERE userNickName LIKE '%${userNickName}%'`, function (err, rows) {
+                        if (err) {
+                            connection.release();
+                            reject(err);
+                        }
+                        else {
+                            connection.release();
+                            if (!rows.length) {
+                                resolve(rows);
+                            }
+                            else {
+                                reject('The NickName is not allowed');
+                            }
+                        }
+                    });
+                });
+            });
+        }));
+    }
+    /**
      * model: user 업데이트
-     * @param {number} studentId
+     * @param {number} userId
      * @param userData
      * @returns {Promise<any>}
      */
@@ -214,7 +241,7 @@ class User {
     }
     /**
      * model: user 삭제
-     * @param {number} studentId
+     * @param {number} userId
      * @returns {Promise<any>}
      */
     deleteUser(userId) {

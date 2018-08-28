@@ -65,6 +65,12 @@ describe('user 모델', () => {
 		}]);
 	});
 
+	it('getBlockUserNicName', async () => {
+		const result = await user.getBlockUserNickName('testUserNickName');
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
 	it('updateUser', async () => {
 		const result = await user.updateUser(userId, {
 			major: 'updateTestMajor'
