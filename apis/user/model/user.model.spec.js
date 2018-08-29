@@ -70,11 +70,6 @@ describe('user 모델', () => {
                 isValidation: 0
             }]);
     }));
-    it('getBlockUserNicName', () => __awaiter(this, void 0, void 0, function* () {
-        const result = yield user_model_1.user.getBlockUserNickName('testUserNickName');
-        // console.log(result);
-        chai_1.expect(result).to.instanceof(Array);
-    }));
     it('updateUser', () => __awaiter(this, void 0, void 0, function* () {
         const result = yield user_model_1.user.updateUser(userId, {
             major: 'updateTestMajor'

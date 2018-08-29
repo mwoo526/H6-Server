@@ -22,6 +22,7 @@ class UserValidationRoutes {
         this.userValidationRouter.get('/userValidation/userId/:userId', checkUserId);
         this.userValidationRouter.get('/userValidation/userNickName/:userNickName', checkUserNickName);
         this.userValidationRouter.post('/userValidation/userId/:userId/userPw', checkUserPw);
+        this.userValidationRouter.get('/userValidation/blockUserNickName/:blockUserNickName', getBlockUserNickName);
         this.userValidationRouter.get('/userValidation/sendPasswordMail/:userId', sendPasswordMail);
         this.userValidationRouter.post('/userValidation/sendValidationMail', sendValidationMail);
         this.userValidationRouter.get('/userValidation/verify/:uuid', verifyValidation);
@@ -134,6 +135,42 @@ function checkUserPw(req, res) {
                         success: false,
                         statusCode: 500,
                         message: 'checkUserPw: 50000'
+                    });
+                    break;
+            }
+        }
+    });
+}
+/**
+ * route: blockUserNickName 조회
+ * @param req
+ * @param res
+ */
+function getBlockUserNickName(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let userNickName = req.params.blockUserNickName;
+        try {
+            yield userValidation_model_1.userValidation.getBlockUserNickName(userNickName);
+            res.send({
+                success: true,
+                statusCode: 200,
+                message: 'getBlockUserNicName: 200'
+            });
+        }
+        catch (err) {
+            switch (err) {
+                case 'The NickName is not allowed':
+                    res.send({
+                        success: false,
+                        statusCode: 409,
+                        message: 'getBlockUserNicName: 40901'
+                    });
+                    break;
+                default:
+                    res.send({
+                        success: false,
+                        statusCode: 500,
+                        message: 'getBlockUserNicName: 50000'
                     });
                     break;
             }

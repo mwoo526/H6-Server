@@ -68,5 +68,10 @@ describe('userValidation 모델', () => {
         // console.log(result);
         chai_1.expect(result).instanceof(Array);
     }));
+    it('getBlockUserNicName', () => __awaiter(this, void 0, void 0, function* () {
+        const result = yield userValidation_model_1.userValidation.getBlockUserNickName('testUserNickName');
+        // console.log(result);
+        chai_1.expect(result).to.instanceof(Array);
+    }));
 });
 //# sourceMappingURL=userValidation.model.spec.js.map

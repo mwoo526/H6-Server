@@ -25,7 +25,6 @@ class UserRoutes {
         this.userRouter.post('/user/userId/:userId/uploadAvatar', uploadAvatar);
         this.userRouter.get('/user', pageListUser);
         this.userRouter.get('/user/userId/:userId', getUser);
-        this.userRouter.get('/user/blockUserNickName/:blockUserNickName', getBlockUserNickName);
         this.userRouter.put('/user/userId/:userId', updateUser);
         this.userRouter.put('/user/userId/:userId/password', updateUserPassword);
         this.userRouter.delete('/user/userId/:userId', deleteUser);
@@ -94,42 +93,6 @@ function getUser(req, res) {
                         success: false,
                         statusCode: 500,
                         message: 'getUser: 50000'
-                    });
-                    break;
-            }
-        }
-    });
-}
-/**
- * route: blockUserNickName 조회
- * @param req
- * @param res
- */
-function getBlockUserNickName(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        let userNickName = req.params.blockUserNickName;
-        try {
-            yield user_model_1.user.getBlockUserNickName(userNickName);
-            res.send({
-                success: true,
-                statusCode: 200,
-                message: 'getBlockUserNicName: 200'
-            });
-        }
-        catch (err) {
-            switch (err) {
-                case 'The NickName is not allowed':
-                    res.send({
-                        success: false,
-                        statusCode: 409,
-                        message: 'getBlockUserNicName: 40901'
-                    });
-                    break;
-                default:
-                    res.send({
-                        success: false,
-                        statusCode: 500,
-                        message: 'getBlockUserNicName: 50000'
                     });
                     break;
             }

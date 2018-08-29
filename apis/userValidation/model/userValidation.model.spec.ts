@@ -62,5 +62,11 @@ describe('userValidation 모델', () => {
 		const result = await userValidation.checkUserPw(testUserId, testUserPw);
 		// console.log(result);
 		expect(result).instanceof(Array);
-	})
+	});
+
+	it('getBlockUserNicName', async () => {
+		const result = await userValidation.getBlockUserNickName('testUserNickName');
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
 });

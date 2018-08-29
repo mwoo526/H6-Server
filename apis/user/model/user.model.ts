@@ -115,30 +115,6 @@ export class User {
 	}
 
 	/**
-	 * model: blockUserNicName 조회
-	 * @param userNickName
-	 */
-	getBlockUserNickName(userNickName: string): Promise<any> {
-		return new Promise(async (resolve, reject) => {
-			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM blockUserNickName WHERE userNickName LIKE '%${userNickName}%'`, function(err, rows) {
-					if (err) {
-						connection.release();
-						reject(err);
-					} else {
-						connection.release();
-						if (!rows.length) {
-							resolve(rows);
-						} else {
-							reject('The NickName is not allowed');
-						}
-					}
-				})
-			})
-		});
-	}
-
-	/**
 	 * model: user 업데이트
 	 * @param {number} userId
 	 * @param userData
