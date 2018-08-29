@@ -1,13 +1,13 @@
 import * as nodemailer from 'nodemailer';
 
 export module emailUtil {
-    export const smtpTransport = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: "h6.verifying.email",
-            pass: "starbucks0123"
-        }
-    });
+	export const smtpTransport = nodemailer.createTransport({
+		service: 'gmail',
+		auth: {
+			user: 'h6.verifying.email',
+			pass: 'starbucks0123'
+		}
+	});
 }
 
 /*

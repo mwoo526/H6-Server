@@ -185,7 +185,7 @@ async function deleteUser(req, res): Promise<void> {
  */
 async function uploadAvatar(req, res): Promise<void> {
 	let userId: string = req.params.userId;
-	avatar(req, res, async function (err) {
+	avatar(req, res, async function(err) {
 		if (err) {
 			if (err.message === 'The AWS Access Key Id you provided does not exist in our records.') {
 				res.send({

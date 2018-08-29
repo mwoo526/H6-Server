@@ -342,7 +342,8 @@ export class Vote {
 	updateVoteTopic(voteTopicIndex: number, voteTopicData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query('UPDATE voteTopic SET ? WHERE voteTopicIndex = ?', [voteTopicData, voteTopicIndex], function(err, rows) {
+				await connection.query('UPDATE voteTopic SET ? WHERE voteTopicIndex = ?', [voteTopicData,
+					voteTopicIndex], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);

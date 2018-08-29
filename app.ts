@@ -1,6 +1,7 @@
 import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import { admissionRoutes } from './apis/admissionYear/route/admissionYear.route';
+import { reportBoardRoutes } from './apis/board/route/reportBoard.route';
 import { lectureRoutes } from './apis/lecture/route/lecture.route';
 import { lectureInfoRoutes } from './apis/lecture/route/lectureInfo.route';
 import { lectureReplyRoutes } from './apis/lecture/route/lectureReply.route';
@@ -9,12 +10,11 @@ import { signInRoutes } from './apis/sign/route/signIn.route';
 import { signUpRoutes } from './apis/sign/route/signUp.route';
 import { termsRoutes } from './apis/terms/route/terms.route';
 import { testRoutes } from './apis/test/route/test.route';
-import { userRoutes } from './apis/user/route/user.route';
 import { trackRoutes } from './apis/track/route/track.route';
+import { userRoutes } from './apis/user/route/user.route';
 import { userValidationRoutes } from './apis/userValidation/route/userValidation.route';
 import { versionRoutes } from './apis/version/route/version.route';
 import { voteRoutes } from './apis/vote/route/vote.route';
-import { reportBoardRoutes } from './apis/board/route/reportBoard.route';
 import { notFoundError, serverError } from './middlewares/error.middleware';
 import { verify } from './middlewares/tokenVerify.middleware';
 import { voteScheduler } from './schedulers/vote/voteScheduler';
@@ -42,7 +42,7 @@ export class Server {
 		this.app.use(trackRoutes.trackRouter);
 		this.app.use(admissionRoutes.admissionYearRouter);
 		this.app.use(userValidationRoutes.userValidationRouter);
-        this.app.use(reportBoardRoutes.reportBoardRouter);
+		this.app.use(reportBoardRoutes.reportBoardRouter);
 		/** 라우터 토큰 검증 */
 		this.app.use(verify);
 		/** 라우터 추가 */

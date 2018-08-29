@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import { slack } from './slack';
 import * as fs from 'fs';
+import { slack } from './slack';
 
 describe('slack', () => {
 	it('sendMessage - JSON 메시지 전송 성공', async (done) => {

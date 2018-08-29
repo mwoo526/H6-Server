@@ -1,5 +1,5 @@
-import * as cron from 'node-cron';
 import * as dateFormat from 'dateformat';
+import * as cron from 'node-cron';
 import { vote } from '../../apis/vote/model/vote';
 
 export class VoteScheduler {
@@ -7,11 +7,11 @@ export class VoteScheduler {
 	}
 
 	task() {
-		cron.schedule('0 0 * * *', async function(){
+		cron.schedule('0 0 * * *', async function() {
 			const now = new Date();
-			const nowDate = await dateFormat(now, "isoDateTime");
+			const nowDate = await dateFormat(now, 'isoDateTime');
 			const ActiveVoteTopic = await vote.getVoteTopic();
-			const dueDate = await dateFormat(ActiveVoteTopic.dueDate, "isoDateTime");
+			const dueDate = await dateFormat(ActiveVoteTopic.dueDate, 'isoDateTime');
 			const resultDate = await vote.getVoteDateDiff(dueDate, nowDate);
 
 			/** 마감기한이 지나면 데이터 업데이트 */
