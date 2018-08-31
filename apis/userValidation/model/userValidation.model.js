@@ -199,7 +199,7 @@ class UserValidation {
                             connection.release();
                             for (let i = 0; i < rows.length; i++) {
                                 if (userNickName.indexOf(rows[i].userNickName) != -1) {
-                                    reject(`The NickName is not allowed`);
+                                    reject('The NickName is not allowed');
                                 }
                             }
                             resolve(rows);
