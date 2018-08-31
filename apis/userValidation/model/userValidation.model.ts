@@ -165,17 +165,18 @@ export class UserValidation {
 	getBlockUserNickName(userNickName: string): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM blockUserNickName WHERE userNickName LIKE '%${userNickName}%'`, function(err, rows) {
+				await connection.query(`SELECT userNickName FROM blockUserNickName`, function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
 					} else {
 						connection.release();
-						if (!rows.length) {
-							resolve(rows);
-						} else {
-							reject('The NickName is not allowed');
+						for (let i = 0; i < rows.length; i++) {
+							if (userNickName.indexOf(rows[i].userNickName) != -1) {
+								reject('The NickName is not allowed');
+							}
 						}
+						resolve(rows);
 					}
 				})
 			})

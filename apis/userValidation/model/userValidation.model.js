@@ -217,19 +217,19 @@ class UserValidation {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
       yield pool.getConnection(function (err, connection) {
         return __awaiter(this, void 0, void 0, function* () {
-          yield connection.query(`SELECT * FROM blockUserNickName WHERE userNickName LIKE '%${userNickName}%'`, function (err, rows) {
+          yield connection.query(`SELECT userNickName FROM blockUserNickName`, function (err, rows) {
             if (err) {
               connection.release();
               reject(err);
             }
             else {
               connection.release();
-              if (!rows.length) {
-                resolve(rows);
+              for (let i = 0; i < rows.length; i++) {
+                if (userNickName.indexOf(rows[i].userNickName) != -1) {
+                  reject('The NickName is not allowed');
+                }
               }
-              else {
-                reject('The NickName is not allowed');
-              }
+              resolve(rows);
             }
           });
         });

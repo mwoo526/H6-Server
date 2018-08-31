@@ -6,8 +6,8 @@ var emailUtil;
   emailUtil.smtpTransport = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: "h6.verifying.email",
-      pass: "starbucks0123"
+      user: 'h6.verifying.email',
+      pass: 'starbucks0123'
     }
   });
 })(emailUtil = exports.emailUtil || (exports.emailUtil = {}));
