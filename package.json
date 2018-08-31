@@ -10,9 +10,10 @@
   "license": "ISC",
   "dependencies": {
     "@types/mocha": "^2.2.48",
-    "@types/node": "^10.0.0",
+    "@types/node": "^10.9.4",
     "async": "^2.6.1",
     "aws-sdk": "^2.286.2",
+    "axios": "0.18.0",
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
     "chalk": "^2.3.2",
@@ -30,7 +31,6 @@
     "nodemailer": "^4.4.2",
     "pbkdf2": "^3.0.14",
     "ts-node": "^6.1.1",
-    "typescript": "^2.9.1",
-    "axios": "0.18.0"
+    "typescript": "^2.9.1"
   }
 }
