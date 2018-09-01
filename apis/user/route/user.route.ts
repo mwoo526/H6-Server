@@ -1,5 +1,6 @@
 import * as express from 'express';
 import { s3Util } from '../../../packages/utils/s3.util';
+import { uuidV1 } from '../../../packages/utils/uuid.util';
 import { UserResource } from '../../../resources/user.resource';
 import { lectureReply } from '../../lecture/model/lectureReply.model';
 import { userValidation } from '../../userValidation/model/userValidation.model';
@@ -151,10 +152,15 @@ async function updateUserPassword(req, res): Promise<void> {
 async function deleteUser(req, res): Promise<void> {
 	let userId: string = req.params.userId;
 	try {
-		const resultUser = await user.getUser(userId);
-		await userValidation.deleteUserValidation(userId);
-		await lectureReply.deleteLectureReplyByUserIndex(resultUser[0].userIndex);
-		await user.deleteUser(userId);
+		// TODO(@jade): 유저 삭제에 대한 정책 정해지면 고도화  date: 2018. 9. 2. AM 1:54
+		// const resultUser = await user.getUser(userId);
+		// await userValidation.deleteUserValidation(userId);
+		// await lectureReply.deleteLectureReplyByUserIndex(resultUser[0].userIndex);
+		// await user.deleteUser(userId);
+		await user.updateUser(userId, {
+			userId: uuidV1(),
+			userNickName: '탈퇴한 회원'
+		});
 		await user.createUserLog({
 			userId: req.params.userId,
 			log: 'Withdrawal success'

@@ -10,9 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const s3_util_1 = require("../../../packages/utils/s3.util");
+const uuid_util_1 = require("../../../packages/utils/uuid.util");
 const user_resource_1 = require("../../../resources/user.resource");
-const lectureReply_model_1 = require("../../lecture/model/lectureReply.model");
-const userValidation_model_1 = require("../../userValidation/model/userValidation.model");
 const user_model_1 = require("../model/user.model");
 let avatar = s3_util_1.s3Util.upload.single('avatar');
 class UserRoutes {
@@ -167,10 +166,15 @@ function deleteUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let userId = req.params.userId;
         try {
-            const resultUser = yield user_model_1.user.getUser(userId);
-            yield userValidation_model_1.userValidation.deleteUserValidation(userId);
-            yield lectureReply_model_1.lectureReply.deleteLectureReplyByUserIndex(resultUser[0].userIndex);
-            yield user_model_1.user.deleteUser(userId);
+            // TODO(@jade): 유저 삭제에 대한 정책 정해지면 고도화  date: 2018. 9. 2. AM 1:54
+            // const resultUser = await user.getUser(userId);
+            // await userValidation.deleteUserValidation(userId);
+            // await lectureReply.deleteLectureReplyByUserIndex(resultUser[0].userIndex);
+            // await user.deleteUser(userId);
+            yield user_model_1.user.updateUser(userId, {
+                userId: uuid_util_1.uuidV1(),
+                userNickName: '탈퇴한 회원'
+            });
             yield user_model_1.user.createUserLog({
                 userId: req.params.userId,
                 log: 'Withdrawal success'
