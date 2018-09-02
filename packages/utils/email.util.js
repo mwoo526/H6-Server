@@ -1,13 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const fs = require("fs");
 const nodemailer = require("nodemailer");
 var emailUtil;
 (function (emailUtil) {
+    const file = './packages/utils/config/email.json';
+    let emailData = fs.readFileSync(file, 'utf8');
+    emailData = JSON.parse(emailData);
     emailUtil.smtpTransport = nodemailer.createTransport({
-        service: 'gmail',
+        service: emailData.service,
         auth: {
-            user: 'h6.verifying.email',
-            pass: 'starbucks0123'
+            user: emailData.auth.user,
+            pass: emailData.auth.pass
         }
     });
 })(emailUtil = exports.emailUtil || (exports.emailUtil = {}));

@@ -1,11 +1,16 @@
+import * as fs from "fs";
 import * as nodemailer from 'nodemailer';
 
 export module emailUtil {
+	const file = './packages/utils/config/email.json';
+	let emailData: any = fs.readFileSync(file, 'utf8');
+	emailData = JSON.parse(emailData);
+
 	export const smtpTransport = nodemailer.createTransport({
-		service: 'gmail',
+		service: emailData.service,
 		auth: {
-			user: 'h6.verifying.email',
-			pass: 'starbucks0123'
+			user: emailData.auth.user,
+			pass: emailData.auth.pass
 		}
 	});
 }
