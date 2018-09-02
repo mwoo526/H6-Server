@@ -1,9 +1,0 @@
-{
-  "host": "호스트 주소",
-  "user": "아이디",
-  "password": "비밀번호",
-  "database": "데이터베이스",
-  "timezone": "UTC",
-  "connectionLimit": 50,
-  "waitForConnections": true
-}
