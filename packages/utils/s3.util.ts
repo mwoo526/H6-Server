@@ -7,7 +7,7 @@ export module s3Util {
 	aws.config.loadFromPath(__dirname + "/config/awsconfig.json");
 	let s3 = new aws.S3();
 
-	export const upload = multer({
+	export const upload = multer({limits: { fileSize: 5 * 1024 * 1024 },
 		storage: multerS3({
 			s3: s3,
 			bucket: "dv-handam/avatar",

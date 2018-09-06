@@ -18,6 +18,8 @@ import { reportBoardRoutes } from './apis/board/route/reportBoard.route';
 import { notFoundError, serverError } from './middlewares/error.middleware';
 import { verify } from './middlewares/tokenVerify.middleware';
 import { voteScheduler } from './schedulers/vote/voteScheduler';
+import { fileRoutes } from './apis/file/route/file.route';
+
 
 export class Server {
 	/** app 에 대한 타입 설정 */
@@ -43,6 +45,7 @@ export class Server {
 		this.app.use(admissionRoutes.admissionYearRouter);
 		this.app.use(userValidationRoutes.userValidationRouter);
         this.app.use(reportBoardRoutes.reportBoardRouter);
+        this.app.use(fileRoutes.fileRouter);
 		/** 라우터 토큰 검증 */
 		this.app.use(verify);
 		/** 라우터 추가 */
