@@ -1,3 +1,4 @@
+import * as aws from 'aws-sdk';
 import * as express from 'express';
 import { s3Util } from '../../../packages/utils/s3.util';
 import { uuidV1 } from '../../../packages/utils/uuid.util';
@@ -6,6 +7,7 @@ import { lectureReply } from '../../lecture/model/lectureReply.model';
 import { userValidation } from '../../userValidation/model/userValidation.model';
 import { user } from '../model/user.model';
 
+let s3 = new aws.S3();
 let avatar = s3Util.upload.single('avatar');
 
 export class UserRoutes {
@@ -23,6 +25,7 @@ export class UserRoutes {
 		this.userRouter.put('/user/userId/:userId', updateUser);
 		this.userRouter.put('/user/userId/:userId/password', updateUserPassword);
 		this.userRouter.delete('/user/userId/:userId', deleteUser);
+		this.userRouter.delete('/user/userId/:userId/deleteAvatar', deleteAvatar);
 	}
 }
 
@@ -232,6 +235,52 @@ async function uploadAvatar(req, res): Promise<void> {
 			}
 		}
 	});
+}
+
+async function deleteAvatar(req, res): Promise<void> {
+	let userId: string = req.params.userId;
+	try {
+		const resultUser = await user.getUser(userId);
+		if (resultUser[0].avatar) {
+			let splitAvatar = resultUser[0].avatar.split('/');
+			let splitAvatarStage = splitAvatar[2].split('.');
+			await s3.deleteObject(
+				{
+					Bucket: `${splitAvatarStage[0]}/${splitAvatar[3]}`,
+					Key: `${splitAvatar[4]}`
+				},
+				(err) => {
+					if (err) {
+						throw err;
+					}
+				}
+			);
+			await user.updateUser(userId, {
+				avatar: null
+			});
+			res.send({
+				success: true,
+				statusCode: 200,
+				message: 'deleteAvatar: 200'
+			});
+		} else {
+			res.send({
+				success: true,
+				statusCode: 404,
+				message: 'deleteAvatar: 40401'
+			});
+		}
+	} catch (err) {
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'deleteAvatar: 50000'
+				});
+				break;
+		}
+	}
 }
 
 export const userRoutes: UserRoutes = new UserRoutes();
