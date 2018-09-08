@@ -15,6 +15,9 @@ import { userRoutes } from './apis/user/route/user.route';
 import { userValidationRoutes } from './apis/userValidation/route/userValidation.route';
 import { versionRoutes } from './apis/version/route/version.route';
 import { voteRoutes } from './apis/vote/route/vote.route';
+import {categoryRoutes} from "./apis/category/route/category.route";
+import {boardRoutes} from "./apis/board/route/board.route";
+import {boardReplyRoutes} from "./apis/board/route/boardReply.route";
 import { notFoundError, serverError } from './middlewares/error.middleware';
 import { verify } from './middlewares/tokenVerify.middleware';
 import { voteScheduler } from './schedulers/vote/voteScheduler';
@@ -43,6 +46,9 @@ export class Server {
 		this.app.use(admissionRoutes.admissionYearRouter);
 		this.app.use(userValidationRoutes.userValidationRouter);
 		this.app.use(reportBoardRoutes.reportBoardRouter);
+        this.app.use(categoryRoutes.categoryRouter);
+        this.app.use(boardRoutes.boardRouter);
+        this.app.use(boardReplyRoutes.boardReplyRouter);
 		/** 라우터 토큰 검증 */
 		this.app.use(verify);
 		/** 라우터 추가 */
