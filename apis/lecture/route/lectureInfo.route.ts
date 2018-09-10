@@ -1,5 +1,6 @@
 import * as express from 'express';
 import { LectureInfoResource } from '../../../resources/lectureInfo.resource';
+import { user } from '../../user/model/user.model';
 import { lectureInfo } from '../model/lectureInfo.model';
 
 export class LectureInfoRoutes {
@@ -14,6 +15,7 @@ export class LectureInfoRoutes {
 		this.lectureInfoRouter.get('/lectureInfo', pageListLectureInfo);
 		this.lectureInfoRouter.get('/lectureInfo/pageListLectureInfoBySearchTerm/:searchTerm', pageListLectureInfoBySearchTerm);
 		this.lectureInfoRouter.get('/lectureInfo/lectureInfoIndex/:lectureInfoIndex', getLectureInfoByLectureInfoIndex);
+		this.lectureInfoRouter.get('/lectureInfo/userId/:userId', pageListLectureInfoByUserId);
 		this.lectureInfoRouter.get('/lectureInfo/lectureName/:lectureName', pageListLectureInfoByLectureName);
 		this.lectureInfoRouter.get('/lectureInfo/professorName/:professorName', pageListLectureInfoByProfessorName);
 		this.lectureInfoRouter.put('/lectureInfo/lectureInfoIndex/:lectureInfoIndex', updateLectureInfo);
@@ -138,6 +140,46 @@ async function getLectureInfoByLectureInfoIndex(req, res): Promise<void> {
 					success: false,
 					statusCode: 500,
 					message: 'getLectureInfoByLectureInfoIndex: 50000'
+				});
+				break;
+		}
+	}
+}
+
+/**
+ * route lectureInfo userId 조회
+ * @param req
+ * @param res
+ */
+async function pageListLectureInfoByUserId(req, res): Promise<void> {
+	let userId: string = req.params.userId;
+	let page: number = parseInt(req.query.page);
+	let count: number = parseInt(req.query.count);
+	try {
+		const resultUser = await user.getUser(userId);
+		const resultCount = await lectureInfo.listLectureInfoByUserIndex(resultUser[0].userIndex);
+		const result = await lectureInfo.pageListLectureInfoByUserIndex(resultUser[0].userIndex, page, count);
+		res.send({
+			success: true,
+			statusCode: 200,
+			resultCount: resultCount.length,
+			result: result,
+			message: 'pageListLectureInfoByUserId: 200'
+		});
+	} catch (err) {
+		switch (err) {
+			case 'The ID does not exist':
+				res.send({
+					success: false,
+					statusCode: 404,
+					message: 'pageListLectureInfoByUserId: 40401'
+				});
+				break;
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'pageListLectureInfoByUserId: 50000'
 				});
 				break;
 		}

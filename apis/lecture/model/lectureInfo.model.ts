@@ -208,11 +208,11 @@ export class LectureInfo {
 					start = 0;
 				}
 				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
-                FROM lectureInfo AS t1 
-                INNER JOIN lecture AS t2 ON t1.lectureIndex = t2.lectureIndex 
-                INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex 
-                WHERE t2.lectureName LIKE '%${lectureName}%'
-                ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
+          FROM lectureInfo AS t1 
+          INNER JOIN lecture AS t2 ON t1.lectureIndex = t2.lectureIndex 
+          INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex 
+          WHERE t2.lectureName LIKE '%${lectureName}%'
+          ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
 					if (err) {
 						await connection.release();
 						reject(err);
@@ -275,6 +275,71 @@ export class LectureInfo {
                 INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex 
                 WHERE t3.professorName LIKE '%${professorName}%'
                 ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, async function(err, rows) {
+					if (err) {
+						await connection.release();
+						reject(err);
+					} else {
+						for (let i = 0; i < rows.length; i++) {
+							const result = await lectureReply.countGetLectureReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
+							rows[i].replyCount = result[0].replyCount;
+						}
+						await connection.release();
+						resolve(rows);
+					}
+				});
+			})
+		})
+	}
+
+	/**
+	 * model: listLectureInfo userIndex 리스트 조회
+	 * @param userIndex
+	 */
+	listLectureInfoByUserIndex(userIndex: number): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
+				FROM lectureInfo AS t1
+				INNER JOIN lecture AS t2 ON t1.lectureIndex = t2.lectureIndex 
+				INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex 
+				INNER JOIN lectureReply AS t4 ON t1.lectureInfoIndex = t4.lectureInfoIndex
+				WHERE t4.userIndex = '${userIndex}'`, async function(err, rows) {
+					if (err) {
+						await connection.release();
+						reject(err);
+					} else {
+						for (let i = 0; i < rows.length; i++) {
+							const result = await lectureReply.countGetLectureReplyByLectureInfoIndex(rows[i].lectureInfoIndex);
+							rows[i].replyCount = result[0].replyCount;
+						}
+						await connection.release();
+						resolve(rows);
+					}
+				});
+			})
+		})
+	}
+
+	/**
+	 * model: listLectureInfo userIndex page 리스트 조회
+	 * @param userIndex
+	 * @param page
+	 * @param count
+	 */
+	pageListLectureInfoByUserIndex(userIndex: number, page: number, count: number): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			let start = (page - 1) * count;
+			if (start < 0) {
+				start = 0;
+			}
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
+				FROM lectureInfo AS t1
+				INNER JOIN lecture AS t2 ON t1.lectureIndex = t2.lectureIndex 
+				INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex 
+				INNER JOIN lectureReply AS t4 ON t1.lectureInfoIndex = t4.lectureInfoIndex
+				WHERE t4.userIndex = '${userIndex}'
+				ORDER BY t4.createdAt ASC LIMIT ${start}, ${count}`, async function(err, rows) {
 					if (err) {
 						await connection.release();
 						reject(err);

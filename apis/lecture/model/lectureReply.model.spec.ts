@@ -12,7 +12,7 @@ describe('lectureReply 모델', () => {
 		try {
 			const result = await lectureReply.createLectureReply({
 				lectureInfoIndex: 179,
-				userIndex: 9,
+				userIndex: 1,
 				semester: '17년도 2학기',
 				homework: '보통',
 				homeworkType: '팀 프로젝트',
