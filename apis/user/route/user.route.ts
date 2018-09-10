@@ -3,8 +3,6 @@ import * as express from 'express';
 import { s3Util } from '../../../packages/utils/s3.util';
 import { uuidV1 } from '../../../packages/utils/uuid.util';
 import { UserResource } from '../../../resources/user.resource';
-import { lectureReply } from '../../lecture/model/lectureReply.model';
-import { userValidation } from '../../userValidation/model/userValidation.model';
 import { user } from '../model/user.model';
 
 let s3 = new aws.S3();

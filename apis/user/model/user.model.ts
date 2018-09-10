@@ -106,7 +106,7 @@ export class User {
 						connection.release();
 						reject(err);
 					} else {
-						if (rows == "") {
+						if (rows == '') {
 							reject('The ID does not exist');
 						}
 						connection.release();

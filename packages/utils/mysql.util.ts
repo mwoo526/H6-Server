@@ -1,4 +1,4 @@
-import * as fs from "fs";
+import * as fs from 'fs';
 import * as mysql from 'mysql';
 
 /** MySQL DB 연결 */

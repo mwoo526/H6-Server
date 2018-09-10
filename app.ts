@@ -46,9 +46,9 @@ export class Server {
 		this.app.use(admissionRoutes.admissionYearRouter);
 		this.app.use(userValidationRoutes.userValidationRouter);
 		this.app.use(reportBoardRoutes.reportBoardRouter);
-        this.app.use(categoryRoutes.categoryRouter);
-        this.app.use(boardRoutes.boardRouter);
-        this.app.use(boardReplyRoutes.boardReplyRouter);
+		this.app.use(categoryRoutes.categoryRouter);
+		this.app.use(boardRoutes.boardRouter);
+		this.app.use(boardReplyRoutes.boardReplyRouter);
 		/** 라우터 토큰 검증 */
 		this.app.use(verify);
 		/** 라우터 추가 */

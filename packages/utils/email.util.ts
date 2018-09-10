@@ -1,4 +1,4 @@
-import * as fs from "fs";
+import * as fs from 'fs';
 import * as nodemailer from 'nodemailer';
 
 export module emailUtil {
