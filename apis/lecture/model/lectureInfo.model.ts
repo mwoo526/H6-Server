@@ -388,7 +388,7 @@ export class LectureInfo {
 	updateLectureInfoAverage(lectureInfoIndex: number, average: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`UPDATE lectureInfo SET average = ${average} WHERE lectureInfoIndex = ${lectureInfoIndex}`, async function(err, rows) {
+				await connection.query(`UPDATE lectureInfo SET average = ${average}, updatedAt = now() WHERE lectureInfoIndex = ${lectureInfoIndex}`, async function(err, rows) {
 					if (err) {
 						await connection.release();
 						reject(err);
