@@ -7,7 +7,7 @@ export class FileResource {
     private fileSize;
     private fileExtension;
     private downloadCount;
-
+    
     constructor(fileData) {
         this.setboardIndex(fileData.boardIndex);
         this.setuserIndex(fileData.userIndex);
