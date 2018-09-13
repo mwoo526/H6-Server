@@ -183,7 +183,7 @@ async function deleteFile(req, res): Promise<void> {
 
 
 
-/**
+/**ts
  * route: filePath 삭제
  * @param req
  * @param res
