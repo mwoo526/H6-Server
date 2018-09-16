@@ -11,7 +11,7 @@ export class Lecture {
 	createLecture(lectureData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query('INSERT INTO lecture SET ?', lectureData, function(err) {
+				await connection.query('INSERT INTO lecture SET ?', [lectureData], function(err) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -73,7 +73,7 @@ export class Lecture {
 	getLectureByLectureCode(lectureCode: string): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM lecture WHERE lectureCode LIKE '%${lectureCode}%'`, function(err, rows) {
+				await connection.query(`SELECT * FROM lecture WHERE lectureCode LIKE '%${escape(lectureCode)}%'`, function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -94,7 +94,7 @@ export class Lecture {
 	getLectureByLectureName(lectureName: string): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM lecture WHERE lectureName LIKE '%${lectureName}%'`, function(err, rows) {
+				await connection.query(`SELECT * FROM lecture WHERE lectureName LIKE ?`, [`%${lectureName}%`], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -115,7 +115,7 @@ export class Lecture {
 	getLectureByTrack(track: string): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM lecture WHERE track LIKE '%${track}%'`, function(err, rows) {
+				await connection.query(`SELECT * FROM lecture WHERE track LIKE ?`, [`%${track}%`], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -159,7 +159,7 @@ export class Lecture {
 	deleteLecture(lectureIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query('DELETE FROM lecture WHERE lectureIndex = ?', lectureIndex, function(err, rows) {
+				await connection.query('DELETE FROM lecture WHERE lectureIndex = ?', [lectureIndex], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);

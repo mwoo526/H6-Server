@@ -11,7 +11,7 @@ export class Track {
 	createTrack(trackData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query('INSERT INTO track SET ?', trackData, function(err) {
+				await connection.query('INSERT INTO track SET ?', [trackData], function(err) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -90,7 +90,7 @@ export class Track {
 	deleteTrack(trackName: string): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query('DELETE FROM track WHERE trackName = ?', trackName, async function(err, rows) {
+				await connection.query('DELETE FROM track WHERE trackName = ?', [trackName], async function(err, rows) {
 					if (err) {
 						await connection.release();
 						reject(err);

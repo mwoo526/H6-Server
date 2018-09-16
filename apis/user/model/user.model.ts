@@ -197,7 +197,7 @@ export class User {
 	deleteUser(userId: string): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`DELETE FROM user WHERE userId = ?`, userId, function(err, rows) {
+				await connection.query(`DELETE FROM user WHERE userId = ?`, [userId], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -218,7 +218,7 @@ export class User {
 	updateIsValidation(userId: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`UPDATE user set isValidation='${1}' WHERE userId=?`, [userId], (err, rows) => {
+				await connection.query(`UPDATE user set isValidation = '${1}' WHERE userId = ?`, [userId], (err, rows) => {
 					connection.release();
 					if (err) {
 						reject(err);
