@@ -11,7 +11,7 @@ export class Version {
 	createVersion(versionData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query('INSERT INTO version SET ?', versionData, function(err) {
+				await connection.query('INSERT INTO version SET ?', [versionData], function(err) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -72,7 +72,7 @@ export class Version {
 	deleteVersion(versionIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query('DELETE FROM version WHERE versionIndex = ?', versionIndex, async function(err, rows) {
+				await connection.query('DELETE FROM version WHERE versionIndex = ?', [versionIndex], async function(err, rows) {
 					if (err) {
 						await connection.release();
 						reject(err);
