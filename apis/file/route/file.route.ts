@@ -1,12 +1,11 @@
 import * as express from 'express';
-// import * as fs from 'fs';
 import * as aws from 'aws-sdk';
 import { file } from '../model/file.model';
 import { FileResource } from '../../../resources/file.resource';
 import { s3Util } from '../../../packages/utils/s3.util';
 
 
-let upload = s3Util.upload.single('upload');
+let upload = s3Util.upload.array('upload',2);
 let s3 = new aws.S3();
 
 export class FileRoutes {
@@ -18,13 +17,13 @@ export class FileRoutes {
 
     public router() {
         this.fileRouter.post('/file', createFile);
-        this.fileRouter.post('/file/fileIndex/:fileIndex/uploadFile', uploadFile);
+        this.fileRouter.post('/file/fileIndex/:boardIndex/uploadFile', uploadFile);
         this.fileRouter.get('/file', listFile);
         this.fileRouter.get('/file/fileIndex/:fileIndex', getFileIndex);
         this.fileRouter.put('/file/fileIndex/:fileIndex', updateFile);
         this.fileRouter.delete('/file/fileIndex/:fileIndex', deleteFile);
         this.fileRouter.delete('/file/fileIndex/:fileIndex/deleteUpload', deleteUploadFile);
-       //  this.fileRouter.get('/file/fileIndex/:fileIndex/downloadFile', downloadFile);
+      // this.fileRouter.get('/file/fileIndex/:fileIndex/downloadFile', downloadFile);
     }
 }
 
@@ -107,7 +106,7 @@ async function getFileIndex(req, res): Promise<void> {
                 res.send({
                     success: false,
                     statusCode: 500,
-                    message: 'getFileIndes: 50000'
+                    message: 'getFileIndex: 50000'
                 });
                 break;
         }
@@ -244,7 +243,7 @@ async function deleteUploadFile(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function uploadFile(req, res): Promise<void> {
-    let fileIndex : number =  req.params.fileIndex;
+    let boardIndex : number = req.params.boardIndex;
     upload(req, res, async function (err) {
         if (err) {
             if (err.message === 'The AWS Access Key Id you provided does not exist in our records.') {
@@ -261,18 +260,20 @@ async function uploadFile(req, res): Promise<void> {
                     message: 'uploadFile: 40302'
                 });
             }
+
         }
         try {
-            let result = req.file;
-
+            let result = req.files;
+            let result_Index = file.getboardIndex(boardIndex);
             /** 파일 등록 */
-            await file.updateFile(fileIndex, {
-                filePath: result.location
-            });
+            for(let i=0;i<result_Index.length;i++){
+            await file.updateFile(result_Index[i], {
+                filePath: result[i].location
+            });};
             res.send({
                 success: true,
                 statusCode: 200,
-                result: result.location,
+                //result: result[i].location,
                 message: 'uploadFile: 200'
             });
         } catch (err) {
@@ -288,22 +289,35 @@ async function uploadFile(req, res): Promise<void> {
         }
     });
 }
-/*
-async function downloadFile(req, res): Promise<any> {
-    let fileIndex : number = req.params.fileIndex;
-    let file = fs.createWriteStream('avatar/req[0].fileName');
 
+
+/**
+ * route: file download
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+/*
+async function downloadFile(req, res): Promise<void> {
+    let fileIndex: number = req.params.fileIndex;
     try {
-        const result = await  s3.getObject({
-            Bucket: 'dv-handam/avatar',
-            Key: 'avatar/req[0].fileName'
-        }).createReadStream().pipe(file);
-        res.send({
-            success: true,
-            statusCode: 200,
-            result: result,
-            message: 'downloadFile: 200'
-        })
+        const resultFile = await file.getFileIndex(fileIndex);
+        if (resultFile[0].filePath) {
+            let splitUpload = resultFile[0].filePath.split('/');
+            let splitUploadStage = splitUpload[2].split('.');
+            let file = fs.createWriteStream("/tmp/" + '${splitUpload[4]}');
+            await s3.getObject(
+                {
+                    Bucket: `${splitUploadStage[0]}/${splitUpload[3]}`,
+                    Key: `${splitUpload[4]}`
+                }
+            ).createReadStream().pipe(file);
+            res.send({
+                success: true,
+                statusCode: 200,
+                message: 'deleteFile: 200'
+            });
+        }
     } catch (err) {
         switch (err) {
             default:
@@ -311,11 +325,16 @@ async function downloadFile(req, res): Promise<any> {
                 res.send({
                     success: false,
                     statusCode: err,
-                    message: 'downloadFile: 50000'
+                    message: 'deleteFile: 50000'
                 });
                 break;
         }
     }
 }
+
+
+
 */
+
+
 export const fileRoutes : FileRoutes = new FileRoutes();
