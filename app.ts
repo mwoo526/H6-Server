@@ -21,6 +21,7 @@ import {boardReplyRoutes} from "./apis/board/route/boardReply.route";
 import { notFoundError, serverError } from './middlewares/error.middleware';
 import { verify } from './middlewares/tokenVerify.middleware';
 import { voteScheduler } from './schedulers/vote/voteScheduler';
+import { fileRoutes } from "./apis/file/route/file.route";
 
 export class Server {
 	/** app 에 대한 타입 설정 */
@@ -49,6 +50,7 @@ export class Server {
 		this.app.use(categoryRoutes.categoryRouter);
 		this.app.use(boardRoutes.boardRouter);
 		this.app.use(boardReplyRoutes.boardReplyRouter);
+		this.app.use(fileRoutes.fileRouter);
 		/** 라우터 토큰 검증 */
 		this.app.use(verify);
 		/** 라우터 추가 */
