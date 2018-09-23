@@ -37,8 +37,9 @@ class SignIn {
 										tokenDoubleMajor: rows[0].doubleMajor,
 										tokenConnectedMajor: rows[0].connectedMajor,
 										tokenAdmissionYear: rows[0].year,
-										tokenInValidation: rows[0].isValidations,
-										tokenAvatar: rows[0].avatar
+										tokenInValidation: rows[0].isValidation,
+										tokenAvatar: rows[0].avatar,
+										tokenStatus: rows[0].status
 									},
 									jwtToken.secret,
 									{

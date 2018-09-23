@@ -160,7 +160,8 @@ async function deleteUser(req, res): Promise<void> {
 		// await user.deleteUser(userId);
 		await user.updateUser(userId, {
 			userId: uuidV1(),
-			userNickName: '탈퇴한 회원'
+			userNickName: '탈퇴한 회원',
+			status: 'INACTIVE'
 		});
 		await user.createUserLog({
 			userId: req.params.userId,
