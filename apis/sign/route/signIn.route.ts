@@ -58,7 +58,6 @@ async function getUser(req, res): Promise<void> {
 				});
 				break;
 			default:
-				console.log(err);
 				res.send({
 					success: false,
 					statusCode: 500,

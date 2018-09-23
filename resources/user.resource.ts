@@ -9,6 +9,9 @@ export class UserResource {
 	private doubleMajor;
 	private connectedMajor;
 	private admissionYear;
+	private isValidation;
+	private avatar;
+	private status;
 
 	constructor(signUpData) {
 		this.setUserId(signUpData.userId);
@@ -19,6 +22,9 @@ export class UserResource {
 		this.setDoubleMajor(signUpData.doubleMajor);
 		this.setConnectedMajor(signUpData.connectedMajor);
 		this.setAdmissionYear(signUpData.admissionYear);
+		this.setIsValidation(signUpData.isValidation);
+		this.setAvatar(signUpData.avatar);
+		this.setStatus(signUpData.status);
 	}
 
 	public getUserId() {
@@ -85,6 +91,30 @@ export class UserResource {
 		this.admissionYear = admissionYear;
 	}
 
+	public getIsValidation() {
+		return this.isValidation;
+	}
+
+	public setIsValidation(isValidation) {
+		this.isValidation = isValidation;
+	}
+
+	public getAvatar() {
+		return this.avatar;
+	}
+
+	public setAvatar(avatar) {
+		this.avatar = avatar;
+	}
+
+	public getStatus() {
+		return this.status;
+	}
+
+	public setStatus(status) {
+		this.status = status;
+	}
+
 	getSignUp() {
 		let userResource = {
 			userId: this.getUserId(),
@@ -95,7 +125,9 @@ export class UserResource {
 			doubleMajor: this.getDoubleMajor(),
 			connectedMajor: this.getConnectedMajor(),
 			admissionYear: this.getAdmissionYear(),
-			isValidation: false
+			isValidation: this.getIsValidation(),
+			avatar: this.getAvatar(),
+			status: this.getStatus()
 		};
 		return userResource;
 	}
