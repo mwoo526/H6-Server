@@ -12,11 +12,12 @@ export class BoardRoutes {
     public router() {
         this.boardRouter.post('/board', createBoard);
         this.boardRouter.get('/board', pageListBoardInfo);
-        this.boardRouter.get('/pageListBoardInfoBySearchTerm/:searchTerm', pageListBoardInfoBySearchTerm);
+        this.boardRouter.get('/board/searchTerm/:searchTerm', pageListBoardInfoBySearchTerm);
         this.boardRouter.get('/board/category/:category', pageListBoardInfoByCategory);
         this.boardRouter.get('/board/post/:post', pageListBoardInfoByPost)
-        this.boardRouter.get('/getPostByBoardIndex/:boardIndex', getPostByBoardIndex);
-        this.boardRouter.get('/pageListBoardInfoByCount', pageListBoardInfoByCount);
+        this.boardRouter.get('/board/userIndex/:userIndex', pageListBoardInfoByUserIndex)
+        this.boardRouter.get('/board/getPost/:boardIndex', getPostByBoardIndex);
+        this.boardRouter.get('/board/count', pageListBoardInfoByCount);
         this.boardRouter.put('/board/:boardIndex', updateBoard);
         this.boardRouter.delete('/board/:boardIndex', deleteBoard);
     }
@@ -181,7 +182,33 @@ async function pageListBoardInfoByPost(req, res) {
                 break;
         }
     }
+}
 
+async function pageListBoardInfoByUserIndex(req,res){
+    let userIndex: number = req.params.userIndex;
+    let page: number = req.query.page;
+    let count: number = req.query.count;
+    try{
+        const resultCount: any = await board.listBoardInfoByUserIndex(userIndex);
+        const result: any = await board.pageListBoardInfoByUserIndex(userIndex,page,count);
+        res.send({
+            success: true,
+            statusCode: 200,
+            resultCount: resultCount.length,
+            result: result,
+            message: 'pageListBoardInfoByUserIndex 200'
+        })
+    } catch (err) {
+        switch (err) {
+            default:
+                res.send({
+                    success: false,
+                    statusCode: 500,
+                    message: 'pageListBoardInfoByUserIndex 500'
+                })
+                break;
+        }
+    }
 }
 
 /**

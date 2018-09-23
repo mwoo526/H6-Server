@@ -14,8 +14,8 @@ export class BoardReplyRoutes {
         this.boardReplyRouter.post('/boardReply/:boardReplyIndex', createBoardReplyComments);
         this.boardReplyRouter.get('/boardReply/boardIndex/:boardIndex', pageListBoardReplyByBoardIndex);
         this.boardReplyRouter.get('/boardReply/userIndex/:userIndex', pageListBoardReplyByUserIndex);
-        this.boardReplyRouter.get('/boardReply/comments/:boardReplyIndex',pageListBoardReplyByComments);
-        this.boardReplyRouter.get('/boardReply/boardReplyComments/:boardIndex',pageListBoardReplyComments);
+        this.boardReplyRouter.get('/boardReply/comments/:boardReplyIndex', pageListBoardReplyByComments);
+        this.boardReplyRouter.get('/boardReply/boardReplyComments/:boardIndex', pageListBoardReplyComments);
         this.boardReplyRouter.put('/boardReply/:boardReplyIndex', updateBoardReply);
         this.boardReplyRouter.delete('/boardReply/:boardReplyIndex', deleteBoardReply);
 
@@ -58,24 +58,24 @@ async function createBoardReply(req, res) {
  * @param res
  * @returns {Promise<void>}
  */
-async function createBoardReplyComments(req,res){
+async function createBoardReplyComments(req, res) {
     let boardReplyIndex: number = req.params.boardReplyIndex;
     let boardReplyData: any = new BoardReplyResource(req.body);
-    try{
-        let result: any = await boardReply.createBoardReplyComments(boardReplyData.getBoardReplyData(),boardReplyIndex);
+    try {
+        let result: any = await boardReply.createBoardReplyComments(boardReplyData.getBoardReplyData(), boardReplyIndex);
         res.send({
-            success : true,
-            statusCode : 200,
-            result : result,
-            message : 'createBoardReplyComments 200'
+            success: true,
+            statusCode: 200,
+            result: result,
+            message: 'createBoardReplyComments 200'
         })
     } catch (err) {
         switch (err) {
             default:
                 res.send({
-                    success : false,
-                    statusCode : 500,
-                    message : 'createBoardReplyComments 500'
+                    success: false,
+                    statusCode: 500,
+                    message: 'createBoardReplyComments 500'
                 })
                 break;
         }
@@ -157,14 +157,14 @@ async function pageListBoardReplyByUserIndex(req, res) {
  * @param res
  * @returns {Promise<void>}
  */
-async function pageListBoardReplyByComments(req,res){
+async function pageListBoardReplyByComments(req, res) {
     let boardReplyIndex: number = req.params.boardReplyIndex;
     let page: number = req.query.page;
     let count: number = req.query.count;
 
-    try{
+    try {
         let resultCount: any = await boardReply.listBoardReplyByComments(boardReplyIndex);
-        let result: any = await boardReply.pageListBoardReplyByComments(boardReplyIndex,page,count);
+        let result: any = await boardReply.pageListBoardReplyByComments(boardReplyIndex, page, count);
         res.send({
             success: true,
             statusCode: 200,
@@ -192,14 +192,14 @@ async function pageListBoardReplyByComments(req,res){
  * @param res
  * @returns {Promise<void>}
  */
-async function pageListBoardReplyComments(req,res){
+async function pageListBoardReplyComments(req, res) {
     let boardIndex: number = req.params.boardIndex;
     let page: number = req.query.page;
     let count: number = req.query.count;
 
-    try{
+    try {
         let resultCount: any = await boardReply.listBoardReplyComments(boardIndex);
-        let result: any = await boardReply.pageListBoardReplyComments(boardIndex,page,count);
+        let result: any = await boardReply.pageListBoardReplyComments(boardIndex, page, count);
         res.send({
             success: true,
             statusCode: 200,
@@ -208,7 +208,7 @@ async function pageListBoardReplyComments(req,res){
             message: 'pageListBoardReplyComments 200'
         })
     } catch (err) {
-        switch(err) {
+        switch (err) {
             default:
                 res.send({
                     success: false,
