@@ -3,7 +3,6 @@ export class BoardResource {
 	private category;
 	private boardTitle;
 	private boardContent;
-	private count;
 
 	constructor(boardData) {
 		this.setUserIndex(boardData.userIndex);
@@ -44,13 +43,6 @@ export class BoardResource {
 		this.boardContent = boardContent;
 	}
 
-	getCount() {
-		return this.count;
-	}
-
-	setCount(count) {
-		this.count = count;
-	}
 
 	getBoard() {
 		let boardData: object = {

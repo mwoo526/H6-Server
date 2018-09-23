@@ -193,7 +193,7 @@ async function pageListBoardInfoByPost(req, res) {
 async function getPostByBoardIndex(req, res) {
     let boardIndex: number = req.params.boardIndex;
     try {
-        const isBoard: any = await board.getBoardByBoardIndex(boardIndex);
+        // TODO count 수정
         await board.updateBoardByCount(boardIndex);
         let result: any = await board.getPostByBoardIndex(boardIndex);
         res.send({
@@ -254,7 +254,6 @@ async function updateBoard(req, res) {
     let boardIndex: number = req.params.boardIndex;
     let boardData: any = await new BoardResource(req.body);
     try {
-        const isBoard: any = await board.getBoardByBoardIndex(boardIndex);
         const result: any = await board.updateBoard(boardIndex, boardData);
         res.send({
             success: true,
@@ -284,7 +283,6 @@ async function updateBoard(req, res) {
 async function deleteBoard(req, res) {
     let boardIndex: number = req.params.boardIndex;
     try {
-        const isBoard: any = await board.getBoardByBoardIndex(boardIndex);
         const result: any = await board.deleteBoard(boardIndex);
         res.send({
             success: true,

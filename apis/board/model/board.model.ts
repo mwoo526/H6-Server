@@ -288,7 +288,8 @@ export class Board {
 		})
 	}
 
-	/**
+    // TODO count 수정
+    /**
 	 * model : boardInfo count page 리스트 조회 (조회수)
 	 * @param {number} page
 	 * @param {number} count
@@ -338,7 +339,8 @@ export class Board {
 		})
 	}
 
-	/**
+    // TODO count 수정
+    /**
 	 * model : board 조회수 업데이트
 	 * @param {number} boardIndex
 	 * @returns {Promise<void>}
