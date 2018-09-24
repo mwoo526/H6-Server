@@ -67,16 +67,16 @@ describe('board 모델', () => {
         expect(result).to.instanceof(Array);
     })
 
+    it('getBoardPost', async () => {
+        const result: any = await board.getBoardPost(16);
+        // console.log(result);
+        expect(result).to.instanceof(Object);
+    })
+
     it('pageListBoardInfoByUserIndex', async () => {
         const result: any = await board.pageListBoardInfoByUserIndex(1, 1, 5);
         // console.log(result);
         expect(result).to.instanceof(Array);
-    })
-
-    it('getPostByBoardIndex', async () => {
-        const result: any = await board.getPostByBoardIndex(16);
-        // console.log(result);
-        expect(result).to.instanceof(Object);
     })
 
     it('pageListBoardInfoByCount', async () => {
@@ -91,6 +91,12 @@ describe('board 모델', () => {
             boardTitle: "테스트 타이틀",
             boardContent: "테이트 컨텐츠"
         })
+        // console.log(result);
+        expect(result).to.instanceof(Object);
+    })
+
+    it('updateBoardByCount', async () => {
+        const result: any = await board.updateBoardByCount(18);
         // console.log(result);
         expect(result).to.instanceof(Object);
     })

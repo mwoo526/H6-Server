@@ -1,6 +1,7 @@
 import * as express from 'express';
 import {BoardResource} from '../../../resources/board.resource';
 import {board} from '../model/board.model';
+import {countLog} from "../model/countLog.model";
 
 export class BoardRoutes {
     public boardRouter: express.Router = express.Router();
@@ -16,7 +17,7 @@ export class BoardRoutes {
         this.boardRouter.get('/board/category/:category', pageListBoardInfoByCategory);
         this.boardRouter.get('/board/post/:post', pageListBoardInfoByPost)
         this.boardRouter.get('/board/userIndex/:userIndex', pageListBoardInfoByUserIndex)
-        this.boardRouter.get('/board/getPost/:boardIndex', getPostByBoardIndex);
+        this.boardRouter.get('/board/getBoardPost/:boardIndex/:userIndex', getBoardPost);
         this.boardRouter.get('/board/count', pageListBoardInfoByCount);
         this.boardRouter.put('/board/:boardIndex', updateBoard);
         this.boardRouter.delete('/board/:boardIndex', deleteBoard);
@@ -184,6 +185,12 @@ async function pageListBoardInfoByPost(req, res) {
     }
 }
 
+/**
+ * route : boardInfo user 별 리스트 조회
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
 async function pageListBoardInfoByUserIndex(req,res){
     let userIndex: number = req.params.userIndex;
     let page: number = req.query.page;
@@ -217,27 +224,44 @@ async function pageListBoardInfoByUserIndex(req,res){
  * @param res
  * @returns {Promise<void>}
  */
-async function getPostByBoardIndex(req, res) {
+async function getBoardPost(req, res) {
     let boardIndex: number = req.params.boardIndex;
-    try {
-        // TODO count 수정
-        await board.updateBoardByCount(boardIndex);
-        let result: any = await board.getPostByBoardIndex(boardIndex);
+    let userIndex: number = req.params.userIndex;
+    try{
+        await countLog.CheckCountLog(boardIndex,userIndex);
+        let result: any = await board.getBoardPost(boardIndex);
         res.send({
             success: true,
             statusCode: 200,
             result: result,
-            message: 'getPostByBoardIndex 200'
+            message: 'getBoardPost 200'
         })
     } catch (err) {
         switch (err) {
+            case 'This UserLog is not exist' :
+                await countLog.createCountLog(boardIndex,userIndex);
+                await board.updateBoardByCount(boardIndex);
+                let result: any = await board.getBoardPost(boardIndex);
+                res.send({
+                  success: true,
+                  statusCode: 200,
+                  result: result,
+                  message: 'getBoardPost 200'
+                })
+                break;
+            case 'This Post is not exist' :
+                res.send({
+                    success: false,
+                    statusCode: 404,
+                    message: 'getBoardPost 404'
+                })
+                break;
             default:
                 res.send({
                     success: false,
                     statusCode: 500,
-                    message: 'getPostByBoardIndex 500'
+                    message: 'getBoardPost 500'
                 })
-                break;
         }
     }
 }

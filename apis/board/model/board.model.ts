@@ -31,7 +31,7 @@ export class Board {
     listBoardInfo(): Promise<void> {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async (err, connection) => {
-                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t2.userNickName 
+                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t1.count, t1.recommend, t2.userNickName 
                 FROM board AS t1
                 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
                 ORDER BY t1.boardIndex DESC`, (err, data) => {
@@ -60,7 +60,7 @@ export class Board {
                     start = 0;
                 }
 
-                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t2.userNickName 
+                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t1.count, t1.recommend, t2.userNickName 
                 FROM board AS t1
                 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
                 ORDER BY t1.boardIndex DESC LIMIT ${start},${count}`, (err, data) => {
@@ -83,7 +83,7 @@ export class Board {
     listBoardInfoBySearchTerm(searchTerm: string): Promise<void> {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async (err, connection) => {
-                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t2.userNickName 
+                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t1.count, t1.recommend, t2.userNickName 
                 FROM board AS t1
                 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
                 WHERE t1.category LIKE '%${searchTerm}%'
@@ -115,7 +115,7 @@ export class Board {
                     start = 0
                 }
 
-                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t2.userNickName 
+                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t1.count, t1.recommend, t2.userNickName 
                 FROM board AS t1
                 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
                 WHERE t1.category LIKE '%${searchTerm}%'
@@ -141,7 +141,7 @@ export class Board {
     listBoardInfoByCategory(category: string): Promise<void> {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async (err, connection) => {
-                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t2.userNickName 
+                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t1.count, t1.recommend, t2.userNickName 
                 FROM board AS t1
                 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
                 WHERE t1.category = '${category}'`, (err, data) => {
@@ -171,7 +171,7 @@ export class Board {
                     start = 0;
                 }
 
-                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t2.userNickName 
+                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t1.count, t1.recommend, t2.userNickName 
                 FROM board AS t1
                 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
                 WHERE t1.category = '${category}'
@@ -195,7 +195,7 @@ export class Board {
     listBoardInfoByPost(post: string): Promise<any> {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async (err, connection) => {
-                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t2.userNickName 
+                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t1.count, t1.recommend, t2.userNickName 
                 FROM board AS t1
                 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
                 WHERE t1.boardTitle LIKE '%${post}%'
@@ -227,7 +227,7 @@ export class Board {
                     start = 0;
                 }
 
-                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t2.userNickName 
+                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t1.count, t1.recommend, t2.userNickName 
                 FROM board AS t1
                 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
                 WHERE t1.boardTitle LIKE '%${post}%'
@@ -253,7 +253,7 @@ export class Board {
     listBoardInfoByUserIndex(userIndex: number): Promise<void> {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async (err, connection) => {
-                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t2.userNickName
+                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t1.count, t1.recommend, t2.userNickName
 					FROM board AS t1
 					INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
 					WHERE t1.userIndex=${userIndex}`, (err, data) => {
@@ -282,7 +282,7 @@ export class Board {
                     start = 0;
                 }
 
-                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t2.userNickName
+                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t1.count, t1.recommend, t2.userNickName
 					FROM board AS t1
 					INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
 					WHERE t1.userIndex=${userIndex}
@@ -299,21 +299,24 @@ export class Board {
         })
     }
 
+
     /**
-     * model : post 조회 (게시글)
+     * model : board 게시물 조회
      * @param {number} boardIndex
      * @returns {Promise<void>}
      */
-    getPostByBoardIndex(boardIndex: number): Promise<void> {
+    getBoardPost(boardIndex: number): Promise<void> {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async (err, connection) => {
-                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.boardContent, t1.createdAt, t2.userNickName
+                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.boardContent, t1.createdAt, t1.count, t1.recommend, t2.userNickName
                 FROM board AS t1
                 INNER JOIN user AS t2 ON t1.userIndex=t2.userIndex
                 WHERE t1.boardIndex =${boardIndex}`, (err, data) => {
                     connection.release();
                     if (err) {
                         reject(err);
+                    } else if(data[0] == null){
+                        reject('This Post is not exist');
                     } else {
                         resolve(data);
                     }
@@ -322,7 +325,6 @@ export class Board {
         })
     }
 
-    // TODO count 수정
     /**
      * model : boardInfo count page 리스트 조회 (조회수)
      * @param {number} page
@@ -337,7 +339,7 @@ export class Board {
                     start = 0;
                 }
 
-                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.count, t1.createdAt, t2.userNickName 
+                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t1.count, t1.recommend, t2.userNickName 
                 FROM board AS t1
                 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
                 ORDER BY t1.count DESC  LIMIT ${start},${count}`, (err, data) => {
@@ -373,7 +375,6 @@ export class Board {
         })
     }
 
-    // TODO count 수정
     /**
      * model : board 조회수 업데이트
      * @param {number} boardIndex
