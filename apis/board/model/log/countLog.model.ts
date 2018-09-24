@@ -1,4 +1,4 @@
-import {mysqlUtil} from "../../../packages/utils/mysql.util";
+import {mysqlUtil} from "../../../../packages/utils/mysql.util";
 
 const pool = mysqlUtil.pool;
 
@@ -31,7 +31,7 @@ export class CountLog {
      * @param {number} userIndex
      * @returns {Promise<void>}
      */
-    CheckCountLog(boardIndex: number, userIndex: number): Promise<void> {
+    checkCountLog(boardIndex: number, userIndex: number): Promise<void> {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async (err, connection) => {
                 await connection.query(`SELECT * FROM countLog WHERE boardIndex = ${boardIndex} AND userIndex = ${userIndex}`, (err, data) => {

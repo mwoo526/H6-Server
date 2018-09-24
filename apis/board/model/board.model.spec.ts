@@ -67,12 +67,6 @@ describe('board 모델', () => {
         expect(result).to.instanceof(Array);
     })
 
-    it('getBoardPost', async () => {
-        const result: any = await board.getBoardPost(16);
-        // console.log(result);
-        expect(result).to.instanceof(Object);
-    })
-
     it('pageListBoardInfoByUserIndex', async () => {
         const result: any = await board.pageListBoardInfoByUserIndex(1, 1, 5);
         // console.log(result);
@@ -83,6 +77,24 @@ describe('board 모델', () => {
         const result: any = await board.pageListBoardInfoByCount(1, 5);
         // console.log(result);
         expect(result).to.instanceof(Array);
+    })
+
+    it('pageListBoardInfoByRecommend', async () => {
+        const result: any = await board.pageListBoardInfoByRecommend(1, 5);
+        // console.log(result);
+        expect(result).to.instanceof(Array);
+    })
+
+    it('getBoardPost', async () => {
+        const result: any = await board.getBoardPost(16);
+        // console.log(result);
+        expect(result).to.instanceof(Object);
+    })
+
+    it('getBoardRecommend', async () => {
+        const result: any = await board.getBoardRecommend(16);
+        // console.log(result);
+        expect(result).to.instanceof(Object);
     })
 
     it('updateBoard', async () => {
@@ -99,6 +111,18 @@ describe('board 모델', () => {
         const result: any = await board.updateBoardByCount(18);
         // console.log(result);
         expect(result).to.instanceof(Object);
+    })
+
+    it('updateBoardByRecommendUp', async () => {
+        const result: any = await board.updateBoardByRecommendUp(16);
+        // console.log(result);
+        expect(result).to.instanceof(Object);
+    })
+
+    it('updateBoardByRecommendDown', async () => {
+            const result: any = await board.updateBoardByRecommendDown(16);
+            // console.log(result);
+            expect(result).to.instanceof(Object);
     })
 
     it('deleteBoard', async () => {

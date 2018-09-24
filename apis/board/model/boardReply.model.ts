@@ -33,7 +33,7 @@ export class BoardReply {
     createBoardReplyComments(boardData: any, boardReplyIndex: number): Promise<void> {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async (err, connection) => {
-                await connection.query(`INSERT INTO boardReply SET boardIndex = ? , userIndex = ? , boardReplyContent = ? , parent = ?`,
+                await connection.query(`INSERT INTO boardReply SET boardIndex = ?, userIndex = ?, boardReplyContent = ?, parent = ?`,
                     [boardData.boardIndex, boardData.userIndex, boardData.boardReplyContent, boardReplyIndex], (err) => {
                         connection.release();
                         if (err) {
@@ -56,8 +56,8 @@ export class BoardReply {
             await pool.getConnection(async (err, connection) => {
                 await connection.query(`SELECT t1.boardReplyIndex, t1.boardReplyContent, t1.createdAt, t2.userNickName 
                  FROM boardReply AS t1
-                 INNER JOIN user AS t2 ON t1.userIndex= t2.userIndex
-                 WHERE t1.boardIndex=${boardIndex} AND t1.parent IS NULL
+                 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
+                 WHERE t1.boardIndex = ${boardIndex} AND t1.parent IS NULL
                  ORDER BY t1.boardReplyIndex DESC`, (err, data) => {
                     connection.release();
                     if (err) {
@@ -87,8 +87,8 @@ export class BoardReply {
 
                 await connection.query(`SELECT t1.boardReplyIndex, t1.boardReplyContent, t1.createdAt, t2.userNickName
                  FROM boardReply AS t1
-                 INNER JOIN user AS t2 ON t1.userIndex=t2.userIndex                 
-                 WHERE t1.boardIndex=${boardIndex} AND t1.parent IS NULL
+                 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex                 
+                 WHERE t1.boardIndex = ${boardIndex} AND t1.parent IS NULL
                  ORDER BY t1.boardReplyIndex DESC LIMIT ${start},${count}`, (err, data) => {
                     connection.release();
                     if (err) {
@@ -166,7 +166,7 @@ export class BoardReply {
                 await connection.query(`SELECT t1.boardReplyIndex, t1.boardReplyContent, t1.createdAt, t2.userNickName
 				FROM boardReply AS t1
 				INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
-				WHERE t1.parent=${boardReplyIndex}
+				WHERE t1.parent = ${boardReplyIndex}
 				ORDER BY t1.boardReplyIndex DESC`, (err, data) => {
                     connection.release();
                     if (err) {
@@ -197,7 +197,7 @@ export class BoardReply {
                 await connection.query(`SELECT t1.boardReplyIndex, t1.boardReplyContent, t1.createdAt, t2.userNickName
                   FROM boardReply AS t1
                   INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
-                  WHERE t1.parent=${boardReplyIndex}
+                  WHERE t1.parent = ${boardReplyIndex}
                   ORDER BY t1.boardReplyIndex DESC LIMIT ${start},${count}`, (err, data) => {
                     connection.release();
                     if (err) {
@@ -221,8 +221,8 @@ export class BoardReply {
                 await connection.query(`SELECT t1.boardReplyIndex, t1.boardReplyContent, t1.createdAt, t2.userNickName
     			FROM boardReply AS t1
     			INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
-    			WHERE t1.boardIndex=${boardIndex}
-    			ORDER BY  IF(isnull(parent),boardReplyIndex,parent)`, (err, data) => {
+    			WHERE t1.boardIndex = ${boardIndex}
+    			ORDER BY IF(isnull(parent),boardReplyIndex,parent)`, (err, data) => {
                     if (err) {
                         reject(err);
                     } else {
@@ -251,8 +251,8 @@ export class BoardReply {
                 await connection.query(`SELECT t1.boardReplyIndex, t1.boardReplyContent, t1.createdAt, t2.userNickName
     			FROM boardReply AS t1
     			INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
-    			WHERE t1.boardIndex=${boardIndex}
-    			ORDER BY  IF(isnull(parent),boardReplyIndex,parent) LIMIT ${start},${count}`, (err, data) => {
+    			WHERE t1.boardIndex = ${boardIndex}
+    			ORDER BY IF(isnull(parent),boardReplyIndex,parent) LIMIT ${start},${count}`, (err, data) => {
                     if (err) {
                         reject(err);
                     } else {
@@ -273,7 +273,7 @@ export class BoardReply {
     updateBoardReply(boardReplyIndex: number, boardReplyData: any): Promise<void> {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async (err, connection) => {
-                await connection.query(`UPDATE boardReply SET ? WHERE boardReplyIndex=${boardReplyIndex}`, boardReplyData, (err) => {
+                await connection.query(`UPDATE boardReply SET ? WHERE boardReplyIndex = ${boardReplyIndex}`, boardReplyData, (err) => {
                     connection.release();
                     if (err) {
                         reject(err);
@@ -293,7 +293,7 @@ export class BoardReply {
     deleteBoardReply(boardReplyIndex: number): Promise<void> {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async (err, connection) => {
-                await connection.query(`DELETE FROM boardReply WHERE boardReplyIndex=${boardReplyIndex}`, (err, data) => {
+                await connection.query(`DELETE FROM boardReply WHERE boardReplyIndex = ${boardReplyIndex}`, (err, data) => {
                     connection.release();
                     if (err) {
                         reject(err);

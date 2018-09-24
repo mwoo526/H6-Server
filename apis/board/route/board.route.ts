@@ -1,7 +1,8 @@
 import * as express from 'express';
 import {BoardResource} from '../../../resources/board.resource';
 import {board} from '../model/board.model';
-import {countLog} from "../model/countLog.model";
+import {countLog} from "../model/log/countLog.model";
+import {recommendLog} from "../model/log/recommendLog.model";
 
 export class BoardRoutes {
     public boardRouter: express.Router = express.Router();
@@ -13,12 +14,14 @@ export class BoardRoutes {
     public router() {
         this.boardRouter.post('/board', createBoard);
         this.boardRouter.get('/board', pageListBoardInfo);
+        this.boardRouter.get('/board/count', pageListBoardInfoByCount);
+        this.boardRouter.get('/board/recommend', pageListBoardInfoByRecommend);
         this.boardRouter.get('/board/searchTerm/:searchTerm', pageListBoardInfoBySearchTerm);
         this.boardRouter.get('/board/category/:category', pageListBoardInfoByCategory);
         this.boardRouter.get('/board/post/:post', pageListBoardInfoByPost)
         this.boardRouter.get('/board/userIndex/:userIndex', pageListBoardInfoByUserIndex)
         this.boardRouter.get('/board/getBoardPost/:boardIndex/:userIndex', getBoardPost);
-        this.boardRouter.get('/board/count', pageListBoardInfoByCount);
+        this.boardRouter.get('/board/getBoardRecommend/:boardIndex/:userIndex', getBoardRecommend);
         this.boardRouter.put('/board/:boardIndex', updateBoard);
         this.boardRouter.delete('/board/:boardIndex', deleteBoard);
     }
@@ -86,6 +89,67 @@ async function pageListBoardInfo(req, res) {
     }
 }
 
+/**
+ * route : boardInfo count page 리스트 조회 (조회수)
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function pageListBoardInfoByCount(req, res) {
+    let page: number = req.query.page;
+    let count: number = req.query.count;
+    try {
+        const resultCount: any = await board.listBoardInfoByCount();
+        const result: any = await board.pageListBoardInfoByCount(page, count);
+        res.send({
+            success: true,
+            statusCode: 200,
+            resultCount: resultCount.length,
+            result: result,
+            message: 'pageListBoardInfoByCount 200'
+        })
+    } catch (err) {
+        switch (err) {
+            default:
+                res.send({
+                    success: false,
+                    statusCode: 500,
+                    message: 'pageListBoardInfoByCount 500'
+                })
+        }
+    }
+}
+
+/**
+ * route : boardInfo recommend page 리스트 조회 (추천수)
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function pageListBoardInfoByRecommend(req,res) {
+    let page: number = req.query.page;
+    let count: number = req.query.count;
+    try {
+        const resultCount: any = await board.listBoardInfoByRecommend();
+        const result: any = await board.pageListBoardInfoByRecommend(page, count);
+        res.send({
+            success: true,
+            statusCode: 200,
+            resultCount: resultCount.length,
+            result: result,
+            message: 'pageListBoardInfoByRecommend 200'
+        })
+    } catch (err) {
+        switch (err) {
+            default:
+                res.send({
+                    success: false,
+                    statusCode: 500,
+                    message: 'pageListBoardInfoByRecommend 500'
+                })
+        }
+    }
+}
 /**
  * route : boardInfo searchTerm 조회
  * @param req
@@ -191,13 +255,13 @@ async function pageListBoardInfoByPost(req, res) {
  * @param res
  * @returns {Promise<void>}
  */
-async function pageListBoardInfoByUserIndex(req,res){
+async function pageListBoardInfoByUserIndex(req, res) {
     let userIndex: number = req.params.userIndex;
     let page: number = req.query.page;
     let count: number = req.query.count;
-    try{
+    try {
         const resultCount: any = await board.listBoardInfoByUserIndex(userIndex);
-        const result: any = await board.pageListBoardInfoByUserIndex(userIndex,page,count);
+        const result: any = await board.pageListBoardInfoByUserIndex(userIndex, page, count);
         res.send({
             success: true,
             statusCode: 200,
@@ -227,8 +291,8 @@ async function pageListBoardInfoByUserIndex(req,res){
 async function getBoardPost(req, res) {
     let boardIndex: number = req.params.boardIndex;
     let userIndex: number = req.params.userIndex;
-    try{
-        await countLog.CheckCountLog(boardIndex,userIndex);
+    try {
+        await countLog.checkCountLog(boardIndex, userIndex);
         let result: any = await board.getBoardPost(boardIndex);
         res.send({
             success: true,
@@ -239,14 +303,14 @@ async function getBoardPost(req, res) {
     } catch (err) {
         switch (err) {
             case 'This UserLog is not exist' :
-                await countLog.createCountLog(boardIndex,userIndex);
+                await countLog.createCountLog(boardIndex, userIndex);
                 await board.updateBoardByCount(boardIndex);
                 let result: any = await board.getBoardPost(boardIndex);
                 res.send({
-                  success: true,
-                  statusCode: 200,
-                  result: result,
-                  message: 'getBoardPost 200'
+                    success: true,
+                    statusCode: 200,
+                    result: result,
+                    message: 'getBoardPost 200'
                 })
                 break;
             case 'This Post is not exist' :
@@ -267,29 +331,55 @@ async function getBoardPost(req, res) {
 }
 
 /**
- * route : boardInfo count page 리스트 조회 (조회수)
+ * route : 추천수 조회 (게시글)
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
-async function pageListBoardInfoByCount(req, res) {
-    let page: number = req.query.page;
-    let count: number = req.query.count;
+async function getBoardRecommend(req, res) {
+    let boardIndex: number = req.params.boardIndex;
+    let userIndex: number = req.params.userIndex;
     try {
-        let result: any = await board.pageListBoardInfoByCount(page, count);
-        res.send({
-            success: true,
-            statusCode: 200,
-            result: result,
-            message: 'pageListBoardInfoByCount 200'
-        })
+        let isRecommend: any = await recommendLog.checkRecommendLog(boardIndex, userIndex);
+        if (isRecommend.isRecommend) {
+            await recommendLog.updateRecommendLog(boardIndex, userIndex);
+            await board.updateBoardByRecommendDown(boardIndex);
+            let result: any = await board.getBoardRecommend(boardIndex);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'getBoardRecommend 200'
+            })
+        } else {
+            await recommendLog.updateRecommendLog(boardIndex, userIndex);
+            await board.updateBoardByRecommendUp(boardIndex);
+            let result: any = await board.getBoardRecommend(boardIndex);
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'getBoardRecommend 200'
+            })
+        }
     } catch (err) {
         switch (err) {
+            case 'This RecommendLog is not exist':
+                await recommendLog.createRecommendLog(boardIndex, userIndex);
+                await board.updateBoardByRecommendUp(boardIndex);
+                let result: any = await board.getBoardRecommend(boardIndex);
+                res.send({
+                    success: true,
+                    statusCode: 200,
+                    result: result,
+                    message: 'getBoardRecommend 200'
+                })
+                break;
             default:
                 res.send({
                     success: false,
                     statusCode: 500,
-                    message: 'pageListBoardInfoByCount 500'
+                    message: 'getBoardRecommend 500'
                 })
         }
     }
