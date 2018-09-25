@@ -132,7 +132,7 @@ async function updateReportBoard(req, res): Promise<void> {
 	try {
 		const data = await reportBoard.getReportBoardIndex(reportBoardIndex);
 
-		const result = await reportBoard.updateReportBoard(reportBoardIndex, reportBoardData);
+		const result = await reportBoard.updateReportBoard(reportBoardIndex, reportBoardData.getReportBoard());
 		res.send({
 			success: true,
 			statusCode: 200,
