@@ -36,10 +36,23 @@ export class UserRoutes {
 async function createUser(req, res): Promise<void> {
 	const userData: any = new UserResource(req.body);
 	try {
-		const result: any = await user.createUser(userData);
-		res.send(result);
+		const result = await user.createUser(userData);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'createUser: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'createUser: 50000'
+				});
+				break;
+		}
 	}
 }
 
@@ -54,9 +67,22 @@ async function pageListUser(req, res): Promise<void> {
 		let page: number = parseInt(req.query.page);
 		let count: number = parseInt(req.query.count);
 		const result: any = await user.pageListUser(page, count);
-		res.send(result);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'pageListUser: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'pageListUser: 50000'
+				});
+				break;
+		}
 	}
 }
 
@@ -98,10 +124,23 @@ async function getUser(req, res): Promise<void> {
 async function updateUser(req, res): Promise<void> {
 	let userId: string = req.params.userId;
 	try {
-		const result: any = await user.updateUser(userId, req.body);
-		res.send(result);
+		const result = await user.updateUser(userId, req.body);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'updateUser: 200'
+		});
 	} catch (err) {
-		res.send(err);
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'updateUser: 50000'
+				});
+				break;
+		}
 	}
 }
 
@@ -118,10 +157,11 @@ async function updateUserPassword(req, res): Promise<void> {
 
 	try {
 		await user.getUserPassword(userId, userPw);
-		await user.updateUserPassword(userId, userNewPw);
+		const result = await user.updateUserPassword(userId, userNewPw);
 		res.send({
 			success: true,
 			statusCode: 200,
+			result: result,
 			message: 'updateUserPassword: 200'
 		});
 	} catch (err) {
@@ -158,7 +198,7 @@ async function deleteUser(req, res): Promise<void> {
 		// await userValidation.deleteUserValidation(userId);
 		// await lectureReply.deleteLectureReplyByUserIndex(resultUser[0].userIndex);
 		// await user.deleteUser(userId);
-		await user.updateUser(userId, {
+		const result = await user.updateUser(userId, {
 			userId: uuidV1(),
 			userNickName: '탈퇴한 회원',
 			status: 'INACTIVE'
@@ -170,6 +210,7 @@ async function deleteUser(req, res): Promise<void> {
 		res.send({
 			success: true,
 			statusCode: 200,
+			result: result,
 			message: 'deleteUser: 200'
 		});
 	} catch (err) {
@@ -254,12 +295,13 @@ async function deleteAvatar(req, res): Promise<void> {
 					}
 				}
 			);
-			await user.updateUser(userId, {
+			const result = await user.updateUser(userId, {
 				avatar: null
 			});
 			res.send({
 				success: true,
 				statusCode: 200,
+				result: result,
 				message: 'deleteAvatar: 200'
 			});
 		} else {
