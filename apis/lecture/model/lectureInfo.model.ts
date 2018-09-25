@@ -96,7 +96,8 @@ export class LectureInfo {
 				WHERE t2.lectureCode LIKE ?
 				OR t2.lectureName LIKE ?
 				OR t2.track LIKE ? 
-				OR t3.professorName LIKE ?`, [`%${searchTerm}%`, `%${searchTerm}%`, `%${searchTerm}%`, `%${searchTerm}%`],async function(err, rows) {
+				OR t3.professorName LIKE ?`, [`%${searchTerm}%`, `%${searchTerm}%`, `%${searchTerm}%`,
+					`%${searchTerm}%`], async function(err, rows) {
 					if (err) {
 						await connection.release();
 						reject(err);
@@ -130,7 +131,8 @@ export class LectureInfo {
 				OR t2.lectureName LIKE ?
 				OR t2.track LIKE ?
 				OR t3.professorName LIKE ?
-				ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, [`%${searchTerm}%`, `%${searchTerm}%`, `%${searchTerm}%`, `%${searchTerm}%`],async function(err, rows) {
+				ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, [`%${searchTerm}%`, `%${searchTerm}%`,
+					`%${searchTerm}%`, `%${searchTerm}%`], async function(err, rows) {
 					if (err) {
 						await connection.release();
 						reject(err);
@@ -154,7 +156,7 @@ export class LectureInfo {
 				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
 				FROM lectureInfo AS t1 INNER JOIN lecture AS t2 ON t1.lectureIndex = t2.lectureIndex 
 				INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex 
-				WHERE t1.lectureInfoIndex = ?`, [lectureInfoIndex],async function(err, rows) {
+				WHERE t1.lectureInfoIndex = ?`, [lectureInfoIndex], async function(err, rows) {
 					if (err) {
 						await connection.release();
 						reject(err);
@@ -182,7 +184,7 @@ export class LectureInfo {
 				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
 				FROM lectureInfo AS t1 INNER JOIN lecture AS t2 ON t1.lectureIndex = t2.lectureIndex 
 				INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex 
-				WHERE t2.lectureName LIKE ?`, [`%${lectureName}%`],async function(err, rows) {
+				WHERE t2.lectureName LIKE ?`, [`%${lectureName}%`], async function(err, rows) {
 					if (err) {
 						await connection.release();
 						reject(err);
@@ -212,7 +214,7 @@ export class LectureInfo {
           INNER JOIN lecture AS t2 ON t1.lectureIndex = t2.lectureIndex 
           INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex 
           WHERE t2.lectureName LIKE ?
-          ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, [`%${lectureName}%`],async function(err, rows) {
+          ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, [`%${lectureName}%`], async function(err, rows) {
 					if (err) {
 						await connection.release();
 						reject(err);
@@ -240,7 +242,7 @@ export class LectureInfo {
 				await connection.query(`SELECT t1.lectureInfoIndex, t1.average, t2.lectureName, t2.track, t3.professorName 
 				FROM lectureInfo AS t1 INNER JOIN lecture AS t2 ON t1.lectureIndex = t2.lectureIndex 
 				INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex 
-				WHERE t3.professorName LIKE ?`, [`%${professorName}%`],async function(err, rows) {
+				WHERE t3.professorName LIKE ?`, [`%${professorName}%`], async function(err, rows) {
 					if (err) {
 						await connection.release();
 						reject(err);
@@ -274,7 +276,7 @@ export class LectureInfo {
                 INNER JOIN lecture AS t2 ON t1.lectureIndex = t2.lectureIndex 
                 INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex 
                 WHERE t3.professorName LIKE ?
-                ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, [`%${professorName}%`],async function(err, rows) {
+                ORDER BY t1.lectureInfoIndex ASC LIMIT ${start}, ${count}`, [`%${professorName}%`], async function(err, rows) {
 					if (err) {
 						await connection.release();
 						reject(err);
@@ -303,7 +305,7 @@ export class LectureInfo {
 				INNER JOIN lecture AS t2 ON t1.lectureIndex = t2.lectureIndex 
 				INNER JOIN professor AS t3 ON t1.professorIndex = t3.professorIndex 
 				INNER JOIN lectureReply AS t4 ON t1.lectureInfoIndex = t4.lectureInfoIndex
-				WHERE t4.userIndex = ?`, [userIndex],async function(err, rows) {
+				WHERE t4.userIndex = ?`, [userIndex], async function(err, rows) {
 					if (err) {
 						await connection.release();
 						reject(err);
@@ -388,7 +390,8 @@ export class LectureInfo {
 	updateLectureInfoAverage(lectureInfoIndex: number, average: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`UPDATE lectureInfo SET average = ?, updatedAt = now() WHERE lectureInfoIndex = ?`, [average, lectureInfoIndex], async function(err, rows) {
+				await connection.query(`UPDATE lectureInfo SET average = ?, updatedAt = now() WHERE lectureInfoIndex = ?`, [average,
+					lectureInfoIndex], async function(err, rows) {
 					if (err) {
 						await connection.release();
 						reject(err);

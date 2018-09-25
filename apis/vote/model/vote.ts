@@ -94,7 +94,7 @@ export class Vote {
 	getVoteTopicByStatus(status: string): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM voteTopic WHERE status = ?`, [status],function(err, rows) {
+				await connection.query(`SELECT * FROM voteTopic WHERE status = ?`, [status], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -115,7 +115,7 @@ export class Vote {
 	getVoteTopicByTopicIndex(voteTopicIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM voteTopic WHERE voteTopicIndex = ?`, [voteTopicIndex],function(err, rows) {
+				await connection.query(`SELECT * FROM voteTopic WHERE voteTopicIndex = ?`, [voteTopicIndex], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -255,7 +255,8 @@ export class Vote {
 					FROM voteUser
 					WHERE voteItemIndex = ?
 				) count
-				FROM voteItem WHERE voteTopicIndex = ? AND voteItemIndex = ?`, [voteItemIndex, voteTopicIndex, voteItemIndex], function(err, rows) {
+				FROM voteItem WHERE voteTopicIndex = ? AND voteItemIndex = ?`, [voteItemIndex, voteTopicIndex,
+					voteItemIndex], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
