@@ -216,7 +216,7 @@ async function sendPasswordMail(req, res): Promise<void> {
 async function sendValidationMail(req, res): Promise<void> {
 	try {
 		let host: any = req.get('host');
-		let uuid = uuidV1();
+		let uuid: string = uuidV1();
 
 		let userId: string = req.body.userId.toLowerCase();
 		let link: any = 'http://' + host + '/userValidation/verify/' + uuid;

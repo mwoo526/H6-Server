@@ -57,6 +57,7 @@ describe('user 모델', () => {
 			userNickName: 'testUserNickName',
 			major: 'testMajor',
 			minor: null,
+			status: null,
 			doubleMajor: null,
 			connectedMajor: null,
 			avatar: null,
