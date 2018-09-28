@@ -3,6 +3,7 @@ import * as aws from 'aws-sdk';
 import { file } from '../model/file.model';
 import { FileResource } from '../../../resources/file.resource';
 import { s3Util } from '../../../packages/utils/s3.util';
+import {user} from "../../user/model/user.model";
 
 
 let upload = s3Util.upload.array('upload',2);
@@ -23,7 +24,7 @@ export class FileRoutes {
         this.fileRouter.put('/file/fileIndex/:fileIndex', updateFile);
         this.fileRouter.delete('/file/fileIndex/:fileIndex', deleteFile);
         this.fileRouter.delete('/file/fileIndex/:fileIndex/deleteUpload', deleteUploadFile);
-      // this.fileRouter.get('/file/fileIndex/:fileIndex/downloadFile', downloadFile);
+      this.fileRouter.post('/file/fileIndex/:fileIndex/downloadFile', downloadFile);
     }
 }
 
@@ -297,35 +298,48 @@ async function uploadFile(req, res): Promise<void> {
  * @param res
  * @returns {Promise<void>}
  */
-/*
+
 async function downloadFile(req, res): Promise<void> {
+    const signedUrlExpireSeconds = 60 * 5 // your expiry time in seconds.
     let fileIndex: number = req.params.fileIndex;
     try {
         const resultFile = await file.getFileIndex(fileIndex);
         if (resultFile[0].filePath) {
             let splitUpload = resultFile[0].filePath.split('/');
             let splitUploadStage = splitUpload[2].split('.');
-            let file = fs.createWriteStream("/tmp/" + '${splitUpload[4]}');
-            await s3.getObject(
-                {
-                    Bucket: `${splitUploadStage[0]}/${splitUpload[3]}`,
-                    Key: `${splitUpload[4]}`
+            const url = s3.getSignedUrl('getObject', {
+                Bucket: `${splitUploadStage[0]}/${splitUpload[3]}`,
+                Key: `${splitUpload[4]}`,
+                Expires: signedUrlExpireSeconds
+            },
+                (err) => {
+                    if (err) {
+                        throw err;
+                    }
                 }
-            ).createReadStream().pipe(file);
+            );
+            await file.updateFile(fileIndex, {
+                downloadCount: +1
+            });
             res.send({
                 success: true,
                 statusCode: 200,
-                message: 'deleteFile: 200'
+                message: 'downloadFile: 200'
+            });
+        } else {
+            res.send({
+                success: true,
+                statusCode: 404,
+                message: 'downloadFile: 40401'
             });
         }
     } catch (err) {
         switch (err) {
             default:
-                console.log(err);
                 res.send({
                     success: false,
-                    statusCode: err,
-                    message: 'deleteFile: 50000'
+                    statusCode: 500,
+                    message: 'downloadFile: 50000'
                 });
                 break;
         }
@@ -334,7 +348,8 @@ async function downloadFile(req, res): Promise<void> {
 
 
 
-*/
+
+
 
 
 export const fileRoutes : FileRoutes = new FileRoutes();
