@@ -115,7 +115,7 @@ export class UserValidation {
 	checkUserNickName(userNickName: string): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM user WHERE userNickName = ?`, [userNickName],async function(err, rows) {
+				await connection.query(`SELECT * FROM user WHERE userNickName = ?`, [userNickName], async function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -142,7 +142,8 @@ export class UserValidation {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				userPw = await encriptionPw.getHash(userPw);
-				await connection.query(`SELECT * FROM user WHERE userId = ? AND userPw = ?`, [userId, userPw], async function(err, rows) {
+				await connection.query(`SELECT * FROM user WHERE userId = ? AND userPw = ?`, [userId,
+					userPw], async function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);

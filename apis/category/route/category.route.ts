@@ -51,26 +51,14 @@ async function createCategory(req, res) {
 async function listCategory(req, res) {
 	try {
 		const result: any = await category.listCategory();
-		if (result.length == 0) {
-			throw 'No Content';
-		} else {
-			res.send({
-				success: true,
-				statusCode: 200,
-				result: result,
-				message: 'listCategory 200'
-			})
-		}
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'listCategory 200'
+		})
 	} catch (err) {
 		switch (err) {
-			case 'No Content':
-				res.send({
-					success: true,
-					statusCode: 204,
-					message: 'updateCategory 204'
-				})
-				break;
-
 			default:
 				res.send({
 					success: false,
@@ -92,28 +80,15 @@ async function updateCategory(req, res) {
 	let categoryName: string = req.params.categoryName;
 	let categoryData: CategoryResource = new CategoryResource(req.body);
 	try {
-		const isCategory: any = await category.listCategoryByCategoryName(categoryName);
 		const result: any = await category.updateCategory(categoryName, categoryData);
-		if (isCategory.length == 0) {
-			throw 'No Content';
-		} else {
-			res.send({
-				success: true,
-				statusCode: 200,
-				result: result,
-				message: 'updateCategory 200'
-			})
-		}
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'updateCategory 200'
+		})
 	} catch (err) {
 		switch (err) {
-			case 'No Content':
-				res.send({
-					success: true,
-					statusCode: 204,
-					message: 'updateCategory 204'
-				})
-				break;
-
 			default:
 				res.send({
 					success: false,
@@ -134,29 +109,15 @@ async function updateCategory(req, res) {
 async function deleteCategory(req, res) {
 	let categoryName: string = req.params.categoryName;
 	try {
-		const isCategory: any = await category.listCategoryByCategoryName(categoryName);
 		const result: any = await category.deleteCategory(categoryName);
-		if (isCategory.length == 0) {
-			throw 'No Content';
-		} else {
-			res.send({
-				success: true,
-				statusCode: 200,
-				result: result,
-				message: 'deleteCategory 200'
-			})
-		}
-
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'deleteCategory 200'
+		})
 	} catch (err) {
 		switch (err) {
-			case 'No Content':
-				res.send({
-					success: true,
-					statusCode: 204,
-					message: 'deleteCategory 204'
-				})
-				break;
-
 			default:
 				res.send({
 					success: false,
