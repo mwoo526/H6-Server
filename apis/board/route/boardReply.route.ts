@@ -11,8 +11,11 @@ export class BoardReplyRoutes {
 
 	public router() {
 		this.boardReplyRouter.post('/boardReply', createBoardReply);
+		this.boardReplyRouter.post('/boardReply/:boardReplyIndex', createBoardReplyComments);
 		this.boardReplyRouter.get('/boardReply/boardIndex/:boardIndex', pageListBoardReplyByBoardIndex);
 		this.boardReplyRouter.get('/boardReply/userIndex/:userIndex', pageListBoardReplyByUserIndex);
+		this.boardReplyRouter.get('/boardReply/comments/:boardReplyIndex', pageListBoardReplyByComments);
+		this.boardReplyRouter.get('/boardReply/boardReplyComments/:boardIndex', pageListBoardReplyComments);
 		this.boardReplyRouter.put('/boardReply/:boardReplyIndex', updateBoardReply);
 		this.boardReplyRouter.delete('/boardReply/:boardReplyIndex', deleteBoardReply);
 
@@ -50,7 +53,37 @@ async function createBoardReply(req, res) {
 }
 
 /**
- * route : boardReply 조회
+ * route : boardReply 답글 생성
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function createBoardReplyComments(req, res) {
+	let boardReplyIndex: number = req.params.boardReplyIndex;
+	let boardReplyData: any = new BoardReplyResource(req.body);
+	try {
+		let result: any = await boardReply.createBoardReplyComments(boardReplyData.getBoardReplyData(), boardReplyIndex);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'createBoardReplyComments 200'
+		})
+	} catch (err) {
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'createBoardReplyComments 500'
+				})
+				break;
+		}
+	}
+}
+
+/**
+ * route : boardReply board 별 리스트 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
@@ -62,26 +95,15 @@ async function pageListBoardReplyByBoardIndex(req, res) {
 	try {
 		let resultCount: any = await boardReply.listBoardReplyByBoardIndex(boardIndex);
 		let result: any = await boardReply.pageListBoardReplyByBoardIndex(boardIndex, page, count);
-		if (resultCount.length == 0) {
-			throw 'No Content';
-		} else {
-			res.send({
-				success: true,
-				statusCode: 200,
-				resultCount: resultCount.length,
-				result: result,
-				message: 'pageListBoardReplyByBoardIndex 200'
-			})
-		}
+		res.send({
+			success: true,
+			statusCode: 200,
+			resultCount: resultCount.length,
+			result: result,
+			message: 'pageListBoardReplyByBoardIndex 200'
+		})
 	} catch (err) {
 		switch (err) {
-			case 'No Content':
-				res.send({
-					success: true,
-					statusCode: 204,
-					message: 'pageListBoardReplyByBoardIndex 204'
-				})
-				break;
 			default:
 				res.send({
 					success: false,
@@ -107,31 +129,91 @@ async function pageListBoardReplyByUserIndex(req, res) {
 	try {
 		let resultCount: any = await boardReply.listBoardReplyByUserIndex(userIndex);
 		let result: any = await boardReply.pageListBoardReplyByUserIndex(userIndex, page, count);
-		if (resultCount.length == 0) {
-			throw 'No Content';
-		} else {
-			res.send({
-				success: true,
-				statusCode: 200,
-				resultCount: resultCount.length,
-				result: result,
-				message: 'pageListBoardReplyByUserIndex 200'
-			})
-		}
+
+		res.send({
+			success: true,
+			statusCode: 200,
+			resultCount: resultCount.length,
+			result: result,
+			message: 'pageListBoardReplyByUserIndex 200'
+		})
+
 	} catch (err) {
 		switch (err) {
-			case 'No Content':
-				res.send({
-					success: true,
-					statusCode: 204,
-					message: 'pageListBoardReplyByUserIndex 204'
-				})
-				break;
 			default:
 				res.send({
 					success: false,
 					statusCode: 500,
 					message: 'pageListBoardReplyByUserIndex 500'
+				})
+				break;
+		}
+	}
+}
+
+/**
+ * route : boardReply 별 답글 리스트 조회
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function pageListBoardReplyByComments(req, res) {
+	let boardReplyIndex: number = req.params.boardReplyIndex;
+	let page: number = req.query.page;
+	let count: number = req.query.count;
+
+	try {
+		let resultCount: any = await boardReply.listBoardReplyByComments(boardReplyIndex);
+		let result: any = await boardReply.pageListBoardReplyByComments(boardReplyIndex, page, count);
+		res.send({
+			success: true,
+			statusCode: 200,
+			resultCount: resultCount.length,
+			result: result,
+			message: 'pageListBoardReplyByComments 200'
+		})
+	} catch (err) {
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'pageListBoardReplyByComments 500'
+				})
+				break;
+		}
+	}
+
+}
+
+/**
+ * route : boardReply 대댓글 리스트 조회
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function pageListBoardReplyComments(req, res) {
+	let boardIndex: number = req.params.boardIndex;
+	let page: number = req.query.page;
+	let count: number = req.query.count;
+
+	try {
+		let resultCount: any = await boardReply.listBoardReplyComments(boardIndex);
+		let result: any = await boardReply.pageListBoardReplyComments(boardIndex, page, count);
+		res.send({
+			success: true,
+			statusCode: 200,
+			resultCount: resultCount.length,
+			result: result,
+			message: 'pageListBoardReplyComments 200'
+		})
+	} catch (err) {
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'pageListBoardReplyComments 500'
 				})
 				break;
 		}
@@ -184,11 +266,14 @@ async function deleteBoardReply(req, res) {
 			message: 'deleteBoardReply 200'
 		})
 	} catch (err) {
-		res.send({
-			success: false,
-			statusCode: 500,
-			message: 'deleteBoardReply 500'
-		})
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'deleteBoardReply 500'
+				})
+		}
 	}
 }
 

@@ -2,11 +2,14 @@ export class BoardReplyResource {
 	private boardIndex;
 	private userIndex;
 	private boardReplyContent;
+	private parent;
 
 	constructor(boardReplyData) {
 		this.setBoardIndex(boardReplyData.boardIndex);
 		this.setUserIndex(boardReplyData.userIndex);
 		this.setBoardReplyContent(boardReplyData.boardReplyContent);
+		this.setParent(boardReplyData.parent);
+
 	}
 
 	getBoardIndex() {
@@ -33,11 +36,20 @@ export class BoardReplyResource {
 		this.boardReplyContent = boardReplyContent;
 	}
 
+	getParent(){
+		return this.parent;
+	}
+
+	setParent(parent){
+		this.parent=parent;
+	}
+
 	getBoardReplyData() {
 		let boardReplyData = {
 			boardIndex: this.getBoardIndex(),
 			userIndex: this.getUserIndex(),
-			boardReplyContent: this.getBoardReplyContent()
+			boardReplyContent: this.getBoardReplyContent(),
+			parent : this.getParent()
 		};
 		return boardReplyData;
 	}
