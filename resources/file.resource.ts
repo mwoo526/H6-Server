@@ -1,5 +1,5 @@
 export class FileResource {
-
+    private  boardFileIndex;
     private boardIndex;
     private userIndex;
     private fileName;
@@ -9,6 +9,7 @@ export class FileResource {
     private downloadCount;
     
     constructor(fileData) {
+        this.setboardFileIndex(fileData.boardFileIndex);
         this.setboardIndex(fileData.boardIndex);
         this.setuserIndex(fileData.userIndex);
         this.setFileName(fileData.fileName);
@@ -19,6 +20,13 @@ export class FileResource {
 
     }
 
+    getboardFileIndex() {
+        return this.boardFileIndex;
+    }
+
+    setboardFileIndex(boardFileIndex) {
+        this.boardFileIndex = boardFileIndex;
+    }
     getboardIndex() {
         return this.boardIndex;
     }
@@ -78,6 +86,7 @@ export class FileResource {
 
     getFile() {
         let fileResource = {
+            boardFileIndex: this.getboardFileIndex(),
             boardIndex: this.getboardIndex(),
             userIndex: this.getuserIndex(),
             fileName: this.getFileName(),

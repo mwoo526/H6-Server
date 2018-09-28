@@ -45,6 +45,7 @@ export class File {
 		})
 	}
 
+
 	/**
 	 * model: file Index조회
 	 * @param {number} fileIndex
@@ -65,6 +66,7 @@ export class File {
 			})
 		})
 	}
+
 
 	/**
 	 * model: file Index조회
