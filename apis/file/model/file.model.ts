@@ -72,7 +72,7 @@ export class File {
      * @param {number} fileIndex
      * @returns {Promise<any>}
      */
-    getboardIndex(boardIndex: number): Promise<any> {
+    getBoardIndex(boardIndex: number): Promise<any> {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async function(err, connection) {
                 await connection.query(`SELECT boardFileIndex FROM file WHERE boardIndex = ?`, [boardIndex], function(err, rows) {
