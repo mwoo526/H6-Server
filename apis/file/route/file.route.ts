@@ -3,10 +3,10 @@ import * as aws from 'aws-sdk';
 import { file } from '../model/file.model';
 import { FileResource } from '../../../resources/file.resource';
 import { s3Util } from '../../../packages/utils/s3.util';
-import {user} from "../../user/model/user.model";
 
 
-let upload = s3Util.upload.array('upload',2);
+
+let upload = s3Util.upload.array('upload',3);
 let s3 = new aws.S3();
 
 export class FileRoutes {
@@ -19,12 +19,15 @@ export class FileRoutes {
     public router() {
         this.fileRouter.post('/file', createFile);
         this.fileRouter.post('/file/fileIndex/:boardIndex/uploadFile', uploadFile);
+        this.fileRouter.post('/file/fileIndex/:fileIndex/downloadFile', downloadFile);
         this.fileRouter.get('/file', listFile);
         this.fileRouter.get('/file/fileIndex/:fileIndex', getFileIndex);
+        this.fileRouter.get('/file/fileIndex/:fileIndex', getBoardIndex);
+        this.fileRouter.get('/file/fileIndex/:fileIndex/downloadCount', downloadCount);
         this.fileRouter.put('/file/fileIndex/:fileIndex', updateFile);
         this.fileRouter.delete('/file/fileIndex/:fileIndex', deleteFile);
         this.fileRouter.delete('/file/fileIndex/:fileIndex/deleteUpload', deleteUploadFile);
-      this.fileRouter.post('/file/fileIndex/:fileIndex/downloadFile', downloadFile);
+
     }
 }
 
@@ -114,6 +117,34 @@ async function getFileIndex(req, res): Promise<void> {
     }
 }
 
+/**
+ * route: file FileIndex 조회
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function getBoardIndex(req, res): Promise<void> {
+    let fileIndex: number = req.params.fileIndex;
+    try {
+        const result: any = await file.getBoardIndex(fileIndex);
+        res.send({
+            success: true,
+            statusCode: 200,
+            result: result[0],
+            message: 'getBoardIndex: 200'
+        });
+    } catch (err) {
+        switch (err) {
+            default:
+                res.send({
+                    success: false,
+                    statusCode: 500,
+                    message: 'getBoardIndex: 50000'
+                });
+                break;
+        }
+    }
+}
 
 
 
@@ -237,14 +268,22 @@ async function deleteUploadFile(req, res): Promise<void> {
 }
 
 
+
+
+
+
+
 /**
  * route: file 업로드
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
+
 async function uploadFile(req, res): Promise<void> {
-    let boardIndex : number = req.params.boardIndex;
+    let boardIndex: number = req.params.boardIndex;
+    let userIndex: number = req.params.userIndex;
+
     upload(req, res, async function (err) {
         if (err) {
             if (err.message === 'The AWS Access Key Id you provided does not exist in our records.') {
@@ -265,18 +304,22 @@ async function uploadFile(req, res): Promise<void> {
         }
         try {
             let result = req.files;
-            let result_Index = file.getboardIndex(boardIndex);
-            /** 파일 등록 */
-            for(let i=0;i<result_Index.length;i++){
-            await file.updateFile(result_Index[i], {
-                filePath: result[i].location
-            });};
-            res.send({
-                success: true,
-                statusCode: 200,
-                //result: result[i].location,
-                message: 'uploadFile: 200'
-            });
+            for (let i = 0; i < result.length; i++) {
+                await file.createFile({
+                    boardIndex: boardIndex,
+                    userIndex: userIndex,
+                    fileName: result[i].originalname,
+                    filePath: result[i].location,
+                    fileSize: result[i].size,
+                    fileExtension: result[i].mimetype
+                });
+                res.send({
+                    success: true,
+                    statusCode: 200,
+                    //result: result[i].location,
+                    message: 'uploadFile: 200'
+                });
+            }
         } catch (err) {
             switch (err) {
                 default:
@@ -346,6 +389,36 @@ async function downloadFile(req, res): Promise<void> {
     }
 }
 
+
+/**
+ * route: downloadCount 조회
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+
+async function downloadCount(req, res): Promise<void> {
+    let fileIndex : number = req.params.fileIndex;
+    try {
+        const result = await file.downloadCount(fileIndex);
+        res.send({
+            success: true,
+            statusCode: 200,
+            result: result,
+            message: 'downloadCount: 200'
+        })
+    } catch (err) {
+        switch (err) {
+            default:
+                res.send({
+                    success: false,
+                    statusCode: 500,
+                    message: 'downloadCount: 50000'
+                });
+                break;
+        }
+    }
+}
 
 
 
