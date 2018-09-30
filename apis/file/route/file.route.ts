@@ -6,7 +6,7 @@ import { s3Util } from '../../../packages/utils/s3.util';
 
 
 
-let upload = s3Util.upload.array('upload',2);
+let upload = s3Util.upload.array('upload',3);
 let s3 = new aws.S3();
 
 export class FileRoutes {
@@ -268,14 +268,22 @@ async function deleteUploadFile(req, res): Promise<void> {
 }
 
 
+
+
+
+
+
 /**
  * route: file 업로드
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
+
 async function uploadFile(req, res): Promise<void> {
-    let boardIndex : number = req.params.boardIndex;
+    let boardIndex: number = req.params.boardIndex;
+    let userIndex: number = req.params.userIndex;
+
     upload(req, res, async function (err) {
         if (err) {
             if (err.message === 'The AWS Access Key Id you provided does not exist in our records.') {
@@ -296,18 +304,22 @@ async function uploadFile(req, res): Promise<void> {
         }
         try {
             let result = req.files;
-            let result_Index = file.getboardIndex(boardIndex);
-            /** 파일 등록 */
-            for(let i=0;i<result_Index.length;i++){
-            await file.updateFile(result_Index[i], {
-                filePath: result[i].location
-            });};
-            res.send({
-                success: true,
-                statusCode: 200,
-                //result: result[i].location,
-                message: 'uploadFile: 200'
-            });
+            for (let i = 0; i < result.length; i++) {
+                await file.createFile({
+                    boardIndex: boardIndex,
+                    userIndex: userIndex,
+                    fileName: result[i].originalname,
+                    filePath: result[i].location,
+                    fileSize: result[i].size,
+                    fileExtension: result[i].mimetype
+                });
+                res.send({
+                    success: true,
+                    statusCode: 200,
+                    //result: result[i].location,
+                    message: 'uploadFile: 200'
+                });
+            }
         } catch (err) {
             switch (err) {
                 default:
