@@ -193,7 +193,7 @@ export class UserValidation {
 	setUuid(userId: any, uuid: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`UPDATE userValidation set validationCode='${uuid}' WHERE userId = ?`, [userId], (err, rows) => {
+				await connection.query(`UPDATE userValidation set validationCode = ? WHERE userId = ?`, [uuid, userId], (err, rows) => {
 					connection.release();
 					if (err) {
 						reject('setUuid query error');
@@ -291,7 +291,7 @@ export class UserValidation {
 	updateIsValidation(userId: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`UPDATE user set isValidation='${1}' WHERE userId = ?`, [userId], (err, rows) => {
+				await connection.query(`UPDATE user set isValidation = ? WHERE userId = ?`, [1, userId], (err, rows) => {
 					connection.release();
 					if (err) {
 						reject(err);
