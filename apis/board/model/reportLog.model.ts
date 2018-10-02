@@ -41,11 +41,7 @@ export class ReportLog {
 					if (err) {
 						reject(err);
 					} else {
-						if (data.length == 0) {
-							reject('No Contents');
-						} else {
-							resolve(data);
-						}
+						resolve(data);
 					}
 				})
 			})
@@ -95,11 +91,7 @@ export class ReportLog {
 					if (err) {
 						reject(err);
 					} else {
-						if (data.length == 0) {
-							reject('No Content');
-						} else {
-							resolve(data);
-						}
+						resolve(data);
 					}
 				})
 			})
@@ -120,11 +112,7 @@ export class ReportLog {
 					if (err) {
 						reject(err);
 					} else {
-						if (data.length == 0) {
-							reject('No Content');
-						} else {
-							resolve(data);
-						}
+						resolve(data);
 					}
 				})
 			})

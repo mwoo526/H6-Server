@@ -68,12 +68,6 @@ async function pageReportLogInfo(req, res): Promise<void> {
 		});
 	} catch (err) {
 		switch (err) {
-			case 'No Contents':
-				res.send({
-					success: false,
-					statusCode: 204,
-					message: 'pageReportLogInfo: 204'
-				});
 			default:
 				res.send({
 					success: false,
@@ -104,12 +98,6 @@ async function getReportLogContent(req, res): Promise<void> {
 		});
 	} catch (err) {
 		switch (err) {
-			case 'No Content':
-				res.send({
-					success: false,
-					statusCode: 204,
-					message: 'getReportLogContent: 204'
-				});
 			default:
 				res.send({
 					success: false,
@@ -142,12 +130,6 @@ async function updateReportLog(req, res): Promise<void> {
 
 	} catch (err) {
 		switch (err) {
-			case 'No Content':
-				res.send({
-					success: false,
-					statusCode: 204,
-					message: 'updateReportLog: 204'
-				});
 			default:
 				res.send({
 					success: false,
@@ -180,12 +162,6 @@ async function deleteReportLog(req, res): Promise<void> {
 
 	} catch (err) {
 		switch (err) {
-			case 'No Content':
-				res.send({
-					success: false,
-					statusCode: 204,
-					message: 'deleteReportLog: 204'
-				});
 			default:
 				res.send({
 					success: false,
