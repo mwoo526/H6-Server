@@ -47,7 +47,7 @@ export class File {
 
 
 	/**
-	 * model: file Index조회
+	 * model: file Index 조회
 	 * @param {number} fileIndex
 	 * @returns {Promise<any>}
 	 */
@@ -68,12 +68,13 @@ export class File {
 	}
 
 
-	/**
-	 * model: file Index조회
-	 * @param {number} fileIndex
-	 * @returns {Promise<any>}
-	 */
-	getboardIndex(boardIndex: number): Promise<any> {
+    /**
+     * model: file Index 조회
+     * @returns {Promise<any>}
+     * @param boardIndex
+     */
+
+	getBoardIndex(boardIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
 				await connection.query(`SELECT boardFileIndex FROM file WHERE boardIndex = ?`, [boardIndex], function(err, rows) {
@@ -92,6 +93,7 @@ export class File {
 	/** model : file 업데이트
 	 * @returns {Promise<void>}
 	 */
+
 	updateFile(fileIndex: number, fileDate: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
@@ -114,10 +116,11 @@ export class File {
 	 * @param {number} fileIndex
 	 * @returns {Promise<any>}
 	 */
+
 	deleteFile(fileIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`DELETE FROM file WHERE boardFileIndex = ${fileIndex}`, function(err, rows) {
+				await connection.query(`DELETE FROM file WHERE boardFileIndex = ?`,[fileIndex], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -130,6 +133,32 @@ export class File {
 		})
 	}
 
+    /**
+     * model: file downloadCount 조회
+     * @param {number} fileIndex
+     * @returns {Promise<any>}
+     */
+
+
+    downloadCount(fileIndex: number): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            await pool.getConnection(async function(err, connection) {
+                await connection.query(`SELECT downloadCount FROM file WHERE boardFileIndex = ?`,[fileIndex], function(err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(rows);
+                    }
+                })
+            })
+        })
+    }
+
+
+
 }
+
 
 export const file: any = new File();
