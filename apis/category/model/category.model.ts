@@ -12,7 +12,7 @@ export class Category {
 	createCategory(categoryData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`INSERT INTO category SET ?`, categoryData, (err) => {
+				await connection.query(`INSERT INTO category SET ?`, [categoryData], (err) => {
 					connection.release();
 					if (err) {
 						reject(err);
@@ -51,7 +51,7 @@ export class Category {
 	listCategoryByCategoryName(categoryName: string): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`SELECT * FROM category WHERE categoryName LIKE '${categoryName}'`, (err, data) => {
+				await connection.query(`SELECT * FROM category WHERE categoryName LIKE ?`, [categoryName], (err, data) => {
 					connection.release();
 					if (err) {
 						reject(err);
@@ -72,8 +72,7 @@ export class Category {
 	updateCategory(categoryName: string, categoryData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`UPDATE category SET ? WHERE categoryName = ?`, [categoryData,
-					categoryName], (err, data) => {
+				await connection.query(`UPDATE category SET ? WHERE categoryName = ?`, [categoryData, categoryName], (err, data) => {
 					connection.release();
 					if (err) {
 						reject(err);
@@ -93,7 +92,7 @@ export class Category {
 	deleteCategory(categoryName: string): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`DELETE FROM category WHERE categoryName = ?`, categoryName, (err, data) => {
+				await connection.query(`DELETE FROM category WHERE categoryName = ?`, [categoryName], (err, data) => {
 					connection.release();
 					if (err) {
 						reject(err);

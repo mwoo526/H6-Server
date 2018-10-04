@@ -13,9 +13,9 @@ export class BoardReplyRoutes {
 		this.boardReplyRouter.post('/boardReply', createBoardReply);
 		this.boardReplyRouter.post('/boardReply/:boardReplyIndex', createBoardReplyComments);
 		this.boardReplyRouter.get('/boardReply/boardIndex/:boardIndex', pageListBoardReplyByBoardIndex);
-		this.boardReplyRouter.get('/boardReply/userIndex/:userIndex', pageListBoardReplyByUserIndex);
 		this.boardReplyRouter.get('/boardReply/comments/:boardReplyIndex', pageListBoardReplyByComments);
 		this.boardReplyRouter.get('/boardReply/boardReplyComments/:boardIndex', pageListBoardReplyComments);
+		this.boardReplyRouter.get('/boardReply/check/:boardIndex', checkCountBoardReply);
 		this.boardReplyRouter.put('/boardReply/:boardReplyIndex', updateBoardReply);
 		this.boardReplyRouter.delete('/boardReply/:boardReplyIndex', deleteBoardReply);
 
@@ -115,41 +115,6 @@ async function pageListBoardReplyByBoardIndex(req, res) {
 	}
 }
 
-/**
- * route : boardReply user 별 리스트 조회
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-async function pageListBoardReplyByUserIndex(req, res) {
-	let userIndex: number = req.params.userIndex;
-	let page: number = req.query.page;
-	let count: number = req.query.count;
-
-	try {
-		let resultCount: any = await boardReply.listBoardReplyByUserIndex(userIndex);
-		let result: any = await boardReply.pageListBoardReplyByUserIndex(userIndex, page, count);
-
-		res.send({
-			success: true,
-			statusCode: 200,
-			resultCount: resultCount.length,
-			result: result,
-			message: 'pageListBoardReplyByUserIndex 200'
-		})
-
-	} catch (err) {
-		switch (err) {
-			default:
-				res.send({
-					success: false,
-					statusCode: 500,
-					message: 'pageListBoardReplyByUserIndex 500'
-				})
-				break;
-		}
-	}
-}
 
 /**
  * route : boardReply 별 답글 리스트 조회
@@ -217,6 +182,20 @@ async function pageListBoardReplyComments(req, res) {
 				})
 				break;
 		}
+	}
+}
+
+async function checkCountBoardReply(req,res) {
+	let boardIndex: number = req.params.boardIndex;
+	try {
+		const result: any = await boardReply.countBoardReplyByBoardIndex(boardIndex);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result
+		})
+	} catch (err) {
+		res.send(err);
 	}
 }
 
