@@ -1,6 +1,8 @@
 import * as express from 'express';
 import { BoardResource } from '../../../resources/board.resource';
 import { board } from '../model/board.model';
+import { goodLog } from "../model/log/goodLog.model";
+import { badLog } from "../model/log/badLog.model";
 import { recommendLog } from '../model/log/recommendLog.model';
 
 export class BoardRoutes {
@@ -17,7 +19,8 @@ export class BoardRoutes {
         this.boardRouter.get('/board/searchTerm/:searchTerm', pageListBoardBySearchTerm);
         this.boardRouter.get('/board/userIndex/:userIndex', pageListBoardInfoByUserIndex);
         this.boardRouter.get('/getBoard/:boardIndex', getBoardPost);
-        this.boardRouter.get('/board/getBoardRecommend/:boardIndex/:userIndex', getBoardRecommend);
+        this.boardRouter.get('/board/good/:boardIndex/:userIndex', getBoardGood);
+        this.boardRouter.get('/board/bad/:boardIndex/:userIndex', getBoardBad);
         this.boardRouter.put('/board/:boardIndex', updateBoard);
         this.boardRouter.delete('/board/:boardIndex', deleteBoard);
     }
@@ -223,12 +226,100 @@ async function getBoardPost(req,res) {
 }
 
 /**
+ * route : 추천
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function getBoardGood(req,res) {
+    let boardIndex: number = req.params.boardIndex;
+    let userIndex: number = req.params.userIndex;
+
+    try {
+        await goodLog.checkGoodLog(boardIndex,userIndex);
+        await goodLog.createGoodLog({
+            boardIndex: boardIndex,
+            userIndex: userIndex
+        })
+        await board.updateBoardByGood(boardIndex);
+        const result: any = await board.getBoardGood(boardIndex);{
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'getBoardGood 200'
+            })
+        }
+    } catch (err) {
+        switch (err) {
+            case 'This is goodLog is already exist':
+                res.send({
+                    success: false,
+                    statusCode: 409,
+                    message: 'getBoardGood 409'
+                })
+                break;
+            default:
+                res.send({
+                    success: false,
+                    statusCode: 500,
+                    message: 'getBoardGood 500'
+                })
+        }
+    }
+}
+
+/**
+ * route : 비추천
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function getBoardBad(req,res) {
+    let boardIndex: number = req.params.boardIndex;
+    let userIndex: number = req.params.userIndex;
+
+    try {
+        await badLog.checkBadLog(boardIndex,userIndex);
+        await badLog.createBadLog({
+            boardIndex: boardIndex,
+            userIndex: userIndex
+        })
+        await board.updateBoardByBad(boardIndex);
+        const result: any = await board.getBoardBad(boardIndex);{
+            res.send({
+                success: true,
+                statusCode: 200,
+                result: result,
+                message: 'getBoardBad 200'
+            })
+        }
+    } catch (err) {
+        switch (err) {
+            case 'This is badLog is not exist':
+                res.send({
+                    success: false,
+                    statusCode: 409,
+                    message: 'getBoardBad 409'
+                })
+                break;
+            default:
+                res.send({
+                    success: false,
+                    statusCode: 500,
+                    message: 'getBoardBad 500'
+                })
+        }
+    }
+}
+
+/**
  * route : 추천수 조회 (게시글)
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
-async function getBoardRecommend(req, res) {
+/*async function getBoardRecommend(req, res) {
     let boardIndex: number = req.params.boardIndex;
     let userIndex: number = req.params.userIndex;
     try {
@@ -275,7 +366,7 @@ async function getBoardRecommend(req, res) {
                 })
         }
     }
-}
+}*/
 
 /**
  * route : board 업데이트

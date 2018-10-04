@@ -37,8 +37,8 @@ export class GoodLog {
                     connection.release();
                     if (err) {
                         reject(err);
-                    } else if (data[0] == null) {
-                        reject(`This is goodLog is not exist`);
+                    } else if (data[0] != null) {
+                        reject(`This is goodLog is already exist`);
                     } else {
                         resolve(data);
                     }

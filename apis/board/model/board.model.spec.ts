@@ -74,8 +74,14 @@ describe('board 모델', async () => {
         expect(result).to.instanceof(Object);
     })
 
-    it('getBoardRecommend', async () => {
-        const result: any = await board.getBoardRecommend(16);
+    it('getBoardGood', async () => {
+        const result: any = await board.getBoardGood(33);
+        // console.log(result);
+        expect(result).to.instanceof(Object);
+    })
+
+    it('getBoardBad', async () => {
+        const result: any = await board.getBoardBad(33);
         // console.log(result);
         expect(result).to.instanceof(Object);
     })
@@ -104,6 +110,18 @@ describe('board 모델', async () => {
 
     it('updateBoardByRecommendDown', async () => {
         const result: any = await board.updateBoardByRecommendDown(16);
+        // console.log(result);
+        expect(result).to.instanceof(Object);
+    })
+
+    it('updateBoardByGood', async () => {
+        const result: any = await board.updateBoardByGood(33);
+        // console.log(result);
+        expect(result).to.instanceof(Object);
+    })
+
+    it('updateBoardByBad', async () => {
+        const result: any = await board.updateBoardByBad(33);
         // console.log(result);
         expect(result).to.instanceof(Object);
     })

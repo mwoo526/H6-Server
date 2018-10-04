@@ -390,14 +390,34 @@ export class Board {
     }
 
     /**
-     * model : board 추천수 조회
+     * model : 추천수 조회
      * @param {number} boardIndex
      * @returns {Promise<void>}
      */
-    getBoardRecommend(boardIndex: number): Promise<void> {
+    getBoardGood(boardIndex: number): Promise<void> {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async (err, connection) => {
-                await connection.query(`SELECT recommend FROM board WHERE boardIndex = ${boardIndex}`, (err, data) => {
+                await connection.query(`SELECT good FROM board WHERE boardIndex = ?`, [boardIndex], (err, data) => {
+                    connection.release();
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(data[0]);
+                    }
+                })
+            })
+        })
+    }
+
+    /**
+     * model : 비추천수 조회
+     * @param {number} boardIndex
+     * @returns {Promise<void>}
+     */
+    getBoardBad(boardIndex: number): Promise<void> {
+        return new Promise(async (resolve, reject) => {
+            await pool.getConnection(async (err, connection) => {
+                await connection.query(`SELECT bad FROM board WHERE boardIndex = ?`, [boardIndex], (err, data) => {
                     connection.release();
                     if (err) {
                         reject(err);

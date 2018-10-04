@@ -37,7 +37,7 @@ export class BadLog {
                     connection.release();
                     if (err) {
                         reject(err);
-                    } else if (data[0] == null) {
+                    } else if (data[0] != null) {
                         reject(`This is badLog is not exist`);
                     } else {
                         resolve(data);

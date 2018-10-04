@@ -15,7 +15,6 @@ export class BoardReplyRoutes {
 		this.boardReplyRouter.get('/boardReply/boardIndex/:boardIndex', pageListBoardReplyByBoardIndex);
 		this.boardReplyRouter.get('/boardReply/comments/:boardReplyIndex', pageListBoardReplyByComments);
 		this.boardReplyRouter.get('/boardReply/boardReplyComments/:boardIndex', pageListBoardReplyComments);
-		this.boardReplyRouter.get('/boardReply/check/:boardIndex', checkCountBoardReply);
 		this.boardReplyRouter.put('/boardReply/:boardReplyIndex', updateBoardReply);
 		this.boardReplyRouter.delete('/boardReply/:boardReplyIndex', deleteBoardReply);
 
@@ -182,20 +181,6 @@ async function pageListBoardReplyComments(req, res) {
 				})
 				break;
 		}
-	}
-}
-
-async function checkCountBoardReply(req,res) {
-	let boardIndex: number = req.params.boardIndex;
-	try {
-		const result: any = await boardReply.countBoardReplyByBoardIndex(boardIndex);
-		res.send({
-			success: true,
-			statusCode: 200,
-			result: result
-		})
-	} catch (err) {
-		res.send(err);
 	}
 }
 
