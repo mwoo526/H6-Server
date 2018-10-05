@@ -3,7 +3,7 @@ import { BoardResource } from '../../../resources/board.resource';
 import { board } from '../model/board.model';
 import { goodLog } from "../model/log/goodLog.model";
 import { badLog } from "../model/log/badLog.model";
-import { recommendLog } from '../model/log/recommendLog.model';
+import { scrapLog } from "../model/log/scrapLog.model";
 
 export class BoardRoutes {
     public boardRouter: express.Router = express.Router();
@@ -15,12 +15,13 @@ export class BoardRoutes {
     public router() {
         this.boardRouter.post('/board', createBoard);
         this.boardRouter.get('/board/:sort', pageListBoard);
-        this.boardRouter.get('/board/:category/:sort', pageBoardByCategory);
+        this.boardRouter.get('/board/category/:category/:sort', pageBoardByCategory);
         this.boardRouter.get('/board/searchTerm/:searchTerm', pageListBoardBySearchTerm);
         this.boardRouter.get('/board/userIndex/:userIndex', pageListBoardInfoByUserIndex);
-        this.boardRouter.get('/getBoard/:boardIndex', getBoardPost);
+        this.boardRouter.get('/board/post/:boardIndex', getBoardPost);
         this.boardRouter.get('/board/good/:boardIndex/:userIndex', getBoardGood);
         this.boardRouter.get('/board/bad/:boardIndex/:userIndex', getBoardBad);
+        this.boardRouter.get('/board/scrap/:boardIndex/:userIndex', getBoardScrap);
         this.boardRouter.put('/board/:boardIndex', updateBoard);
         this.boardRouter.delete('/board/:boardIndex', deleteBoard);
     }
@@ -98,8 +99,8 @@ async function pageListBoard(req, res) {
 async function pageBoardByCategory(req, res) {
     let category: string = req.params.category;
     let sort: string = req.params.sort;
-    let page: number = parseInt(req.params.page);
-    let count: number = parseInt(req.params.count);
+    let page: number = parseInt(req.query.page);
+    let count: number = parseInt(req.query.count);
     try{
         const resultCount: any = await board.listBoardByCategory(category,sort);
         const result: any = await board.pageListBoardByCategory(category,sort,page,count);
@@ -116,6 +117,7 @@ async function pageBoardByCategory(req, res) {
                 res.send({
                     success: false,
                     statusCode: 500,
+                    err: err,
                     message: 'pageBoardByCategory: 500'
                 });
                 break;
@@ -155,6 +157,7 @@ async function pageListBoardBySearchTerm(req, res) {
         }
     }
 }
+
 
 /**
  * route : boardInfo user 별 리스트 조회
@@ -313,60 +316,55 @@ async function getBoardBad(req,res) {
     }
 }
 
-/**
- * route : 추천수 조회 (게시글)
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-/*async function getBoardRecommend(req, res) {
+
+async function getBoardScrap(req, res) {
     let boardIndex: number = req.params.boardIndex;
     let userIndex: number = req.params.userIndex;
     try {
-        let isRecommend: any = await recommendLog.checkRecommendLog(boardIndex, userIndex);
+        let isRecommend: any = await scrapLog.checkScrapLog(boardIndex, userIndex);
         if (isRecommend.isRecommend) {
-            await recommendLog.updateRecommendLog(boardIndex, userIndex);
-            await board.updateBoardByRecommendDown(boardIndex);
-            let result: any = await board.getBoardRecommend(boardIndex);
+            await scrapLog.updateScrapLog(boardIndex, userIndex);
+            await board.updateBoardByScrap(boardIndex);
+            let result: any = await board.getBoardScrap(boardIndex);
             res.send({
                 success: true,
                 statusCode: 200,
                 result: result,
-                message: 'getBoardRecommend 200'
+                message: 'getBoardScrap 200'
             })
         } else {
-            await recommendLog.updateRecommendLog(boardIndex, userIndex);
-            await board.updateBoardByRecommendUp(boardIndex);
-            let result: any = await board.getBoardRecommend(boardIndex);
+            await scrapLog.updateScrapLog(boardIndex, userIndex);
+            await board.updateBoardByScrap(boardIndex);
+            let result: any = await board.getBoardScrap(boardIndex);
             res.send({
                 success: true,
                 statusCode: 200,
                 result: result,
-                message: 'getBoardRecommend 200'
+                message: 'getBoardScrap 200'
             })
         }
     } catch (err) {
         switch (err) {
-            case 'This RecommendLog is not exist':
-                await recommendLog.createRecommendLog(boardIndex, userIndex);
-                await board.updateBoardByRecommendUp(boardIndex);
-                let result: any = await board.getBoardRecommend(boardIndex);
+            case 'This ScrapLog is not exist':
+                await scrapLog.createScrapLog(boardIndex, userIndex);
+                await board.updateBoardByScrap(boardIndex);
+                let result: any = await board.getBoardScrap(boardIndex);
                 res.send({
                     success: true,
                     statusCode: 200,
                     result: result,
-                    message: 'getBoardRecommend 200'
+                    message: 'getBoardScrap 200'
                 })
                 break;
             default:
                 res.send({
                     success: false,
                     statusCode: 500,
-                    message: 'getBoardRecommend 500'
+                    message: 'getBoardScrap 500'
                 })
         }
     }
-}*/
+}
 
 /**
  * route : board 업데이트

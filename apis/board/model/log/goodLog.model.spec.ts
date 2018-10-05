@@ -9,13 +9,13 @@ describe('goodLog 모델', () => {
 
     it('createGoodLog 모델', async () => {
         const result: any = await goodLog.createGoodLog(goodLogData);
-        console.log(result);
+        // console.log(result);
         expect(result).to.instanceof(Object);
     });
 
     it('checkGoodLog 모델', async () => {
         const result: any = await goodLog.checkGoodLog(goodLogData.boardIndex, goodLogData.userIndex);
-        console.log(result);
+        // console.log(result);
         expect(result).to.instanceof(Object);
     })
 });

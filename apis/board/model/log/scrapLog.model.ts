@@ -2,7 +2,7 @@ import { mysqlUtil } from '../../../../packages/utils/mysql.util';
 
 const pool = mysqlUtil.pool;
 
-export class RecommendLog {
+export class ScrapLog {
 
 	/**
 	 * model : recommendLog 생성
@@ -10,20 +10,19 @@ export class RecommendLog {
 	 * @param {number} userIndex
 	 * @returns {Promise<void>}
 	 */
-	createRecommendLog(boardIndex: number, userIndex: number): Promise<void> {
+	createScrapLog(boardIndex: number, userIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`INSERT INTO recommendLog SET boardIndex = ?, userIndex = ?`, [boardIndex,
-					userIndex], (err, data) => {
+				await connection.query(`INSERT INTO scrapLog SET boardIndex = ?, userIndex = ?`, [boardIndex, userIndex], (err, data) => {
 					connection.release();
 					if (err) {
 						reject(err);
 					} else {
 						resolve(data);
 					}
-				})
-			})
-		})
+				});
+			});
+		});
 	}
 
 	/**
@@ -32,21 +31,21 @@ export class RecommendLog {
 	 * @param {number} userIndex
 	 * @returns {Promise<void>}
 	 */
-	checkRecommendLog(boardIndex: number, userIndex: number): Promise<void> {
+	checkScrapLog(boardIndex: number, userIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`SELECT isRecommend FROM recommendLog WHERE boardIndex = ${boardIndex} AND userIndex = ${userIndex}`, (err, data) => {
+				await connection.query(`SELECT isScrap FROM scrapLog WHERE boardIndex = ? AND userIndex = ?`, [boardIndex, userIndex], (err, data) => {
 					connection.release();
 					if (err) {
 						reject(err);
 					} else if (data[0] == null) {
-						reject('This RecommendLog is not exist');
+						reject('This ScrapLog is not exist');
 					} else {
 						resolve(data[0]);
 					}
-				})
-			})
-		})
+				});
+			});
+		});
 	}
 
 	/**
@@ -55,21 +54,21 @@ export class RecommendLog {
 	 * @param {number} userIndex
 	 * @returns {Promise<void>}
 	 */
-	updateRecommendLog(boardIndex: number, userIndex: number): Promise<void> {
+	updateScrapLog(boardIndex: number, userIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`UPDATE recommendLog SET isRecommend = IF(isRecommend=FALSE,TRUE,FALSE) WHERE boardIndex = ${boardIndex} AND userIndex = ${userIndex}`, (err, data) => {
+				await connection.query(`UPDATE scrapLog SET isScrap = IF(isScrap=FALSE,TRUE,FALSE) WHERE boardIndex = ? AND userIndex = ?`, [boardIndex, userIndex],(err, data) => {
 					connection.release();
 					if (err) {
 						reject(err);
 					} else {
 						resolve(data);
 					}
-				})
-			})
-		})
+				});
+			});
+		});
 	}
 
 }
 
-export const recommendLog: RecommendLog = new RecommendLog();
+export const scrapLog: ScrapLog = new ScrapLog();

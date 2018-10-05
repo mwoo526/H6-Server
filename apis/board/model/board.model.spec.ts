@@ -4,11 +4,11 @@ import { board } from './board.model';
 describe('board 모델', async () => {
     it('createBoard', async () => {
         const result: any = await board.createBoard({
-            boardIndex: 9,
+            boardIndex: 5,
             userIndex: 1,
-            category: '분실물',
-            boardTitle: '분실물 타이틀2',
-            boardContent: '분실물 컨텐츠2'
+            category: '연애',
+            boardTitle: '연애 타이틀',
+            boardContent: '연애 컨텐츠'
         });
         // console.log(result);
         expect(result).to.instanceof(Object);
@@ -17,7 +17,7 @@ describe('board 모델', async () => {
     it('listBoard', async () => {
         const sort: string = 'sort';
         const result: any = await board.listBoard(sort);
-        console.log(result);
+        // console.log(result);
         expect(result).to.instanceof(Array);
     })
 
@@ -37,7 +37,7 @@ describe('board 모델', async () => {
     })
 
     it('pageListBoardByCategory', async () => {
-        const category: string = '연애';
+        const category: string = '자유';
         const sort: string = 'createdAt';
         const result: any = await board.pageListBoardByCategory(category, sort, 1, 5);
         // console.log(result);
@@ -45,13 +45,13 @@ describe('board 모델', async () => {
     })
 
     it('listBoardInfoBySearchTerm', async () => {
-        const result: any = await board.listBoardBySearchTerm('컨텐');
+        const result: any = await board.listBoardBySearchTerm('분실물');
         // console.log(result);
         expect(result).to.instanceof(Array);
     })
 
     it('pageListBoardInfoBySearchTerm', async () => {
-        const result: any = await board.pageListBoardBySearchTerm('자유', 1, 5);
+        const result: any = await board.pageListBoardBySearchTerm('분실물', 1, 5);
         // console.log(result);
         expect(result).to.instanceof(Array);
     })
@@ -86,8 +86,14 @@ describe('board 모델', async () => {
         expect(result).to.instanceof(Object);
     })
 
+    it('getBoardScrap', async () => {
+        const result: any = await board.getBoardScrap(33);
+        // console.log(result);
+        expect(result).to.instanceof(Object);
+    })
+
     it('updateBoard', async () => {
-        const result: any = await board.updateBoard(20, {
+        const result: any = await board.updateBoard(34, {
             category: '자유',
             boardTitle: '테스트 타이틀',
             boardContent: '테이트 컨텐츠'
@@ -98,18 +104,6 @@ describe('board 모델', async () => {
 
     it('updateBoardByCount', async () => {
         const result: any = await board.updateBoardByCount(1);
-        // console.log(result);
-        expect(result).to.instanceof(Object);
-    })
-
-    it('updateBoardByRecommendUp', async () => {
-        const result: any = await board.updateBoardByRecommendUp(16);
-        // console.log(result);
-        expect(result).to.instanceof(Object);
-    })
-
-    it('updateBoardByRecommendDown', async () => {
-        const result: any = await board.updateBoardByRecommendDown(16);
         // console.log(result);
         expect(result).to.instanceof(Object);
     })
@@ -125,6 +119,13 @@ describe('board 모델', async () => {
         // console.log(result);
         expect(result).to.instanceof(Object);
     })
+
+    it('updateBoardByScrap', async () => {
+        const result: any = await board.updateBoardByScrap(33);
+        // console.log(result);
+        expect(result).to.instanceof(Object);
+    })
+
 
     it('deleteBoard', async () => {
         const result: any = await board.deleteBoard(20);

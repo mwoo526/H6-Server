@@ -6,7 +6,7 @@ describe('boardReply 모델', () => {
     before(async () => {
         try {
             const result: any = await boardReply.createBoardReply({
-                boardIndex: 33,
+                boardIndex: 1,
                 userIndex: 1,
                 boardReplyContent: '테스트 댓글입니다'
             });

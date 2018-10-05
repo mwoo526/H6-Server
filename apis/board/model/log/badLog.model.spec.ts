@@ -9,13 +9,13 @@ describe('badLog 모델', () => {
 
     it('createBadLog 모델', async () => {
         const result: any = await badLog.createBadLog(badLogData);
-        console.log(result);
+        // console.log(result);
         expect(result).to.instanceof(Object);
     });
 
     it('checkBadLog 모델', async () => {
         const result: any = await badLog.checkBadLog(badLogData.boardIndex, badLogData.userIndex);
-        console.log(result);
+        // console.log(result);
         expect(result).to.instanceof(Object);
     })
 });

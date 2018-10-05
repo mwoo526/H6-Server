@@ -13,16 +13,16 @@ export class Board {
     createBoard(boardData: any): Promise<void> {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async (err, connection) => {
-                await connection.query(`INSERT INTO board SET ?`, boardData, (err) => {
+                await connection.query(`INSERT INTO board SET ?`, [boardData], (err) => {
                     connection.release();
                     if (err) {
                         reject(err);
                     } else {
                         resolve(boardData);
                     }
-                })
-            })
-        })
+                });
+            });
+        });
     }
 
     /**
@@ -36,8 +36,8 @@ export class Board {
                 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex`;
             await pool.getConnection(async (err, connection) => {
                 if (sort == 'createdAt') {
-                    await connection.query(`${sql} ORDER BY t1.createdAt DESC`, (err, data) => {
-                        connection.release();
+                    await connection.query(`${sql} ORDER BY t1.createdAt DESC`, async (err, data) => {
+                        await connection.release();
                         if (err) {
                             reject(err);
                         } else {
@@ -46,28 +46,27 @@ export class Board {
                     });
                 }
                 else if (sort == 'count') {
-                    await connection.query(` ${sql} ORDER BY t1.count DESC`, (err, data) => {
-                        connection.release();
+                    await connection.query(` ${sql} ORDER BY t1.count DESC`, async (err, data) => {
+                        await connection.release();
                         if (err) {
                             reject(err);
                         } else {
                             resolve(data);
                         }
-                    })
+                    });
                 }
                 else if (sort == 'recommend') {
-                    await connection.query(` ${sql} ORDER BY t1.good DESC`, (err, data) => {
-                        connection.release();
+                    await connection.query(` ${sql} ORDER BY t1.good DESC`, async (err, data) => {
+                        await connection.release();
                         if (err) {
                             reject(err);
                         } else {
                             resolve(data);
                         }
-                    })
+                    });
                 }
-
-            })
-        })
+            });
+        });
     }
 
     /**
@@ -88,48 +87,51 @@ export class Board {
                 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex`;
                 if (sort == 'createdAt') {
                     await connection.query(`${sql} ORDER BY t1.createdAt DESC LIMIT ${start},${count}`, async (err, data) => {
-                        for(let i:number = 0; i < data.length; i++){
-                            const result: any = await boardReply.countBoardReplyByBoardIndex(data[i].boardIndex);
-                            data[i].boardReplyCount = result[0].boardReplyCount;
-                        }
-                        await connection.release();
                         if (err) {
+                            await connection.release();
                             reject(err);
                         } else {
+                            for (let i: number = 0; i < data.length; i++) {
+                                const result: any = await boardReply.countBoardReplyByBoardIndex(data[i].boardIndex);
+                                data[i].boardReplyCount = result[0].boardReplyCount;
+                            }
+                            await connection.release();
                             resolve(data);
                         }
                     });
                 }
                 else if (sort == 'count') {
                     await connection.query(` ${sql} ORDER BY t1.count DESC LIMIT ${start},${count}`, async (err, data) => {
-                        for(let i:number = 0; i < data.length; i++){
-                            const result: any = await boardReply.countBoardReplyByBoardIndex(data[i].boardIndex);
-                            data[i].boardReplyCount = result[0].boardReplyCount;
-                        }
-                        await connection.release();
                         if (err) {
+                            await connection.release();
                             reject(err);
                         } else {
+                            for (let i: number = 0; i < data.length; i++) {
+                                const result: any = await boardReply.countBoardReplyByBoardIndex(data[i].boardIndex);
+                                data[i].boardReplyCount = result[0].boardReplyCount;
+                            }
+                            await connection.release();
                             resolve(data);
                         }
-                    })
+                    });
                 }
                 else if (sort == 'recommend') {
                     await connection.query(` ${sql} ORDER BY t1.good DESC LIMIT ${start},${count}`, async (err, data) => {
-                        for(let i:number = 0; i < data.length; i++){
-                            const result: any = await boardReply.countBoardReplyByBoardIndex(data[i].boardIndex);
-                            data[i].boardReplyCount = result[0].boardReplyCount;
-                        }
-                        await connection.release();
                         if (err) {
+                            await connection.release();
                             reject(err);
                         } else {
+                            for (let i: number = 0; i < data.length; i++) {
+                                const result: any = await boardReply.countBoardReplyByBoardIndex(data[i].boardIndex);
+                                data[i].boardReplyCount = result[0].boardReplyCount;
+                            }
+                            await connection.release();
                             resolve(data);
                         }
-                    })
+                    });
                 }
-            })
-        })
+            });
+        });
     }
 
     /**
@@ -145,8 +147,8 @@ export class Board {
                 FROM board AS t1
                 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex WHERE t1.category = `;
                 if (sort == 'createdAt') {
-                    await connection.query(`${sql} ? ORDER BY t1.createdAt DESC`, [category], (err, data) => {
-                        connection.release();
+                    await connection.query(`${sql} ? ORDER BY t1.createdAt DESC`, [category], async (err, data) => {
+                        await connection.release();
                         if (err) {
                             reject(err);
                         } else {
@@ -155,28 +157,27 @@ export class Board {
                     });
                 }
                 else if (sort == 'count') {
-                    await connection.query(` ${sql} ? ORDER BY t1.count DESC`, [category], (err, data) => {
-                        connection.release();
+                    await connection.query(` ${sql} ? ORDER BY t1.count DESC`, [category], async (err, data) => {
+                        await connection.release();
                         if (err) {
                             reject(err);
                         } else {
                             resolve(data);
                         }
-                    })
+                    });
                 }
                 else if (sort == 'recommend') {
-                    await connection.query(` ${sql} ? ORDER BY t1.good DESC`, [category], (err, data) => {
-                        connection.release();
+                    await connection.query(` ${sql} ? ORDER BY t1.good DESC`, [category], async (err, data) => {
+                        await connection.release();
                         if (err) {
                             reject(err);
                         } else {
                             resolve(data);
                         }
-                    })
+                    });
                 }
-
-            })
-        })
+            });
+        });
     }
 
     /**
@@ -199,48 +200,51 @@ export class Board {
                 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex WHERE t1.category = `;
                 if (sort == 'createdAt') {
                     await connection.query(`${sql} ? ORDER BY t1.createdAt DESC LIMIT ${start},${count}`, [category], async (err, data) => {
-                        for(let i: number = 0; i < data.length; i++){
-                            const result: any = await boardReply.countBoardReplyByBoardIndex(data[i].boardIndex);
-                            data[i].boardReplyCount = result[0].boardReplyCount;
-                        }
-                        await connection.release();
                         if (err) {
+                            await connection.release();
                             reject(err);
                         } else {
+                            for (let i: number = 0; i < data.length; i++) {
+                                const result: any = await boardReply.countBoardReplyByBoardIndex(data[i].boardIndex);
+                                data[i].boardReplyCount = result[0].boardReplyCount;
+                            }
+                            await connection.release();
                             resolve(data);
                         }
                     });
                 }
                 else if (sort == 'count') {
                     await connection.query(` ${sql} ? ORDER BY t1.count DESC LIMIT ${start},${count}`, [category], async (err, data) => {
-                        for(let i:number = 0; i < data.length; i++){
-                            const result: any = await boardReply.countBoardReplyByBoardIndex(data[i].boardIndex);
-                            data[i].boardReplyCount = result[0].boardReplyCount;
-                        }
-                        await connection.release();
                         if (err) {
+                            await connection.release();
                             reject(err);
                         } else {
+                            for (let i = 0; i < data.length; i++) {
+                                const result: any = await boardReply.countBoardReplyByBoardIndex(data[i].boardIndex);
+                                data[i].boardReplyCount = result[0].boardReplyCount;
+                            }
+                            await connection.release();
                             resolve(data);
                         }
-                    })
+                    });
                 }
                 else if (sort == 'recommend') {
                     await connection.query(` ${sql} ? ORDER BY t1.good DESC LIMIT ${start},${count}`, [category], async (err, data) => {
-                        for(let i:number = 0; i < data.length; i++){
-                            const result: any = await boardReply.countBoardReplyByBoardIndex(data[i].boardIndex);
-                            data[i].boardReplyCount = result[0].boardReplyCount;
-                        }
-                        await connection.release();
                         if (err) {
+                            await connection.release();
                             reject(err);
                         } else {
+                            for (let i = 0; i < data.length; i++) {
+                                const result: any = await boardReply.countBoardReplyByBoardIndex(data[i].boardIndex);
+                                data[i].boardReplyCount = result[0].boardReplyCount;
+                            }
+                            await connection.release();
                             resolve(data);
                         }
-                    })
+                    });
                 }
-            })
-        })
+            });
+        });
     }
 
     /**
@@ -255,16 +259,16 @@ export class Board {
                 FROM board AS t1
                 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
                 WHERE t1.boardTitle LIKE ?
-                or t1.boardContent LIKE ?`, [`%${searchTerm}%`, `%${searchTerm}%`], (err, data) => {
-                    connection.release();
+                or t1.boardContent LIKE ?`, [`%${searchTerm}%`, `%${searchTerm}%`], async (err, data) => {
+                    await connection.release();
                     if (err) {
                         reject(err);
                     } else {
                         resolve(data);
                     }
-                })
-            })
-        })
+                });
+            });
+        });
     }
 
     /**
@@ -281,28 +285,27 @@ export class Board {
                 if (start < 0) {
                     start = 0
                 }
-
-                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.boardContent, t1.createdAt, t1.good, t1.bad, t1.scrap, t2.userNickName
+                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.boardContent, t1.createdAt, t1.good, t1.bad, t1.scrap, t2.userNickName                
                 FROM board AS t1
                 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
                 WHERE t1.boardTitle LIKE ?
                 or t1.boardContent LIKE ?
                 ORDER BY t1.boardIndex DESC  LIMIT ${start},${count}`, [`%${searchTerm}%`, `%${searchTerm}%`], async (err, data) => {
-                    for(let i = 0; i < data.length; i++){
-                        const result: any = await boardReply.countBoardReplyByBoardIndex(data[i].boardIndex);
-                        data[i].boardReplyCount = result[0].boardReplyCount;
-                    }
-                    await connection.release();
                     if (err) {
+                        await connection.release();
                         reject(err);
                     } else {
+                        for (let i = 0; i < data.length; i++) {
+                            const result: any = await boardReply.countBoardReplyByBoardIndex(data[i].boardIndex);
+                            data[i].boardReplyCount = result[0].boardReplyCount;
+                        }
+                        await connection.release();
                         resolve(data);
                     }
-                })
-            })
-        })
+                });
+            });
+        });
     }
-
 
     /**
      * model : boardInfo user 리스트 조회
@@ -321,9 +324,9 @@ export class Board {
                     } else {
                         resolve(data);
                     }
-                })
-            })
-        })
+                });
+            });
+        });
     }
 
     /**
@@ -352,10 +355,9 @@ export class Board {
                     } else {
                         resolve(data);
                     }
-
-                })
-            })
-        })
+                });
+            });
+        });
     }
 
     /**
@@ -377,20 +379,20 @@ export class Board {
                         await connection.release();
                         reject('This Post is not exist');
                     } else {
-                        for(let i: number = 0; i < data.length; i++) {
+                        for (let i: number = 0; i < data.length; i++) {
                             const result: any = await boardReply.countBoardReplyByBoardIndex(data[i].boardIndex);
                             data[i].boardReplyCount = result[0].boardReplyCount
                         }
                         await connection.release();
                         resolve(data);
                     }
-                })
-            })
-        })
+                });
+            });
+        });
     }
 
     /**
-     * model : 추천수 조회
+     * model : board 추천수 조회
      * @param {number} boardIndex
      * @returns {Promise<void>}
      */
@@ -404,13 +406,13 @@ export class Board {
                     } else {
                         resolve(data[0]);
                     }
-                })
-            })
-        })
+                });
+            });
+        });
     }
 
     /**
-     * model : 비추천수 조회
+     * model : board 비추천수 조회
      * @param {number} boardIndex
      * @returns {Promise<void>}
      */
@@ -424,9 +426,29 @@ export class Board {
                     } else {
                         resolve(data[0]);
                     }
-                })
-            })
-        })
+                });
+            });
+        });
+    }
+
+    /**
+     * model : board 스크랩 조회
+     * @param {number} boardIndex
+     * @returns {Promise<void>}
+     */
+    getBoardScrap(boardIndex: number): Promise<void> {
+        return new Promise(async (resolve, reject) => {
+            await pool.getConnection(async (err, connection) => {
+                await connection.query(`SELECT scrap FROM board WHERE boardIndex = ?`, [boardIndex], (err, data) => {
+                    connection.release();
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(data[0]);
+                    }
+                });
+            });
+        });
     }
 
     /**
@@ -438,7 +460,7 @@ export class Board {
     updateBoard(boardIndex: number, boardData: any): Promise<void> {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async (err, connection) => {
-                await connection.query(`UPDATE board SET ? WHERE boardIndex = ?`, [boardData], (err) => {
+                await connection.query(`UPDATE board SET ? WHERE boardIndex = ?`, [boardData, boardIndex], (err) => {
                     connection.release();
                     if (err) {
                         reject(err);
@@ -471,51 +493,11 @@ export class Board {
     }
 
     /**
-     * model : board 추천수 up
-     * @param {number} boardIndex
-     * @returns {Promise<void>}
-     */
-    updateBoardByRecommendUp(boardIndex: number): Promise<void> {
-        return new Promise(async (resolve, reject) => {
-            await pool.getConnection(async (err, connection) => {
-                await connection.query(`UPDATE board SET recommend = recommend+1 WHERE boardIndex = ${boardIndex}`, (err, data) => {
-                    connection.release();
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(data);
-                    }
-                })
-            })
-        })
-    }
-
-    /**
-     * model : board 추천수 down
-     * @param {number} boardIndex
-     * @returns {Promise<void>}
-     */
-    updateBoardByRecommendDown(boardIndex: number): Promise<void> {
-        return new Promise(async (resolve, reject) => {
-            await pool.getConnection(async (err, connection) => {
-                await connection.query(`UPDATE board SET recommend = IF(recommend > 0, recommend-1, 0) WHERE boardIndex = ${boardIndex}`, (err, data) => {
-                    connection.release();
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(data);
-                    }
-                })
-            })
-        })
-    }
-
-    /**
      * model : board 추천수 업데이트
      * @param {number} boardIndex
      * @returns {Promise<any>}
      */
-    updateBoardByGood(boardIndex: number): Promise<any> {
+    updateBoardByGood(boardIndex: number): Promise<void> {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async (err, connection) => {
                 await connection.query(`UPDATE board SET good = good + 1 WHERE boardIndex = ?`, [boardIndex], (err, data) => {
@@ -535,7 +517,7 @@ export class Board {
      * @param {number} boardIndex
      * @returns {Promise<any>}
      */
-    updateBoardByBad(boardIndex: number): Promise<any> {
+    updateBoardByBad(boardIndex: number): Promise<void> {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async (err, connection) => {
                 await connection.query(`UPDATE board SET bad = bad + 1 WHERE boardIndex = ?`, [boardIndex], (err, data) => {
@@ -548,6 +530,26 @@ export class Board {
                 })
             })
         })
+    }
+
+    /**
+     * model : board 스크랩 업데이트
+     * @param {number} boardIndex
+     * @returns {Promise<void>}
+     */
+    updateBoardByScrap(boardIndex: number): Promise<void> {
+        return new Promise(async (resolve, reject) => {
+            await pool.getConnection(async (err, connection) => {
+                await connection.query(`UPDATE board SET scrap = IF(scrap=FALSE,TRUE,FALSE) WHERE boardIndex = ?`, [boardIndex], (err, data) => {
+                    connection.release();
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(data);
+                    }
+                });
+            });
+        });
     }
 
     /**
