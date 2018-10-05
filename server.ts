@@ -3,7 +3,7 @@ import * as express from 'express';
 import { Server } from './app';
 import { slack } from './packages/core/slack/slack';
 
-const port: number = 8080;
+const port: number = 80;
 const app: express.Application = new Server().app;
 app.set('port', port);
 app.listen(app.get('port'), async () => {
@@ -19,7 +19,7 @@ app.listen(app.get('port'), async () => {
   **********************************************************************************************************************************                                  
       `);
 	console.log('H6 server listening on port ' + port);
-	// await slack.sendDeployMessage('deploy');
+	await slack.sendDeployMessage('deploy');
 }).on('error', err => {
 	console.error(err);
 });
