@@ -4,12 +4,12 @@ const pool = mysqlUtil.pool;
 
 export class ScrapLog {
 
-	/**
-	 * model : recommendLog 생성
-	 * @param {number} boardIndex
-	 * @param {number} userIndex
-	 * @returns {Promise<void>}
-	 */
+    /**
+	 * model : scrapLog 생성
+     * @param {number} boardIndex
+     * @param {number} userIndex
+     * @returns {Promise<void>}
+     */
 	createScrapLog(boardIndex: number, userIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
@@ -25,12 +25,12 @@ export class ScrapLog {
 		});
 	}
 
-	/**
-	 * model : recommendLog 중복검사
-	 * @param {number} boardIndex
-	 * @param {number} userIndex
-	 * @returns {Promise<void>}
-	 */
+    /**
+	 * model : scrapLog 중복검사
+     * @param {number} boardIndex
+     * @param {number} userIndex
+     * @returns {Promise<void>}
+     */
 	checkScrapLog(boardIndex: number, userIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
@@ -48,12 +48,12 @@ export class ScrapLog {
 		});
 	}
 
-	/**
-	 * model : recommendLog isRecommend 업데이트
-	 * @param {number} boardIndex
-	 * @param {number} userIndex
-	 * @returns {Promise<void>}
-	 */
+    /**
+	 * model : scrapLog 업데이트
+     * @param {number} boardIndex
+     * @param {number} userIndex
+     * @returns {Promise<void>}
+     */
 	updateScrapLog(boardIndex: number, userIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {

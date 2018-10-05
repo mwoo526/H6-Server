@@ -248,7 +248,7 @@ export class Board {
     }
 
     /**
-     * model : board searchTerm  조회 (검색)
+     * model : board searchTerm 조회 (검색)
      * @param {string} searchTerm
      * @returns {Promise<void>}
      */
@@ -272,7 +272,7 @@ export class Board {
     }
 
     /**
-     * model : board searchTerm 조회 (검색)
+     * model : board page searchTerm 조회 (검색)
      * @param {string} searchTerm
      * @param {number} page
      * @param {number} count
@@ -300,59 +300,6 @@ export class Board {
                             data[i].boardReplyCount = result[0].boardReplyCount;
                         }
                         await connection.release();
-                        resolve(data);
-                    }
-                });
-            });
-        });
-    }
-
-    /**
-     * model : boardInfo user 리스트 조회
-     * @param {number} userIndex
-     * @returns {Promise<void>}
-     */
-    listBoardInfoByUserIndex(userIndex: number): Promise<void> {
-        return new Promise(async (resolve, reject) => {
-            await pool.getConnection(async (err, connection) => {
-                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t1.count, t1.recommend, t2.userNickName
-					FROM board AS t1
-					INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
-					WHERE t1.userIndex = ${userIndex}`, (err, data) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(data);
-                    }
-                });
-            });
-        });
-    }
-
-    /**
-     * model : boardInfo user page 리스트 조회
-     * @param {number} userIndex
-     * @param {number} page
-     * @param {number} count
-     * @returns {Promise<void>}
-     */
-    pageListBoardInfoByUserIndex(userIndex: number, page: number, count: number): Promise<void> {
-        return new Promise(async (resolve, reject) => {
-            await pool.getConnection(async (err, connection) => {
-                let start: number = (page - 1) * count;
-                if (start < 0) {
-                    start = 0;
-                }
-
-                await connection.query(`SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.createdAt, t1.count, t1.recommend, t2.userNickName
-					FROM board AS t1
-					INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
-					WHERE t1.userIndex = ${userIndex}
-					ORDER BY t1.boardIndex DESC LIMIT ${start},${count}`, (err, data) => {
-                    connection.release();
-                    if (err) {
-                        reject(err);
-                    } else {
                         resolve(data);
                     }
                 });

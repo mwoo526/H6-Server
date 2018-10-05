@@ -41,13 +41,13 @@ export class BoardReply {
                         } else {
                             resolve(boardData);
                         }
-                    })
-            })
-        })
+                    });
+            });
+        });
     }
 
     /**
-     * model : boardReply board 리스트 조회
+     * model : boardReply 댓글 리스트 조회
      * @param {number} boardIndex
      * @returns {Promise<void>}
      */
@@ -65,13 +65,13 @@ export class BoardReply {
                     } else {
                         resolve(data);
                     }
-                })
-            })
-        })
+                });
+            });
+        });
     }
 
     /**
-     * model : boardReply board page 리스트 조회
+     * model : boardReply 댓글 page 리스트 조회
      * @param {number} boardIndex
      * @param {number} page
      * @param {number} count
@@ -96,9 +96,9 @@ export class BoardReply {
                     } else {
                         resolve(data);
                     }
-                })
-            })
-        })
+                });
+            });
+        });
     }
 
     /**
@@ -120,9 +120,9 @@ export class BoardReply {
                     } else {
                         resolve(data);
                     }
-                })
-            })
-        })
+                });
+            });
+        });
     }
 
     /**
@@ -151,9 +151,9 @@ export class BoardReply {
                     } else {
                         resolve(data);
                     }
-                })
-            })
-        })
+                });
+            });
+        });
     }
 
     /**
@@ -174,9 +174,9 @@ export class BoardReply {
                     } else {
                         resolve(data);
                     }
-                })
-            })
-        })
+                });
+            });
+        });
     }
 
     /**
@@ -204,9 +204,9 @@ export class BoardReply {
                     } else {
                         resolve(data);
                     }
-                })
-            })
-        })
+                });
+            });
+        });
     }
 
     /**
@@ -224,9 +224,9 @@ export class BoardReply {
                     } else {
                         resolve(data);
                     }
-                })
-            })
-        })
+                });
+            });
+        });
     }
 
     /**
@@ -245,9 +245,9 @@ export class BoardReply {
                     } else {
                         resolve(boardReplyData);
                     }
-                })
-            })
-        })
+                });
+            });
+        });
     }
 
     /**
@@ -265,9 +265,9 @@ export class BoardReply {
                     } else {
                         resolve(data);
                     }
-                })
-            })
-        })
+                });
+            });
+        });
     }
 
 }
