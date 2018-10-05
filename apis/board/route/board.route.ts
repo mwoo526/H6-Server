@@ -17,7 +17,6 @@ export class BoardRoutes {
         this.boardRouter.get('/board/:sort', pageListBoard);
         this.boardRouter.get('/board/category/:category/:sort', pageBoardByCategory);
         this.boardRouter.get('/board/searchTerm/:searchTerm', pageListBoardBySearchTerm);
-        this.boardRouter.get('/board/userIndex/:userIndex', pageListBoardInfoByUserIndex);
         this.boardRouter.get('/board/post/:boardIndex', getBoardPost);
         this.boardRouter.get('/board/good/:boardIndex/:userIndex', getBoardGood);
         this.boardRouter.get('/board/bad/:boardIndex/:userIndex', getBoardBad);
@@ -29,7 +28,7 @@ export class BoardRoutes {
 }
 
 /**
- * board 생성
+ * route : board 생성
  * @param req
  * @param res
  * @returns {Promise<void>}
@@ -126,7 +125,7 @@ async function pageBoardByCategory(req, res) {
 }
 
 /**
- * route : boardI searchTerm 조회
+ * route : board searchTerm 검색
  * @param req
  * @param res
  * @returns {Promise<void>}
@@ -158,42 +157,8 @@ async function pageListBoardBySearchTerm(req, res) {
     }
 }
 
-
 /**
- * route : boardInfo user 별 리스트 조회
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-async function pageListBoardInfoByUserIndex(req, res) {
-    let userIndex: number = req.params.userIndex;
-    let page: number = req.query.page;
-    let count: number = req.query.count;
-    try {
-        const resultCount: any = await board.listBoardInfoByUserIndex(userIndex);
-        const result: any = await board.pageListBoardInfoByUserIndex(userIndex, page, count);
-        res.send({
-            success: true,
-            statusCode: 200,
-            resultCount: resultCount.length,
-            result: result,
-            message: 'pageListBoardInfoByUserIndex 200'
-        })
-    } catch (err) {
-        switch (err) {
-            default:
-                res.send({
-                    success: false,
-                    statusCode: 500,
-                    message: 'pageListBoardInfoByUserIndex 500'
-                })
-                break;
-        }
-    }
-}
-
-/**
- * route : 게시물 조회
+ * route : board 게시물 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
@@ -229,7 +194,7 @@ async function getBoardPost(req,res) {
 }
 
 /**
- * route : 추천
+ * route : board 추천 업데이트
  * @param req
  * @param res
  * @returns {Promise<void>}
@@ -273,7 +238,7 @@ async function getBoardGood(req,res) {
 }
 
 /**
- * route : 비추천
+ * route : board 비추천 업데이트
  * @param req
  * @param res
  * @returns {Promise<void>}
@@ -316,7 +281,12 @@ async function getBoardBad(req,res) {
     }
 }
 
-
+/**
+ * route : board 스크랩 업데이트
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
 async function getBoardScrap(req, res) {
     let boardIndex: number = req.params.boardIndex;
     let userIndex: number = req.params.userIndex;

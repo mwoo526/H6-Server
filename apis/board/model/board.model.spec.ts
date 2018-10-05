@@ -56,18 +56,6 @@ describe('board 모델', async () => {
         expect(result).to.instanceof(Array);
     })
 
-    it('listBoardInfoByUserIndex', async () => {
-        const result: any = await board.listBoardInfoByUserIndex(1);
-        // console.log(result);
-        expect(result).to.instanceof(Array);
-    })
-
-    it('pageListBoardInfoByUserIndex', async () => {
-        const result: any = await board.pageListBoardInfoByUserIndex(1, 1, 5);
-        // console.log(result);
-        expect(result).to.instanceof(Array);
-    })
-
     it('getBoardPost', async () => {
         const result: any = await board.getBoardPost(33);
         // console.log(result);

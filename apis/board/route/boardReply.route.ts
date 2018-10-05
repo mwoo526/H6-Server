@@ -82,7 +82,7 @@ async function createBoardReplyComments(req, res) {
 }
 
 /**
- * route : boardReply board 별 리스트 조회
+ * route : boardReply 댓글 별 리스트 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
@@ -116,7 +116,7 @@ async function pageListBoardReplyByBoardIndex(req, res) {
 
 
 /**
- * route : boardReply 별 답글 리스트 조회
+ * route : boardReply 답글 별 리스트 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
