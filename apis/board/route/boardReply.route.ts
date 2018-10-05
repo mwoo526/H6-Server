@@ -114,7 +114,6 @@ async function pageListBoardReplyByBoardIndex(req, res) {
 	}
 }
 
-
 /**
  * route : boardReply 답글 별 리스트 조회
  * @param req

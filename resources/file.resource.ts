@@ -1,100 +1,100 @@
 export class FileResource {
-    private  boardFileIndex;
-    private boardIndex;
-    private userIndex;
-    private fileName;
-    private filePath;
-    private fileSize;
-    private fileExtension;
-    private downloadCount;
-    
-    constructor(fileData) {
-        this.setboardFileIndex(fileData.boardFileIndex);
-        this.setboardIndex(fileData.boardIndex);
-        this.setuserIndex(fileData.userIndex);
-        this.setFileName(fileData.fileName);
-        this.setFilePath(fileData.filePath);
-        this.setFileSize(fileData.fileSize);
-        this.setFileExtension(fileData.fileExtension);
-        this.setdownloadCount(fileData.downloadCount);
+	private boardFileIndex;
+	private boardIndex;
+	private userIndex;
+	private fileName;
+	private filePath;
+	private fileSize;
+	private fileExtension;
+	private downloadCount;
 
-    }
+	constructor(fileData) {
+		this.setboardFileIndex(fileData.boardFileIndex);
+		this.setboardIndex(fileData.boardIndex);
+		this.setuserIndex(fileData.userIndex);
+		this.setFileName(fileData.fileName);
+		this.setFilePath(fileData.filePath);
+		this.setFileSize(fileData.fileSize);
+		this.setFileExtension(fileData.fileExtension);
+		this.setdownloadCount(fileData.downloadCount);
 
-    getboardFileIndex() {
-        return this.boardFileIndex;
-    }
+	}
 
-    setboardFileIndex(boardFileIndex) {
-        this.boardFileIndex = boardFileIndex;
-    }
-    getboardIndex() {
-        return this.boardIndex;
-    }
+	getboardFileIndex() {
+		return this.boardFileIndex;
+	}
 
-    setboardIndex(boardIndex) {
-        this.boardIndex = boardIndex;
-    }
+	setboardFileIndex(boardFileIndex) {
+		this.boardFileIndex = boardFileIndex;
+	}
 
-    getuserIndex() {
-        return this.userIndex;
-    }
+	getboardIndex() {
+		return this.boardIndex;
+	}
 
-    setuserIndex(userIndex) {
-        this.userIndex = userIndex;
-    }
+	setboardIndex(boardIndex) {
+		this.boardIndex = boardIndex;
+	}
 
-    getFileName() {
-        return this.fileName;
-    }
+	getuserIndex() {
+		return this.userIndex;
+	}
 
-    setFileName(fileName) {
-        this.fileName = fileName;
-    }
+	setuserIndex(userIndex) {
+		this.userIndex = userIndex;
+	}
 
-    getFilePath() {
-        return this.filePath;
-    }
+	getFileName() {
+		return this.fileName;
+	}
 
-    setFilePath(filePath) {
-        this.filePath = filePath;
-    }
+	setFileName(fileName) {
+		this.fileName = fileName;
+	}
 
-    getFileSize() {
-        return this.fileSize;
-    }
+	getFilePath() {
+		return this.filePath;
+	}
 
-    setFileSize(fileSize) {
-        this.fileSize = fileSize;
-    }
+	setFilePath(filePath) {
+		this.filePath = filePath;
+	}
 
-    getFileExtension() {
-        return this.fileExtension;
-    }
+	getFileSize() {
+		return this.fileSize;
+	}
 
-    setFileExtension(fileExtension) {
-        this.fileExtension = fileExtension;
-    }
+	setFileSize(fileSize) {
+		this.fileSize = fileSize;
+	}
 
-    getdownloadCount() {
-        return this.downloadCount;
-    }
+	getFileExtension() {
+		return this.fileExtension;
+	}
 
-    setdownloadCount(downloadCount) {
-        this.downloadCount = downloadCount;
-    }
+	setFileExtension(fileExtension) {
+		this.fileExtension = fileExtension;
+	}
 
+	getdownloadCount() {
+		return this.downloadCount;
+	}
 
-    getFile() {
-        let fileResource = {
-            boardFileIndex: this.getboardFileIndex(),
-            boardIndex: this.getboardIndex(),
-            userIndex: this.getuserIndex(),
-            fileName: this.getFileName(),
-            filePath: this.getFilePath(),
-            fileSize: this.getFileSize(),
-            fileExtension: this.getFileExtension(),
-            downloadCount: this.getdownloadCount()
-        };
-        return fileResource;
-    }
+	setdownloadCount(downloadCount) {
+		this.downloadCount = downloadCount;
+	}
+
+	getFile() {
+		let fileResource = {
+			boardFileIndex: this.getboardFileIndex(),
+			boardIndex: this.getboardIndex(),
+			userIndex: this.getuserIndex(),
+			fileName: this.getFileName(),
+			filePath: this.getFilePath(),
+			fileSize: this.getFileSize(),
+			fileExtension: this.getFileExtension(),
+			downloadCount: this.getdownloadCount()
+		};
+		return fileResource;
+	}
 }

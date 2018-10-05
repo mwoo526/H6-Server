@@ -37,7 +37,7 @@ describe('userValidation 모델', () => {
 			console.error('err', err);
 		}
 	});
-	
+
 	it('createUserValidation', async () => {
 		const result = await userValidation.createUserValidation({
 			userId: testUserId
@@ -102,7 +102,7 @@ describe('userValidation 모델', () => {
 		expect(result[0].userId).to.eql(tmpUserId);
 	});
 
-	it('getUpdateAt', async ()=> {
+	it('getUpdateAt', async () => {
 		const result = await userValidation.getUpdatedAt(tmpUserId);
 		expect(result).to.instanceof(Array);
 	});

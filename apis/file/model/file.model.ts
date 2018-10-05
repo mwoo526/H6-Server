@@ -45,7 +45,6 @@ export class File {
 		})
 	}
 
-
 	/**
 	 * model: file Index 조회
 	 * @param {number} fileIndex
@@ -67,12 +66,11 @@ export class File {
 		})
 	}
 
-
-    /**
-     * model: file Index 조회
-     * @returns {Promise<any>}
-     * @param boardIndex
-     */
+	/**
+	 * model: file Index 조회
+	 * @returns {Promise<any>}
+	 * @param boardIndex
+	 */
 
 	getBoardIndex(boardIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
@@ -120,7 +118,7 @@ export class File {
 	deleteFile(fileIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`DELETE FROM file WHERE boardFileIndex = ?`,[fileIndex], function(err, rows) {
+				await connection.query(`DELETE FROM file WHERE boardFileIndex = ?`, [fileIndex], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -133,32 +131,29 @@ export class File {
 		})
 	}
 
-    /**
-     * model: file downloadCount 조회
-     * @param {number} fileIndex
-     * @returns {Promise<any>}
-     */
+	/**
+	 * model: file downloadCount 조회
+	 * @param {number} fileIndex
+	 * @returns {Promise<any>}
+	 */
 
 
-    downloadCount(fileIndex: number): Promise<any> {
-        return new Promise(async (resolve, reject) => {
-            await pool.getConnection(async function(err, connection) {
-                await connection.query(`SELECT downloadCount FROM file WHERE boardFileIndex = ?`,[fileIndex], function(err, rows) {
-                    if (err) {
-                        connection.release();
-                        reject(err);
-                    } else {
-                        connection.release();
-                        resolve(rows);
-                    }
-                })
-            })
-        })
-    }
-
-
+	downloadCount(fileIndex: number): Promise<any> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(`SELECT downloadCount FROM file WHERE boardFileIndex = ?`, [fileIndex], function(err, rows) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						connection.release();
+						resolve(rows);
+					}
+				})
+			})
+		})
+	}
 
 }
-
 
 export const file: any = new File();

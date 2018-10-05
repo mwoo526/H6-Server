@@ -36,12 +36,12 @@ export class BoardReplyResource {
 		this.boardReplyContent = boardReplyContent;
 	}
 
-	getParent(){
+	getParent() {
 		return this.parent;
 	}
 
-	setParent(parent){
-		this.parent=parent;
+	setParent(parent) {
+		this.parent = parent;
 	}
 
 	getBoardReplyData() {
@@ -49,7 +49,7 @@ export class BoardReplyResource {
 			boardIndex: this.getBoardIndex(),
 			userIndex: this.getUserIndex(),
 			boardReplyContent: this.getBoardReplyContent(),
-			parent : this.getParent()
+			parent: this.getParent()
 		};
 		return boardReplyData;
 	}

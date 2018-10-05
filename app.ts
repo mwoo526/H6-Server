@@ -48,8 +48,8 @@ export class Server {
 		this.app.use(userValidationRoutes.userValidationRouter);
 		this.app.use(reportBoardRoutes.reportBoardRouter);
 		this.app.use(categoryRoutes.categoryRouter);
-        this.app.use(boardRoutes.boardRouter);
-        this.app.use(boardReplyRoutes.boardReplyRouter);
+		this.app.use(boardRoutes.boardRouter);
+		this.app.use(boardReplyRoutes.boardReplyRouter);
 		this.app.use(fileRoutes.fileRouter);
 		/** 라우터 토큰 검증 */
 		this.app.use(verify);

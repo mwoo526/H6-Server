@@ -72,7 +72,8 @@ export class Category {
 	updateCategory(categoryName: string, categoryData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`UPDATE category SET ? WHERE categoryName = ?`, [categoryData, categoryName], (err, data) => {
+				await connection.query(`UPDATE category SET ? WHERE categoryName = ?`, [categoryData,
+					categoryName], (err, data) => {
 					connection.release();
 					if (err) {
 						reject(err);

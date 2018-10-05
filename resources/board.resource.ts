@@ -43,7 +43,6 @@ export class BoardResource {
 		this.boardContent = boardContent;
 	}
 
-
 	getBoard() {
 		let boardData: object = {
 			userIndex: this.getUserIndex(),
