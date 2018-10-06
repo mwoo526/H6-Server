@@ -6,4 +6,4 @@
 * npm i @types/node
 * npm install
 * tsc --p tsconfig.json
-* sudo node server
+* npm start
