@@ -71,7 +71,6 @@ export class File {
 	 * @returns {Promise<any>}
 	 * @param boardIndex
 	 */
-
 	getBoardIndex(boardIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
@@ -91,7 +90,6 @@ export class File {
 	/** model : file 업데이트
 	 * @returns {Promise<void>}
 	 */
-
 	updateFile(fileIndex: number, fileDate: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
@@ -114,7 +112,6 @@ export class File {
 	 * @param {number} fileIndex
 	 * @returns {Promise<any>}
 	 */
-
 	deleteFile(fileIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
@@ -136,8 +133,6 @@ export class File {
 	 * @param {number} fileIndex
 	 * @returns {Promise<any>}
 	 */
-
-
 	downloadCount(fileIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {

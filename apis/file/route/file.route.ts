@@ -25,7 +25,6 @@ export class FileRoutes {
 		this.fileRouter.put('/file/fileIndex/:fileIndex', updateFile);
 		this.fileRouter.delete('/file/fileIndex/:fileIndex', deleteFile);
 		this.fileRouter.delete('/file/fileIndex/:fileIndex/deleteUpload', deleteUploadFile);
-
 	}
 }
 
@@ -248,7 +247,7 @@ async function deleteUploadFile(req, res): Promise<void> {
 			default:
 				res.send({
 					success: false,
-					statusCode: err,
+					statusCode: 500,
 					message: 'deleteFile: 50000'
 				});
 				break;
