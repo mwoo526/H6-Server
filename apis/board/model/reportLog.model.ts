@@ -25,6 +25,29 @@ export class ReportLog {
 		});
 	}
 
+    /**
+     * model:
+     * @param :
+     * @returns {Promise<any>}
+     */
+
+    getReportLogCount(boardIndex: number): Promise<any> {
+    	return new Promise(async (resolve, reject) => {
+    		await pool.getConnection(async (err, connection) => {
+    			await connection.query(`SELECT boardIndex, count(*) as reportCount 
+    			from reportLog where boardIndex=? group by boardIndex`, [boardIndex], (err, data) => {
+    				connection.release();
+    				if(err) {
+    					reject(err);
+					}
+					else {
+    					resolve(data);
+					}
+				})
+			})
+		});
+	}
+
 	/**
 	 * model : ReportLogInfo 리스트 조회
 	 * @returns {Promise<void>}

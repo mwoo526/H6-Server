@@ -1,6 +1,8 @@
 import * as express from 'express';
 import { ReportLogResource } from '../../../resources/reportLog.resource';
 import { reportLog } from '../model/reportLog.model';
+import { slack } from '../../../packages/core/slack/slack';
+
 
 export class ReportLogRoutes {
 	public reportLogRouter: express.Route = express.Router();
@@ -26,8 +28,18 @@ export class ReportLogRoutes {
  */
 async function createReportLog(req, res): Promise<void> {
 	let reportLogData: any = new ReportLogResource(req.body);
+	const alarmCount = 3;
 	try {
 		const result: any = await reportLog.createReportLog(reportLogData.getReportLog());
+		let countResult: any = await reportLog.getReportLogCount(result['boardIndex']);
+		countResult = JSON.parse(JSON.stringify(countResult));
+
+		const reportCount = countResult[0]['reportCount'];
+		if(reportCount > alarmCount) {
+            console.log(reportCount);
+			await slack.sendReportMessage('deploy', result['boardIndex'], reportCount);
+        }
+
 		res.send({
 			success: true,
 			statusCode: 200,
