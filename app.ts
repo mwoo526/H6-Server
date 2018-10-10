@@ -1,7 +1,7 @@
 import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import { admissionRoutes } from './apis/admissionYear/route/admissionYear.route';
-import { reportBoardRoutes } from './apis/board/route/reportBoard.route';
+import { reportLogRoutes } from './apis/board/route/reportLog.route';
 import { lectureRoutes } from './apis/lecture/route/lecture.route';
 import { lectureInfoRoutes } from './apis/lecture/route/lectureInfo.route';
 import { lectureReplyRoutes } from './apis/lecture/route/lectureReply.route';
@@ -46,7 +46,7 @@ export class Server {
 		this.app.use(trackRoutes.trackRouter);
 		this.app.use(admissionRoutes.admissionYearRouter);
 		this.app.use(userValidationRoutes.userValidationRouter);
-		this.app.use(reportBoardRoutes.reportBoardRouter);
+		this.app.use(reportLogRoutes.reportLogRouter);
 		this.app.use(categoryRoutes.categoryRouter);
 		this.app.use(boardRoutes.boardRouter);
 		this.app.use(boardReplyRoutes.boardReplyRouter);

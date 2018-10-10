@@ -36,6 +36,48 @@ export class Slack {
 		});
 	}
 
+	async sendReportMessage(channel: string, boardIndex: number, reportCount: number) {
+		const file = './packages/core/env/env.json';
+        let envData: any = await fs.readFileSync(file, 'utf8');
+        envData = JSON.parse(envData);
+        const path = this.getChannelPath(channel);
+        const url: string = `https://hooks.slack.com/services/${path}`;
+
+        const message = {
+            attachments: [
+                {
+                    'color': '#36a64f',
+                    'mrkdwn_in': ['text', 'fields'],
+                    'fields': [
+                        {
+                            'title': `${envData.stage} 서버 / ReportLog 알림`,
+                            'value': `boardIndex=${boardIndex}, reportCount=${reportCount} `,
+                            'short': false
+                        }
+                    ]
+                }
+            ]
+        };
+
+	  	const options = {
+			url: `https://hooks.slack.com/services/${path}`,
+			method: 'POST',
+			json: true,
+			body: message
+		};
+
+		/**
+		 * 슬랙 메시지 전송 실패시 서버 에러가 발생하지 않게 하기 위해 setImmediate으로 처리
+		 */
+		setImmediate(() => {
+			axios.post(url, message)
+				.then((response) => response.data)
+				.catch((err) => {
+					console.log(err);
+				});
+		});
+	}
+
 	async sendDeployMessage(channel: string) {
 		/** 환경변수 파일 읽어오기 */
 		const file = './packages/core/env/env.json';
