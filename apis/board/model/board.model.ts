@@ -35,7 +35,7 @@ export class Board {
                 FROM board AS t1
                 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex`;
 			await pool.getConnection(async (err, connection) => {
-				if (sort == 'createdAt') {
+				if (sort === 'createdAt') {
 					await connection.query(`${sql} ORDER BY t1.createdAt DESC`, async (err, data) => {
 						await connection.release();
 						if (err) {
@@ -45,7 +45,7 @@ export class Board {
 						}
 					});
 				}
-				else if (sort == 'count') {
+				else if (sort === 'count') {
 					await connection.query(` ${sql} ORDER BY t1.count DESC`, async (err, data) => {
 						await connection.release();
 						if (err) {
@@ -55,7 +55,7 @@ export class Board {
 						}
 					});
 				}
-				else if (sort == 'recommend') {
+				else if (sort === 'recommend') {
 					await connection.query(` ${sql} ORDER BY t1.good DESC`, async (err, data) => {
 						await connection.release();
 						if (err) {
@@ -85,7 +85,7 @@ export class Board {
 				let sql: any = `SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.boardContent, t1.createdAt, t1.good, t1.bad, t1.scrap, t2.userNickName
                 FROM board AS t1
                 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex`;
-				if (sort == 'createdAt') {
+				if (sort === 'createdAt') {
 					await connection.query(`${sql} ORDER BY t1.createdAt DESC LIMIT ${start},${count}`, async (err, data) => {
 						if (err) {
 							await connection.release();
@@ -100,7 +100,7 @@ export class Board {
 						}
 					});
 				}
-				else if (sort == 'count') {
+				else if (sort === 'count') {
 					await connection.query(` ${sql} ORDER BY t1.count DESC LIMIT ${start},${count}`, async (err, data) => {
 						if (err) {
 							await connection.release();
@@ -115,7 +115,7 @@ export class Board {
 						}
 					});
 				}
-				else if (sort == 'recommend') {
+				else if (sort === 'recommend') {
 					await connection.query(` ${sql} ORDER BY t1.good DESC LIMIT ${start},${count}`, async (err, data) => {
 						if (err) {
 							await connection.release();
@@ -146,7 +146,7 @@ export class Board {
 				let sql: any = `SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.boardContent, t1.createdAt, t1.good, t1.bad, t1.scrap, t2.userNickName
                 FROM board AS t1
                 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex WHERE t1.category = `;
-				if (sort == 'createdAt') {
+				if (sort === 'createdAt') {
 					await connection.query(`${sql} ? ORDER BY t1.createdAt DESC`, [category], async (err, data) => {
 						await connection.release();
 						if (err) {
@@ -156,7 +156,7 @@ export class Board {
 						}
 					});
 				}
-				else if (sort == 'count') {
+				else if (sort === 'count') {
 					await connection.query(` ${sql} ? ORDER BY t1.count DESC`, [category], async (err, data) => {
 						await connection.release();
 						if (err) {
@@ -166,7 +166,7 @@ export class Board {
 						}
 					});
 				}
-				else if (sort == 'recommend') {
+				else if (sort === 'recommend') {
 					await connection.query(` ${sql} ? ORDER BY t1.good DESC`, [category], async (err, data) => {
 						await connection.release();
 						if (err) {
@@ -198,7 +198,7 @@ export class Board {
 				let sql: any = `SELECT t1.boardIndex, t1.category, t1.boardTitle, t1.boardContent, t1.createdAt, t1.good, t1.bad, t1.scrap, t2.userNickName
                 FROM board AS t1
                 INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex WHERE t1.category = `;
-				if (sort == 'createdAt') {
+				if (sort === 'createdAt') {
 					await connection.query(`${sql} ? ORDER BY t1.createdAt DESC LIMIT ${start},${count}`, [category], async (err, data) => {
 						if (err) {
 							await connection.release();
@@ -213,7 +213,7 @@ export class Board {
 						}
 					});
 				}
-				else if (sort == 'count') {
+				else if (sort === 'count') {
 					await connection.query(` ${sql} ? ORDER BY t1.count DESC LIMIT ${start},${count}`, [category], async (err, data) => {
 						if (err) {
 							await connection.release();
@@ -228,7 +228,7 @@ export class Board {
 						}
 					});
 				}
-				else if (sort == 'recommend') {
+				else if (sort === 'recommend') {
 					await connection.query(` ${sql} ? ORDER BY t1.good DESC LIMIT ${start},${count}`, [category], async (err, data) => {
 						if (err) {
 							await connection.release();
