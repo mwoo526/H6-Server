@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { scrapLog } from './scrapLog.model';
+import { scrapLog } from './boardScrapLog.model';
 
 describe('scrapLog 모델', () => {
 

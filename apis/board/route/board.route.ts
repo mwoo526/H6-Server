@@ -1,9 +1,9 @@
 import * as express from 'express';
 import { BoardResource } from '../../../resources/board.resource';
 import { board } from '../model/board.model';
-import { badLog } from '../model/log/badLog.model';
-import { goodLog } from '../model/log/goodLog.model';
-import { scrapLog } from '../model/log/scrapLog.model';
+import { badLog } from '../model/boardBadLog.model';
+import { goodLog } from '../model/boardGoodLog.model';
+import { scrapLog } from '../model/boardScrapLog.model';
 
 export class BoardRoutes {
 	public boardRouter: express.Router = express.Router();

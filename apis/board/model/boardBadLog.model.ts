@@ -1,4 +1,4 @@
-import { mysqlUtil } from '../../../../packages/utils/mysql.util';
+import { mysqlUtil } from '../../../packages/utils/mysql.util';
 
 const pool = mysqlUtil.pool;
 
