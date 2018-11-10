@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { goodLog } from './goodLog.model';
+import { goodLog } from './boardGoodLog.model';
 
 describe('goodLog 모델', () => {
 	const goodLogData: any = {
