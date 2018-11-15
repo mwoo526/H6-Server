@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { user } from '../../user/model/user.model';
 import { vote } from './vote';
 
 describe('vote 모델', () => {
@@ -93,20 +94,22 @@ describe('vote 모델', () => {
 	});
 
 	it('createVoteUser', async () => {
+		const voteUser = await user.getUser('kingdom0608@gmail.com');
 		const result = await vote.createVoteUser({
 			voteTopicIndex: testVoteTopicIndex,
 			voteItemIndex: testVoteItemIndex,
-			voteUserId: 'kingdom0608@gmail.com'
+			userIndex: voteUser[0].userIndex
 		});
 		// console.log(result);
 		expect(result).instanceof(Object);
 	});
 
 	it('createVoteUser2', async () => {
+		const voteUser = await user.getUser('tlswnsxo@naver.com');
 		const result = await vote.createVoteUser({
 			voteTopicIndex: testVoteTopicIndex,
 			voteItemIndex: testVoteItemIndex2,
-			voteUserId: 'tlswnsxo@naver.com'
+			userIndex: voteUser[0].userIndex
 		});
 		// console.log(result);
 		expect(result).instanceof(Object);
@@ -155,7 +158,8 @@ describe('vote 모델', () => {
 	});
 
 	it('checkVote', async () => {
-		const result = await vote.checkVote(testVoteTopicIndex, 'kingdom0608@gmail.com');
+		const voteUser = await user.getUser('kingdom0608@gmail.com');
+		const result = await vote.checkVote(testVoteTopicIndex, voteUser[0].userIndex);
 		// console.log(result);
 		expect(result).to.instanceof(Object);
 	});

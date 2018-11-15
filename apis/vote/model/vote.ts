@@ -299,8 +299,7 @@ export class Vote {
 	getVoteUser(voteTopicIndex: number, voteItemIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query('SELECT * FROM voteUser WHERE voteTopicIndex = ? AND voteItemIndex = ?', [voteTopicIndex,
-					voteItemIndex], function(err, rows) {
+				await connection.query('SELECT * FROM voteUser WHERE voteTopicIndex = ? AND voteItemIndex = ?', [voteTopicIndex, voteItemIndex], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -360,14 +359,13 @@ export class Vote {
 	/**
 	 * model: vote 체크
 	 * @param {number} voteTopicIndex
-	 * @param {string} voteUserId
+	 * @param {number} userIndex
 	 * @returns {Promise<void>}
 	 */
-	checkVote(voteTopicIndex: number, voteUserId: string): Promise<void> {
+	checkVote(voteTopicIndex: number, userIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query('SELECT * FROM voteUser WHERE voteTopicIndex = ? AND voteUserId = ?', [voteTopicIndex,
-					voteUserId], function(err, rows) {
+				await connection.query('SELECT * FROM voteUser WHERE voteTopicIndex = ? AND userIndex = ?', [voteTopicIndex, userIndex], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -376,7 +374,7 @@ export class Vote {
 						if (rows[0]) {
 							resolve(rows[0]);
 						}
-						reject('userId does not exist');
+						reject('user does not exist');
 					}
 				})
 			})

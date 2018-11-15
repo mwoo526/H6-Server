@@ -1,4 +1,5 @@
 import * as express from 'express';
+import { user } from '../../user/model/user.model';
 import { vote } from '../model/vote';
 
 export class VoteRoutes {
@@ -13,7 +14,7 @@ export class VoteRoutes {
 		this.voteRouter.get('/vote', getVote);
 		this.voteRouter.get('/pastVote', pageListPastVote);
 		this.voteRouter.get('/pastVote/pastVoteTopicIndex/:pastVoteTopicIndex', getPastVote);
-		this.voteRouter.get('/checkVote/voteTopicIndex/:voteTopicIndex/voteUserId/:userId', checkVote);
+		this.voteRouter.get('/checkVote/voteTopicIndex/:voteTopicIndex/voteUserId/:voteUserId', checkVote);
 	}
 }
 
@@ -27,11 +28,12 @@ async function createVote(req, res): Promise<void> {
 	try {
 		const voteTopicIndex: number = req.body.voteTopicIndex;
 		const voteItemIndex: number = req.body.voteItemIndex;
-		const voteUserId: string = req.body.userId;
+		const voteUserId: any = req.body.voteUserId;
+		const voteUser = await user.getUser(voteUserId);
 		const result: string = await vote.createVoteUser({
 			voteTopicIndex: voteTopicIndex,
 			voteItemIndex: voteItemIndex,
-			voteUserId: voteUserId
+			userIndex: voteUser[0].userIndex
 		});
 		res.send({
 			success: true,
@@ -186,9 +188,10 @@ async function getPastVote(req, res) {
  */
 async function checkVote(req, res): Promise<void> {
 	const voteTopicIndex = req.params.voteTopicIndex;
-	const voteUserId = req.params.userId;
+	const voteUserId = req.params.voteUserId;
 	try {
-		const result = await vote.checkVote(voteTopicIndex, voteUserId);
+		const voteUser = await user.getUser(voteUserId);
+		const result = await vote.checkVote(voteTopicIndex, voteUser[0].userIndex);
 		res.send({
 			success: true,
 			statusCode: 200,
@@ -197,7 +200,7 @@ async function checkVote(req, res): Promise<void> {
 		});
 	} catch (err) {
 		switch (err) {
-			case 'userId does not exist':
+			case 'user does not exist':
 				res.send({
 					success: false,
 					statusCode: 404,
