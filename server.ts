@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import * as express from 'express';
+import * as fs from "fs";
 import { Server } from './app';
 import { slack } from './packages/core/slack/slack';
 
@@ -18,8 +19,16 @@ app.listen(app.get('port'), async () => {
     ft        tf    tftftftftftf        tftftftftftf    tftftftftftf    tf       tf.       tftf       tftftftftftf    tf       tf.
   **********************************************************************************************************************************                                  
       `);
-	console.log('H6 server listening on port ' + port);
-	await slack.sendDeployMessage('deploy');
+	const file = './packages/core/env/env.json';
+	let envData: any = fs.readFileSync(file, 'utf8');
+	envData = JSON.parse(envData);
+
+	console.log('stage:', envData.stage);
+	console.log('H6 server listening on port', port);
+
+	if (envData.stage === 'dv' || envData.stage === 'prod') {
+		await slack.sendDeployMessage('deploy');
+	}
 }).on('error', err => {
 	console.error(err);
 });
