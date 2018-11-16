@@ -1,7 +1,6 @@
 export class FileResource {
 	private boardFileIndex;
 	private boardIndex;
-	private userIndex;
 	private fileName;
 	private filePath;
 	private fileSize;
@@ -11,7 +10,6 @@ export class FileResource {
 	constructor(fileData) {
 		this.setboardFileIndex(fileData.boardFileIndex);
 		this.setboardIndex(fileData.boardIndex);
-		this.setuserIndex(fileData.userIndex);
 		this.setFileName(fileData.fileName);
 		this.setFilePath(fileData.filePath);
 		this.setFileSize(fileData.fileSize);
@@ -34,14 +32,6 @@ export class FileResource {
 
 	setboardIndex(boardIndex) {
 		this.boardIndex = boardIndex;
-	}
-
-	getuserIndex() {
-		return this.userIndex;
-	}
-
-	setuserIndex(userIndex) {
-		this.userIndex = userIndex;
 	}
 
 	getFileName() {
@@ -88,7 +78,6 @@ export class FileResource {
 		let fileResource = {
 			boardFileIndex: this.getboardFileIndex(),
 			boardIndex: this.getboardIndex(),
-			userIndex: this.getuserIndex(),
 			fileName: this.getFileName(),
 			filePath: this.getFilePath(),
 			fileSize: this.getFileSize(),
