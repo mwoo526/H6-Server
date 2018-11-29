@@ -1,6 +1,7 @@
 import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import { admissionRoutes } from './apis/admissionYear/route/admissionYear.route';
+import { postsRoutes } from './apis/board/route/posts.route';
 import { reportLogRoutes } from './apis/board/route/reportLog.route';
 import { lectureRoutes } from './apis/lecture/route/lecture.route';
 import { lectureInfoRoutes } from './apis/lecture/route/lectureInfo.route';
@@ -15,9 +16,6 @@ import { userRoutes } from './apis/user/route/user.route';
 import { userValidationRoutes } from './apis/userValidation/route/userValidation.route';
 import { versionRoutes } from './apis/version/route/version.route';
 import { voteRoutes } from './apis/vote/route/vote.route';
-import { categoryRoutes } from "./apis/category/route/category.route";
-import { boardRoutes } from "./apis/board/route/board.route";
-import { boardReplyRoutes } from "./apis/board/route/boardReply.route";
 import { notFoundError, serverError } from './middlewares/error.middleware';
 import { verify } from './middlewares/tokenVerify.middleware';
 import { voteScheduler } from './schedulers/vote/voteScheduler';
@@ -46,10 +44,8 @@ export class Server {
 		this.app.use(trackRoutes.trackRouter);
 		this.app.use(admissionRoutes.admissionYearRouter);
 		this.app.use(userValidationRoutes.userValidationRouter);
+		this.app.use(postsRoutes.postsRouter);
 		this.app.use(reportLogRoutes.reportLogRouter);
-		this.app.use(categoryRoutes.categoryRouter);
-		this.app.use(boardRoutes.boardRouter);
-		this.app.use(boardReplyRoutes.boardReplyRouter);
 		this.app.use(fileRoutes.fileRouter);
 		/** 라우터 토큰 검증 */
 		this.app.use(verify);

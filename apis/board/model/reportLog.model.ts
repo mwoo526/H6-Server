@@ -9,7 +9,6 @@ export class ReportLog {
 	 * @param : reportLogData
 	 * @returns {Promise<void>}
 	 */
-
 	createReportLog(reportLogData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
@@ -30,7 +29,6 @@ export class ReportLog {
      * @param :
      * @returns {Promise<any>}
      */
-
     getReportLogCount(boardIndex: number): Promise<any> {
     	return new Promise(async (resolve, reject) => {
     		await pool.getConnection(async (err, connection) => {
@@ -52,7 +50,6 @@ export class ReportLog {
 	 * model : ReportLogInfo 리스트 조회
 	 * @returns {Promise<void>}
 	 */
-
 	listReportLogInfo(): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
@@ -77,7 +74,6 @@ export class ReportLog {
 	 * @param {number} count
 	 * @returns {Promise<void>}
 	 */
-
 	pageListReportLogInfo(page: number, count: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
@@ -126,7 +122,6 @@ export class ReportLog {
 	 * @param : reportLogIndex
 	 * @returns {Promise<void>}
 	 */
-
 	getReportLogIndex(reportLogIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
@@ -147,7 +142,6 @@ export class ReportLog {
 	 * @param : reportLogIndex, reportLogData
 	 * @returns {Promise<void>}
 	 */
-
 	updateReportLog(reportLogIndex: number, reportLogData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {

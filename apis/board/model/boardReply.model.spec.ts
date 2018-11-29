@@ -15,7 +15,7 @@ describe('boardReply 모델', () => {
 		} catch (err) {
 			console.error('err', err);
 		}
-	})
+	});
 
 	after(async () => {
 		try {
@@ -25,7 +25,7 @@ describe('boardReply 모델', () => {
 		} catch (err) {
 			console.error('err', err);
 		}
-	})
+	});
 
 	it('createBoardReplyComments', async () => {
 		const boardData: any = {
@@ -36,43 +36,43 @@ describe('boardReply 모델', () => {
 		const result: any = await boardReply.createBoardReplyComments(boardData, 41);
 		// console.log(result);
 		expect(result).to.instanceof(Object);
-	})
+	});
 
 	it('listBoardReplyByBoardIndex', async () => {
 		const result: any = await boardReply.listBoardReplyByBoardIndex(20);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
-	})
+	});
 
 	it('pageListBoardReplyByBoardIndex', async () => {
 		const result: any = await boardReply.pageListBoardReplyByBoardIndex(20, 1, 5);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
-	})
+	});
 
 	it('listBoardReplyByComments', async () => {
 		const result: any = await boardReply.listBoardReplyByComments(4);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
-	})
+	});
 
 	it('pageListBoardReplyByComments', async () => {
 		const result: any = await boardReply.pageListBoardReplyByComments(4, 1, 5);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
-	})
+	});
 
 	it('listBoardReplyComments', async () => {
 		const result: any = await boardReply.listBoardReplyComments(23);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
-	})
+	});
 
 	it('pageListBoardReplyComments', async () => {
 		const result: any = await boardReply.pageListBoardReplyComments(23, 1, 5);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
-	})
+	});
 
 	it('updateBoardReply', async () => {
 		const result: any = await boardReply.updateBoardReply(8, {
@@ -80,6 +80,5 @@ describe('boardReply 모델', () => {
 		});
 		// console.log(result);
 		expect(result).to.instanceof(Object);
-	})
-
-})
+	});
+});
