@@ -35,6 +35,7 @@ describe('postsReply 모델', () => {
 	it('createPostsReply', async () => {
 		const result: any = await postsReply.createPostsReply({
 			postsIndex: resultPosts[0].postsIndex,
+			parentsPostsReplyIndex: null,
 			userIndex: 1,
 			content: '테스트 게시글 댓글'
 		});

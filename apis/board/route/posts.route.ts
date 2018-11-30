@@ -107,6 +107,7 @@ async function getPosts(req, res): Promise<void> {
 	let postsIndex: number = req.params.postsIndex;
 	try {
 		const result: any = await posts.getPosts(postsIndex);
+		await posts.updatePostsByCount(postsIndex);
 		res.send({
 			success: true,
 			statusCode: 200,

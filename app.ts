@@ -2,6 +2,7 @@ import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import { admissionRoutes } from './apis/admissionYear/route/admissionYear.route';
 import { postsRoutes } from './apis/board/route/posts.route';
+import { postsReplyRoutes } from './apis/board/route/postsReply.route';
 import { reportLogRoutes } from './apis/board/route/reportLog.route';
 import { lectureRoutes } from './apis/lecture/route/lecture.route';
 import { lectureInfoRoutes } from './apis/lecture/route/lectureInfo.route';
@@ -44,16 +45,17 @@ export class Server {
 		this.app.use(trackRoutes.trackRouter);
 		this.app.use(admissionRoutes.admissionYearRouter);
 		this.app.use(userValidationRoutes.userValidationRouter);
-		this.app.use(postsRoutes.postsRouter);
-		this.app.use(reportLogRoutes.reportLogRouter);
-		this.app.use(fileRoutes.fileRouter);
 		/** 라우터 토큰 검증 */
 		this.app.use(verify);
 		/** 라우터 추가 */
+		this.app.use(postsRoutes.postsRouter);
+		this.app.use(postsReplyRoutes.postsReplyRouter);
+		this.app.use(reportLogRoutes.reportLogRouter);
+		this.app.use(fileRoutes.fileRouter);
 		this.app.use(voteRoutes.voteRouter);
 		this.app.use(testRoutes.testRouter);
 		this.app.use(userRoutes.userRouter);
-        this.app.use(professorRoutes.professorRouter);
+		this.app.use(professorRoutes.professorRouter);
 		this.app.use(lectureRoutes.lectureRouter);
 		this.app.use(lectureInfoRoutes.lectureInfoRouter);
 		this.app.use(lectureReplyRoutes.lectureReplyRouter);

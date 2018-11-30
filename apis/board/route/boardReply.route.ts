@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { BoardReplyResource } from '../../../resources/boardReply.resource';
+import { PostsReplyResource } from '../../../resources/postsReply.resource';
 import { boardReply } from '../model/boardReply.model';
 
 export class BoardReplyRoutes {
@@ -28,7 +28,7 @@ export class BoardReplyRoutes {
  * @returns {Promise<void>}
  */
 async function createBoardReply(req, res) {
-	let boardReplyData: any = new BoardReplyResource(req.body);
+	let boardReplyData: any = new PostsReplyResource(req.body);
 	try {
 		const result: any = await boardReply.createBoardReply(boardReplyData.getBoardReplyData());
 		res.send({
@@ -59,7 +59,7 @@ async function createBoardReply(req, res) {
  */
 async function createBoardReplyComments(req, res) {
 	let boardReplyIndex: number = req.params.boardReplyIndex;
-	let boardReplyData: any = new BoardReplyResource(req.body);
+	let boardReplyData: any = new PostsReplyResource(req.body);
 	try {
 		let result: any = await boardReply.createBoardReplyComments(boardReplyData.getBoardReplyData(), boardReplyIndex);
 		res.send({
@@ -191,7 +191,7 @@ async function pageListBoardReplyComments(req, res) {
  */
 async function updateBoardReply(req, res) {
 	let boardReplyIndex: number = req.params.boardReplyIndex;
-	let boardReplyData: any = await new BoardReplyResource(req.body);
+	let boardReplyData: any = await new PostsReplyResource(req.body);
 	try {
 		const result: any = await boardReply.updateBoardReply(boardReplyIndex, boardReplyData);
 		res.send({
