@@ -1,8 +1,8 @@
 import * as aws from 'aws-sdk';
 import * as express from 'express';
 import {s3Util} from '../../../packages/utils/s3.util';
-import {FileResource} from '../../../resources/file.resource';
 import {file} from '../model/file.model';
+import {FileResource} from '../../../resources/file.resource';
 
 let upload = s3Util.upload.array('upload', 3);
 let s3 = new aws.S3();
@@ -16,14 +16,11 @@ export class FileRoutes {
 
     public router() {
         this.fileRouter.post('/file', createFile);
-        this.fileRouter.post('/file/fileIndex/:boardIndex/uploadFile', uploadFile);
+        this.fileRouter.post('/file/fileIndex/postsIndex/uploadFile', uploadFile);
         this.fileRouter.post('/file/fileIndex/:fileIndex/downloadFile', downloadFile);
         this.fileRouter.get('/file', listFile);
-        this.fileRouter.get('/file/fileIndex/:fileIndex', getFileIndex);
-        this.fileRouter.get('/file/boardIndex/:boardIndex', getBoardIndex);
+        this.fileRouter.get('/file/postsIndex/:postsIndex', getPostsIndex);
         this.fileRouter.get('/file/fileIndex/:fileIndex/downloadCount', downloadCount);
-        this.fileRouter.put('/file/fileIndex/:fileIndex', updateFile);
-        this.fileRouter.delete('/file/fileIndex/:fileIndex', deleteFile);
         this.fileRouter.delete('/file/fileIndex/:fileIndex/deleteUpload', deleteUploadFile);
     }
 }
@@ -31,9 +28,9 @@ export class FileRoutes {
 /**
  * route: file 생성
  * @param req
- * @param res
+ * @param res*
  * @returns {Promise<void>}
- */
+  */
 
 async function createFile(req, res): Promise<void> {
     let fileData: any = new FileResource(req.body);
@@ -43,20 +40,19 @@ async function createFile(req, res): Promise<void> {
             success: true,
             statusCode: 200,
             result: result,
-            message: 'createFile: 200'
-        });
+            message: 'createFile: 200'});
     } catch (err) {
         switch (err) {
             default:
                 res.send({
                     success: false,
                     statusCode: 500,
-                    message: 'createFile: 50000'
-                });
+                    message: 'createFile: 50000'});
                 break;
         }
     }
 }
+
 
 /**
  * route: file 조회
@@ -94,45 +90,15 @@ async function listFile(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 
-async function getFileIndex(req, res): Promise<void> {
-    let fileIndex: number = req.params.fileIndex;
+async function getPostsIndex(req, res): Promise<void> {
+    let postsIndex: number = req.params.postsIndex;
     try {
-        const result: any = await file.getFileIndex(fileIndex);
-        res.send({
-            success: true,
-            statusCode: 200,
-            result: result[0],
-            message: 'getFileIndex: 200'
-        });
-    } catch (err) {
-        switch (err) {
-            default:
-                res.send({
-                    success: false,
-                    statusCode: 500,
-                    message: 'getFileIndex: 50000'
-                });
-                break;
-        }
-    }
-}
-
-/**
- * route: file FileIndex 조회
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-
-async function getBoardIndex(req, res): Promise<void> {
-    let boardIndex: number = req.params.boardIndex;
-    try {
-        const result: any = await file.getBoardIndex(boardIndex);
+        const result: any = await file.getPostsIndex(postsIndex);
         res.send({
             success: true,
             statusCode: 200,
             result: result,
-            message: 'getBoardIndex: 200'
+            message: 'getPostsIndex: 200'
         });
     } catch (err) {
         switch (err) {
@@ -140,68 +106,7 @@ async function getBoardIndex(req, res): Promise<void> {
                 res.send({
                     success: false,
                     statusCode: 500,
-                    message: 'getBoardIndex: 50000'
-                });
-                break;
-        }
-    }
-}
-
-/**
- * route: file 업데이트
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-
-async function updateFile(req, res): Promise<void> {
-    let fileIndex: number = req.params.boardFileIndex;
-    let fileData: any = new FileResource(req.body);
-    try {
-        const result: any = await file.updateFile(fileIndex, fileData.getFile());
-        res.send({
-            success: true,
-            statusCode: 200,
-            result: result,
-            message: 'updateFile: 200'
-        });
-    } catch (err) {
-        switch (err) {
-            default:
-                res.send({
-                    success: false,
-                    statusCode: 500,
-                    message: 'updateFile: 50000'
-                });
-                break;
-        }
-    }
-}
-
-/**
- * route: File 삭제
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-
-async function deleteFile(req, res): Promise<void> {
-    let fileIndex: number = req.params.fileIndex;
-    try {
-
-        await file.deleteFile(fileIndex);
-        res.send({
-            success: true,
-            statusCode: 200,
-            message: 'deleteFile: 200'
-        });
-    } catch (err) {
-        switch (err) {
-            default:
-                res.send({
-                    success: false,
-                    statusCode: 500,
-                    message: 'deleteFile: 50000'
+                    message: 'getPostsIndex: 50000'
                 });
                 break;
         }
@@ -267,7 +172,7 @@ async function deleteUploadFile(req, res): Promise<void> {
  */
 
 async function uploadFile(req, res): Promise<void> {
-    let boardIndex: number = req.params.boardIndex;
+    let postsIndex: number = req.params.postsIndex;
 
 
     upload(req, res, async function (err) {
@@ -292,7 +197,7 @@ async function uploadFile(req, res): Promise<void> {
             let result = req.files;
             for (let i = 0; i < result.length; i++) {
                 await file.createFile({
-                    boardIndex: boardIndex,
+                    postsIndex: postsIndex,
                     fileName: result[i].originalname,
                     filePath: result[i].location,
                     fileSize: result[i].size,
