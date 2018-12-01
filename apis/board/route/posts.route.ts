@@ -31,7 +31,8 @@ async function createPosts(req, res) {
 			userIndex: resultUser[0].userIndex,
 			postsCategoryIndex: req.body.postsCategoryIndex,
 			title: req.body.title,
-			content: req.body.content
+			content: req.body.content,
+			status: 'ACTIVE'
 		});
 		res.send({
 			success: true,

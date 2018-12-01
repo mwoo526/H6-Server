@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { PostsReplyResource } from '../../../resources/postsReply.resource';
+import { user } from '../../user/model/user.model';
 import { postsReply } from '../model/postsReply.model';
 
 export class PostsReplyRoutes {
@@ -10,7 +10,7 @@ export class PostsReplyRoutes {
 	}
 
 	public router() {
-		this.postsReplyRouter.post('/postsReply', createPostsReply);
+		this.postsReplyRouter.post('/postsReply/postsIndex/:postsIndex', createPostsReply);
 		this.postsReplyRouter.get('/postsReply/postsIndex/:postsIndex', pageListPostsReply);
 		this.postsReplyRouter.put('/postsReply/postsReplyIndex/:postsReplyIndex', updatePostsReply);
 		this.postsReplyRouter.delete('/postsReply/postsReplyIndex/:postsReplyIndex', deletePostsReply);
@@ -24,9 +24,16 @@ export class PostsReplyRoutes {
  * @returns {Promise<void>}
  */
 async function createPostsReply(req, res) {
-	let postsReplyData: any = new PostsReplyResource(req.body);
+	const postsIndex = req.params.postsIndex;
+	const resultUser = await user.getUser(req.body.userId);
 	try {
-		const result: any = await postsReply.createPostsReply(postsReplyData.getPostsReplyData());
+		const result: any = await postsReply.createPostsReply({
+			postsIndex: postsIndex,
+			parentsPostsReplyIndex: req.body.parentsPostsReplyIndex,
+			userIndex: resultUser[0].userIndex,
+			content: req.body.content,
+			status: 'ACTIVE'
+		});
 		res.send({
 			success: true,
 			statusCode: 200,

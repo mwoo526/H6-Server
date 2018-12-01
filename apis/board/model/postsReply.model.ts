@@ -31,7 +31,8 @@ export class PostsReplyModel {
 				t1.postsReplyIndex, 
 				t1.parentsPostsReplyIndex,
 				t1.postsIndex,
-				t1.content, 
+				t1.content,
+				t1.status,
 				t1.createdAt, 
 				t2.userNickName
 				FROM postsReply AS t1
@@ -57,7 +58,8 @@ export class PostsReplyModel {
 				t1.postsReplyIndex,
 				t1.parentsPostsReplyIndex,
 				t1.postsIndex,
-				t1.content, 
+				t1.content,
+				t1.status,
 				t1.createdAt, 
 				t2.userNickName
 				FROM postsReply AS t1
@@ -95,6 +97,7 @@ export class PostsReplyModel {
 				t1.parentsPostsReplyIndex,
 				t1.postsIndex,
 			  t1.content,
+			  t1.status,
         t1.createdAt,
 				t2.userNickName
         FROM postsReply AS t1
