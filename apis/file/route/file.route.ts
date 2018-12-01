@@ -2,7 +2,7 @@ import * as aws from 'aws-sdk';
 import * as express from 'express';
 import {s3Util} from '../../../packages/utils/s3.util';
 import {file} from '../model/file.model';
-import {FileResource} from '../../../resources/file.resource';
+
 
 let upload = s3Util.upload.array('upload', 3);
 let s3 = new aws.S3();
@@ -15,44 +15,15 @@ export class FileRoutes {
     }
 
     public router() {
-        this.fileRouter.post('/file', createFile);
-        this.fileRouter.post('/file/fileIndex/postsIndex/uploadFile', uploadFile);
-        this.fileRouter.post('/file/fileIndex/:fileIndex/downloadFile', downloadFile);
+
         this.fileRouter.get('/file', listFile);
         this.fileRouter.get('/file/postsIndex/:postsIndex', getPostsIndex);
         this.fileRouter.get('/file/fileIndex/:fileIndex/downloadCount', downloadCount);
-        this.fileRouter.delete('/file/fileIndex/:fileIndex/deleteUpload', deleteUploadFile);
+        this.fileRouter.post('/file/fileIndex/:postsIndex/uploadFile', uploadFile);
+        this.fileRouter.post('/file/fileIndex/:fileIndex/downloadFile', downloadFile);
+        this.fileRouter.delete('/file/fileIndex/:fileIndex/deleteFile', deleteFile);
     }
 }
-
-/**
- * route: file 생성
- * @param req
- * @param res*
- * @returns {Promise<void>}
-  */
-
-async function createFile(req, res): Promise<void> {
-    let fileData: any = new FileResource(req.body);
-    try {
-        const result: any = await file.createFile(fileData.getFile());
-        res.send({
-            success: true,
-            statusCode: 200,
-            result: result,
-            message: 'createFile: 200'});
-    } catch (err) {
-        switch (err) {
-            default:
-                res.send({
-                    success: false,
-                    statusCode: 500,
-                    message: 'createFile: 50000'});
-                break;
-        }
-    }
-}
-
 
 /**
  * route: file 조회
@@ -114,57 +85,6 @@ async function getPostsIndex(req, res): Promise<void> {
 }
 
 /**
- * route: file 삭제
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-
-async function deleteUploadFile(req, res): Promise<void> {
-    let fileIndex: number = req.params.fileIndex;
-    try {
-        const resultFile = await file.getFileIndex(fileIndex);
-        if (resultFile[0].filePath) {
-            let splitUpload = resultFile[0].filePath.split('/');
-            let splitUploadStage = splitUpload[2].split('.');
-            await s3.deleteObject(
-                {
-                    Bucket: `${splitUploadStage[0]}/${splitUpload[3]}`,
-                    Key: `${splitUpload[4]}`
-                },
-                (err) => {
-                    if (err) {
-                        throw err;
-                    }
-                }
-            );
-            await file.deleteFile(fileIndex);
-            res.send({
-                success: true,
-                statusCode: 200,
-                message: 'deleteFile: 200'
-            });
-        } else {
-            res.send({
-                success: true,
-                statusCode: 404,
-                message: 'deleteFile: 40401'
-            });
-        }
-    } catch (err) {
-        switch (err) {
-            default:
-                res.send({
-                    success: false,
-                    statusCode: 500,
-                    message: 'deleteFile: 50000'
-                });
-                break;
-        }
-    }
-}
-
-/**
  * route: file 업로드
  * @param req
  * @param res
@@ -173,8 +93,6 @@ async function deleteUploadFile(req, res): Promise<void> {
 
 async function uploadFile(req, res): Promise<void> {
     let postsIndex: number = req.params.postsIndex;
-
-
     upload(req, res, async function (err) {
         if (err) {
             if (err.message === 'The AWS Access Key Id you provided does not exist in our records.') {
@@ -225,7 +143,58 @@ async function uploadFile(req, res): Promise<void> {
 }
 
 /**
- * route: file download
+ * route: file 삭제
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+
+async function deleteFile(req, res): Promise<void> {
+    let fileIndex: number = req.params.fileIndex;
+    try {
+        const resultFile = await file.getFileIndex(fileIndex);
+        if (resultFile[0].filePath) {
+            let splitUpload = resultFile[0].filePath.split('/');
+            let splitUploadStage = splitUpload[2].split('.');
+            await s3.deleteObject(
+                {
+                    Bucket: `${splitUploadStage[0]}/${splitUpload[3]}`,
+                    Key: `${splitUpload[4]}`
+                },
+                (err) => {
+                    if (err) {
+                        throw err;
+                    }
+                }
+            );
+            await file.deleteFile(fileIndex);
+            res.send({
+                success: true,
+                statusCode: 200,
+                message: 'deleteFile: 200'
+            });
+        } else {
+            res.send({
+                success: true,
+                statusCode: 404,
+                message: 'deleteFile: 40401'
+            });
+        }
+    } catch (err) {
+        switch (err) {
+            default:
+                res.send({
+                    success: false,
+                    statusCode: 500,
+                    message: 'deleteFile: 50000'
+                });
+                break;
+        }
+    }
+}
+
+/**
+ * route: file 다운로드
  * @param req
  * @param res
  * @returns {Promise<void>}
