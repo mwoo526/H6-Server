@@ -36,7 +36,7 @@ export class Slack {
 		});
 	}
 
-	async sendReportMessage(channel: string, boardIndex: number, reportCount: number) {
+	async sendReportMessage(channel: string, postsIndex: number, reportCount: number) {
 		const file = './packages/core/env/env.json';
         let envData: any = await fs.readFileSync(file, 'utf8');
         envData = JSON.parse(envData);
@@ -50,8 +50,8 @@ export class Slack {
                     'mrkdwn_in': ['text', 'fields'],
                     'fields': [
                         {
-                            'title': `${envData.stage} 서버 / ReportLog 알림`,
-                            'value': `boardIndex=${boardIndex}, reportCount=${reportCount} `,
+                            'title': `${envData.stage} 서버 / Report 알림`,
+                            'value': `postsIndex=${postsIndex}, reportCount=${reportCount} `,
                             'short': false
                         }
                     ]
@@ -131,7 +131,6 @@ export class Slack {
 		}
 		return path;
 	}
-
 }
 
 export const slack: Slack = new Slack();
