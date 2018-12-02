@@ -12,7 +12,8 @@ describe('postsReply 모델', () => {
 				userIndex: 1,
 				postsCategoryIndex: 1,
 				title: '테스트 게시글 제목',
-				content: '테스트 게시글 내용'
+				content: '테스트 게시글 내용',
+				status: 'ACTIVE'
 			});
 
 			const result: any = await posts.getPostsByTitle('테스트 게시글 제목');
@@ -37,7 +38,8 @@ describe('postsReply 모델', () => {
 			postsIndex: resultPosts[0].postsIndex,
 			parentsPostsReplyIndex: null,
 			userIndex: 1,
-			content: '테스트 게시글 댓글'
+			content: '테스트 게시글 댓글',
+			status: 'ACTIVE'
 		});
 		// console.log(result);
 		expect(result).to.instanceof(Object);

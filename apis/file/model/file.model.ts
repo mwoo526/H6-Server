@@ -48,6 +48,27 @@ export class File {
         })
     }
 
+    /**
+     * model: file Index 조회
+     * @param {number} fileIndex
+     * @returns {Promise<any>}
+     */
+
+    getFileIndex(fileIndex: number): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            await pool.getConnection(async function (err, connection) {
+                await connection.query(`SELECT * FROM file WHERE boardFileIndex = ?`, [fileIndex], function (err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(rows);
+                    }
+                })
+            })
+        })
+    }
 
     /**
      * model: file Index 조회
@@ -71,6 +92,26 @@ export class File {
         })
     }
 
+    /** model : file 업데이트
+     * @returns {Promise<void>}
+     */
+
+    updateFile(fileIndex: number, fileDate: any): Promise<void> {
+        return new Promise(async (resolve, reject) => {
+            await pool.getConnection(async function (err, connection) {
+                await connection.query(`UPDATE file SET ? WHERE boardFileIndex = ?`, [fileDate,
+                    fileIndex], function (err, rows) {
+                    if (err) {
+                        connection.release();
+                        reject(err);
+                    } else {
+                        connection.release();
+                        resolve(rows);
+                    }
+                })
+            })
+        })
+    }
 
     /**
      * model: file 삭제

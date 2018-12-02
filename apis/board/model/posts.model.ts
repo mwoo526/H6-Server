@@ -23,7 +23,7 @@ export class Posts {
 			let filterArray: any = filter.split(' ');
 
 			for (let i = 0; i < filterArray.length; i++) {
-				/** 티켓 키에 맞도록 커스터마이징 */
+				/** 포스트 키에 맞도록 커스터마이징 */
 				if (filterArray[i] === `postsCategoryIndex`) {
 					filterArray[i] = `t3.postsCategoryIndex`;
 				}
@@ -39,7 +39,7 @@ export class Posts {
 					filterArray[i] = filterArray[i];
 				}
 
-				/** 티켓 값에 맞도록 커스터마이징 */
+				/** 포스트 값에 맞도록 커스터마이징 */
 				if (filterArray[i] === ('=') || filterArray[i] === ('>=') || filterArray[i] === ('>') || filterArray[i] === ('<=') || filterArray[i] === ('<')) {
 					if (filterArray[i + 1] == 'true' || filterArray[i + 1] == 'false') {
 						filterArray[i + 1] = `${filterArray[i + 1]}`;
@@ -52,7 +52,7 @@ export class Posts {
 				}
 			}
 
-			/** 티켓 SQL 문으로 정리 */
+			/** 포스트 SQL 문으로 정리 */
 			let filterString: string = filterArray.join(' ');
 			filterString = filterString + ' ';
 
@@ -114,6 +114,7 @@ export class Posts {
 			t1.title, 
 			t1.content,
 			t1.count, 
+			t1.status,
 			t1.createdAt, 
 			t2.userNickName,
 			t3.postsCategoryName,
@@ -164,7 +165,8 @@ export class Posts {
 			t1.postsCategoryIndex,
 			t1.title, 
 			t1.content,
-			t1.count, 
+			t1.count,
+			t1.status,
 			t1.createdAt, 
 			t2.userNickName,
 			t3.postsCategoryName,
@@ -223,6 +225,7 @@ export class Posts {
 				t1.postsCategoryIndex,
 				t1.title,
 				t1.content,
+				t1.status,
 				t1.createdAt,
 				t2.userNickName,
 			  (SELECT COUNT(*) AS count FROM postsReply WHERE t1.postsIndex = postsReply.postsIndex) AS replyCount 
@@ -257,6 +260,7 @@ export class Posts {
 				t1.postsCategoryIndex,
 				t1.title,
 				t1.content,
+			  t1.status,
 				t1.createdAt,
 				t2.userNickName,
 			  (SELECT COUNT(*) AS count FROM postsReply WHERE t1.postsIndex = postsReply.postsIndex) AS replyCount 

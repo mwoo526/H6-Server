@@ -9,7 +9,8 @@ describe('posts 모델', async () => {
 			userIndex: 1,
 			postsCategoryIndex: 1,
 			title: '테스트 게시글 제목',
-			content: '테스트 게시글 내용'
+			content: '테스트 게시글 내용',
+			status: 'ACTIVE'
 		});
 		// console.log(result);
 		expect(result).to.instanceof(Object);
