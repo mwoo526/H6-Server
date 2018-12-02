@@ -124,12 +124,12 @@ export class PostsReport {
 	updatePostsReport(postsReportIndex: number, postsReportData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`UPDATE reportLog SET ? WHERE postsReportIndex=?`, [postsReportData, postsReportIndex], (err, data) => {
+				await connection.query(`UPDATE postsReport SET ? WHERE postsReportIndex=?`, [postsReportData, postsReportIndex], (err) => {
 					connection.release();
 					if (err) {
 						reject(err);
 					} else {
-						resolve(data);
+						resolve(postsReportData);
 					}
 				})
 			})

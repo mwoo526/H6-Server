@@ -212,7 +212,6 @@ async function deletePostsReport(req, res): Promise<void> {
 					message: 'deletePostsReport: 500'
 				});
 		}
-
 	}
 }
 
