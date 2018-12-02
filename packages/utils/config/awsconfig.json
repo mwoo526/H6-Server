@@ -1,5 +1,7 @@
 {
   "accessKeyId": "공개키아이디",
   "secretAccessKey": "비밀키",
-  "region": "ap-northeast-2"
+  "bucket": "dv-handam/avatar",
+  "region": "ap-northeast-2",
+  "acl": "public-read-write"
 }
