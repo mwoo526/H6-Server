@@ -4,6 +4,7 @@ import { admissionRoutes } from './apis/admissionYear/route/admissionYear.route'
 import { postsRoutes } from './apis/board/route/posts.route';
 import { postsReplyRoutes } from './apis/board/route/postsReply.route';
 import { postsReportRoutes } from './apis/board/route/postsReport.route';
+import { postsSubscriberRoutes } from './apis/board/route/postsSubscriber.route';
 import { lectureRoutes } from './apis/lecture/route/lecture.route';
 import { lectureInfoRoutes } from './apis/lecture/route/lectureInfo.route';
 import { lectureReplyRoutes } from './apis/lecture/route/lectureReply.route';
@@ -50,6 +51,7 @@ export class Server {
 		/** 라우터 추가 */
 		this.app.use(postsRoutes.postsRouter);
 		this.app.use(postsReplyRoutes.postsReplyRouter);
+		this.app.use(postsSubscriberRoutes.postsSubscriberRouter);
 		this.app.use(postsReportRoutes.postsReportRouter);
 		this.app.use(fileRoutes.fileRouter);
 		this.app.use(voteRoutes.voteRouter);

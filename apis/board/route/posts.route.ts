@@ -74,10 +74,10 @@ async function pageListPosts(req, res) {
 		const resultCount: any = await posts.listPosts(filter);
 		const result: any = await posts.pageListPosts(filter, orderBy, page, count);
 		for (const row of result) {
-			let subscriberCount = await postsSubscriber.getPostsSubscriberCount(row.postsIndex);
-			row.isGoodCount = subscriberCount[0].isGoodCount || 0;
-			row.isBadCount = subscriberCount[0].isBadCount || 0;
-			row.isScrap = subscriberCount[0].isScrapCount || 0;
+			let subscriberCount = await postsSubscriber.getPostsSubscriber(row.postsIndex);
+			row.goodCount = subscriberCount[0].goodCount || 0;
+			row.badCount = subscriberCount[0].badCount || 0;
+			row.isScrap = subscriberCount[0].isScrap === 1 ? true : false;
 		}
 		res.send({
 			success: true,

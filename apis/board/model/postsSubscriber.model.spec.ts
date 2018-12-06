@@ -55,15 +55,21 @@ describe('postsSubscriber', () => {
 		expect(result).to.instanceof(Object);
 	});
 
-	it('getPostsSubscriberCount', async () => {
-		const result: any = await postsSubscriber.getPostsSubscriberCount(resultPosts[0].postsIndex);
+	it('getPostsSubscriber', async () => {
+		const result: any = await postsSubscriber.getPostsSubscriber(resultPosts[0].postsIndex);
 		console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
+	it('getPostsSubscriberCountByUserIndex', async () => {
+		const result: any = await postsSubscriber.getPostsSubscriberCountByUserIndex(resultPosts[0].postsIndex, 1);
+		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});
 
 	it('updatePostsSubscriber', async () => {
 		const result: any = await postsSubscriber.updatePostsSubscriber(resultPosts[0].postsIndex, 1, {
-			isGood: false
+			isBad: true
 		});
 		// console.log(result);
 		expect(result).to.instanceof(Object);
@@ -73,5 +79,5 @@ describe('postsSubscriber', () => {
 		const result: any = await postsSubscriber.deletePostsSubscriber(resultPosts[0].postsIndex, 1);
 		// console.log(result);
 		expect(result).to.instanceof(Object);
-	})
+	});
 });
