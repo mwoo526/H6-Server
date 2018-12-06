@@ -1,8 +1,5 @@
 import * as express from 'express';
-import { LectureInfoResource } from '../../../resources/lectureInfo.resource';
-import { PostsSubscriberResource } from '../../../resources/postsSubscriber.resource';
 import { user } from '../../user/model/user.model';
-import { posts } from '../model/posts.model';
 import { postsSubscriber } from '../model/postsSubscriber.model';
 
 export class PostsSubscriberRoutes {
@@ -18,7 +15,7 @@ export class PostsSubscriberRoutes {
 }
 
 /**
- * route: posts 생성
+ * route: postsSubscriber 생성 및 업데이트
  * @param req
  * @param res
  */
