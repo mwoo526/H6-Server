@@ -28,7 +28,7 @@ async function createVote(req, res): Promise<void> {
 	try {
 		const voteTopicIndex: number = req.body.voteTopicIndex;
 		const voteItemIndex: number = req.body.voteItemIndex;
-		const voteUserId: any = req.body.voteUserId;
+		const voteUserId: any = req.body.userId;
 		const voteUser = await user.getUser(voteUserId);
 		const result: string = await vote.createVoteUser({
 			voteTopicIndex: voteTopicIndex,
