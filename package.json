@@ -30,6 +30,7 @@
     "node-uuid": "^1.4.8",
     "nodemailer": "^4.4.2",
     "pbkdf2": "^3.0.14",
+    "supertest": "^3.3.0",
     "ts-node": "^6.1.1",
     "typescript": "^2.9.1"
   }
