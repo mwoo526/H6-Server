@@ -170,19 +170,24 @@ async function getBlockUserNickName(req, res): Promise<void> {
  */
 async function sendPasswordMail(req, res): Promise<void> {
 	try {
-		let newPassword: any = await String(getRandomInt());
+		let newPassword: any = String(getRandomInt());
 		let userId: string = req.params.userId;
-		let html: any = `${userId} 님 안녕하세요.<br><br> 임시비밀번호 ${newPassword} <br><br>`;
-
-		await user.updateUserPassword(userId, newPassword);
+		let html: any = `${userId} 님 안녕하세요.<br><br> 임시비밀번호는 ${newPassword} 입니다.<br><br>`;
 
 		let mailOptions = {
 			to: userId,
-			subject: '한담 비밀번호 재발급 매일',
+			subject: '한담 비밀번호 재발급 메일',
 			html: html
 		};
 
-		await userValidation.sendPasswordMail(mailOptions);
+		/** 비밀번호 재발급 메일 발송 */
+		await userValidation.sendPasswordMail(mailOptions).catch(err => {
+			throw err;
+		});
+
+		/** 비밀번호 업데이트 */
+		await user.updateUserPassword(userId, newPassword);
+
 		res.send({
 			success: true,
 			statusCode: 200,
