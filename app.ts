@@ -18,6 +18,7 @@ import { userRoutes } from './apis/user/route/user.route';
 import { userValidationRoutes } from './apis/userValidation/route/userValidation.route';
 import { versionRoutes } from './apis/version/route/version.route';
 import { voteRoutes } from './apis/vote/route/vote.route';
+import { todayLunchRoutes } from "./apis/todayLunch/route/todayLunch.route";
 import { notFoundError, serverError } from './middlewares/error.middleware';
 import { verify } from './middlewares/tokenVerify.middleware';
 import { voteScheduler } from './schedulers/vote/voteScheduler';
@@ -62,6 +63,7 @@ export class Server {
 		this.app.use(lectureInfoRoutes.lectureInfoRouter);
 		this.app.use(lectureReplyRoutes.lectureReplyRouter);
 		this.app.use(versionRoutes.versionRouter);
+		this.app.use(todayLunchRoutes.todayLunchRouter);
 		/** 라우터 오류 처리 */
 		this.app.use(notFoundError);
 		this.app.use(serverError);
