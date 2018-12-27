@@ -12,8 +12,8 @@ export class TodayLunch {
     createTodayLunch(todayLunchData: any): Promise<any> {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async (err, connection) => {
-                await connection.query(`INSERT INTO todayLunch SET ?`, [todayLunchData], async (err) => {
-                    await connection.release();
+                await connection.query(`INSERT INTO todayLunch SET ?`, [todayLunchData], (err) => {
+                    connection.release();
                     if(err) {
                         reject(err);
                     } else {
@@ -65,7 +65,7 @@ export class TodayLunch {
     }
 
     /**
-     * model: lecture 업데이트
+     * model: todayLunch 업데이트
      * @param {number} todayLunchIndex
      * @param todayLunchData
      * @returns {Promise<any>}

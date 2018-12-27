@@ -27,7 +27,7 @@ export class TodayLunchRoutes {
 async function createTodayLunch(req, res): Promise<void> {
     let todayLunchData: any = new TodayLunchResource(req.body);
     try {
-        const result: any = await todayLunch.createTodayLunch(todayLunchData);
+        const result: any = await todayLunch.createTodayLunch(todayLunchData.getTodayLunch());
         res.send({
             success: true,
             statusCode: 200,
@@ -99,8 +99,8 @@ async function getTodayLunchByIndex(req, res): Promise<void> {
                 });
         }
     }
-
 }
+
 /**
  * route: todayLunch 업데이트
  * @param req
@@ -137,7 +137,7 @@ async function updateTodayLunch(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function deleteTodayLunchByIndex(req, res): Promise<void> {
-    let todayLunchIndex: number = req.params.todayLunchIndex;
+    const todayLunchIndex: number = req.params.todayLunchIndex;
     try {
         const result: any = await todayLunch.deleteTodayLunch(todayLunchIndex);
         res.send({
