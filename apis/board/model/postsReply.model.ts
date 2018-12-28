@@ -127,13 +127,13 @@ export class PostsReplyModel {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`UPDATE postsReply SET ? WHERE postsReplyIndex = ?`,
 					[postsReplyData, postsReplyIndex], (err) => {
-					connection.release();
-					if (err) {
-						reject(err);
-					} else {
-						resolve(postsReplyData);
-					}
-				});
+						connection.release();
+						if (err) {
+							reject(err);
+						} else {
+							resolve(postsReplyData);
+						}
+					});
 			});
 		});
 	}

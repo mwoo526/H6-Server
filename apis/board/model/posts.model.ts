@@ -48,7 +48,7 @@ export class Posts {
 					}
 				}
 				if (filterArray[i] === ('LIKE')) {
-					filterArray[i - 1] = `REPLACE(${filterArray[i - 1]}, ' ', '')` ;
+					filterArray[i - 1] = `REPLACE(${filterArray[i - 1]}, ' ', '')`;
 					filterArray[i + 1] = `"%${filterArray[i + 1]}%"`;
 				}
 			}

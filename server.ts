@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import * as express from 'express';
-import * as fs from "fs";
+import * as fs from 'fs';
 import { Server } from './app';
 import { slack } from './packages/core/slack/slack';
 

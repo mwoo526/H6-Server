@@ -16,7 +16,7 @@ export class PostsReportResource {
 	}
 
 	setPostsReportIndex(postsReportIndex) {
-	    this.postsReportIndex = postsReportIndex;
+		this.postsReportIndex = postsReportIndex;
 	}
 
 	getUserIndex() {

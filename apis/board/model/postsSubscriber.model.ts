@@ -89,13 +89,13 @@ export class PostsSubscriber {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`DELETE FROM postsSubscriber WHERE postsIndex = ? AND userIndex = ?`,
 					[postsIndex, userIndex], (err, data) => {
-					connection.release();
-					if (err) {
-						reject(err);
-					} else {
-						resolve(data);
-					}
-				});
+						connection.release();
+						if (err) {
+							reject(err);
+						} else {
+							resolve(data);
+						}
+					});
 			});
 		});
 	}

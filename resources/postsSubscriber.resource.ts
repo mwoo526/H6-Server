@@ -1,5 +1,3 @@
-import { postsSubscriber } from '../apis/board/model/postsSubscriber.model';
-
 export class PostsSubscriberResource {
 	private postsIndex;
 	private userIndex;

@@ -3,8 +3,8 @@ import { posts } from './posts.model';
 import { postsReply } from './postsReply.model';
 
 describe('postsReply 모델', () => {
-  let resultPosts;
-  let resultPostsReply;
+	let resultPosts;
+	let resultPostsReply;
 
 	before(async () => {
 		try {

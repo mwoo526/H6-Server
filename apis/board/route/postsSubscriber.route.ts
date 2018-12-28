@@ -70,5 +70,4 @@ async function putPostsSubscriber(req, res) {
 	}
 }
 
-
 export const postsSubscriberRoutes: PostsSubscriberRoutes = new PostsSubscriberRoutes();
