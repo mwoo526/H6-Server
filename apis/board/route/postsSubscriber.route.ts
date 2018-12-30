@@ -50,7 +50,6 @@ async function putPostsSubscriber(req, res) {
 			message: 'putPostsSubscriber: 200'
 		});
 	} catch (err) {
-		console.log(err);
 		switch (err) {
 			case 'The ID does not exist':
 				res.send({
