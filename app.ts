@@ -40,6 +40,7 @@ export class Server {
 		this.app.use(bodyParser.urlencoded({extended: false}));
 		this.app.use(bodyParser.json());
 		/** 라우터 추가 */
+		this.app.use(versionRoutes.versionRouter);
 		this.app.use(signUpRoutes.signUpRouter);
 		this.app.use(signInRoutes.signInRouter);
 		this.app.use(termsRoutes.termsRouter);
@@ -61,7 +62,6 @@ export class Server {
 		this.app.use(lectureRoutes.lectureRouter);
 		this.app.use(lectureInfoRoutes.lectureInfoRouter);
 		this.app.use(lectureReplyRoutes.lectureReplyRouter);
-		this.app.use(versionRoutes.versionRouter);
 		/** 라우터 오류 처리 */
 		this.app.use(notFoundError);
 		this.app.use(serverError);
