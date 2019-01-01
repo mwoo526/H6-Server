@@ -57,7 +57,7 @@ describe('postsSubscriber', () => {
 
 	it('getPostsSubscriber', async () => {
 		const result: any = await postsSubscriber.getPostsSubscriber(resultPosts[0].postsIndex);
-		console.log(result);
+		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});
 
