@@ -337,12 +337,13 @@ export class Posts {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`SELECT 
 				t1.postsIndex,
-				t1.postsCategoryIndex,
 				t1.title,
 				t1.content,
 				t1.status,
 				t1.createdAt,
 				t2.userNickName,
+				t3.postsCategoryIndex,
+				t3.postsCategoryName,
 			  (SELECT COUNT(*) AS count FROM postsReply WHERE t1.postsIndex = postsReply.postsIndex) AS replyCount 
         FROM posts AS t1
         INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
@@ -372,12 +373,13 @@ export class Posts {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`SELECT 
 				t1.postsIndex,
-				t1.postsCategoryIndex,
 				t1.title,
 				t1.content,
 			  t1.status,
 				t1.createdAt,
 				t2.userNickName,
+				t3.postsCategoryIndex,
+				t3.postsCategoryName,
 			  (SELECT COUNT(*) AS count FROM postsReply WHERE t1.postsIndex = postsReply.postsIndex) AS replyCount 
         FROM posts AS t1
         INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
