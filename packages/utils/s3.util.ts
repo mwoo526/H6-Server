@@ -5,8 +5,8 @@ import * as multerS3 from 'multer-s3';
 import * as path from 'path';
 
 export module s3Util {
-	aws.config.loadFromPath(__dirname + '/config/awsconfig.json');
-	const file = './packages/utils/config/awsconfig.json';
+	aws.config.loadFromPath(__dirname + '/config/env.json');
+	const file = './packages/utils/config/env.json';
 	let awsconfig: any = fs.readFileSync(file, 'utf8');
 	awsconfig = JSON.parse(awsconfig);
 	let s3 = new aws.S3();

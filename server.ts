@@ -19,7 +19,7 @@ app.listen(app.get('port'), async () => {
     ft        tf    tftftftftftf        tftftftftftf    tftftftftftf    tf       tf.       tftf       tftftftftftf    tf       tf.
   **********************************************************************************************************************************                                  
       `);
-	const file = './packages/core/env/env.json';
+	const file = './packages/utils/config/env.json';
 	let envData: any = fs.readFileSync(file, 'utf8');
 	envData = JSON.parse(envData);
 
