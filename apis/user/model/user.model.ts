@@ -222,8 +222,7 @@ export class User {
 					connection.release();
 					if (err) {
 						reject(err);
-					}
-					else {
+					} else {
 						resolve(rows);
 					}
 				})

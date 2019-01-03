@@ -13,6 +13,7 @@ export class PostsRoutes {
 	public router() {
 		this.postsRouter.post('/posts', createPosts);
 		this.postsRouter.get('/posts', pageListPosts);
+		this.postsRouter.get('/posts/userId/:userId', pageListPostsByIsScrap);
 		this.postsRouter.get('/posts/postsIndex/:postsIndex', getPosts);
 		this.postsRouter.put('/posts/postsIndex/:postsIndex', updatePosts);
 		this.postsRouter.delete('/posts/postsIndex/:postsIndex', deletePosts);
@@ -93,6 +94,54 @@ async function pageListPosts(req, res) {
 					success: false,
 					statusCode: 500,
 					message: 'pageListPosts: 50000'
+				});
+				break;
+		}
+	}
+}
+
+/**
+ * route: posts page isScrap 리스트 조회
+ * @param req
+ * @param res
+ */
+async function pageListPostsByIsScrap(req, res) {
+	let filter: string = req.query.filter;
+	let orderBy: string = req.query.orderBy;
+	let page: number = parseInt(req.query.page);
+	let count: number = parseInt(req.query.count);
+	try {
+		const resultUser = await user.getUser(req.params.userId);
+		const userIndex = resultUser[0].userIndex;
+		const resultCount: any = await posts.listPostsByIsScrap(userIndex, filter);
+		const result: any = await posts.pageListPostsByIsScrap(userIndex, filter, orderBy, page, count);
+		for (const row of result) {
+			let subscriberCount = await postsSubscriber.getPostsSubscriber(row.postsIndex);
+			row.goodCount = subscriberCount[0].goodCount || 0;
+			row.badCount = subscriberCount[0].badCount || 0;
+			row.isScrap = subscriberCount[0].isScrap === 1 ? true : false;
+		}
+		res.send({
+			success: true,
+			statusCode: 200,
+			resultCount: resultCount.length,
+			result: result,
+			message: 'pageListPostsByIsScrap: 200'
+		});
+	} catch (err) {
+		switch (err) {
+			case 'The ID does not exist':
+				res.send({
+					success: false,
+					statusCode: 404,
+					message: 'pageListPostsByIsScrap: 40401'
+				});
+				break;
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'pageListPostsByIsScrap: 50000'
 				});
 				break;
 		}

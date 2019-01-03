@@ -64,17 +64,14 @@ export class UserValidation {
 			const getValidationCode: any = await this.getValidationCode(userId);
 			if (userData[0].userEmail == null) {
 				throw new Error('The email does not exist.');
-			}
-			else {
+			} else {
 				const result = await userValidation.getValidationCode(userId);
 				if (result[0].validationCode == validationCode) {
 					const result: any = await userValidation.updateIsValidation(userId);
 					resolve(result);
-				}
-				else if (getValidationCode[0].isValidation == true) {
+				} else if (getValidationCode[0].isValidation == true) {
 					reject('This validation Code is already verified');
-				}
-				else {
+				} else {
 					reject('The validation Code does not correct');
 				}
 			}
@@ -193,12 +190,12 @@ export class UserValidation {
 	setUuid(userId: any, uuid: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`UPDATE userValidation set validationCode = ? WHERE userId = ?`, [uuid, userId], (err, rows) => {
+				await connection.query(`UPDATE userValidation set validationCode = ? WHERE userId = ?`, [uuid,
+					userId], (err, rows) => {
 					connection.release();
 					if (err) {
 						reject('setUuid query error');
-					}
-					else {
+					} else {
 						resolve(rows);
 					}
 				})
@@ -233,8 +230,7 @@ export class UserValidation {
 			await smtpTransport.sendMail(mailOptions, (err, res) => {
 				if (err) {
 					reject('sendValidationMail error');
-				}
-				else {
+				} else {
 					resolve('send ok');
 				}
 			});
@@ -253,8 +249,7 @@ export class UserValidation {
 					connection.release();
 					if (err) {
 						reject(err);
-					}
-					else {
+					} else {
 						resolve(rows);
 					}
 				})
@@ -274,8 +269,7 @@ export class UserValidation {
 					connection.release();
 					if (err) {
 						reject(err);
-					}
-					else {
+					} else {
 						resolve(rows);
 					}
 				})
@@ -295,8 +289,7 @@ export class UserValidation {
 					connection.release();
 					if (err) {
 						reject(err);
-					}
-					else {
+					} else {
 						resolve(rows);
 					}
 				})
@@ -316,8 +309,7 @@ export class UserValidation {
 					connection.release();
 					if (err) {
 						reject(err);
-					}
-					else {
+					} else {
 						resolve(rows);
 					}
 				})
@@ -350,8 +342,7 @@ export class UserValidation {
 					await this.deleteUserValidation(userId);
 					await user.updateIsValidation(userId);
 					resolve('Email is been Successfully verified');
-				}
-				else {
+				} else {
 					reject('Validation date expired.');
 				}
 			} catch (err) {

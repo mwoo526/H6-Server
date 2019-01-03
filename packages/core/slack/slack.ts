@@ -38,28 +38,28 @@ export class Slack {
 
 	async sendReportMessage(channel: string, postsIndex: number, reportCount: number) {
 		const file = './packages/core/env/env.json';
-        let envData: any = await fs.readFileSync(file, 'utf8');
-        envData = JSON.parse(envData);
-        const path = this.getChannelPath(channel);
-        const url: string = `https://hooks.slack.com/services/${path}`;
+		let envData: any = await fs.readFileSync(file, 'utf8');
+		envData = JSON.parse(envData);
+		const path = this.getChannelPath(channel);
+		const url: string = `https://hooks.slack.com/services/${path}`;
 
-        const message = {
-            attachments: [
-                {
-                    'color': '#36a64f',
-                    'mrkdwn_in': ['text', 'fields'],
-                    'fields': [
-                        {
-                            'title': `${envData.stage} 서버 / Report 알림`,
-                            'value': `postsIndex=${postsIndex}, reportCount=${reportCount} `,
-                            'short': false
-                        }
-                    ]
-                }
-            ]
-        };
+		const message = {
+			attachments: [
+				{
+					'color': '#36a64f',
+					'mrkdwn_in': ['text', 'fields'],
+					'fields': [
+						{
+							'title': `${envData.stage} 서버 / Report 알림`,
+							'value': `postsIndex=${postsIndex}, reportCount=${reportCount} `,
+							'short': false
+						}
+					]
+				}
+			]
+		};
 
-	  	const options = {
+		const options = {
 			url: `https://hooks.slack.com/services/${path}`,
 			method: 'POST',
 			json: true,

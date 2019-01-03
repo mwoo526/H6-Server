@@ -48,7 +48,7 @@ export class Posts {
 					}
 				}
 				if (filterArray[i] === ('LIKE')) {
-					filterArray[i - 1] = `REPLACE(${filterArray[i - 1]}, ' ', '')` ;
+					filterArray[i - 1] = `REPLACE(${filterArray[i - 1]}, ' ', '')`;
 					filterArray[i + 1] = `"%${filterArray[i + 1]}%"`;
 				}
 			}
@@ -176,6 +176,120 @@ export class Posts {
       INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
 			INNER JOIN postsCategory AS t3 ON t1.postsCategoryIndex = t3.postsCategoryIndex
 			WHERE t1.postsIndex IS NOT NULL `;
+
+			if (filter) {
+				const resultFilter = await this.filterPosts(filter);
+				sql = sql + resultFilter;
+			}
+
+			if (orderBy) {
+				const orderByObj = await this.orderByPosts(orderBy);
+				if (orderByObj.hasOwnProperty('createdAt')) {
+					sortType = orderByObj.createdAt;
+					sql = sql + `ORDER BY t1.createdAt ${sortType} `;
+				}
+
+				if (orderByObj.hasOwnProperty('updatedAt')) {
+					sortType = orderByObj.updatedAt;
+					sql = sql + `ORDER BY t1.updatedAt ${sortType} `;
+				}
+			} else {
+				sql = sql + `ORDER BY t1.createdAt DESC `;
+			}
+
+			sql = sql + `LIMIT ${start}, ${count}`;
+
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(sql, function(err, rows) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						connection.release();
+						resolve(rows);
+					}
+				});
+			});
+		});
+	}
+
+	/**
+	 * model: posts 스크랩 리스트 조회
+	 * @param filter
+	 */
+	listPostsByIsScrap(userIndex: number, filter: string) {
+		return new Promise(async (resolve, reject) => {
+			let sql: any = `SELECT 
+			t1.postsIndex,
+			t1.userIndex,
+			t1.postsCategoryIndex,
+			t1.title, 
+			t1.content,
+			t1.count, 
+			t1.status,
+			t1.createdAt, 
+			t2.userNickName,
+			t3.postsCategoryName,
+			(SELECT COUNT(*) AS count FROM postsReply WHERE t1.postsIndex = postsReply.postsIndex) AS replyCount 
+      FROM posts AS t1
+      INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
+			INNER JOIN postsCategory AS t3 ON t1.postsCategoryIndex = t3.postsCategoryIndex
+			INNER JOIN postsSubscriber AS t4 ON t1.postsIndex = t4.postsIndex AND t4.userIndex = ${userIndex}
+			WHERE t1.postsIndex IS NOT NULL AND t4.isScrap = 1 `;
+
+			if (filter) {
+				const resultFilter = await this.filterPosts(filter);
+				sql = sql + resultFilter;
+			}
+
+			await pool.getConnection(async function(err, connection) {
+				await connection.query(sql, function(err, rows) {
+					if (err) {
+						connection.release();
+						reject(err);
+					} else {
+						connection.release();
+						resolve(rows);
+					}
+				});
+			});
+		});
+	}
+
+	/**
+	 * model: posts page isScrap 리스트 조회
+	 * @param userIndex
+	 * @param filter
+	 * @param orderBy
+	 * @param page
+	 * @param count
+	 */
+	pageListPostsByIsScrap(userIndex: number, filter: string, orderBy: string, page: number, count: number): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			let sortType;
+
+			let start = (page - 1) * count;
+			if (start < 0) {
+				start = 0;
+			}
+
+			let sql: any = `SELECT 
+			t1.postsIndex,
+			t1.userIndex,
+			t1.postsCategoryIndex,
+			t1.title, 
+			t1.content,
+			t1.count,
+			t1.status,
+			t1.createdAt, 
+			t2.userNickName,
+			t3.postsCategoryName,
+			(SELECT COUNT(*) AS count FROM postsReply WHERE t1.postsIndex = postsReply.postsIndex) AS replyCount 
+      FROM posts AS t1
+      INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
+			INNER JOIN postsCategory AS t3 ON t1.postsCategoryIndex = t3.postsCategoryIndex
+			INNER JOIN postsSubscriber AS t4 ON t1.postsIndex = t4.postsIndex AND t4.userIndex = ${userIndex}
+      WHERE t1.postsIndex IS NOT NULL AND t4.isScrap = 1 `;
 
 			if (filter) {
 				const resultFilter = await this.filterPosts(filter);

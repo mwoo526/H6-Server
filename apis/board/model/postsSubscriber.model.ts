@@ -3,6 +3,10 @@ import { mysqlUtil } from '../../../packages/utils/mysql.util';
 const pool = mysqlUtil.pool;
 
 export class PostsSubscriber {
+	/**
+	 * model: postsSubscriber 생성
+	 * @param postsSubscriberData
+	 */
 	createPostsSubscriber(postsSubscriberData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
@@ -18,6 +22,10 @@ export class PostsSubscriber {
 		});
 	}
 
+	/**
+	 * model: postsSubscriber 게시글별 조회
+	 * @param postsIndex
+	 */
 	getPostsSubscriber(postsIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
@@ -40,6 +48,11 @@ export class PostsSubscriber {
 		});
 	}
 
+	/**
+	 * model: postsSubscriber 사용자별 개수 조회
+	 * @param postsIndex
+	 * @param userIndex
+	 */
 	getPostsSubscriberCountByUserIndex(postsIndex: number, userIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
@@ -66,6 +79,12 @@ export class PostsSubscriber {
 		});
 	}
 
+	/**
+	 * model: postsSubscriber 업데이트
+	 * @param postsIndex
+	 * @param userIndex
+	 * @param postsSubscriberData
+	 */
 	updatePostsSubscriber(postsIndex: number, userIndex: number, postsSubscriberData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
@@ -84,18 +103,23 @@ export class PostsSubscriber {
 		});
 	}
 
+	/**
+	 * model: postsSubscriber 삭제
+	 * @param postsIndex
+	 * @param userIndex
+	 */
 	deletePostsSubscriber(postsIndex: number, userIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`DELETE FROM postsSubscriber WHERE postsIndex = ? AND userIndex = ?`,
 					[postsIndex, userIndex], (err, data) => {
-					connection.release();
-					if (err) {
-						reject(err);
-					} else {
-						resolve(data);
-					}
-				});
+						connection.release();
+						if (err) {
+							reject(err);
+						} else {
+							resolve(data);
+						}
+					});
 			});
 		});
 	}

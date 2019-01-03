@@ -1,5 +1,5 @@
-import * as request from 'supertest';
 import { expect } from 'chai';
+import * as request from 'supertest';
 
 describe('signIn 라우트', () => {
 	it('signInRoutes', async () => {
@@ -22,15 +22,15 @@ describe('signIn 라우트', () => {
 			message: 'getUser: 200',
 			result: {
 				userIndex: 487,
-				userId: "mochatest@gmail.com",
-				userNickName: "모카테스트",
-				major: "산업경영공학과",
+				userId: 'mochatest@gmail.com',
+				userNickName: '모카테스트',
+				major: '산업경영공학과',
 				minor: null,
 				doubleMajor: null,
 				connectedMajor: null,
 				admissionYear: 2018,
 				avatar: null,
-				status: "ACTIVE",
+				status: 'ACTIVE',
 				isValidation: 0,
 			}
 		});

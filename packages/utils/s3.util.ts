@@ -1,5 +1,5 @@
 import * as aws from 'aws-sdk';
-import * as fs from "fs";
+import * as fs from 'fs';
 import * as multer from 'multer';
 import * as multerS3 from 'multer-s3';
 import * as path from 'path';
