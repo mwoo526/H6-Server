@@ -2,13 +2,13 @@ export class PostsReportResource {
 	private postsReportIndex;
 	private userIndex;
 	private postsIndex;
-	private contents;
+	private content;
 
 	constructor(postsReportData) {
 		this.setPostsReportIndex(postsReportData.postsReportIndex);
 		this.setUserIndex(postsReportData.userIndex);
 		this.setPostsIndex(postsReportData.postsIndex);
-		this.setContents(postsReportData.contents);
+		this.setContent(postsReportData.content);
 	}
 
 	getPostsReportIndex() {
@@ -35,12 +35,12 @@ export class PostsReportResource {
 		this.postsIndex = postsIndex;
 	}
 
-	getContents() {
-		return this.contents;
+	getContent() {
+		return this.content;
 	}
 
-	setContents(contents) {
-		this.contents = contents;
+	setContent(content) {
+		this.content = content;
 	}
 
 	getPostsReport() {
@@ -48,7 +48,7 @@ export class PostsReportResource {
 			postsReportIndex: this.getPostsReportIndex(),
 			userIndex: this.getUserIndex(),
 			postsIndex: this.getPostsIndex(),
-			contents: this.getContents()
+			content: this.getContent()
 		};
 		return postsReportResource;
 	}

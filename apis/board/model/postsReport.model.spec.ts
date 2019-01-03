@@ -14,12 +14,12 @@ describe('postsReport 모델', () => {
 			const result = await postsReport.createPostsReport({
 				userIndex: userIndex,
 				postsIndex: postsIndex,
-				contents: content
+				content: content
 			});
 			expect(result).to.be.eqls({
 				userIndex: userIndex,
 				postsIndex: postsIndex,
-				contents: content
+				content: content
 			});
 		} catch (err) {
 			console.error('err', err);
@@ -56,13 +56,13 @@ describe('postsReport 모델', () => {
 		const result = await postsReport.updatePostsReport(postsReportIndex, {
 			userIndex: userIndex,
 			postsIndex: postsIndex,
-			contents: updateContent
+			content: updateContent
 		});
 		//console.log(result);
 		expect(result).to.be.eqls({
 			userIndex: userIndex,
 			postsIndex: postsIndex,
-			contents: updateContent
+			content: updateContent
 		});
 	});
 
