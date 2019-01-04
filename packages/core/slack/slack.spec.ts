@@ -3,8 +3,8 @@ import * as fs from 'fs';
 import { slack } from './slack';
 
 describe('slack', () => {
-	it('sendMessage - JSON 메시지 전송 성공', async (done) => {
-		let file = './packages/core/env/env.json';
+	it('sendMessage - 메시지 전송 성공', async () => {
+		const file = './packages/utils/config/env.json';
 		let envData: any = await fs.readFileSync(file, 'utf8');
 		envData = JSON.parse(envData);
 		await slack.sendMessage('deploy', {
@@ -22,11 +22,5 @@ describe('slack', () => {
 				}
 			]
 		});
-		setTimeout(done, 1000);
-	});
-
-	// it('sendMessage - 메시지 전송 실패', (done) => {
-	//   slack.sendMessage('debug', 'LogSlack: sendMessage(): FAIL');
-	//   setTimeout(done, 1000);
-	// });
+	}).timeout( 1000 * 60);
 });

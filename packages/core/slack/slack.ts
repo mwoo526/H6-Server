@@ -37,7 +37,7 @@ export class Slack {
 	}
 
 	async sendReportMessage(channel: string, postsIndex: number, reportCount: number) {
-		const file = './packages/core/env/env.json';
+		const file = './packages/utils/config/env.json';
 		let envData: any = await fs.readFileSync(file, 'utf8');
 		envData = JSON.parse(envData);
 		const path = this.getChannelPath(channel);
@@ -80,9 +80,10 @@ export class Slack {
 
 	async sendDeployMessage(channel: string) {
 		/** 환경변수 파일 읽어오기 */
-		const file = './packages/core/env/env.json';
+		const file = './packages/utils/config/env.json';
 		let envData: any = await fs.readFileSync(file, 'utf8');
 		envData = JSON.parse(envData);
+
 		const path = this.getChannelPath(channel);
 		const url: string = `https://hooks.slack.com/services/${path}`;
 		const message = {

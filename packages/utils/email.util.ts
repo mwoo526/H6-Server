@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as nodemailer from 'nodemailer';
 
 export module emailUtil {
-	const file = './packages/utils/config/email.json';
+	const file = './packages/utils/config/env.json';
 	let emailData: any = fs.readFileSync(file, 'utf8');
 	emailData = JSON.parse(emailData);
 

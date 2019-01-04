@@ -3,7 +3,7 @@ import * as mysql from 'mysql';
 
 /** MySQL DB 연결 */
 export module mysqlUtil {
-	const file = './packages/utils/config/mysql.json';
+	const file = './packages/utils/config/env.json';
 	let mysqlData: any = fs.readFileSync(file, 'utf8');
 	mysqlData = JSON.parse(mysqlData);
 

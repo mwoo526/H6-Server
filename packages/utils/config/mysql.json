@@ -1,9 +1,0 @@
-{
-  "host": "handam-dev.cvogtolpblj7.ap-northeast-2.rds.amazonaws.com",
-  "user": "h6_root",
-  "password": "h6mysqldb",
-  "database": "handam",
-  "timezone": "UTC",
-  "connectionLimit": 50,
-  "waitForConnections": true
-}
