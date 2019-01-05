@@ -113,12 +113,18 @@ async function getPostsReport(req, res): Promise<void> {
 				res.send({
 					success: false,
 					statusCode: 500,
-					message: 'getPostsReport: 500'
+					message: 'getPostsReport: 50000'
 				});
 		}
 	}
 }
 
+/**
+ * route: UserIndex에 따른 postsReport 조회
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
 async function getPostsReportByUser(req, res): Promise<void> {
 	const userIndex: number = req.params.userIndex;
 	try {
@@ -135,12 +141,18 @@ async function getPostsReportByUser(req, res): Promise<void> {
 				res.send({
 					success: false,
 					statusCode: 500,
-					message: 'getPostsReportByUser: 500'
+					message: 'getPostsReportByUser: 50000'
 				});
 		}
 	}
 }
 
+/**
+ * route: postsIndex에 따른 postsReport 조회
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
 async function getPostsReportByPost(req, res): Promise<void> {
 	const postsIndex: number = req.params.postsIndex;
 	try {
@@ -157,7 +169,7 @@ async function getPostsReportByPost(req, res): Promise<void> {
 				res.send({
 					success: false,
 					statusCode: 500,
-					message: 'getPostsReportByPost: 500'
+					message: 'getPostsReportByPost: 50000'
 				});
 		}
 	}
@@ -187,7 +199,7 @@ async function updatePostsReport(req, res): Promise<void> {
 				res.send({
 					success: false,
 					statusCode: 500,
-					message: 'updatePostsReport: 500'
+					message: 'updatePostsReport: 50000'
 				});
 		}
 	}
@@ -217,7 +229,7 @@ async function deletePostsReport(req, res): Promise<void> {
 				res.send({
 					success: false,
 					statusCode: 500,
-					message: 'deletePostsReport: 500'
+					message: 'deletePostsReport: 50000'
 				});
 		}
 	}

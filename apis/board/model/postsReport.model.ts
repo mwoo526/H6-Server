@@ -26,7 +26,8 @@ export class PostsReport {
 
 	/**
 	 * model: PostsReport 중복 신고 확인
-	 * @param : postsIndex, userIndex
+	 * @param : {number} postsIndex
+	 * @param : {number} userIndex
 	 * @returns {Promise<any>}
 	 */
 
@@ -48,7 +49,7 @@ export class PostsReport {
 
 	/**
 	 * model: postsIndex 신고횟수 조회
-	 * @param : postsIndex
+	 * @param : {number} postsIndex
 	 * @returns {Promise<any>}
 	 */
 	getPostsReportCount(postsIndex: number): Promise<any> {
@@ -88,7 +89,7 @@ export class PostsReport {
 
 	/**
 	 * model : PostsReport By User 특정 유저가 신고 리스트 조회
-	 * @param : userIndex
+	 * @param : {number} userIndex
 	 * @returns {Promise<any>}
 	 */
 	getPostsReportByUser(userIndex: number): Promise<any> {
@@ -108,7 +109,7 @@ export class PostsReport {
 
 	/**
 	 * model : PostsReport By Post 특정 게시글 신고 리스트 조회
-	 * @param : postsIndex
+	 * @param : {number} postsIndex
 	 * @returns {Promise<any>}
 	 */
 	getPostsReportByPost(postsIndex: number): Promise<any> {
@@ -128,10 +129,11 @@ export class PostsReport {
 
 	/**
 	 * model: postsReport 업데이트
-	 * @param : postsReportIndex, postsReportData
+	 * @param : {number} postsReportIndex
+	 * @param : {number} postsReportData
 	 * @returns {Promise<any>}
 	 */
-	updatePostsReport(postsReportIndex: number, postsReportData: any): Promise<void> {
+	updatePostsReport(postsReportIndex: number, postsReportData: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`UPDATE postsReport SET ? WHERE postsReportIndex=?`, [postsReportData,
@@ -142,14 +144,15 @@ export class PostsReport {
 					} else {
 						resolve(postsReportData);
 					}
-				})
-			})
+				});
+			});
 		});
 	}
 
 	/**
-	 * model: postsReport 삭제
-	 * @param postsReportIndex, userIndex
+	 * model: postsReport 삭제 (신고 철회)
+	 * @param : {number} postsIndex
+	 * @param : {number} userIndex
 	 * @returns {Promise<any>}
 	 */
 	deletePostsReport(postsIndex: number, userIndex: number): Promise<any> {
