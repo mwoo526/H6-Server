@@ -20,11 +20,12 @@ export class PostsSubscriberRoutes {
  * @param res
  */
 async function putPostsSubscriber(req, res) {
-	const postsIndex = req.params.postsIndex;
-	const resultUser = await user.getUser(req.body.userId);
-	const userIndex = resultUser[0].userIndex;
-	delete req.body.userId;
 	try {
+		const postsIndex = req.params.postsIndex;
+		const resultUser = await user.getUser(req.body.userId);
+		const userIndex = resultUser[0].userIndex;
+		delete req.body.userId;
+
 		let result = await postsSubscriber.getPostsSubscriberCountByUserIndex(postsIndex, userIndex);
 		if (result[0] == null) {
 			await postsSubscriber.createPostsSubscriber({

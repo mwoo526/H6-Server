@@ -3,6 +3,7 @@ import * as express from 'express';
 import { admissionRoutes } from './apis/admissionYear/route/admissionYear.route';
 import { postsRoutes } from './apis/board/route/posts.route';
 import { postsReplyRoutes } from './apis/board/route/postsReply.route';
+import { postsReplySubscriberRoutes } from './apis/board/route/postsReplySubscriber.route';
 import { postsReportRoutes } from './apis/board/route/postsReport.route';
 import { postsSubscriberRoutes } from './apis/board/route/postsSubscriber.route';
 import { lectureRoutes } from './apis/lecture/route/lecture.route';
@@ -55,6 +56,7 @@ export class Server {
 		this.app.use(postsRoutes.postsRouter);
 		this.app.use(postsReplyRoutes.postsReplyRouter);
 		this.app.use(postsSubscriberRoutes.postsSubscriberRouter);
+		this.app.use(postsReplySubscriberRoutes.postsReplySubscriberRouter);
 		this.app.use(postsReportRoutes.postsReportRouter);
 		this.app.use(fileRoutes.fileRouter);
 		this.app.use(voteRoutes.voteRouter);
