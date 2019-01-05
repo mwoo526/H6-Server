@@ -25,6 +25,8 @@ import { notFoundError, serverError } from './middlewares/error.middleware';
 import { verify } from './middlewares/tokenVerify.middleware';
 import { voteScheduler } from './schedulers/vote/voteScheduler';
 import { fileRoutes } from "./apis/file/route/file.route";
+import { noticeRoutes } from "./apis/notice/route/notice.route";
+
 
 export class Server {
 	/** app 에 대한 타입 설정 */
@@ -53,7 +55,8 @@ export class Server {
 		/** 라우터 토큰 검증 */
 		this.app.use(verify);
 		/** 라우터 추가 */
-		this.app.use(postsRoutes.postsRouter);
+        this.app.use(noticeRoutes.noticeRouter);
+        this.app.use(postsRoutes.postsRouter);
 		this.app.use(postsReplyRoutes.postsReplyRouter);
 		this.app.use(postsSubscriberRoutes.postsSubscriberRouter);
 		this.app.use(postsReplySubscriberRoutes.postsReplySubscriberRouter);
