@@ -48,7 +48,7 @@ async function createPostsReport(req, res): Promise<void> {
 		const reportCount = countResult[0]['reportCount'];
 		if (reportCount === alarmCount) {
 			// 게시물 비활성화 처리 관련 코드 삽입예정
-			await slack.sendReportMessage('deploy', result['postsIndex'], reportCount);
+			await slack.sendReportMessage('reported', result['postsIndex'], reportCount);
 		}
 
 		res.send({
