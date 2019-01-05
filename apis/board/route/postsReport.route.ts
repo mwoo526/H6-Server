@@ -2,6 +2,7 @@ import * as express from 'express';
 import { slack } from '../../../packages/core/slack/slack';
 import { PostsReportResource } from '../../../resources/postsReport.resource';
 import { postsReport } from '../model/postsReport.model';
+import { posts } from "../model/posts.model";
 
 export class PostsReportRoutes {
 	public postsReportRouter: express.Route = express.Router();
@@ -47,7 +48,7 @@ async function createPostsReport(req, res): Promise<void> {
 
 		const reportCount = countResult[0]['reportCount'];
 		if (reportCount === alarmCount) {
-			// 게시물 비활성화 처리 관련 코드 삽입예정
+			await posts.updatePostsStatus(result['postsIndex'], 'INACTIVE');
 			await slack.sendReportMessage('reported', result['postsIndex'], reportCount);
 		}
 
@@ -73,7 +74,14 @@ async function createPostsReport(req, res): Promise<void> {
 					message: 'get Posts Report Count Error: 50002'
 				});
 				break;
-			default:
+            case 'posts Status Update Error':
+                res.send({
+                    success: false,
+                    statusCode: 50003,
+                    message: 'posts Status Update Error: 50003'
+                });
+                break;
+            default:
 				res.send({
 					success: false,
 					statusCode: 50000,
