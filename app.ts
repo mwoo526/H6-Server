@@ -5,6 +5,7 @@ import { postsRoutes } from './apis/board/route/posts.route';
 import { postsReplyRoutes } from './apis/board/route/postsReply.route';
 import { postsReplySubscriberRoutes } from './apis/board/route/postsReplySubscriber.route';
 import { postsReportRoutes } from './apis/board/route/postsReport.route';
+import { postsReplyReportRoutes } from "./apis/board/route/postsReplyReport.route";
 import { postsSubscriberRoutes } from './apis/board/route/postsSubscriber.route';
 import { lectureRoutes } from './apis/lecture/route/lecture.route';
 import { lectureInfoRoutes } from './apis/lecture/route/lectureInfo.route';
@@ -61,6 +62,7 @@ export class Server {
 		this.app.use(postsSubscriberRoutes.postsSubscriberRouter);
 		this.app.use(postsReplySubscriberRoutes.postsReplySubscriberRouter);
 		this.app.use(postsReportRoutes.postsReportRouter);
+		this.app.use(postsReplyReportRoutes.postsReplyReportRouter);
 		this.app.use(fileRoutes.fileRouter);
 		this.app.use(voteRoutes.voteRouter);
 		this.app.use(testRoutes.testRouter);
