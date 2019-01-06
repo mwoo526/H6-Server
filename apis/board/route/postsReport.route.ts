@@ -73,22 +73,22 @@ async function createPostsReport(req, res): Promise<void> {
 			case 'check Posts Report Error':
 				res.send({
 					success: false,
-					statusCode: 50001,
-					message: 'check Posts Report Error: 50001'
+					statusCode: 50000,
+					message: 'check Posts Report Error: 50000'
 				});
 				break;
 			case 'get Posts Report Count Error':
 				res.send({
 					success: false,
-					statusCode: 50002,
-					message: 'get Posts Report Count Error: 50002'
+					statusCode: 50000,
+					message: 'get Posts Report Count Error: 50000'
 				});
 				break;
             case 'posts Status Update Error':
                 res.send({
                     success: false,
-                    statusCode: 50003,
-                    message: 'posts Status Update Error: 50003'
+                    statusCode: 50000,
+                    message: 'posts Status Update Error: 50000'
                 });
                 break;
             default:
