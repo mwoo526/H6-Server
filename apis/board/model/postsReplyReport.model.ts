@@ -70,7 +70,7 @@ export class PostsReplyReport {
      * model : PostsReplyReport 모든 신고 리스트 조회
      * @returns {Promise<any>}
      */
-    getPostsReplyReport(): Promise<any> {
+    listPostsReplyReport(): Promise<any> {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async (err, connection) => {
                await connection.query(`SELECT * from postsReplyReport`, (err, data) => {
@@ -90,7 +90,7 @@ export class PostsReplyReport {
      * @param : {number} userIndex
      * @returns {Promise<any>}
      */
-    getPostsReplyReportByUser(userIndex: number): Promise<any> {
+    getPostsReplyReportByUserIndex(userIndex: number): Promise<any> {
         return new Promise(async (resolve, reject) => {
            await pool.getConnection(async (err, connection) => {
               await connection.query(`SELECT * from postsReplyReport where userIndex=?`, [userIndex], (err, data) => {

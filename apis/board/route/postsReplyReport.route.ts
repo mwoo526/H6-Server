@@ -12,8 +12,8 @@ export class PostsReplyReportRoute {
 
     public router() {
         this.postsReplyReportRouter.post('/postsReplyReport', createPostsReplyReport);
-        this.postsReplyReportRouter.get('/postsReplyReport', getPostsReplyReport);
-        this.postsReplyReportRouter.get('/postsReplyReport/userIndex/:userIndex', getPostsReplyReportByUser);
+        this.postsReplyReportRouter.get('/postsReplyReport', listPostsReplyReport);
+        this.postsReplyReportRouter.get('/postsReplyReport/userIndex/:userIndex', getPostsReplyReportByUserIndex);
         this.postsReplyReportRouter.put('/postsReplyReport/postsReplyReportIndex/:postsReplyReportIndex', updatePostsReplyReport);
         this.postsReplyReportRouter.delete('/postsReplyReport', deletePostsReplyReport);
     }
@@ -95,9 +95,9 @@ async function createPostsReplyReport(req, res): Promise<void> {
  * @param res
  * @returns {Promise<void>}
  */
-async function getPostsReplyReport(req, res): Promise<void> {
+async function listPostsReplyReport(req, res): Promise<void> {
     try {
-        const result: any = await postsReplyReport.getPostsReplyReport();
+        const result: any = await postsReplyReport.listPostsReplyReport();
         res.send({
             success: true,
             statusCode: 200,
@@ -122,10 +122,10 @@ async function getPostsReplyReport(req, res): Promise<void> {
  * @param res
  * @returns {Promise<void>}
  */
-async function getPostsReplyReportByUser(req, res): Promise<void> {
+async function getPostsReplyReportByUserIndex(req, res): Promise<void> {
     const userIndex: number = req.params.userIndex;
     try {
-        const result: any = await postsReplyReport.getPostsReplyReportByUser(userIndex);
+        const result: any = await postsReplyReport.getPostsReplyReportByUserIndex(userIndex);
         res.send({
             success: true,
             statusCode: 200,
@@ -180,8 +180,7 @@ async function updatePostsReplyReport(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function deletePostsReplyReport(req, res): Promise<void> {
-    const postsReplyIndex: number = req.body.postsReplyIndex;
-    const userIndex: number = req.body.userIndex;
+    const { postsReplyIndex, userIndex } = req.body;
     try {
         const result: any = await postsReplyReport.deletePostsReplyReport(postsReplyIndex, userIndex);
         res.send({

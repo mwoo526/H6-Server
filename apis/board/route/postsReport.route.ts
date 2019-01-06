@@ -13,9 +13,9 @@ export class PostsReportRoutes {
 
 	public router() {
 		this.postsReportRouter.post('/postsReport', createPostsReport);
-		this.postsReportRouter.get('/postsReport', getPostsReport);
-		this.postsReportRouter.get('/postsReport/userIndex/:userIndex', getPostsReportByUser);
-		this.postsReportRouter.get('/postsReport/postsIndex/:postsIndex', getPostsReportByPost);
+		this.postsReportRouter.get('/postsReport', listPostsReport);
+		this.postsReportRouter.get('/postsReport/userIndex/:userIndex', getPostsReportByUserIndex);
+		this.postsReportRouter.get('/postsReport/postsIndex/:postsIndex', getPostsReportByPostIndex);
 		this.postsReportRouter.put('/postsReport/postsReportIndex/:postsReportIndex', updatePostsReport);
 		this.postsReportRouter.delete('/postsReport/', deletePostsReport);
 	}
@@ -99,9 +99,9 @@ async function createPostsReport(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 
-async function getPostsReport(req, res): Promise<void> {
+async function listPostsReport(req, res): Promise<void> {
 	try {
-		const result: any = await postsReport.getPostsReport();
+		const result: any = await postsReport.listPostsReport();
 		res.send({
 			success: true,
 			statusCode: 200,
@@ -126,10 +126,10 @@ async function getPostsReport(req, res): Promise<void> {
  * @param res
  * @returns {Promise<void>}
  */
-async function getPostsReportByUser(req, res): Promise<void> {
+async function getPostsReportByUserIndex(req, res): Promise<void> {
 	const userIndex: number = req.params.userIndex;
 	try {
-		const result: any = await postsReport.getPostsReportByUser(userIndex);
+		const result: any = await postsReport.getPostsReportByUserIndex(userIndex);
 		res.send({
 			success: true,
 			statusCode: 200,
@@ -154,10 +154,10 @@ async function getPostsReportByUser(req, res): Promise<void> {
  * @param res
  * @returns {Promise<void>}
  */
-async function getPostsReportByPost(req, res): Promise<void> {
+async function getPostsReportByPostIndex(req, res): Promise<void> {
 	const postsIndex: number = req.params.postsIndex;
 	try {
-		const result: any = await postsReport.getPostsReportByPost(postsIndex);
+		const result: any = await postsReport.getPostsReportByPostIndex(postsIndex);
 		res.send({
 			success: true,
 			statusCode: 200,
@@ -213,8 +213,7 @@ async function updatePostsReport(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function deletePostsReport(req, res): Promise<void> {
-	const postsIndex: number = req.body.postsIndex;
-	const userIndex: number = req.body.userIndex;
+	const { postsIndex, userIndex } = req.body;
 	try {
 		const result: any = await postsReport.deletePostsReport(postsIndex, userIndex);
 		res.send({

@@ -72,7 +72,7 @@ export class PostsReport {
 	 * model : PostsReport 모든 신고 리스트 조회
 	 * @returns {Promise<any>}
 	 */
-	getPostsReport(): Promise<any> {
+	listPostsReport(): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`SELECT * from postsReport`, (err, data) => {
@@ -92,7 +92,7 @@ export class PostsReport {
 	 * @param : {number} userIndex
 	 * @returns {Promise<any>}
 	 */
-	getPostsReportByUser(userIndex: number): Promise<any> {
+	getPostsReportByUserIndex(userIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`SELECT * from postsReport WHERE userIndex=?`, [userIndex], (err, data) => {
@@ -112,7 +112,7 @@ export class PostsReport {
 	 * @param : {number} postsIndex
 	 * @returns {Promise<any>}
 	 */
-	getPostsReportByPost(postsIndex: number): Promise<any> {
+	getPostsReportByPostIndex(postsIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`SELECT * from postsReport WHERE postsIndex=?`, [postsIndex], (err, data) => {
