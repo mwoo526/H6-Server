@@ -1,22 +1,12 @@
 export class PostsReportResource {
-	private postsReportIndex;
 	private userIndex;
 	private postsIndex;
 	private content;
 
 	constructor(postsReportData) {
-		this.setPostsReportIndex(postsReportData.postsReportIndex);
 		this.setUserIndex(postsReportData.userIndex);
 		this.setPostsIndex(postsReportData.postsIndex);
 		this.setContent(postsReportData.content);
-	}
-
-	getPostsReportIndex() {
-		return this.postsReportIndex;
-	}
-
-	setPostsReportIndex(postsReportIndex) {
-		this.postsReportIndex = postsReportIndex;
 	}
 
 	getUserIndex() {
@@ -45,7 +35,6 @@ export class PostsReportResource {
 
 	getPostsReport() {
 		let postsReportResource: object = {
-			postsReportIndex: this.getPostsReportIndex(),
 			userIndex: this.getUserIndex(),
 			postsIndex: this.getPostsIndex(),
 			content: this.getContent()
