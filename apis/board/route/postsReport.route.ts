@@ -14,9 +14,9 @@ export class PostsReportRoutes {
 	public router() {
 		this.postsReportRouter.post('/postsReport', createPostsReport);
 		this.postsReportRouter.get('/postsReport', getPostsReport);
-		this.postsReportRouter.get('/postsReport/user/:userIndex', getPostsReportByUser);
-		this.postsReportRouter.get('/postsReport/posts/:postsIndex', getPostsReportByPost);
-		this.postsReportRouter.put('/postsReport/:postsReportIndex', updatePostsReport);
+		this.postsReportRouter.get('/postsReport/userIndex/:userIndex', getPostsReportByUser);
+		this.postsReportRouter.get('/postsReport/postsIndex/:postsIndex', getPostsReportByPost);
+		this.postsReportRouter.put('/postsReport/postsReportIndex/:postsReportIndex', updatePostsReport);
 		this.postsReportRouter.delete('/postsReport/', deletePostsReport);
 	}
 }

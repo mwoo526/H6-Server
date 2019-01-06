@@ -13,8 +13,8 @@ export class PostsReplyReportRoute {
     public router() {
         this.postsReplyReportRouter.post('/postsReplyReport', createPostsReplyReport);
         this.postsReplyReportRouter.get('/postsReplyReport', getPostsReplyReport);
-        this.postsReplyReportRouter.get('/postsReplyReport/user/:userIndex', getPostsReplyReportByUser);
-        this.postsReplyReportRouter.put('/postsReplyReport/:postsReplyReportIndex', updatePostsReplyReport);
+        this.postsReplyReportRouter.get('/postsReplyReport/userIndex/:userIndex', getPostsReplyReportByUser);
+        this.postsReplyReportRouter.put('/postsReplyReport/postsReplyReportIndex/:postsReplyReportIndex', updatePostsReplyReport);
         this.postsReplyReportRouter.delete('/postsReplyReport', deletePostsReplyReport);
     }
 }
