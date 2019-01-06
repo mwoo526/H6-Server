@@ -45,7 +45,10 @@ async function createPostsReplyReport(req, res): Promise<void> {
         countResult = JSON.parse(JSON.stringify(countResult));
 
         const reportCount = countResult[0]['reportCount'];
-        
+        if(reportCount === replyLimitCount) {
+            await postsReply.updatePostsReplyStatus(result['postsReplyIndex'], 'INACTIVE');
+            // 슬랙 알람 처리는 기획 확인 후 추가.
+        }
 
         res.send({
             success: true,
