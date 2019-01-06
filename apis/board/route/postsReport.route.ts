@@ -49,7 +49,7 @@ async function createPostsReport(req, res): Promise<void> {
 		const reportCount = countResult[0]['reportCount'];
 		if (reportCount === alarmCount) {
 			await posts.updatePostsStatus(result['postsIndex'], 'INACTIVE');
-			await slack.sendReportMessage('reported', result['postsIndex'], reportCount);
+			await slack.sendReportMessage('report', result['postsIndex'], reportCount);
 		}
 
 		res.send({
@@ -59,6 +59,7 @@ async function createPostsReport(req, res): Promise<void> {
 			message: 'createPostsReport: 200'
 		});
 	} catch (err) {
+		console.log(err);
 		switch (err) {
 			case 'check Posts Report Error':
 				res.send({
