@@ -38,7 +38,7 @@ export class PostsReport {
 					[postsIndex, userIndex], (err, data) => {
 						connection.release();
 						if (err) {
-							reject('check Posts Report Error');
+							reject(err);
 						} else {
 							resolve(data);
 						}
@@ -59,7 +59,7 @@ export class PostsReport {
     			from postsReport where postsIndex=? group by postsIndex`, [postsIndex], (err, data) => {
 					connection.release();
 					if (err) {
-						reject('get Posts Report Count Error');
+						reject(err);
 					} else {
 						resolve(data);
 					}

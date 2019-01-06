@@ -61,7 +61,7 @@ const createNotice = (req, res) => {
 		}
 
 	})
-}
+};
 
 const listNoticeImg = async (req, res) => {
 	try {
@@ -83,6 +83,6 @@ const listNoticeImg = async (req, res) => {
 				break;
 		}
 	}
-}
+};
 
 export const noticeRoutes: NoticeRoutes = new NoticeRoutes();

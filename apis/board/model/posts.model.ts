@@ -400,23 +400,21 @@ export class Posts {
 		});
 	}
 
-
-
-    /**
-     * model : posts status 업데이트
-     * @param {number} postsIndex
+	/**
+	 * model : posts status 업데이트
+	 * @param {number} postsIndex
 	 * @param {string} status
-     * @returns {Promise<void>}
-     */
-    updatePostsStatus(postsIndex: number, status: string): Promise<void> {
-    	return new Promise(async (resolve, reject) => {
-    		await pool.getConnection(async (err, connection) => {
-    			await connection.query(`UPDATE posts SET status = ? WHERE postsIndex = ?`, [status, postsIndex], (err) => {
-    				connection.release();
-    				if(err) {
-    					reject('posts Status Update Error');
+	 * @returns {Promise<void>}
+	 */
+	updatePostsStatus(postsIndex: number, status: string): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async (err, connection) => {
+				await connection.query(`UPDATE posts SET status = ? WHERE postsIndex = ?`, [status, postsIndex], (err) => {
+					connection.release();
+					if (err) {
+						reject('posts Status Update Error');
 					} else {
-    					resolve();
+						resolve();
 					}
 				});
 			});

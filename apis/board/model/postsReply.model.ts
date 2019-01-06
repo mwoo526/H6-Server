@@ -138,27 +138,27 @@ export class PostsReplyModel {
 		});
 	}
 
-    /**
-     * model : postsReply status 업데이트
-     * @param {number} postsReplyIndex
-     * @param {string} status
-     * @returns {Promise<void>}
-     */
-    updatePostsReplyStatus(postsReplyIndex: number, status: string): Promise<void> {
-        return new Promise(async (resolve, reject) => {
-            await pool.getConnection(async (err, connection) => {
-                await connection.query(`UPDATE postsReply SET status = ? WHERE postsReplyIndex = ?`, [status, postsReplyIndex], (err) => {
-                    connection.release();
-                    if(err) {
-                        reject('postsReply Status Update Error');
-                    } else {
-                        resolve();
-                    }
-                });
-            });
-        });
-    }
-
+	/**
+	 * model : postsReply status 업데이트
+	 * @param {number} postsReplyIndex
+	 * @param {string} status
+	 * @returns {Promise<void>}
+	 */
+	updatePostsReplyStatus(postsReplyIndex: number, status: string): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async (err, connection) => {
+				await connection.query(`UPDATE postsReply SET status = ? WHERE postsReplyIndex = ?`, [status,
+					postsReplyIndex], (err) => {
+					connection.release();
+					if (err) {
+						reject('postsReply Status Update Error');
+					} else {
+						resolve();
+					}
+				});
+			});
+		});
+	}
 
 	/**
 	 * model : postsReply 삭제
