@@ -34,10 +34,10 @@ async function createPostsReport(req, res): Promise<void> {
 		const checkResult: any = await postsReport.checkPostsReport(req.body.postsIndex, req.body.userIndex);
 		if (checkResult.length > 0) {
 			res.send({
-				success: true,
-				statusCode: 200,
+				success: false,
+				statusCode: 409,
 				result: checkResult,
-				message: 'already Reported: 200'
+				message: 'already Reported: 40901'
 			});
 			return;
 		}
