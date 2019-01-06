@@ -3,6 +3,7 @@ import { slack } from '../../../packages/core/slack/slack';
 import { PostsReportResource } from '../../../resources/postsReport.resource';
 import { postsReport } from '../model/postsReport.model';
 import { posts } from "../model/posts.model";
+import { user } from '../../user/model/user.model';
 
 export class PostsReportRoutes {
 	public postsReportRouter: express.Route = express.Router();
@@ -14,7 +15,7 @@ export class PostsReportRoutes {
 	public router() {
 		this.postsReportRouter.post('/postsReport', createPostsReport);
 		this.postsReportRouter.get('/postsReport', listPostsReport);
-		this.postsReportRouter.get('/postsReport/userIndex/:userIndex', getPostsReportByUserIndex);
+		this.postsReportRouter.get('/postsReport/userId/:userId', getPostsReportByUserIndex);
 		this.postsReportRouter.get('/postsReport/postsIndex/:postsIndex', getPostsReportByPostIndex);
 		this.postsReportRouter.put('/postsReport/postsReportIndex/:postsReportIndex', updatePostsReport);
 		this.postsReportRouter.delete('/postsReport/', deletePostsReport);
@@ -28,10 +29,18 @@ export class PostsReportRoutes {
  * @returns {Promise<void>}
  */
 async function createPostsReport(req, res): Promise<void> {
-	let postsReportData: any = new PostsReportResource(req.body);
-	const alarmCount = 3;
+	const { postsIndex, userId } = req.body;
 	try {
-		const checkResult: any = await postsReport.checkPostsReport(req.body.postsIndex, req.body.userIndex);
+        const resultUser = await user.getUser(userId);
+        const { userIndex } = resultUser[0];
+
+        delete req.body.userId;
+        req.body.userIndex = userIndex;
+
+        let postsReportData: any = new PostsReportResource(req.body);
+
+        const alarmCount = 3;
+		const checkResult: any = await postsReport.checkPostsReport(postsIndex, userIndex);
 		if (checkResult.length > 0) {
 			res.send({
 				success: false,
@@ -127,8 +136,11 @@ async function listPostsReport(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function getPostsReportByUserIndex(req, res): Promise<void> {
-	const userIndex: number = req.params.userIndex;
+	const { userId } = req.params;
 	try {
+        const resultUser = await user.getUser(userId);
+        const { userIndex } = resultUser[0];
+
 		const result: any = await postsReport.getPostsReportByUserIndex(userIndex);
 		res.send({
 			success: true,
@@ -183,9 +195,17 @@ async function getPostsReportByPostIndex(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function updatePostsReport(req, res): Promise<void> {
-	let postsReportIndex: number = req.params.postsReportIndex;
-	let postsReportData: any = new PostsReportResource(req.body);
+	const { postsReportIndex } = req.params;
+	const { userId } = req.body;
 	try {
+        const resultUser = await user.getUser(userId);
+        const { userIndex } = resultUser[0];
+
+        delete req.body.userId;
+        req.body.userIndex = userIndex;
+
+        let postsReportData: any = new PostsReportResource(req.body);
+
 		const result = await postsReport.updatePostsReport(postsReportIndex, postsReportData.getPostsReport());
 		res.send({
 			success: true,
@@ -213,8 +233,11 @@ async function updatePostsReport(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function deletePostsReport(req, res): Promise<void> {
-	const { postsIndex, userIndex } = req.body;
-	try {
+	const { postsIndex, userId } = req.body;
+    try {
+        const resultUser = await user.getUser(userId);
+        const { userIndex } = resultUser[0];
+
 		const result: any = await postsReport.deletePostsReport(postsIndex, userIndex);
 		res.send({
 			success: true,
@@ -222,7 +245,6 @@ async function deletePostsReport(req, res): Promise<void> {
 			result: result,
 			message: 'deletePostsReport: 200'
 		});
-
 	} catch (err) {
 		switch (err) {
 			default:

@@ -2,6 +2,7 @@ import * as express from 'express';
 import { PostsReplyReportResource } from "../../../resources/postsReplyReport.resource";
 import { postsReplyReport } from "../model/postsReplyReport.model";
 import { postsReply } from "../model/postsReply.model";
+import { user } from '../../user/model/user.model';
 
 export class PostsReplyReportRoute {
     public postsReplyReportRouter: express.Route = express.Router();
@@ -13,7 +14,7 @@ export class PostsReplyReportRoute {
     public router() {
         this.postsReplyReportRouter.post('/postsReplyReport', createPostsReplyReport);
         this.postsReplyReportRouter.get('/postsReplyReport', listPostsReplyReport);
-        this.postsReplyReportRouter.get('/postsReplyReport/userIndex/:userIndex', getPostsReplyReportByUserIndex);
+        this.postsReplyReportRouter.get('/postsReplyReport/userId/:userId', getPostsReplyReportByUserIndex);
         this.postsReplyReportRouter.put('/postsReplyReport/postsReplyReportIndex/:postsReplyReportIndex', updatePostsReplyReport);
         this.postsReplyReportRouter.delete('/postsReplyReport', deletePostsReplyReport);
     }
@@ -26,10 +27,18 @@ export class PostsReplyReportRoute {
  * @returns {Promise<void>}
  */
 async function createPostsReplyReport(req, res): Promise<void> {
-    const postsReplyReportData: any = new PostsReplyReportResource(req.body);
-    const replyLimitCount = 3;
+    const { postsReplyIndex, userId } = req.body;
     try {
-        const checkResult: any = await postsReplyReport.checkPostsReplyReport(req.body.postsReplyIndex, req.body.userIndex);
+        const resultUser = await user.getUser(userId);
+        const { userIndex } = resultUser[0];
+
+        delete req.body.userId;
+        req.body.userIndex = userIndex;
+
+        const postsReplyReportData: any = new PostsReplyReportResource(req.body);
+
+        const replyLimitCount = 3;
+        const checkResult: any = await postsReplyReport.checkPostsReplyReport(postsReplyIndex, userIndex);
         if(checkResult.length > 0) {
             res.send({
                 success: false,
@@ -123,7 +132,9 @@ async function listPostsReplyReport(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function getPostsReplyReportByUserIndex(req, res): Promise<void> {
-    const userIndex: number = req.params.userIndex;
+    const { userId } = req.params;
+    const resultUser = await user.getUser(userId);
+    const { userIndex } = resultUser[0];
     try {
         const result: any = await postsReplyReport.getPostsReplyReportByUserIndex(userIndex);
         res.send({
@@ -151,9 +162,17 @@ async function getPostsReplyReportByUserIndex(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function updatePostsReplyReport(req, res): Promise<void> {
-    const postsReplyReportIndex: number = req.params.postsReplyReportIndex;
-    const postsReplyReportData: any = new PostsReplyReportResource(req.body);
+    const { postsReplyReportIndex } = req.params;
+    const { userId } = req.body;
     try {
+        const resultUser = await user.getUser(userId);
+        const { userIndex } = resultUser[0];
+
+        delete req.body.userId;
+        req.body.userIndex = userIndex;
+
+        const postsReplyReportData: any = new PostsReplyReportResource(req.body);
+
         const result: any = await postsReplyReport.updatePostsReplyReport(postsReplyReportIndex, postsReplyReportData.getPostsReplyReport());
         res.send({
             success: true,
@@ -180,7 +199,9 @@ async function updatePostsReplyReport(req, res): Promise<void> {
  * @returns {Promise<void>}
  */
 async function deletePostsReplyReport(req, res): Promise<void> {
-    const { postsReplyIndex, userIndex } = req.body;
+    const { postsReplyIndex, userId } = req.body;
+    const resultUser = await user.getUser(userId);
+    const { userIndex } = resultUser[0];
     try {
         const result: any = await postsReplyReport.deletePostsReplyReport(postsReplyIndex, userIndex);
         res.send({
