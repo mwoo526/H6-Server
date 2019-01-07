@@ -37,7 +37,6 @@ const createNotice = (req, res) => {
 		}
 		try {
 			const file = req.file;
-			console.log(file);
 			const result = await notice.createNotice({
 				noticeImg: file.location
 			});

@@ -22,5 +22,5 @@ describe('slack', () => {
 				}
 			]
 		});
-	}).timeout( 1000 * 60);
+	}).timeout(1000 * 60);
 });

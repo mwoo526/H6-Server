@@ -3,31 +3,30 @@ import * as express from 'express';
 import { admissionRoutes } from './apis/admissionYear/route/admissionYear.route';
 import { postsRoutes } from './apis/board/route/posts.route';
 import { postsReplyRoutes } from './apis/board/route/postsReply.route';
+import { postsReplyReportRoutes } from './apis/board/route/postsReplyReport.route';
 import { postsReplySubscriberRoutes } from './apis/board/route/postsReplySubscriber.route';
 import { postsReportRoutes } from './apis/board/route/postsReport.route';
-import { postsReplyReportRoutes } from "./apis/board/route/postsReplyReport.route";
 import { postsSubscriberRoutes } from './apis/board/route/postsSubscriber.route';
+import { fileRoutes } from './apis/file/route/file.route';
 import { lectureRoutes } from './apis/lecture/route/lecture.route';
 import { lectureInfoRoutes } from './apis/lecture/route/lectureInfo.route';
 import { lectureReplyRoutes } from './apis/lecture/route/lectureReply.route';
+import { noticeRoutes } from './apis/notice/route/notice.route';
 import { professorRoutes } from './apis/professor/route/professor.route';
 import { signInRoutes } from './apis/sign/route/signIn.route';
 import { signUpRoutes } from './apis/sign/route/signUp.route';
 import { termsRoutes } from './apis/terms/route/terms.route';
 import { testRoutes } from './apis/test/route/test.route';
+import { todayLunchRoutes } from './apis/todayLunch/route/todayLunch.route';
+import { todayLunchMenuRoutes } from './apis/todayLunch/route/todayLunchMenu.route';
 import { trackRoutes } from './apis/track/route/track.route';
 import { userRoutes } from './apis/user/route/user.route';
 import { userValidationRoutes } from './apis/userValidation/route/userValidation.route';
 import { versionRoutes } from './apis/version/route/version.route';
 import { voteRoutes } from './apis/vote/route/vote.route';
-import { todayLunchRoutes } from "./apis/todayLunch/route/todayLunch.route";
-import { todayLunchMenuRoutes } from "./apis/todayLunch/route/todayLunchMenu.route";
 import { notFoundError, serverError } from './middlewares/error.middleware';
 import { verify } from './middlewares/tokenVerify.middleware';
 import { voteScheduler } from './schedulers/vote/voteScheduler';
-import { fileRoutes } from "./apis/file/route/file.route";
-import { noticeRoutes } from "./apis/notice/route/notice.route";
-
 
 export class Server {
 	/** app 에 대한 타입 설정 */
@@ -56,8 +55,8 @@ export class Server {
 		/** 라우터 토큰 검증 */
 		this.app.use(verify);
 		/** 라우터 추가 */
-        this.app.use(noticeRoutes.noticeRouter);
-        this.app.use(postsRoutes.postsRouter);
+		this.app.use(noticeRoutes.noticeRouter);
+		this.app.use(postsRoutes.postsRouter);
 		this.app.use(postsReplyRoutes.postsReplyRouter);
 		this.app.use(postsSubscriberRoutes.postsSubscriberRouter);
 		this.app.use(postsReplySubscriberRoutes.postsReplySubscriberRouter);
