@@ -29,10 +29,11 @@ export class PostsSubscriber {
 	getPostsSubscriber(postsIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`SELECT 
+				await connection.query(`SELECT
 				SUM(postsSubscriber.isGood) AS goodCount,
 			  SUM(postsSubscriber.isBad) AS badCount,
-        postsSubscriber.isScrap
+        postsSubscriber.isScrap,
+        postsSubscriber.userIndex
 				FROM postsSubscriber
 				INNER JOIN user ON user.userIndex = postsSubscriber.userIndex
         WHERE postsSubscriber.postsIndex = ?

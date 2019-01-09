@@ -14,7 +14,7 @@ export class PostsReplyReportRoute {
 	public router() {
 		this.postsReplyReportRouter.post('/postsReplyReport', createPostsReplyReport);
 		this.postsReplyReportRouter.get('/postsReplyReport', listPostsReplyReport);
-		this.postsReplyReportRouter.get('/postsReplyReport/userId/:userId', getPostsReplyReportByUserIndex);
+		this.postsReplyReportRouter.get('/postsReplyReport/userId/:userId', getPostsReplyReportByUserId);
 		this.postsReplyReportRouter.put('/postsReplyReport/postsReplyReportIndex/:postsReplyReportIndex', updatePostsReplyReport);
 		this.postsReplyReportRouter.delete('/postsReplyReport', deletePostsReplyReport);
 	}
@@ -106,12 +106,12 @@ async function listPostsReplyReport(req, res): Promise<void> {
 }
 
 /**
- * route: UserIndex에 따른 postsReplyReport 조회
+ * route: UserId에 따른 postsReplyReport 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
-async function getPostsReplyReportByUserIndex(req, res): Promise<void> {
+async function getPostsReplyReportByUserId(req, res): Promise<void> {
 	const {userId} = req.params;
 	const resultUser = await user.getUser(userId);
 	const {userIndex} = resultUser[0];

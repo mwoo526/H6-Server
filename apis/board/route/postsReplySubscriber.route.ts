@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { user } from '../../user/model/user.model';
+import { auth } from '../../../packages/utils/auth.util';
 import { postsReplySubscriber } from '../model/postsReplySubscriber.model';
 
 export class PostsReplySubscriberRoutes {
@@ -22,8 +22,8 @@ export class PostsReplySubscriberRoutes {
 async function putPostsReplySubscriber(req, res) {
 	try {
 		const postsReplyIndex = req.params.postsReplyIndex;
-		const resultUser = await user.getUser(req.body.userId);
-		const userIndex = resultUser[0].userIndex;
+		let userData = auth(req);
+		const userIndex = userData.tokenIndex;
 		delete req.body.userId;
 
 		let result = await postsReplySubscriber.getPostsReplySubscriberCountByUserIndex(postsReplyIndex, userIndex);

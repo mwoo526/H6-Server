@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { user } from '../../user/model/user.model';
+import { auth } from '../../../packages/utils/auth.util';
 import { postsReply } from '../model/postsReply.model';
 
 export class PostsReplyRoutes {
@@ -25,12 +25,12 @@ export class PostsReplyRoutes {
  */
 async function createPostsReply(req, res) {
 	const postsIndex = req.params.postsIndex;
-	const resultUser = await user.getUser(req.body.userId);
 	try {
+		let userData = auth(req);
 		const result: any = await postsReply.createPostsReply({
 			postsIndex: postsIndex,
 			parentsPostsReplyIndex: req.body.parentsPostsReplyIndex,
-			userIndex: resultUser[0].userIndex,
+			userIndex: userData.tokenIndex,
 			content: req.body.content,
 			status: 'ACTIVE'
 		});

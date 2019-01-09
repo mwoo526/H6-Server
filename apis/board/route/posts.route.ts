@@ -1,4 +1,5 @@
 import * as express from 'express';
+import { auth } from '../../../packages/utils/auth.util';
 import { user } from '../../user/model/user.model';
 import { posts } from '../model/posts.model';
 import { postsSubscriber } from '../model/postsSubscriber.model';
@@ -26,10 +27,10 @@ export class PostsRoutes {
  * @param res
  */
 async function createPosts(req, res) {
-	const resultUser = await user.getUser(req.body.userId);
 	try {
+		let userData = auth(req);
 		const result: any = await posts.createPosts({
-			userIndex: resultUser[0].userIndex,
+			userIndex: userData.tokenIndex,
 			postsCategoryIndex: req.body.postsCategoryIndex,
 			title: req.body.title,
 			content: req.body.content,
@@ -71,6 +72,7 @@ async function pageListPosts(req, res) {
 	let orderBy: string = req.query.orderBy;
 	let page: number = parseInt(req.query.page);
 	let count: number = parseInt(req.query.count);
+	let userData = auth(req);
 	try {
 		const resultCount: any = await posts.listPosts(filter);
 		const result: any = await posts.pageListPosts(filter, orderBy, page, count);
@@ -78,7 +80,11 @@ async function pageListPosts(req, res) {
 			let subscriberCount = await postsSubscriber.getPostsSubscriber(row.postsIndex);
 			row.goodCount = subscriberCount[0].goodCount || 0;
 			row.badCount = subscriberCount[0].badCount || 0;
-			row.isScrap = subscriberCount[0].isScrap === 1 ? true : false;
+			if (subscriberCount[0].isScrap === 1 && subscriberCount[0].userIndex === userData.tokenIndex) {
+				row.isScrap = true;
+			} else {
+				row.isScrap = false;
+			}
 		}
 		res.send({
 			success: true,
@@ -120,6 +126,7 @@ async function pageListPostsByIsScrap(req, res) {
 			row.goodCount = subscriberCount[0].goodCount || 0;
 			row.badCount = subscriberCount[0].badCount || 0;
 			row.isScrap = subscriberCount[0].isScrap === 1 ? true : false;
+			delete row.userIndex;
 		}
 		res.send({
 			success: true,

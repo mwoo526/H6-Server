@@ -110,7 +110,6 @@ export class Posts {
 		return new Promise(async (resolve, reject) => {
 			let sql: any = `SELECT 
 			t1.postsIndex,
-			t1.userIndex,
 			t1.postsCategoryIndex,
 			t1.title, 
 			t1.content,
@@ -162,7 +161,6 @@ export class Posts {
 
 			let sql: any = `SELECT 
 			t1.postsIndex,
-			t1.userIndex,
 			t1.postsCategoryIndex,
 			t1.title, 
 			t1.content,
