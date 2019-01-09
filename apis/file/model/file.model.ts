@@ -34,7 +34,7 @@ export class File {
 	listFile(): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`SELECT fileName FROM file  ORDER BY boardFileIndex`, (err, data) => {
+				await connection.query(`SELECT fileName FROM file  ORDER BY postsFileIndex`, (err, data) => {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -57,7 +57,7 @@ export class File {
 	getFileIndex(fileIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT * FROM file WHERE boardFileIndex = ?`, [fileIndex], function(err, rows) {
+				await connection.query(`SELECT * FROM file WHERE postsFileIndex = ?`, [fileIndex], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -79,7 +79,7 @@ export class File {
 	getPostsIndex(postsIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT boardFileIndex FROM file WHERE postsIndex = ?`, [postsIndex], function(err, rows) {
+				await connection.query(`SELECT postsFileIndex FROM file WHERE postsIndex = ?`, [postsIndex], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -99,7 +99,7 @@ export class File {
 	updateFile(fileIndex: number, fileDate: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`UPDATE file SET ? WHERE boardFileIndex = ?`, [fileDate,
+				await connection.query(`UPDATE file SET ? WHERE postsFileIndex = ?`, [fileDate,
 					fileIndex], function(err, rows) {
 					if (err) {
 						connection.release();
@@ -122,7 +122,7 @@ export class File {
 	deleteFile(fileIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`DELETE FROM file WHERE boardFileIndex = ?`, [fileIndex], function(err, rows) {
+				await connection.query(`DELETE FROM file WHERE postsFileIndex = ?`, [fileIndex], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
@@ -144,7 +144,7 @@ export class File {
 	downloadCount(fileIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async function(err, connection) {
-				await connection.query(`SELECT downloadCount FROM file WHERE boardFileIndex = ?`, [fileIndex], function(err, rows) {
+				await connection.query(`SELECT downloadCount FROM file WHERE postsFileIndex = ?`, [fileIndex], function(err, rows) {
 					if (err) {
 						connection.release();
 						reject(err);
