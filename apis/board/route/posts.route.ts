@@ -78,9 +78,10 @@ async function pageListPosts(req, res) {
 		const result: any = await posts.pageListPosts(filter, orderBy, page, count);
 		for (const row of result) {
 			let subscriberCount = await postsSubscriber.getPostsSubscriber(row.postsIndex);
+			let scrapData: any = await postsSubscriber.getPostsSubscriberCountByUserIndex(row.postsIndex, userData.tokenIndex);
 			row.goodCount = subscriberCount[0].goodCount || 0;
 			row.badCount = subscriberCount[0].badCount || 0;
-			if (subscriberCount[0].isScrap === 1 && subscriberCount[0].userIndex === userData.tokenIndex) {
+			if (scrapData.length > 0 && scrapData[0].isScrap === 1) {
 				row.isScrap = true;
 			} else {
 				row.isScrap = false;

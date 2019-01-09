@@ -44,6 +44,8 @@ async function putPostsSubscriber(req, res) {
 			await postsSubscriber.deletePostsSubscriber(postsIndex, userIndex);
 		}
 
+		delete result[0].userIndex;
+
 		res.send({
 			success: true,
 			statusCode: 200,

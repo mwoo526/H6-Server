@@ -62,6 +62,7 @@ export class PostsSubscriber {
 				t1.isGood,
 				t1.isBad,
 				t1.isScrap,
+				t2.userIndex,
 				t2.userId,
 				t2.userNickName
 				FROM postsSubscriber AS t1
