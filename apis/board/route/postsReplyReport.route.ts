@@ -1,4 +1,5 @@
 import * as express from 'express';
+import { slack } from '../../../packages/core/slack/slack';
 import { PostsReplyReportResource } from '../../../resources/postsReplyReport.resource';
 import { user } from '../../user/model/user.model';
 import { postsReply } from '../model/postsReply.model';
@@ -55,8 +56,14 @@ async function createPostsReplyReport(req, res): Promise<void> {
 
 		const reportCount = countResult[0]['reportCount'];
 		if (reportCount === replyLimitCount) {
+			const color = '#0013FF';
+            const field = {
+                'title': `Reply Report 알림`,
+                'value': `postsIndex=${result['postsIndex']}, postsReplyIndex=${result['postsReplyIndex']}, reportCount=${reportCount}`,
+                'short': false
+            };
 			await postsReply.updatePostsReplyStatus(result['postsReplyIndex'], 'INACTIVE');
-			// 슬랙 알람 처리는 기획 확인 후 추가.
+            await slack.sendReportMessage('replyReport', field, color);
 		}
 
 		res.send({
