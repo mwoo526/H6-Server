@@ -3,7 +3,7 @@ import * as express from 'express';
 import { s3Util } from '../../../packages/utils/s3.util';
 import { file } from '../model/file.model';
 
-let upload = s3Util.upload.array('upload', 3);
+let upload = s3Util.upload('file').array('upload', 3);
 let s3 = new aws.S3();
 
 export class FileRoutes {

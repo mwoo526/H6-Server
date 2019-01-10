@@ -2,7 +2,7 @@ import * as express from 'express';
 import { s3Util } from '../../../packages/utils/s3.util';
 import { notice } from '../model/notice.model';
 
-const upload = s3Util.upload.single('notice');
+const upload = s3Util.upload('notice').single('notice');
 
 export class NoticeRoutes {
 	public noticeRouter: express.Router = express.Router();

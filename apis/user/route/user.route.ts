@@ -6,7 +6,7 @@ import { UserResource } from '../../../resources/user.resource';
 import { user } from '../model/user.model';
 
 let s3 = new aws.S3();
-let avatar = s3Util.upload.single('avatar');
+let avatar = s3Util.upload('avatar').single('avatar');
 
 export class UserRoutes {
 	public userRouter: express.Router = express.Router();

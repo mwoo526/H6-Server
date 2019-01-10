@@ -11,10 +11,10 @@ export module s3Util {
 	awsconfig = JSON.parse(awsconfig);
 	let s3 = new aws.S3();
 
-	export const upload = multer({
+	export const upload = (folder) => multer({
 		storage: multerS3({
 			s3: s3,
-			bucket: awsconfig.bucket,
+			bucket: `${awsconfig.bucket}/${folder}`,
 			key: function(req, file, cb) {
 				let extension = path.extname(file.originalname);
 				cb(null, Date.now().toString() + extension)
