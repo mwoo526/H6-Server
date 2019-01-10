@@ -26,7 +26,7 @@ async function putPostsReplySubscriber(req, res) {
 		const userIndex = userData.tokenIndex;
 		delete req.body.userId;
 
-		let result = await postsReplySubscriber.getPostsReplySubscriberCountByUserIndex(postsReplyIndex, userIndex);
+		let result = await postsReplySubscriber.getPostsReplySubscriberByUserIndex(postsReplyIndex, userIndex);
 		if (result[0] == null) {
 			await postsReplySubscriber.createPostsReplySubscriber({
 				postsReplyIndex: postsReplyIndex,
@@ -38,7 +38,7 @@ async function putPostsReplySubscriber(req, res) {
 			await postsReplySubscriber.updatePostsReplySubscriber(postsReplyIndex, userIndex, req.body);
 		}
 
-		result = await postsReplySubscriber.getPostsReplySubscriberCountByUserIndex(postsReplyIndex, userIndex);
+		result = await postsReplySubscriber.getPostsReplySubscriberByUserIndex(postsReplyIndex, userIndex);
 		if (result[0].isGood === 0 && result[0].isBad === 0 && result[0].isScrap === 0) {
 			await postsReplySubscriber.deletePostsReplySubscriber(postsReplyIndex, userIndex);
 		}
