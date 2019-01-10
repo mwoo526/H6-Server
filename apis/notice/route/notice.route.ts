@@ -12,12 +12,15 @@ export class NoticeRoutes {
 	}
 
 	public router() {
-		this.noticeRouter.post('/notice', createNotice);
+		this.noticeRouter.post('/notice', upload, createNotice);
+		this.noticeRouter.get('/notice', listNotice);
 		this.noticeRouter.get('/notice/img', listNoticeImg);
 	}
 }
 
 const createNotice = (req, res) => {
+	const { noticeUrl, noticeSubject } = req.body;
+
 	upload(req, res, async (err) => {
 		if (err) {
 			if (err.message === 'The AWS Access Key Id you provided does not exist in our records.') {
@@ -38,7 +41,11 @@ const createNotice = (req, res) => {
 		try {
 			const file = req.file;
 			const result = await notice.createNotice({
-				noticeImg: file.location
+				noticeImg: file.location,
+				info: JSON.stringify({
+					noticeUrl: noticeUrl,
+					noticeSubject: noticeSubject
+				})
 			});
 
 			res.send({
@@ -60,6 +67,27 @@ const createNotice = (req, res) => {
 		}
 
 	})
+};
+
+const listNotice = async (req, res) => {
+	try {
+		const result = await notice.listNotice();
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'listNotice 200'
+		})
+	} catch (err) {
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'listNotice: 50000'
+				});
+		}
+	}
 };
 
 const listNoticeImg = async (req, res) => {
