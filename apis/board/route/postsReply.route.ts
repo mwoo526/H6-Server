@@ -1,6 +1,7 @@
 import * as express from 'express';
 import { auth } from '../../../packages/utils/auth.util';
 import { postsReply } from '../model/postsReply.model';
+import { postsReplySubscriber } from '../model/postsReplySubscriber.model';
 
 export class PostsReplyRoutes {
 	public postsReplyRouter: express.Router = express.Router();
@@ -63,12 +64,26 @@ async function createPostsReply(req, res) {
  */
 async function pageListPostsReply(req, res) {
 	let postsIndex: number = req.params.postsIndex;
-	let page: number = req.query.page;
-	let count: number = req.query.count;
+	let page: number = parseInt(req.query.page);
+	let count: number = parseInt(req.query.count);
 	try {
+		let userData = auth(req);
 		let resultCount: any = await postsReply.listPostsReply(postsIndex);
 		let result: any = await postsReply.pageListPostsReply(postsIndex, page, count);
 		for (const row of result) {
+			let subscriberCount = await postsReplySubscriber.getPostsReplySubscriberSumCount(row.postsReplyIndex);
+			row.goodCount = subscriberCount[0].goodCount || 0;
+			row.badCount = subscriberCount[0].badCount || 0;
+
+			let scrapData: any = await postsReplySubscriber.getPostsReplySubscriberByUserIndex(row.postsReplyIndex, userData.tokenIndex);
+			if (scrapData.length !== 0) {
+				row.isGood = scrapData[0].isGood === 1 ? true : false;
+				row.isBad = scrapData[0].isBad === 1 ? true : false;
+			} else {
+				row.isGood = false;
+				row.isBad = false;
+			}
+
 			let childPostsReply = await postsReply.listChildPostReply(row.postsIndex, row.postsReplyIndex);
 			row.childPostsReply = childPostsReply
 		}

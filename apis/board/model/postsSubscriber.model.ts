@@ -30,12 +30,35 @@ export class PostsSubscriber {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`SELECT
+				t1.postsIndex,
+				t1.isGood,
+				t1.isBad,
+				t1.isScrap,
+				t2.userIndex,
+				t2.userId,
+				t2.userNickName
+				FROM postsSubscriber AS t1
+				INNER JOIN user AS t2 ON user.userIndex = postsSubscriber.userIndex
+        WHERE postsSubscriber.postsIndex = ?
+        `, [postsIndex], (err, data) => {
+					connection.release();
+					if (err) {
+						reject(err);
+					} else {
+						resolve(data);
+					}
+				});
+			});
+		});
+	}
+
+	getPostsSubscriberSumCount(postsIndex: number): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async (err, connection) => {
+				await connection.query(`SELECT
 				SUM(postsSubscriber.isGood) AS goodCount,
-			  SUM(postsSubscriber.isBad) AS badCount,
-        postsSubscriber.isScrap,
-        postsSubscriber.userIndex
-				FROM postsSubscriber
-				INNER JOIN user ON user.userIndex = postsSubscriber.userIndex
+			  SUM(postsSubscriber.isBad) AS badCount
+			  FROM postsSubscriber
         WHERE postsSubscriber.postsIndex = ?
         `, [postsIndex], (err, data) => {
 					connection.release();
@@ -54,7 +77,7 @@ export class PostsSubscriber {
 	 * @param postsIndex
 	 * @param userIndex
 	 */
-	getPostsSubscriberCountByUserIndex(postsIndex: number, userIndex: number): Promise<void> {
+	getPostsSubscriberByUserIndex(postsIndex: number, userIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`SELECT 
