@@ -11,19 +11,19 @@ describe('notice 모델', () => {
     };
    it('createNotice', async () => {
        const result = await notice.createNotice(noticeData);
-       console.log(result);
+       // console.log(result);
        expect(result).to.equal(noticeData)
    });
 
    it('listNotice', async () => {
        const result = await notice.listNotice();
-       console.log(result);
+       // console.log(result);
        expect(result).instanceof(Array);
    });
 
     it('listNoticeImg', async () => {
         const result = await notice.listNoticeImg();
-        console.log(result);
+        // console.log(result);
         expect(result).instanceof(Array);
     })
 });
