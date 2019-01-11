@@ -109,7 +109,9 @@ export class PostsReplyModel {
 			  t1.content,
 			  t1.status,
         t1.createdAt,
-				t2.userNickName
+				t2.userNickName,
+				(SELECT SUM(isGood) FROM postsReplySubscriber WHERE postsReplySubscriber.postsReplyIndex = t1.postsReplyIndex) AS goodCount,
+				(SELECT SUM(isBad) FROM postsReplySubscriber WHERE postsReplySubscriber.postsReplyIndex = t1.postsReplyIndex) AS badCount
         FROM postsReply AS t1
         INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex                 
         WHERE t1.postsIndex = ?

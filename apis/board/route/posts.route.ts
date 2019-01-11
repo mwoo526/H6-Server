@@ -2,7 +2,7 @@ import * as express from 'express';
 import { auth } from '../../../packages/utils/auth.util';
 import { user } from '../../user/model/user.model';
 import { posts } from '../model/posts.model';
-import { PostsSubscriber, postsSubscriber } from '../model/postsSubscriber.model';
+import { postsSubscriber } from '../model/postsSubscriber.model';
 
 export class PostsRoutes {
 	public postsRouter: express.Router = express.Router();
@@ -124,9 +124,6 @@ async function pageListPostsByIsScrap(req, res) {
 		const resultCount: any = await posts.listPostsByIsScrap(userIndex, filter);
 		const result: any = await posts.pageListPostsByIsScrap(userIndex, filter, orderBy, page, count);
 		for (const row of result) {
-			let subscriberCount = await postsSubscriber.getPostsSubscriberSumCount(row.postsIndex);
-			row.goodCount = subscriberCount[0].goodCount || 0;
-			row.badCount = subscriberCount[0].badCount || 0;
 			let scrapData: any = await postsSubscriber.getPostsSubscriberByUserIndex(row.postsIndex, userData.tokenIndex);
 			row.isScrap = scrapData[0].isScrap === 1 ? true : false;
 			delete row.userIndex;
@@ -168,9 +165,6 @@ async function getPosts(req, res): Promise<void> {
 	try {
 		let userData = auth(req);
 		let result: any = await posts.getPosts(postsIndex);
-		const subscriberCount = await postsSubscriber.getPostsSubscriberSumCount(postsIndex);
-		result[0].goodCount = subscriberCount[0].goodCount;
-		result[0].badCount = subscriberCount[0].badCount;
 		let scrapData: any = await postsSubscriber.getPostsSubscriberByUserIndex(postsIndex, userData.tokenIndex);
 		if (scrapData.length !== 0) {
 			result[0].isGood = scrapData[0].isGood === 1 ? true : false;
