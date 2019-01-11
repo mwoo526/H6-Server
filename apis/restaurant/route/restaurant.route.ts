@@ -1,6 +1,6 @@
 import * as express from 'express';
-import { RestaurantResource } from "../../../resources/restaurant.resource";
-import { restaurant } from "../model/restaurant.model";
+import { RestaurantResource } from '../../../resources/restaurant.resource';
+import { restaurant } from '../model/restaurant.model';
 
 export class RestaurantRoutes {
 	public restaurantRouter: express.Route = express.Router();

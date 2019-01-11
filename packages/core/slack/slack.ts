@@ -7,7 +7,7 @@ export class Slack {
 		this.paths = (this.paths) ? this.paths : {
 			deploy: 'T8L9Z0KGC/BC6G0C4CF/uuKe61Z8pfbA6aEc86YZt6SL',
 			report: 'T8L9Z0KGC/BF8QZNNQ6/HmLda4Al4DtfsXjsRZnPgLAP',
-            replyReport: 'T8L9Z0KGC/BFADB9YF5/6IScmVnXZsBMxDZvc8gAldQm'
+			replyReport: 'T8L9Z0KGC/BFADB9YF5/6IScmVnXZsBMxDZvc8gAldQm'
 		};
 	}
 

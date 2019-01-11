@@ -43,29 +43,28 @@ export class RestaurantMenu {
 		});
 	}
 
-    /**
-     * model: restaurantIndex 에 따른 restaurantMenu 리스트 조회
-     * @param : void
-     * @returns {Promise<any>}
-     */
-    listRestaurantMenusByRestaurantIndex(restaurantIndex: number): Promise<any> {
-        return new Promise(async (resolve, reject) => {
-            await pool.getConnection(async (err, connection) => {
-                await connection.query(`SELECT * from restaurantMenu where restaurantIndex=?`,[restaurantIndex], (err, data) => {
-                    connection.release();
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(data);
-                    }
-                });
-            });
-        });
-    }
-
+	/**
+	 * model: restaurantIndex 에 따른 restaurantMenu 리스트 조회
+	 * @param : void
+	 * @returns {Promise<any>}
+	 */
+	listRestaurantMenusByRestaurantIndex(restaurantIndex: number): Promise<any> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async (err, connection) => {
+				await connection.query(`SELECT * from restaurantMenu where restaurantIndex=?`, [restaurantIndex], (err, data) => {
+					connection.release();
+					if (err) {
+						reject(err);
+					} else {
+						resolve(data);
+					}
+				});
+			});
+		});
+	}
 
 	/**
-     * model: restaurantIndex 에 따른 restaurantMenu 조회
+	 * model: restaurantIndex 에 따른 restaurantMenu 조회
 	 * @param : {number} restaurantMenuIndex
 	 * @returns {Promise<any>}
 	 */

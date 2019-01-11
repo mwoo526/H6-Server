@@ -12,7 +12,7 @@ export class RestaurantMenuRoute {
 	public router() {
 		this.restaurantMenuRouter.post('/restaurantMenu', createRestaurantMenu);
 		this.restaurantMenuRouter.get('/restaurantMenu', listRestaurantMenus);
-        this.restaurantMenuRouter.get('/restaurantMenu/restaurantIndex/:restaurantIndex', listRestaurantMenusByRestaurantIndex);
+		this.restaurantMenuRouter.get('/restaurantMenu/restaurantIndex/:restaurantIndex', listRestaurantMenusByRestaurantIndex);
 		this.restaurantMenuRouter.get('/restaurantMenu/restaurantMenuIndex/:restaurantMenuIndex', getRestaurantMenu);
 		this.restaurantMenuRouter.put('/restaurantMenu/restaurantMenuIndex/:restaurantMenuIndex', updateRestaurantMenu);
 		this.restaurantMenuRouter.delete('/restaurantMenu/restaurantMenuIndex/:restaurantMenuIndex', deleteRestaurantMenu);
@@ -82,24 +82,24 @@ async function listRestaurantMenus(req, res): Promise<void> {
  */
 async function listRestaurantMenusByRestaurantIndex(req, res): Promise<void> {
 	const {restaurantIndex} = req.params;
-    try {
-        const results: any = await restaurantMenu.listRestaurantMenusByRestaurantIndex(restaurantIndex);
-        res.send({
-            success: true,
-            statusCode: 200,
-            result: results,
-            message: 'listRestaurantMenusByRestaurantIndex: 200'
-        });
-    } catch (err) {
-        switch (err) {
-            default:
-                res.send({
-                    success: false,
-                    statusCode: 500,
-                    message: 'listRestaurantMenusByRestaurantIndex: 50000'
-                });
-        }
-    }
+	try {
+		const results: any = await restaurantMenu.listRestaurantMenusByRestaurantIndex(restaurantIndex);
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: results,
+			message: 'listRestaurantMenusByRestaurantIndex: 200'
+		});
+	} catch (err) {
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'listRestaurantMenusByRestaurantIndex: 50000'
+				});
+		}
+	}
 }
 
 /**

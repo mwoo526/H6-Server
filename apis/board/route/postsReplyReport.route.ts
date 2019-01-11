@@ -57,13 +57,13 @@ async function createPostsReplyReport(req, res): Promise<void> {
 		const reportCount = countResult[0]['reportCount'];
 		if (reportCount === replyLimitCount) {
 			const color = '#0013FF';
-            const field = {
-                'title': `Reply Report 알림`,
-                'value': `postsIndex=${result['postsIndex']}, postsReplyIndex=${result['postsReplyIndex']}, reportCount=${reportCount}`,
-                'short': false
-            };
+			const field = {
+				'title': `Reply Report 알림`,
+				'value': `postsIndex=${result['postsIndex']}, postsReplyIndex=${result['postsReplyIndex']}, reportCount=${reportCount}`,
+				'short': false
+			};
 			await postsReply.updatePostsReplyStatus(result['postsReplyIndex'], 'INACTIVE');
-            await slack.sendReportMessage('replyReport', field, color);
+			await slack.sendReportMessage('replyReport', field, color);
 		}
 
 		res.send({

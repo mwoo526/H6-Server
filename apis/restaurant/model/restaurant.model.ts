@@ -74,7 +74,7 @@ export class Restaurant {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`UPDATE restaurant SET ? WHERE restaurantIndex = ?`, [restaurantData,
-                    restaurantIndex], (err) => {
+					restaurantIndex], (err) => {
 					connection.release();
 					if (err) {
 						reject(err);

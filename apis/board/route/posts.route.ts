@@ -165,6 +165,9 @@ async function getPosts(req, res): Promise<void> {
 	try {
 		let userData = auth(req);
 		let result: any = await posts.getPosts(postsIndex);
+		result[0].goodCount = result[0].goodCount === null ? 0 : result[0].goodCount;
+		result[0].badCount = result[0].badCount === null ? 0 : result[0].badCount;
+
 		let scrapData: any = await postsSubscriber.getPostsSubscriberByUserIndex(postsIndex, userData.tokenIndex);
 		if (scrapData.length !== 0) {
 			result[0].isGood = scrapData[0].isGood === 1 ? true : false;

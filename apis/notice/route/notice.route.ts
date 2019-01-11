@@ -19,7 +19,7 @@ export class NoticeRoutes {
 }
 
 const createNotice = (req, res) => {
-	const { noticeUrl, noticeSubject } = req.body;
+	const {noticeUrl, noticeSubject} = req.body;
 
 	upload(req, res, async (err) => {
 		if (err) {

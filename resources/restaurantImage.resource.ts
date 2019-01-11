@@ -1,32 +1,33 @@
 export class RestaurantImageResource {
-    private restaurantIndex;
-    private url;
+	private restaurantIndex;
+	private url;
 
-    constructor(restaurantImageData) {
-        this.setRestaurantIndex(restaurantImageData.restaurantIndex);
-        this.setUrl(restaurantImageData.url);
-    }
-    getRestaurantIndex() {
-        return this.restaurantIndex;
-    }
+	constructor(restaurantImageData) {
+		this.setRestaurantIndex(restaurantImageData.restaurantIndex);
+		this.setUrl(restaurantImageData.url);
+	}
 
-    setRestaurantIndex(restaurantIndex) {
-        this.restaurantIndex = restaurantIndex;
-    }
+	getRestaurantIndex() {
+		return this.restaurantIndex;
+	}
 
-    getUrl() {
-        return this.url;
-    }
+	setRestaurantIndex(restaurantIndex) {
+		this.restaurantIndex = restaurantIndex;
+	}
 
-    setUrl(url) {
-        this.url = url;
-    }
+	getUrl() {
+		return this.url;
+	}
 
-    getRestaurantImage() {
-        let restaurantImageData: object = {
-            restaurantIndex: this.getRestaurantIndex(),
-            url: this.getUrl()
-        };
-        return restaurantImageData;
-    }
+	setUrl(url) {
+		this.url = url;
+	}
+
+	getRestaurantImage() {
+		let restaurantImageData: object = {
+			restaurantIndex: this.getRestaurantIndex(),
+			url: this.getUrl()
+		};
+		return restaurantImageData;
+	}
 }

@@ -12,11 +12,11 @@ export class RestaurantResource {
 		this.setRestaurantImageUrl(restaurantData.restaurantImageUrl);
 		this.setRestaurantMenuImageUrl(restaurantData.restaurantMenuImageUrl);
 		this.setName(restaurantData.name);
-        this.setAddress(restaurantData.address);
-        this.setLocationUrl(restaurantData.locationUrl);
-        this.setTel(restaurantData.tel);
-        this.setOpeningHours(restaurantData.openingHours);
-        this.setReview(restaurantData.review);
+		this.setAddress(restaurantData.address);
+		this.setLocationUrl(restaurantData.locationUrl);
+		this.setTel(restaurantData.tel);
+		this.setOpeningHours(restaurantData.openingHours);
+		this.setReview(restaurantData.review);
 	}
 
 	getRestaurantImageUrl() {
@@ -88,11 +88,11 @@ export class RestaurantResource {
 			restaurantImageUrl: this.getRestaurantImageUrl(),
 			restaurantMenuImageUrl: this.getRestaurantMenuImageUrl(),
 			name: this.getName(),
-            address: this.getAddress(),
-    		locationUrl: this.getLocationUrl(),
-    		tel: this.getTel(),
-    		openingHours: this.getOpeningHours(),
-    		review: this.getReview()
+			address: this.getAddress(),
+			locationUrl: this.getLocationUrl(),
+			tel: this.getTel(),
+			openingHours: this.getOpeningHours(),
+			review: this.getReview()
 		};
 		return restaurantData;
 	}
