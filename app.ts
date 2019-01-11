@@ -17,8 +17,8 @@ import { signInRoutes } from './apis/sign/route/signIn.route';
 import { signUpRoutes } from './apis/sign/route/signUp.route';
 import { termsRoutes } from './apis/terms/route/terms.route';
 import { testRoutes } from './apis/test/route/test.route';
-import { todayLunchRoutes } from './apis/todayLunch/route/todayLunch.route';
-import { todayLunchMenuRoutes } from './apis/todayLunch/route/todayLunchMenu.route';
+import { restaurantRoutes } from './apis/restaurant/route/restaurant.route';
+import { restaurantMenuRoutes } from './apis/restaurant/route/restaurantMenu.route';
 import { trackRoutes } from './apis/track/route/track.route';
 import { userRoutes } from './apis/user/route/user.route';
 import { userValidationRoutes } from './apis/userValidation/route/userValidation.route';
@@ -70,8 +70,8 @@ export class Server {
 		this.app.use(lectureRoutes.lectureRouter);
 		this.app.use(lectureInfoRoutes.lectureInfoRouter);
 		this.app.use(lectureReplyRoutes.lectureReplyRouter);
-		this.app.use(todayLunchRoutes.todayLunchRouter);
-		this.app.use(todayLunchMenuRoutes.todayLunchMenuRouter);
+		this.app.use(restaurantRoutes.restaurantRouter);
+		this.app.use(restaurantMenuRoutes.restaurantMenuRouter);
 		/** 라우터 오류 처리 */
 		this.app.use(notFoundError);
 		this.app.use(serverError);
