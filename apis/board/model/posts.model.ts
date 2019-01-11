@@ -227,8 +227,7 @@ export class Posts {
 			t1.status,
 			t1.createdAt, 
 			t2.userNickName,
-			t3.postsCategoryName,
-			(SELECT COUNT(*) AS count FROM postsReply WHERE t1.postsIndex = postsReply.postsIndex) AS replyCount 
+			t3.postsCategoryName
       FROM posts AS t1
       INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
 			INNER JOIN postsCategory AS t3 ON t1.postsCategoryIndex = t3.postsCategoryIndex
@@ -282,7 +281,9 @@ export class Posts {
 			t1.createdAt, 
 			t2.userNickName,
 			t3.postsCategoryName,
-			(SELECT COUNT(*) AS count FROM postsReply WHERE t1.postsIndex = postsReply.postsIndex) AS replyCount 
+			(SELECT COUNT(*) AS count FROM postsReply WHERE t1.postsIndex = postsReply.postsIndex) AS replyCount, 
+      (SELECT SUM(isGood) AS goodCount FROM postsSubscriber WHERE t1.postsIndex = postsSubscriber.postsIndex) AS goodCount,
+			(SELECT SUM(isBad) AS goodCount FROM postsSubscriber WHERE t1.postsIndex = postsSubscriber.postsIndex) AS badCount
       FROM posts AS t1
       INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
 			INNER JOIN postsCategory AS t3 ON t1.postsCategoryIndex = t3.postsCategoryIndex
@@ -342,7 +343,9 @@ export class Posts {
 				t2.userNickName,
 				t3.postsCategoryIndex,
 				t3.postsCategoryName,
-			  (SELECT COUNT(*) AS count FROM postsReply WHERE t1.postsIndex = postsReply.postsIndex) AS replyCount 
+			  (SELECT COUNT(*) AS count FROM postsReply WHERE t1.postsIndex = postsReply.postsIndex) AS replyCount,
+			  (SELECT SUM(isGood) AS goodCount FROM postsSubscriber WHERE t1.postsIndex = postsSubscriber.postsIndex) AS goodCount,
+			  (SELECT SUM(isBad) AS goodCount FROM postsSubscriber WHERE t1.postsIndex = postsSubscriber.postsIndex) AS badCount
         FROM posts AS t1
         INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
         INNER JOIN postsCategory AS t3 ON t1.postsCategoryIndex = t3.postsCategoryIndex

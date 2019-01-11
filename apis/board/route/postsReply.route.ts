@@ -71,10 +71,6 @@ async function pageListPostsReply(req, res) {
 		let resultCount: any = await postsReply.listPostsReply(postsIndex);
 		let result: any = await postsReply.pageListPostsReply(postsIndex, page, count);
 		for (const row of result) {
-			let subscriberCount = await postsReplySubscriber.getPostsReplySubscriberSumCount(row.postsReplyIndex);
-			row.goodCount = subscriberCount[0].goodCount || 0;
-			row.badCount = subscriberCount[0].badCount || 0;
-
 			let scrapData: any = await postsReplySubscriber.getPostsReplySubscriberByUserIndex(row.postsReplyIndex, userData.tokenIndex);
 			if (scrapData.length !== 0) {
 				row.isGood = scrapData[0].isGood === 1 ? true : false;
@@ -84,7 +80,17 @@ async function pageListPostsReply(req, res) {
 				row.isBad = false;
 			}
 
-			let childPostsReply = await postsReply.listChildPostReply(row.postsIndex, row.postsReplyIndex);
+			let childPostsReply: any = await postsReply.listChildPostReply(row.postsIndex, row.postsReplyIndex);
+			for (const row of childPostsReply) {
+				let scrapReplyData: any = await postsReplySubscriber.getPostsReplySubscriberByUserIndex(row.postsReplyIndex, userData.tokenIndex);
+				if (scrapReplyData.length !== 0) {
+					row.isGood = scrapReplyData[0].isGood === 1 ? true : false;
+					row.isBad = scrapReplyData[0].isBad === 1 ? true : false;
+				} else {
+					row.isGood = false;
+					row.isBad = false;
+				}
+			}
 			row.childPostsReply = childPostsReply
 		}
 		res.send({
