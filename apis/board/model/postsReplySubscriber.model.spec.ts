@@ -71,8 +71,8 @@ describe('postsReplySubscriber', () => {
 		expect(result).to.instanceof(Array);
 	});
 
-	it('getPostsReplySubscriberCountByUserIndex', async () => {
-		const result: any = await postsReplySubscriber.getPostsReplySubscriberCountByUserIndex(resultPostsReply[0].postsReplyIndex, 1);
+	it('getPostsReplySubscriberByUserIndex', async () => {
+		const result: any = await postsReplySubscriber.getPostsReplySubscriberByUserIndex(resultPostsReply[0].postsReplyIndex, 1);
 		// console.log(result);
 		expect(result).to.instanceof(Array);
 	});
