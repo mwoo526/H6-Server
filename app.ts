@@ -19,6 +19,7 @@ import { termsRoutes } from './apis/terms/route/terms.route';
 import { testRoutes } from './apis/test/route/test.route';
 import { restaurantRoutes } from './apis/restaurant/route/restaurant.route';
 import { restaurantMenuRoutes } from './apis/restaurant/route/restaurantMenu.route';
+import { restaurantImageRoutes } from './apis/restaurant/route/restaurantImage.route';
 import { trackRoutes } from './apis/track/route/track.route';
 import { userRoutes } from './apis/user/route/user.route';
 import { userValidationRoutes } from './apis/userValidation/route/userValidation.route';
@@ -72,6 +73,7 @@ export class Server {
 		this.app.use(lectureReplyRoutes.lectureReplyRouter);
 		this.app.use(restaurantRoutes.restaurantRouter);
 		this.app.use(restaurantMenuRoutes.restaurantMenuRouter);
+		this.app.use(restaurantImageRoutes.restaurantImageRouter);
 		/** 라우터 오류 처리 */
 		this.app.use(notFoundError);
 		this.app.use(serverError);
