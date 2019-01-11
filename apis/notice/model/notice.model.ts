@@ -12,13 +12,9 @@ export class Notice {
 	createNotice(noticeData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`INSERT INTO notice SET ?`, [noticeData], async (err, result) => {
+				await connection.query(`INSERT INTO notice SET ?`, [noticeData], async (err) => {
 					await connection.release();
-					if (err) {
-						reject(err);
-					} else {
-						resolve(result);
-					}
+					err ? reject(err) : resolve(noticeData)
 				})
 			})
 		})
@@ -33,11 +29,7 @@ export class Notice {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`SELECT * FROM notice`, async (err, rows) => {
 					await connection.release();
-					if (err) {
-						reject(err);
-					} else {
-						resolve(rows);
-					}
+					err ? reject(err) : resolve(rows)
 				})
 			})
 		})
@@ -57,7 +49,7 @@ export class Notice {
 					} else {
 						let imgRows: string[] = rows.map(function(row) {
 							return row.noticeImg;
-						})
+						});
 						resolve(imgRows);
 					}
 				})
