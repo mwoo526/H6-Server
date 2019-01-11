@@ -2,22 +2,22 @@ import { mysqlUtil } from '../../../packages/utils/mysql.util';
 
 const pool = mysqlUtil.pool;
 
-export class TodayLunch {
+export class Restaurant {
 
 	/**
-	 * model: todayLunch 생성
-	 * @param : todayLunchData
+	 * model: restaurant 생성
+	 * @param : restaurantData
 	 * @returns {Promise<any>}
 	 */
-	createTodayLunch(todayLunchData: any): Promise<any> {
+	createRestaurant(restaurantData: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`INSERT INTO todayLunch SET ?`, [todayLunchData], (err) => {
+				await connection.query(`INSERT INTO restaurant SET ?`, [restaurantData], (err) => {
 					connection.release();
 					if (err) {
 						reject(err);
 					} else {
-						resolve(todayLunchData);
+						resolve(restaurantData);
 					}
 				});
 			});
@@ -25,14 +25,14 @@ export class TodayLunch {
 	}
 
 	/**
-	 * model: 모든 todayLunch 조회
+	 * model: 모든 restaurant 조회
 	 * @param : void
 	 * @returns {Promise<any>}
 	 */
-	getTodayLunches(): Promise<any> {
+	listRestaurants(): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`SELECT * from todayLunch`, (err, data) => {
+				await connection.query(`SELECT * from restaurant`, (err, data) => {
 					connection.release();
 					if (err) {
 						reject(err);
@@ -45,14 +45,14 @@ export class TodayLunch {
 	}
 
 	/**
-	 * model: todayLunch index 조회
-	 * @param : {number} todayLunchIndex
+	 * model: restaurant index 에 따른 조회
+	 * @param : {number} restaurantIndex
 	 * @returns {Promise<any>}
 	 */
-	getTodayLunchByIndex(todayLunchIndex: number): Promise<any> {
+	getRestaurant(restaurantIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`SELECT * from todayLunch WHERE todayLunchIndex = ?`, [todayLunchIndex], (err, data) => {
+				await connection.query(`SELECT * from restaurant WHERE restaurantIndex = ?`, [restaurantIndex], (err, data) => {
 					connection.release();
 					if (err) {
 						reject(err);
@@ -65,21 +65,21 @@ export class TodayLunch {
 	}
 
 	/**
-	 * model: todayLunch 업데이트
-	 * @param {number} todayLunchIndex
-	 * @param todayLunchData
+	 * model: restaurant 업데이트
+	 * @param {number} restaurantIndex
+	 * @param {any} restaurantData
 	 * @returns {Promise<any>}
 	 */
-	updateTodayLunch(todayLunchIndex: number, todayLunchData: any): Promise<any> {
+	updateRestaurant(restaurantIndex: number, restaurantData: any): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`UPDATE todayLunch SET ? WHERE todayLunchIndex = ?`, [todayLunchData,
-					todayLunchIndex], (err) => {
+				await connection.query(`UPDATE restaurant SET ? WHERE restaurantIndex = ?`, [restaurantData,
+                    restaurantIndex], (err) => {
 					connection.release();
 					if (err) {
 						reject(err);
 					} else {
-						resolve(todayLunchData);
+						resolve(restaurantData);
 					}
 				});
 			});
@@ -87,14 +87,14 @@ export class TodayLunch {
 	}
 
 	/**
-	 * model: todayLunch 삭제
-	 * @param {number} todayLunchIndex
+	 * model: restaurant 삭제
+	 * @param {number} restaurantIndex
 	 * @returns {Promise<any>}
 	 */
-	deleteTodayLunch(todayLunchIndex: number): Promise<any> {
+	deleteRestaurant(restaurantIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`DELETE FROM todayLunch WHERE todayLunchIndex = ?`, [todayLunchIndex], (err, data) => {
+				await connection.query(`DELETE FROM restaurant WHERE restaurantIndex = ?`, [restaurantIndex], (err, data) => {
 					connection.release();
 					if (err) {
 						reject(err);
@@ -107,4 +107,4 @@ export class TodayLunch {
 	}
 }
 
-export const todayLunch: TodayLunch = new TodayLunch();
+export const restaurant: Restaurant = new Restaurant();

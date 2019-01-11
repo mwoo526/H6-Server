@@ -6,7 +6,8 @@ export class Slack {
 	constructor(private paths?: object) {
 		this.paths = (this.paths) ? this.paths : {
 			deploy: 'T8L9Z0KGC/BC6G0C4CF/uuKe61Z8pfbA6aEc86YZt6SL',
-			report: 'T8L9Z0KGC/BF8QZNNQ6/HmLda4Al4DtfsXjsRZnPgLAP'
+			report: 'T8L9Z0KGC/BF8QZNNQ6/HmLda4Al4DtfsXjsRZnPgLAP',
+            replyReport: 'T8L9Z0KGC/BFADB9YF5/6IScmVnXZsBMxDZvc8gAldQm'
 		};
 	}
 
@@ -37,34 +38,21 @@ export class Slack {
 		});
 	}
 
-	async sendReportMessage(channel: string, postsIndex: number, reportCount: number) {
+	async sendReportMessage(channel: string, field: object, color: string) {
 		const file = './packages/utils/config/env.json';
-		let envData: any = await fs.readFileSync(file, 'utf8');
-		envData = JSON.parse(envData);
+		// let envData: any = await fs.readFileSync(file, 'utf8');
+		// envData = JSON.parse(envData);
 		const path = this.getChannelPath(channel);
 		const url: string = `https://hooks.slack.com/services/${path}`;
 
 		const message = {
 			attachments: [
 				{
-					'color': '#36a64f',
+					'color': color,
 					'mrkdwn_in': ['text', 'fields'],
-					'fields': [
-						{
-							'title': `${envData.stage} 서버 / Report 알림`,
-							'value': `postsIndex=${postsIndex}, reportCount=${reportCount} `,
-							'short': false
-						}
-					]
+					'fields': [field]
 				}
 			]
-		};
-
-		const options = {
-			url: `https://hooks.slack.com/services/${path}`,
-			method: 'POST',
-			json: true,
-			body: message
 		};
 
 		/**
