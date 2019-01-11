@@ -71,6 +71,9 @@ async function pageListPostsReply(req, res) {
 		let resultCount: any = await postsReply.listPostsReply(postsIndex);
 		let result: any = await postsReply.pageListPostsReply(postsIndex, page, count);
 		for (const row of result) {
+			row.goodCount = row.goodCount === null ? 0 : row.goodCount;
+			row.badCount = row.badCount === null ? 0 : row.badCount;
+
 			let scrapData: any = await postsReplySubscriber.getPostsReplySubscriberByUserIndex(row.postsReplyIndex, userData.tokenIndex);
 			if (scrapData.length !== 0) {
 				row.isGood = scrapData[0].isGood === 1 ? true : false;
@@ -82,6 +85,9 @@ async function pageListPostsReply(req, res) {
 
 			let childPostsReply: any = await postsReply.listChildPostReply(row.postsIndex, row.postsReplyIndex);
 			for (const row of childPostsReply) {
+				row.goodCount = row.goodCount === null ? 0 : row.goodCount;
+				row.badCount = row.badCount === null ? 0 : row.badCount;
+				
 				let scrapReplyData: any = await postsReplySubscriber.getPostsReplySubscriberByUserIndex(row.postsReplyIndex, userData.tokenIndex);
 				if (scrapReplyData.length !== 0) {
 					row.isGood = scrapReplyData[0].isGood === 1 ? true : false;
