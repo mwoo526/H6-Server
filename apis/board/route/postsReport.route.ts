@@ -57,8 +57,14 @@ async function createPostsReport(req, res): Promise<void> {
 
 		const reportCount = countResult[0]['reportCount'];
 		if (reportCount === alarmCount) {
+            const color = '#E82C0C';
+		    const field = {
+                'title': `Posts Report 알림`,
+                'value': `postsIndex=${result['postsIndex']}, reportCount=${reportCount} `,
+                'short': false
+            };
 			await posts.updatePostsStatus(result['postsIndex'], 'INACTIVE');
-			await slack.sendReportMessage('report', result['postsIndex'], reportCount);
+			await slack.sendReportMessage('report', field, color);
 		}
 
 		res.send({
