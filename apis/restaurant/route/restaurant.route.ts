@@ -11,7 +11,7 @@ export class RestaurantRoutes {
 
 	public router() {
 		this.restaurantRouter.post('/restaurant', createRestaurant);
-		this.restaurantRouter.get('/restaurant', listRestaurants);
+		this.restaurantRouter.get('/restaurant', pageListRestaurant);
 		this.restaurantRouter.get('/restaurant/restaurantIndex/:restaurantIndex', getRestaurant);
 		this.restaurantRouter.put('/restaurant/restaurantIndex/:restaurantIndex', updateRestaurant);
 		this.restaurantRouter.delete('/restaurant/restaurantIndex/:restaurantIndex', deleteRestaurant);
@@ -47,19 +47,25 @@ async function createRestaurant(req, res): Promise<void> {
 }
 
 /**
- * route: 모든 restaurant 조회
+ * route: restaurant 리스트 조회
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
-async function listRestaurants(req, res): Promise<void> {
+async function pageListRestaurant(req, res): Promise<void> {
+	let filter: string = req.query.filter;
+	let orderBy: string = req.query.orderBy;
+	let page: number = parseInt(req.query.page);
+	let count: number = parseInt(req.query.count);
 	try {
-		const results: any = await restaurant.listRestaurants();
+		const resultCount: any = await restaurant.listRestaurant(filter);
+		const result: any = await restaurant.pageListRestaurant(filter, orderBy, page, count);
 		res.send({
 			success: true,
 			statusCode: 200,
-			result: results,
-			message: 'listRestaurants: 200'
+			resultCount: resultCount.length,
+			result: result,
+			message: 'listRestaurant: 200'
 		});
 	} catch (err) {
 		switch (err) {
@@ -67,7 +73,7 @@ async function listRestaurants(req, res): Promise<void> {
 				res.send({
 					success: false,
 					statusCode: 500,
-					message: 'listRestaurants: 50000'
+					message: 'listRestaurant: 50000'
 				});
 		}
 	}

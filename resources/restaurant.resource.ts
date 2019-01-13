@@ -1,6 +1,5 @@
 export class RestaurantResource {
-	private restaurantImageUrl;
-	private restaurantMenuImageUrl;
+	private restaurantCategoryIndex;
 	private name;
 	private address;
 	private locationUrl;
@@ -9,8 +8,7 @@ export class RestaurantResource {
 	private review;
 
 	constructor(restaurantData) {
-		this.setRestaurantImageUrl(restaurantData.restaurantImageUrl);
-		this.setRestaurantMenuImageUrl(restaurantData.restaurantMenuImageUrl);
+		this.setRestaurantCategoryIndex(restaurantData.restaurantCategoryIndex);
 		this.setName(restaurantData.name);
 		this.setAddress(restaurantData.address);
 		this.setLocationUrl(restaurantData.locationUrl);
@@ -19,20 +17,12 @@ export class RestaurantResource {
 		this.setReview(restaurantData.review);
 	}
 
-	getRestaurantImageUrl() {
-		return this.restaurantImageUrl;
+	getRestaurantCategoryIndex() {
+		return this.restaurantCategoryIndex;
 	}
 
-	setRestaurantImageUrl(restaurantImageUrl) {
-		this.restaurantImageUrl = restaurantImageUrl;
-	}
-
-	getRestaurantMenuImageUrl() {
-		return this.restaurantMenuImageUrl;
-	}
-
-	setRestaurantMenuImageUrl(restaurantMenuImageUrl) {
-		this.restaurantMenuImageUrl = restaurantMenuImageUrl;
+	setRestaurantCategoryIndex(restaurantCategoryIndex) {
+		this.restaurantCategoryIndex = restaurantCategoryIndex;
 	}
 
 	getName() {
@@ -85,8 +75,7 @@ export class RestaurantResource {
 
 	getRestaurant() {
 		let restaurantData: object = {
-			restaurantImageUrl: this.getRestaurantImageUrl(),
-			restaurantMenuImageUrl: this.getRestaurantMenuImageUrl(),
+			restaurantCategoryIndex: this.getRestaurantCategoryIndex(),
 			name: this.getName(),
 			address: this.getAddress(),
 			locationUrl: this.getLocationUrl(),

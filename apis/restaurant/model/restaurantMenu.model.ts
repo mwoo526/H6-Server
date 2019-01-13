@@ -25,7 +25,7 @@ export class RestaurantMenu {
 
 	/**
 	 * model: 모든 restaurantMenu 조회
-	 * @param : void
+	 * @param: void
 	 * @returns {Promise<any>}
 	 */
 	listRestaurantMenus(): Promise<any> {
@@ -45,7 +45,7 @@ export class RestaurantMenu {
 
 	/**
 	 * model: restaurantIndex 에 따른 restaurantMenu 리스트 조회
-	 * @param : void
+	 * @param: void
 	 * @returns {Promise<any>}
 	 */
 	listRestaurantMenusByRestaurantIndex(restaurantIndex: number): Promise<any> {
@@ -65,7 +65,7 @@ export class RestaurantMenu {
 
 	/**
 	 * model: restaurantIndex 에 따른 restaurantMenu 조회
-	 * @param : {number} restaurantMenuIndex
+	 * @param: {number} restaurantMenuIndex
 	 * @returns {Promise<any>}
 	 */
 	getRestaurantMenu(restaurantMenuIndex: number): Promise<any> {
