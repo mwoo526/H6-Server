@@ -12,7 +12,7 @@ export class PostsReplyRoutes {
 	public router() {
 		this.postsReplyRouter.post('/postsReply/postsIndex/:postsIndex', createPostsReply);
 		this.postsReplyRouter.get('/postsReply/postsIndex/:postsIndex', pageListPostsReply);
-		this.postsReplyRouter.get('/postsReply/parentsPostsReplyIndex/:parentsPostsReplyIndex', pageParentsPostsReply);
+		this.postsReplyRouter.get('/postsReply/parentsPostsReplyIndex/:parentsPostsReplyIndex', pageChildPostsReply);
 		this.postsReplyRouter.get('/postsReply/postsReplyIndex/:postsReplyIndex', getPostsReply);
 		this.postsReplyRouter.put('/postsReply/postsReplyIndex/:postsReplyIndex', updatePostsReply);
 		this.postsReplyRouter.delete('/postsReply/postsReplyIndex/:postsReplyIndex', deletePostsReply);
@@ -94,7 +94,7 @@ async function pageListPostsReply(req, res) {
  * @param req
  * @param res
  */
-async function pageParentsPostsReply(req, res) {
+async function pageChildPostsReply(req, res) {
 	let parentsPostsReplyIndex: number = req.params.parentsPostsReplyIndex;
 	let page: number = parseInt(req.query.page);
 	let count: number = parseInt(req.query.count);
@@ -106,7 +106,7 @@ async function pageParentsPostsReply(req, res) {
 			statusCode: 200,
 			resultCount: resultCount.length,
 			result: result,
-			message: 'pageParentsPostsReply: 200'
+			message: 'pageChildPostsReply: 200'
 		});
 	} catch (err) {
 		switch (err) {
@@ -114,7 +114,7 @@ async function pageParentsPostsReply(req, res) {
 				res.send({
 					success: false,
 					statusCode: 500,
-					message: 'pageParentsPostsReply: 50000'
+					message: 'pageChildPostsReply: 50000'
 				});
 				break;
 		}
