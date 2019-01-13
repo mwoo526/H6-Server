@@ -109,6 +109,7 @@ export class Restaurant {
 	listRestaurant(filter?: string): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			let sql: string = `SELECT
+			t1.restaurantIndex,
 			t1.restaurantCategoryIndex,
 		  t1.name,
 			t1.locationUrl,
@@ -157,6 +158,7 @@ export class Restaurant {
 			}
 
 			let sql: string = `SELECT
+			t1.restaurantIndex,
 			t1.restaurantCategoryIndex,
 		  t1.name,
 			t1.locationUrl,

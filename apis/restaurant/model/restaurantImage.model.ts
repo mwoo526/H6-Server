@@ -46,13 +46,13 @@ export class RestaurantImage {
 
 	/**
 	 * model: restaurantIndex에 따른 restaurantImage 조회
-	 * @param : {number} restaurantIndex
+	 * @param: {number} restaurantIndex
 	 * @returns {Promise<any>}
 	 */
 	listRestaurantImagesByRestaurantIndex(restaurantIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`SELECT * from restaurantImage where restaurantIndex=?`, [restaurantIndex], (err, data) => {
+				await connection.query(`SELECT * from restaurantImage WHERE restaurantIndex = ?`, [restaurantIndex], (err, data) => {
 					if (err) {
 						reject(err);
 					} else {

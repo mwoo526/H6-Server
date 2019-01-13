@@ -1,6 +1,8 @@
 import * as express from 'express';
 import { RestaurantResource } from '../../../resources/restaurant.resource';
 import { restaurant } from '../model/restaurant.model';
+import { restaurantImage } from '../model/restaurantImage.model';
+import { restaurantMenu } from '../model/restaurantMenu.model';
 
 export class RestaurantRoutes {
 	public restaurantRouter: express.Route = express.Router();
@@ -60,6 +62,10 @@ async function pageListRestaurant(req, res): Promise<void> {
 	try {
 		const resultCount: any = await restaurant.listRestaurant(filter);
 		const result: any = await restaurant.pageListRestaurant(filter, orderBy, page, count);
+		for (const row of result) {
+			const resultRestaurantImage = await restaurantImage.listRestaurantImagesByRestaurantIndex(row.restaurantIndex);
+			row.restaurantImage = resultRestaurantImage;
+		}
 		res.send({
 			success: true,
 			statusCode: 200,
@@ -89,6 +95,8 @@ async function getRestaurant(req, res): Promise<void> {
 	const {restaurantIndex} = req.params;
 	try {
 		const result: any = await restaurant.getRestaurant(restaurantIndex);
+		const resultRestaurantMenu = await restaurantMenu.listRestaurantMenusByRestaurantIndex(result[0].restaurantIndex);
+		result[0].restaurantMenu = resultRestaurantMenu;
 		res.send({
 			success: true,
 			statusCode: 200,

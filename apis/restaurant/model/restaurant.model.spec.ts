@@ -7,7 +7,7 @@ describe('restaurant 모델', async () => {
 	it('createRestaurant', async () => {
 		const result = await restaurant.createRestaurant({
 			restaurantCategoryIndex: 1,
-			name: '승리장',
+			name: '영웅분식',
 			address: '서울시 성북구 삼선교로 10바길 38',
 			locationUrl: 'https://goo.gl/maps/L3MtsMtV6r1',
 			tel: '02-760-2341',
@@ -19,7 +19,7 @@ describe('restaurant 모델', async () => {
 	});
 
 	it('getRestaurantByName', async () => {
-		const result = await restaurant.getRestaurantByName('승리장');
+		const result = await restaurant.getRestaurantByName('영웅분식');
 		// console.log(result);
 		resultRestaurant = result;
 		expect(result).to.instanceof(Array);
