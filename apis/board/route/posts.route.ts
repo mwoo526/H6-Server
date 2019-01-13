@@ -78,9 +78,9 @@ async function pageListPosts(req, res) {
 		const result: any = await posts.pageListPosts(filter, orderBy, page, count);
 		for (const row of result) {
 			let subscriberCount = await postsSubscriber.getPostsSubscriberSumCount(row.postsIndex);
-			let scrapData: any = await postsSubscriber.getPostsSubscriberByUserIndex(row.postsIndex, userData.tokenIndex);
 			row.goodCount = subscriberCount[0].goodCount || 0;
 			row.badCount = subscriberCount[0].badCount || 0;
+			let scrapData: any = await postsSubscriber.getPostsSubscriberByUserIndex(row.postsIndex, userData.tokenIndex);
 			if (scrapData.length > 0 && scrapData[0].isScrap === 1) {
 				row.isScrap = true;
 			} else {
@@ -118,14 +118,12 @@ async function pageListPostsByIsScrap(req, res) {
 	let page: number = parseInt(req.query.page);
 	let count: number = parseInt(req.query.count);
 	try {
-		let userData = auth(req);
 		const resultUser = await user.getUser(req.params.userId);
 		const userIndex = resultUser[0].userIndex;
 		const resultCount: any = await posts.listPostsByIsScrap(userIndex, filter);
 		const result: any = await posts.pageListPostsByIsScrap(userIndex, filter, orderBy, page, count);
 		for (const row of result) {
-			let scrapData: any = await postsSubscriber.getPostsSubscriberByUserIndex(row.postsIndex, userData.tokenIndex);
-			row.isScrap = scrapData[0].isScrap === 1 ? true : false;
+			row.isScrap = row.isScrap === 1 ? true : false;
 			delete row.userIndex;
 		}
 		res.send({
@@ -184,7 +182,7 @@ async function getPosts(req, res): Promise<void> {
 			success: true,
 			statusCode: 200,
 			result: result[0],
-			message: 'result: 200'
+			message: 'getPosts: 200'
 		});
 	} catch (err) {
 		switch (err) {

@@ -39,9 +39,11 @@ async function putPostsReplySubscriber(req, res) {
 		}
 
 		result = await postsReplySubscriber.getPostsReplySubscriberByUserIndex(postsReplyIndex, userIndex);
-		if (result[0].isGood === 0 && result[0].isBad === 0 && result[0].isScrap === 0) {
+		if (result[0].isGood === 0 && result[0].isBad === 0) {
 			await postsReplySubscriber.deletePostsReplySubscriber(postsReplyIndex, userIndex);
 		}
+
+		delete result[0].userIndex;
 
 		res.send({
 			success: true,

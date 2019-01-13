@@ -51,7 +51,7 @@ export class PostsReplyModel {
 		});
 	}
 
-	listChildPostReply(postsIndex: number, parentsPostReplyIndex: number): Promise<void> {
+	listChildPostsReply(parentsPostReplyIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`SELECT
@@ -61,26 +61,15 @@ export class PostsReplyModel {
 				t1.content,
 				t1.status,
 				t1.createdAt, 
-				t2.userNickName,
-				(SELECT SUM(isGood) FROM postsReplySubscriber WHERE postsReplySubscriber.postsReplyIndex = t1.postsReplyIndex) AS goodCount,
-				(SELECT SUM(isBad) FROM postsReplySubscriber WHERE postsReplySubscriber.postsReplyIndex = t1.postsReplyIndex) AS badCount
+				t2.userNickName
 				FROM postsReply AS t1
         INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
-        WHERE t1.postsIndex = ?
-        AND t1.parentsPostsReplyIndex = ?
-        ORDER BY t1.createdAt ASC`, [postsIndex, parentsPostReplyIndex], (err, data) => {
+        WHERE t1.parentsPostsReplyIndex = ?
+        ORDER BY t1.createdAt ASC`, [parentsPostReplyIndex], (err, data) => {
 					connection.release();
 					if (err) {
 						reject(err);
 					} else {
-						for (const row of data) {
-							if (row.goodCount === null) {
-								row.goodCount = 0
-							}
-							if (row.badCount === null) {
-								row.badCount = 0
-							}
-						}
 						resolve(data);
 					}
 				});
@@ -109,9 +98,7 @@ export class PostsReplyModel {
 			  t1.content,
 			  t1.status,
         t1.createdAt,
-				t2.userNickName,
-				(SELECT SUM(isGood) FROM postsReplySubscriber WHERE postsReplySubscriber.postsReplyIndex = t1.postsReplyIndex) AS goodCount,
-				(SELECT SUM(isBad) FROM postsReplySubscriber WHERE postsReplySubscriber.postsReplyIndex = t1.postsReplyIndex) AS badCount
+				t2.userNickName
         FROM postsReply AS t1
         INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex                 
         WHERE t1.postsIndex = ?
@@ -121,6 +108,68 @@ export class PostsReplyModel {
 					if (err) {
 						reject(err)
 					} else {
+						resolve(data);
+					}
+				});
+			});
+		});
+	}
+
+	pageListChildPostsReply(parentsPostReplyIndex: number, page: number, count: number): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async (err, connection) => {
+				let start = (page - 1) * count;
+				if (start < 0) {
+					start = 0;
+				}
+				await connection.query(`SELECT
+				t1.postsReplyIndex,
+				t1.parentsPostsReplyIndex,
+				t1.postsIndex,
+				t1.content,
+				t1.status,
+				t1.createdAt, 
+				t2.userNickName
+				FROM postsReply AS t1
+        INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
+        WHERE t1.parentsPostsReplyIndex = ?
+        ORDER BY t1.createdAt ASC LIMIT ${start}, ${count}`, [parentsPostReplyIndex], (err, data) => {
+					connection.release();
+					if (err) {
+						reject(err);
+					} else {
+						resolve(data);
+					}
+				});
+			});
+		});
+	}
+
+	/**
+	 * model: postsReply 조회
+	 * @param postsReplyIndex
+	 */
+	getPostsReply(postsReplyIndex: number): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async (err, connection) => {
+				await connection.query(`SELECT 
+				t1.postsReplyIndex,
+				t1.postsIndex,
+				t1.content,
+				t1.status,
+				t1.createdAt,
+				t2.userNickName
+        FROM postsReply AS t1
+        INNER JOIN user AS t2 ON t1.userIndex = t2.userIndex
+        WHERE t1.postsReplyIndex = ?`, [postsReplyIndex], async (err, data) => {
+					if (err) {
+						await connection.release();
+						reject(err);
+					} else if (data[0] == null) {
+						await connection.release();
+						reject('This postsReply does not exist');
+					} else {
+						await connection.release();
 						resolve(data);
 					}
 				});

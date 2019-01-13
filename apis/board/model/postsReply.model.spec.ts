@@ -58,8 +58,14 @@ describe('postsReply 모델', () => {
 		expect(result).to.instanceof(Array);
 	});
 
+	it('getPostsReply', async () => {
+		const result: any = await postsReply.getPostsReply(resultPostsReply[0].postsReplyIndex);
+		// console.log(result);
+		expect(result).to.instanceof(Object);
+	});
+
 	it('updatePostsReply', async () => {
-		const result: any = await postsReply.updatePostsReply(resultPosts[0].postsIndex, {
+		const result: any = await postsReply.updatePostsReply(resultPostsReply[0].postsReplyIndex, {
 			content: '업데이트 테스트 게시글 댓글 내용'
 		});
 		// console.log(result);

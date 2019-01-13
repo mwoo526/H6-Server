@@ -281,6 +281,7 @@ export class Posts {
 			t1.createdAt, 
 			t2.userNickName,
 			t3.postsCategoryName,
+			t4.isScrap,
 			(SELECT COUNT(*) AS count FROM postsReply WHERE t1.postsIndex = postsReply.postsIndex) AS replyCount, 
       (SELECT SUM(isGood) AS goodCount FROM postsSubscriber WHERE t1.postsIndex = postsSubscriber.postsIndex) AS goodCount,
 			(SELECT SUM(isBad) AS goodCount FROM postsSubscriber WHERE t1.postsIndex = postsSubscriber.postsIndex) AS badCount
