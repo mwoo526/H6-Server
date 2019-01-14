@@ -465,7 +465,7 @@ export class Posts {
 	}
 
 	/**
-	 * model : posts 삭제
+	 * model: posts 삭제
 	 * @param {number} postsIndex
 	 * @returns {Promise<void>}
 	 */
