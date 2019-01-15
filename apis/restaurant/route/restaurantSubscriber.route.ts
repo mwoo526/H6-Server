@@ -21,9 +21,9 @@ export class RestaurantSubscriberRoutes {
  * @returns {Promise<void>}
  */
 async function putRestaurantSubscriber(req, res): Promise<void> {
-    const {restaurantIndex} = req.params;
-    const {tokenIndex} = auth(req);
     try {
+        const {restaurantIndex} = req.params;
+        const {tokenIndex} = auth(req);
         let result: any = await restaurantSubscriber.updateRestaurantSubscriber(tokenIndex, restaurantIndex, req.body);
         if (result.changedRows == 0) {
             result = await restaurantSubscriber.createRestaurantSubscriber({
@@ -34,10 +34,10 @@ async function putRestaurantSubscriber(req, res): Promise<void> {
         }
         else {
             result = await restaurantSubscriber.getRestaurantSubscriber(tokenIndex, restaurantIndex);
-            if (result[0].isGood == 0) {
+            result = result[0];
+            if (result.isGood == 0) {
                 await restaurantSubscriber.deleteRestaurantSubscriber(tokenIndex, restaurantIndex);
             }
-            result = result[0];
         }
 
         delete result.userIndex;
@@ -47,16 +47,8 @@ async function putRestaurantSubscriber(req, res): Promise<void> {
             result: result,
             message: 'putRestaurantSubscriber: 200'
         });
-
     } catch(err) {
         switch (err) {
-            case 'The ID does not exist':
-                res.send({
-                    success: false,
-                    statusCode: 404,
-                    message: 'putRestaurantSubscriber : 40401'
-                });
-                break;
             default:
                 res.send({
                     success: false,
