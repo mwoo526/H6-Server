@@ -3,7 +3,6 @@ import { RestaurantResource } from '../../../resources/restaurant.resource';
 import { restaurant } from '../model/restaurant.model';
 import { restaurantImage } from '../model/restaurantImage.model';
 import { restaurantMenu } from '../model/restaurantMenu.model';
-import { restaurantSubscriber } from '../model/restaurantSubscriber.model';
 
 export class RestaurantRoutes {
 	public restaurantRouter: express.Route = express.Router();

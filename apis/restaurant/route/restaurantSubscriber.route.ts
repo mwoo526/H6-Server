@@ -41,27 +41,27 @@ async function putRestaurantSubscriber(req, res): Promise<void> {
 			}
 		}
 
-        const sumResult: any = await restaurantSubscriber.getRestaurantSubscriberSumCount(restaurantIndex);
-        await restaurant.updateRestaurant(restaurantIndex, sumResult[0]);
+		const sumResult: any = await restaurantSubscriber.getRestaurantSubscriberSumCount(restaurantIndex);
+		await restaurant.updateRestaurant(restaurantIndex, sumResult[0]);
 
-        delete result.userIndex;
-        res.send({
-            success: true,
-            statusCode: 200,
-            result: result,
-            message: 'putRestaurantSubscriber: 200'
-        });
-    } catch(err) {
-        switch (err) {
-            default:
-                res.send({
-                    success: false,
-                    statusCode: 500,
-                    message: 'putRestaurantSubscriber : 50000'
-                });
-                break;
-        }
-    }
+		delete result.userIndex;
+		res.send({
+			success: true,
+			statusCode: 200,
+			result: result,
+			message: 'putRestaurantSubscriber: 200'
+		});
+	} catch (err) {
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'putRestaurantSubscriber : 50000'
+				});
+				break;
+		}
+	}
 }
 
 export const restaurantSubscriberRoutes: RestaurantSubscriberRoutes = new RestaurantSubscriberRoutes();
