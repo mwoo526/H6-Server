@@ -116,6 +116,7 @@ export class Restaurant {
 			t1.tel,
 			t1.openingHours,
 			t1.review,
+			t1.goodCount,
 			t1.createdAt,
 			t2.restaurantCategoryName
 			FROM restaurant AS t1
@@ -165,6 +166,7 @@ export class Restaurant {
 			t1.tel,
 			t1.openingHours,
 			t1.review,
+			t1.goodCount,
 			t1.createdAt,
 			t2.restaurantCategoryName
 			FROM restaurant AS t1
