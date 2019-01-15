@@ -48,6 +48,12 @@ describe('restaurantSubscriber 모델', () => {
         expect(result).to.instanceof(Array);
     });
 
+    it('getRestaurantSubscriberSumCount', async () => {
+        const result: any = await restaurantSubscriber.getRestaurantSubscriberSumCount(restaurantIndex);
+        //console.log(result);
+        expect(result).to.instanceof(Array);
+    });
+
     it('updateRestaurantSubscriber', async () => {
         const result: any = await restaurantSubscriber.updateRestaurantSubscriber(1, restaurantIndex, {
             isGood: 0

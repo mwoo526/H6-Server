@@ -45,6 +45,27 @@ export class RestaurantSubscriber {
         });
     }
 
+    /**
+     * model: restaurantSubscriber 음식점별 good 갯수 합 조회
+     * @param {number} restaurantIndex
+     * return : {Promise<any>}
+     */
+    getRestaurantSubscriberSumCount(restaurantIndex: number): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            await pool.getConnection(async (err, connection) => {
+                await connection.query(`SELECT SUM(isGood) as goodCount FROM restaurantSubscriber WHERE restaurantIndex=?`,
+                    [restaurantIndex], (err, data) => {
+
+                    if(err) {
+                        reject(err);
+                    } else {
+                        resolve(data);
+                    }
+                })
+            });
+        });
+    }
+
 
     /**
      * model: restaurantSubscriber 업데이트
