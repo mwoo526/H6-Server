@@ -40,6 +40,18 @@ describe('posts 모델', async () => {
 		expect(result).to.instanceof(Array);
 	});
 
+	it('listPostsByUserIndex', async () => {
+		const result: any = await posts.listPostsByUserIndex(1, `postsCategoryIndex eq 1`);
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
+	it('pageListPostsByUserIndex', async () => {
+		const result: any = await posts.pageListPostsByUserIndex(1, `postsCategoryIndex eq 1`, `createdAt ASC`, 1, 3);
+		// console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
 	it('getPostsByTitle', async () => {
 		const result: any = await posts.getPostsByTitle('테스트 게시글 제목');
 		// console.log(result);

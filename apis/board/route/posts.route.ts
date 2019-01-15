@@ -1,6 +1,5 @@
 import * as express from 'express';
 import { auth } from '../../../packages/utils/auth.util';
-import { user } from '../../user/model/user.model';
 import { posts } from '../model/posts.model';
 import { postsSubscriber } from '../model/postsSubscriber.model';
 
@@ -14,7 +13,8 @@ export class PostsRoutes {
 	public router() {
 		this.postsRouter.post('/posts', createPosts);
 		this.postsRouter.get('/posts', pageListPosts);
-		this.postsRouter.get('/posts/userId/:userId', pageListPostsByIsScrap);
+		this.postsRouter.get('/posts/scrap', pageListPostsByIsScrap);
+		this.postsRouter.get('/posts/publisher', pageListPostsByUserIndex);
 		this.postsRouter.get('/posts/postsIndex/:postsIndex', getPosts);
 		this.postsRouter.put('/posts/postsIndex/:postsIndex', updatePosts);
 		this.postsRouter.delete('/posts/postsIndex/:postsIndex', deletePosts);
@@ -44,13 +44,6 @@ async function createPosts(req, res) {
 		});
 	} catch (err) {
 		switch (err) {
-			case 'The ID does not exist':
-				res.send({
-					success: false,
-					statusCode: 404,
-					message: 'createPosts : 40401'
-				});
-				break;
 			default:
 				res.send({
 					success: false,
@@ -77,9 +70,6 @@ async function pageListPosts(req, res) {
 		const resultCount: any = await posts.listPosts(filter);
 		const result: any = await posts.pageListPosts(filter, orderBy, page, count);
 		for (const row of result) {
-			let subscriberCount = await postsSubscriber.getPostsSubscriberSumCount(row.postsIndex);
-			row.goodCount = subscriberCount[0].goodCount || 0;
-			row.badCount = subscriberCount[0].badCount || 0;
 			let scrapData: any = await postsSubscriber.getPostsSubscriberByUserIndex(row.postsIndex, userData.tokenIndex);
 			if (scrapData.length > 0 && scrapData[0].isScrap === 1) {
 				row.isScrap = true;
@@ -117,11 +107,10 @@ async function pageListPostsByIsScrap(req, res) {
 	let orderBy: string = req.query.orderBy;
 	let page: number = parseInt(req.query.page);
 	let count: number = parseInt(req.query.count);
+	let userData = auth(req);
 	try {
-		const resultUser = await user.getUser(req.params.userId);
-		const userIndex = resultUser[0].userIndex;
-		const resultCount: any = await posts.listPostsByIsScrap(userIndex, filter);
-		const result: any = await posts.pageListPostsByIsScrap(userIndex, filter, orderBy, page, count);
+		const resultCount: any = await posts.listPostsByIsScrap(userData.tokenIndex, filter);
+		const result: any = await posts.pageListPostsByIsScrap(userData.tokenIndex, filter, orderBy, page, count);
 		for (const row of result) {
 			row.isScrap = row.isScrap === 1 ? true : false;
 			delete row.userIndex;
@@ -135,18 +124,48 @@ async function pageListPostsByIsScrap(req, res) {
 		});
 	} catch (err) {
 		switch (err) {
-			case 'The ID does not exist':
-				res.send({
-					success: false,
-					statusCode: 404,
-					message: 'pageListPostsByIsScrap: 40401'
-				});
-				break;
 			default:
 				res.send({
 					success: false,
 					statusCode: 500,
 					message: 'pageListPostsByIsScrap: 50000'
+				});
+				break;
+		}
+	}
+}
+
+async function pageListPostsByUserIndex(req, res) {
+	let filter: string = req.query.filter;
+	let orderBy: string = req.query.orderBy;
+	let page: number = parseInt(req.query.page);
+	let count: number = parseInt(req.query.count);
+	let userData = auth(req);
+	try {
+		const resultCount: any = await posts.listPostsByUserIndex(userData.tokenIndex, filter);
+		const result: any = await posts.pageListPostsByUserIndex(userData.tokenIndex, filter, orderBy, page, count);
+		for (const row of result) {
+			let scrapData: any = await postsSubscriber.getPostsSubscriberByUserIndex(row.postsIndex, userData.tokenIndex);
+			if (scrapData.length > 0 && scrapData[0].isScrap === 1) {
+				row.isScrap = true;
+			} else {
+				row.isScrap = false;
+			}
+		}
+		res.send({
+			success: true,
+			statusCode: 200,
+			resultCount: resultCount.length,
+			result: result,
+			message: 'pageListPostsByUserIndex: 200'
+		});
+	} catch (err) {
+		switch (err) {
+			default:
+				res.send({
+					success: false,
+					statusCode: 500,
+					message: 'pageListPostsByUserIndex: 50000'
 				});
 				break;
 		}
@@ -163,8 +182,6 @@ async function getPosts(req, res): Promise<void> {
 	try {
 		let userData = auth(req);
 		let result: any = await posts.getPosts(postsIndex);
-		result[0].goodCount = result[0].goodCount === null ? 0 : result[0].goodCount;
-		result[0].badCount = result[0].badCount === null ? 0 : result[0].badCount;
 
 		let scrapData: any = await postsSubscriber.getPostsSubscriberByUserIndex(postsIndex, userData.tokenIndex);
 		if (scrapData.length !== 0) {

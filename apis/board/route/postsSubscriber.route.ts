@@ -1,5 +1,6 @@
 import * as express from 'express';
 import { auth } from '../../../packages/utils/auth.util';
+import { posts } from '../model/posts.model';
 import { postsSubscriber } from '../model/postsSubscriber.model';
 
 export class PostsSubscriberRoutes {
@@ -24,7 +25,6 @@ async function putPostsSubscriber(req, res) {
 		const postsIndex = req.params.postsIndex;
 		let userData = auth(req);
 		const userIndex = userData.tokenIndex;
-		delete req.body.userId;
 
 		let result = await postsSubscriber.getPostsSubscriberByUserIndex(postsIndex, userIndex);
 		if (result[0] == null) {
@@ -43,6 +43,14 @@ async function putPostsSubscriber(req, res) {
 		if (result[0].isGood === 0 && result[0].isBad === 0 && result[0].isScrap === 0) {
 			await postsSubscriber.deletePostsSubscriber(postsIndex, userIndex);
 		}
+
+		/** posts goodCount, badCount 업데이트 */
+		const subscriberCount: any = await postsSubscriber.getPostsSubscriberSumCount(postsIndex);
+		await posts.updatePosts(postsIndex, {
+			goodCount: subscriberCount[0].goodCount,
+			badCount: subscriberCount[0].badCount
+		});
+
 
 		delete result[0].userIndex;
 
