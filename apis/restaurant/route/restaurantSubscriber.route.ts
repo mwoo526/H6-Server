@@ -4,15 +4,16 @@ import { restaurant } from '../model/restaurant.model';
 import { restaurantSubscriber } from '../model/restaurantSubscriber.model';
 
 export class RestaurantSubscriberRoutes {
-    public restaurantSubscriberRouter: express.Router = express.Router();
+	public restaurantSubscriberRouter: express.Router = express.Router();
 
-    constructor() {
-        this.router();
-    }
+	constructor() {
+		this.router();
+	}
 
-    public router() {
-        this.restaurantSubscriberRouter.put('/restaurantSubscriber/restaurantIndex/:restaurantIndex', putRestaurantSubscriber);;
-    }
+	public router() {
+		this.restaurantSubscriberRouter.put('/restaurantSubscriber/restaurantIndex/:restaurantIndex', putRestaurantSubscriber);
+		;
+	}
 }
 
 /**
@@ -22,24 +23,23 @@ export class RestaurantSubscriberRoutes {
  * @returns {Promise<void>}
  */
 async function putRestaurantSubscriber(req, res): Promise<void> {
-    try {
-        const {restaurantIndex} = req.params;
-        const {tokenIndex} = auth(req);
-        let result: any = await restaurantSubscriber.updateRestaurantSubscriber(tokenIndex, restaurantIndex, req.body);
-        if (result.changedRows == 0) {
-            result = await restaurantSubscriber.createRestaurantSubscriber({
-                userIndex: tokenIndex,
-                restaurantIndex: restaurantIndex,
-                isGood: 1
-            });
-        }
-        else {
-            result = await restaurantSubscriber.getRestaurantSubscriber(tokenIndex, restaurantIndex);
-            result = result[0];
-            if (result.isGood == 0) {
-                await restaurantSubscriber.deleteRestaurantSubscriber(tokenIndex, restaurantIndex);
-            }
-        }
+	try {
+		const {restaurantIndex} = req.params;
+		const {tokenIndex} = auth(req);
+		let result: any = await restaurantSubscriber.updateRestaurantSubscriber(tokenIndex, restaurantIndex, req.body);
+		if (result.changedRows == 0) {
+			result = await restaurantSubscriber.createRestaurantSubscriber({
+				userIndex: tokenIndex,
+				restaurantIndex: restaurantIndex,
+				isGood: 1
+			});
+		} else {
+			result = await restaurantSubscriber.getRestaurantSubscriber(tokenIndex, restaurantIndex);
+			result = result[0];
+			if (result.isGood == 0) {
+				await restaurantSubscriber.deleteRestaurantSubscriber(tokenIndex, restaurantIndex);
+			}
+		}
 
         const sumResult: any = await restaurantSubscriber.getRestaurantSubscriberSumCount(restaurantIndex);
         await restaurant.updateRestaurant(restaurantIndex, sumResult[0]);
