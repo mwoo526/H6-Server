@@ -6,6 +6,7 @@ export class RestaurantResource {
 	private tel;
 	private openingHours;
 	private review;
+	private goodCount;
 
 	constructor(restaurantData) {
 		this.setRestaurantCategoryIndex(restaurantData.restaurantCategoryIndex);
@@ -15,6 +16,7 @@ export class RestaurantResource {
 		this.setTel(restaurantData.tel);
 		this.setOpeningHours(restaurantData.openingHours);
 		this.setReview(restaurantData.review);
+		this.setGoodCount(restaurantData.goodCount);
 	}
 
 	getRestaurantCategoryIndex() {
@@ -73,6 +75,14 @@ export class RestaurantResource {
 		this.review = review;
 	}
 
+	getGoodCount() {
+		return this.goodCount;
+	}
+
+	setGoodCount(goodCount) {
+		this.goodCount = goodCount;
+	}
+
 	getRestaurant() {
 		let restaurantData: object = {
 			restaurantCategoryIndex: this.getRestaurantCategoryIndex(),
@@ -81,7 +91,8 @@ export class RestaurantResource {
 			locationUrl: this.getLocationUrl(),
 			tel: this.getTel(),
 			openingHours: this.getOpeningHours(),
-			review: this.getReview()
+			review: this.getReview(),
+			goodCount: this.goodCount
 		};
 		return restaurantData;
 	}

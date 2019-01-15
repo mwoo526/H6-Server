@@ -38,6 +38,21 @@ describe('restaurant 모델', async () => {
 		expect(result).to.instanceof(Array);
 	});
 
+	it('updateRestaurant', async () => {
+		const result: any = await restaurant.updateRestaurant(resultRestaurant[0].restaurantIndex, {
+			restaurantCategoryIndex: 1,
+			name: '미스터돈가스',
+			address: '서울시 성북구 삼선교로 10바길 38',
+			locationUrl: 'https://goo.gl/maps/L3MtsMtV6r1',
+			tel: '02-760-2341',
+			openingHours: '10:00 - 19:00',
+			review: '이젠 돈가스 팔아요',
+			goodCount: 0
+		});
+		//console.log(result);
+		expect(result).to.instanceof(Object);
+	});
+
 	it('deleteRestaurant', async () => {
 		const result = await restaurant.deleteRestaurant(resultRestaurant[0].restaurantIndex);
 		// console.log(result);
