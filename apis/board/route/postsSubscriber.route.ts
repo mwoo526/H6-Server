@@ -51,7 +51,6 @@ async function putPostsSubscriber(req, res) {
 			badCount: subscriberCount[0].badCount
 		});
 
-
 		delete result[0].userIndex;
 
 		res.send({
