@@ -12,7 +12,8 @@ describe('restaurant 모델', async () => {
 			locationUrl: 'https://goo.gl/maps/L3MtsMtV6r1',
 			tel: '02-760-2341',
 			openingHours: '10:00 - 19:00',
-			review: '음식이 전체적으로 좀 짜요.'
+			review: '음식이 전체적으로 좀 짜요.',
+			goodCount: 0
 		});
 		// console.log(result);
 		expect(result).to.instanceof(Object);
@@ -27,13 +28,13 @@ describe('restaurant 모델', async () => {
 
 	it('listRestaurant', async () => {
 		const result = await restaurant.listRestaurant();
-		// console.log(result);
+		//console.log(result);
 		expect(result).to.instanceof(Array);
 	});
 
 	it('pageListRestaurant', async () => {
 		const result = await restaurant.pageListRestaurant(`restaurantCategoryIndex eq 1`, `createdAt ASC`, 1, 3);
-		// console.log(result);
+		//console.log(result);
 		expect(result).to.instanceof(Array);
 	});
 

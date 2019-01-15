@@ -1,5 +1,6 @@
 import * as express from 'express';
 import { auth } from '../../../packages/utils/auth.util';
+import { restaurant } from '../model/restaurant.model';
 import { restaurantSubscriber } from '../model/restaurantSubscriber.model';
 
 export class RestaurantSubscriberRoutes {
@@ -39,6 +40,9 @@ async function putRestaurantSubscriber(req, res): Promise<void> {
                 await restaurantSubscriber.deleteRestaurantSubscriber(tokenIndex, restaurantIndex);
             }
         }
+
+        const sumResult: any = await restaurantSubscriber.getRestaurantSubscriberSumCount(restaurantIndex);
+        await restaurant.updateRestaurant(restaurantIndex, sumResult[0]);
 
         delete result.userIndex;
         res.send({
