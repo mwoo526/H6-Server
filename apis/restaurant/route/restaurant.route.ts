@@ -3,6 +3,7 @@ import { RestaurantResource } from '../../../resources/restaurant.resource';
 import { restaurant } from '../model/restaurant.model';
 import { restaurantImage } from '../model/restaurantImage.model';
 import { restaurantMenu } from '../model/restaurantMenu.model';
+import { restaurantSubscriber } from '../model/restaurantSubscriber.model';
 
 export class RestaurantRoutes {
 	public restaurantRouter: express.Route = express.Router();
@@ -64,7 +65,9 @@ async function pageListRestaurant(req, res): Promise<void> {
 		const result: any = await restaurant.pageListRestaurant(filter, orderBy, page, count);
 		for (const row of result) {
 			const resultRestaurantImage = await restaurantImage.listRestaurantImagesByRestaurantIndex(row.restaurantIndex);
+			const resultIsGoodCount = await restaurantSubscriber.getRestaurantSubscriberSumCount(row.restaurantIndex);
 			row.restaurantImage = resultRestaurantImage;
+			row.goodCount = resultIsGoodCount[0].goodCount;
 		}
 		res.send({
 			success: true,
