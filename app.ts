@@ -2,6 +2,7 @@ import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import { admissionRoutes } from './apis/admissionYear/route/admissionYear.route';
 import { postsRoutes } from './apis/board/route/posts.route';
+import { postsCategoryRoutes } from './apis/board/route/postsCategory.route';
 import { postsReplyRoutes } from './apis/board/route/postsReply.route';
 import { postsReplyReportRoutes } from './apis/board/route/postsReplyReport.route';
 import { postsReplySubscriberRoutes } from './apis/board/route/postsReplySubscriber.route';
@@ -13,6 +14,7 @@ import { lectureInfoRoutes } from './apis/lecture/route/lectureInfo.route';
 import { lectureReplyRoutes } from './apis/lecture/route/lectureReply.route';
 import { noticeRoutes } from './apis/notice/route/notice.route';
 import { professorRoutes } from './apis/professor/route/professor.route';
+import { restaurantCategoryRoutes } from './apis/restaurant/route/restaurantCategory.route';
 import { signInRoutes } from './apis/sign/route/signIn.route';
 import { signUpRoutes } from './apis/sign/route/signUp.route';
 import { termsRoutes } from './apis/terms/route/terms.route';
@@ -64,6 +66,7 @@ export class Server {
 		this.app.use(postsReplySubscriberRoutes.postsReplySubscriberRouter);
 		this.app.use(postsReportRoutes.postsReportRouter);
 		this.app.use(postsReplyReportRoutes.postsReplyReportRouter);
+		this.app.use(postsCategoryRoutes.postsCategoryRouter);
 		this.app.use(fileRoutes.fileRouter);
 		this.app.use(voteRoutes.voteRouter);
 		this.app.use(testRoutes.testRouter);
@@ -76,6 +79,7 @@ export class Server {
 		this.app.use(restaurantMenuRoutes.restaurantMenuRouter);
 		this.app.use(restaurantImageRoutes.restaurantImageRouter);
 		this.app.use(restaurantSubscriberRoutes.restaurantSubscriberRouter);
+		this.app.use(restaurantCategoryRoutes.restaurantCategoryRouter);
 		/** 라우터 오류 처리 */
 		this.app.use(notFoundError);
 		this.app.use(serverError);
