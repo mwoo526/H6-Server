@@ -217,7 +217,22 @@ export class Restaurant {
 	getRestaurant(restaurantIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`SELECT * from restaurant WHERE restaurantIndex = ?`, [restaurantIndex], (err, data) => {
+				await connection.query(`SELECT 
+				t1.restaurantIndex,
+				t1.restaurantCategoryIndex,
+				t1.name,
+				t1.address,
+				t1.locationUrl,
+				t1.tel,
+				t1.openingHours,
+				t1.review,
+				t1.goodCount,
+				t1.createdAt,
+				t1.updatedAt,
+				t2.restaurantCategoryName
+				FROM restaurant AS t1
+				INNER JOIN restaurantCategory AS t2 ON t2.restaurantCategoryIndex = t1.restaurantCategoryIndex
+				WHERE restaurantIndex = ?`, [restaurantIndex], (err, data) => {
 					connection.release();
 					if (err) {
 						reject(err);

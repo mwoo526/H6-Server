@@ -101,7 +101,13 @@ async function getRestaurant(req, res): Promise<void> {
 	try {
 		const result: any = await restaurant.getRestaurant(restaurantIndex);
 		const resultRestaurantMenu = await restaurantMenu.listRestaurantMenusByRestaurantIndex(result[0].restaurantIndex);
+		const resultRestaurantImage = await restaurantImage.listRestaurantImagesByRestaurantIndex(result[0].restaurantIndex);
+		const resultRestaurantTag = await restaurantTag.getRestaurantTag(result[0].restaurantIndex);
+
 		result[0].restaurantMenu = resultRestaurantMenu;
+		result[0].resultRestaurantImage = resultRestaurantImage;
+		result[0].resultRestaurantTag = resultRestaurantTag;
+		
 		res.send({
 			success: true,
 			statusCode: 200,
