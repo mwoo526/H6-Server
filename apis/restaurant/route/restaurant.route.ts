@@ -64,7 +64,9 @@ async function pageListRestaurant(req, res): Promise<void> {
 		const result: any = await restaurant.pageListRestaurant(filter, orderBy, page, count);
 		for (const row of result) {
 			const resultRestaurantImage = await restaurantImage.listRestaurantImagesByRestaurantIndex(row.restaurantIndex);
+			const resultPriorityMenus = await restaurantMenu.getRestaurantPriorityMenus(row.restaurantIndex);
 			row.restaurantImage = resultRestaurantImage;
+			row.restaurantPriorityMenus = resultPriorityMenus;
 		}
 		res.send({
 			success: true,
