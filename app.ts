@@ -22,6 +22,7 @@ import { restaurantRoutes } from './apis/restaurant/route/restaurant.route';
 import { restaurantMenuRoutes } from './apis/restaurant/route/restaurantMenu.route';
 import { restaurantImageRoutes } from './apis/restaurant/route/restaurantImage.route';
 import { restaurantSubscriberRoutes } from './apis/restaurant/route/restaurantSubscriber.route';
+import { restaurantTagRoutes } from './apis/restaurant/route/restaurantTag.route';
 import { trackRoutes } from './apis/track/route/track.route';
 import { userRoutes } from './apis/user/route/user.route';
 import { userValidationRoutes } from './apis/userValidation/route/userValidation.route';
@@ -75,6 +76,7 @@ export class Server {
 		this.app.use(lectureReplyRoutes.lectureReplyRouter);
 		this.app.use(restaurantRoutes.restaurantRouter);
 		this.app.use(restaurantMenuRoutes.restaurantMenuRouter);
+		this.app.use(restaurantTagRoutes.restaurantTagRouter);
 		this.app.use(restaurantImageRoutes.restaurantImageRouter);
 		this.app.use(restaurantSubscriberRoutes.restaurantSubscriberRouter);
 		this.app.use(restaurantCategoryRoutes.restaurantCategoryRouter);
