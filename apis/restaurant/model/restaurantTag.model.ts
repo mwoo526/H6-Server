@@ -31,7 +31,7 @@ export class RestaurantTag {
     getRestaurantTag(restaurantIndex: number): Promise<any> {
         return new Promise(async (resolve, reject) => {
             await pool.getConnection(async (err, connection) => {
-                await connection.query(`SELECT * FROM restaurantTag WHERE restaurantIndex=?`, [restaurantIndex], (err, data) => {
+                await connection.query(`SELECT tag FROM restaurantTag WHERE restaurantIndex=?`, [restaurantIndex], (err, data) => {
                     connection.release();
                     if(err) {
                         reject(err);
