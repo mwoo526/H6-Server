@@ -51,7 +51,7 @@ export class RestaurantMenu {
 	listRestaurantMenusByRestaurantIndex(restaurantIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
-				await connection.query(`SELECT * from restaurantMenu where restaurantIndex=?`, [restaurantIndex], (err, data) => {
+				await connection.query(`SELECT * FROM restaurantMenu WHERE restaurantIndex = ? ORDER BY priority ASC`, [restaurantIndex], (err, data) => {
 					connection.release();
 					if (err) {
 						reject(err);

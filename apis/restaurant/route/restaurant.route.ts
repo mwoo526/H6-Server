@@ -105,7 +105,7 @@ async function getRestaurant(req, res): Promise<void> {
 		res.send({
 			success: true,
 			statusCode: 200,
-			result: result,
+			result: result[0],
 			message: 'getRestaurant: 200'
 		});
 	} catch (err) {
