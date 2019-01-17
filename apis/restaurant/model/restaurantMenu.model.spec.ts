@@ -47,7 +47,7 @@ describe('restaurantMenu 모델', () => {
 
 	it('listRestaurantMenus', async () => {
 		const result: any = await restaurantMenu.listRestaurantMenus();
-		console.log(result);
+		//console.log(result);
 		expect(result).to.instanceof(Array);
 	});
 
@@ -63,6 +63,14 @@ describe('restaurantMenu 모델', () => {
 		//console.log(result);
 		expect(result).to.instanceof(Array);
 	});
+
+	it('getRestaurantPriorityMenus', async() => {
+		const testRestaurantIndex: number = 40;
+		const result: any = await restaurantMenu.getRestaurantPriorityMenus(testRestaurantIndex);
+		console.log(result);
+		expect(result).to.instanceof(Array);
+	});
+
 
 	it('updateRestaurantMenu', async () => {
 		const result: any = await restaurantMenu.updateRestaurantMenu(restaurantMenuIndex, {

@@ -2,12 +2,14 @@ export class RestaurantMenuResource {
 	private restaurantIndex;
 	private name;
 	private price;
+	private priority;
 	private imageURL;
 
 	constructor(restaurantMenuData) {
 		this.setRestaurantIndex(restaurantMenuData.restaurantIndex);
 		this.setName(restaurantMenuData.name);
 		this.setPrice(restaurantMenuData.price);
+		this.setPriority(restaurantMenuData.priority);
 		this.setImageUrl(restaurantMenuData.imageUrl);
 	}
 
@@ -35,6 +37,14 @@ export class RestaurantMenuResource {
 		this.price = price;
 	}
 
+	getPriority() {
+		return this.priority;
+	}
+
+	setPriority(priority) {
+		this.priority = priority;
+	}
+
 	getImageUrl() {
 		return this.imageURL;
 	}
@@ -48,6 +58,7 @@ export class RestaurantMenuResource {
 			restaurantIndex: this.getRestaurantIndex(),
 			name: this.getName(),
 			price: this.getPrice(),
+			priority: this.getPriority(),
 			imageUrl: this.getImageUrl()
 		}
 		return restaurantMenuData;
