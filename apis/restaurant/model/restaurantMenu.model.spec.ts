@@ -64,13 +64,12 @@ describe('restaurantMenu 모델', () => {
 		expect(result).to.instanceof(Array);
 	});
 
-	it('getRestaurantPriorityMenus', async() => {
+	it('getRestaurantPriorityMenus', async () => {
 		const testRestaurantIndex: number = 40;
 		const result: any = await restaurantMenu.getRestaurantPriorityMenus(testRestaurantIndex);
 		console.log(result);
 		expect(result).to.instanceof(Array);
 	});
-
 
 	it('updateRestaurantMenu', async () => {
 		const result: any = await restaurantMenu.updateRestaurantMenu(restaurantMenuIndex, {

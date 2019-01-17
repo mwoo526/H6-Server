@@ -94,8 +94,8 @@ export class RestaurantMenu {
 				await connection.query(`SELECT name from restaurantMenu 
 				WHERE restaurantIndex=? AND priority IS NOT NULL
 				ORDER BY priority ASC`, [restaurantMenuIndex], (err, data) => {
-				    connection.release();
-					if(err) {
+					connection.release();
+					if (err) {
 						reject(err);
 					} else {
 						resolve(data);
@@ -104,7 +104,6 @@ export class RestaurantMenu {
 			});
 		});
 	}
-
 
 	/**
 	 * model: restaurantMenu 업데이트
