@@ -107,7 +107,7 @@ async function getRestaurant(req, res): Promise<void> {
 		result[0].restaurantMenu = resultRestaurantMenu;
 		result[0].resultRestaurantImage = resultRestaurantImage;
 		result[0].resultRestaurantTag = resultRestaurantTag;
-		
+
 		res.send({
 			success: true,
 			statusCode: 200,
