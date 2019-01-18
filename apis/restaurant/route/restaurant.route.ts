@@ -107,7 +107,11 @@ async function getRestaurant(req, res): Promise<void> {
 		result[0].restaurantMenu = resultRestaurantMenu;
 		result[0].resultRestaurantImage = resultRestaurantImage;
 		result[0].resultRestaurantTag = resultRestaurantTag;
-		
+		const googlemap = result[0].locationUrl.split(",");
+		delete result[0].locationUrl;
+		result[0].latitude = googlemap[0];
+		result[0].longitude = googlemap[1];
+
 		res.send({
 			success: true,
 			statusCode: 200,
