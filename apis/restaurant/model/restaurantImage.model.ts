@@ -53,6 +53,7 @@ export class RestaurantImage {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`SELECT * from restaurantImage WHERE restaurantIndex = ?`, [restaurantIndex], (err, data) => {
+					connection.release();
 					if (err) {
 						reject(err);
 					} else {

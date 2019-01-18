@@ -85,15 +85,15 @@ export class RestaurantMenu {
 
 	/**
 	 * model: restaurantIndex 에 따른 Priority restaurantMenu 조회
-	 * @param: {number} restaurantMenuIndex
+	 * @param: {number} restaurantIndex
 	 * @returns {Promise<any>}
 	 */
-	getRestaurantPriorityMenus(restaurantMenuIndex: number): Promise<any> {
+	getRestaurantPriorityMenus(restaurantIndex: number): Promise<any> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`SELECT name from restaurantMenu 
 				WHERE restaurantIndex=? AND priority IS NOT NULL
-				ORDER BY priority ASC`, [restaurantMenuIndex], (err, data) => {
+				ORDER BY priority ASC`, [restaurantIndex], (err, data) => {
 					connection.release();
 					if (err) {
 						reject(err);
