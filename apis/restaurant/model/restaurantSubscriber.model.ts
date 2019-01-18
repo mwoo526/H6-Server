@@ -13,6 +13,7 @@ export class RestaurantSubscriber {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`INSERT INTO restaurantSubscriber SET ?`, [restaurantSubscriberData], (err) => {
+					connection.release();
 					if (err) {
 						reject(err);
 					} else {
@@ -34,7 +35,7 @@ export class RestaurantSubscriber {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`SELECT * from restaurantSubscriber WHERE userIndex=? AND restaurantIndex=?`,
 					[userIndex, restaurantIndex], (err, data) => {
-
+						connection.release();
 						if (err) {
 							reject(err);
 						} else {
@@ -55,7 +56,7 @@ export class RestaurantSubscriber {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`SELECT SUM(isGood) as goodCount FROM restaurantSubscriber WHERE restaurantIndex=?`,
 					[restaurantIndex], (err, data) => {
-
+						connection.release();
 						if (err) {
 							reject(err);
 						} else {
@@ -78,7 +79,7 @@ export class RestaurantSubscriber {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`UPDATE restaurantSubscriber SET ? WHERE userIndex=? AND restaurantIndex=?`,
 					[restaurantSubscriberData, userIndex, restaurantIndex], (err, data) => {
-
+						connection.release();
 						if (err) {
 							reject(err);
 						} else {
@@ -100,7 +101,7 @@ export class RestaurantSubscriber {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`DELETE FROM restaurantSubscriber WHERE userIndex=? AND restaurantIndex=?`,
 					[userIndex, restaurantIndex], (err, data) => {
-
+						connection.release();
 						if (err) {
 							reject(err);
 						} else {
