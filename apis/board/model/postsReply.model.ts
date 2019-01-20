@@ -4,6 +4,10 @@ const pool = mysqlUtil.pool;
 
 export class PostsReplyModel {
 
+	/**
+	 * model: 댓글 생성
+	 * @param postsData
+	 */
 	createPostsReply(postsData: any): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
@@ -20,7 +24,7 @@ export class PostsReplyModel {
 	}
 
 	/**
-	 * model : postsIndex 댓글 리스트 조회
+	 * model: postsIndex 댓글 리스트 조회
 	 * @param {number} postsIndex
 	 * @returns {Promise<void>}
 	 */
@@ -51,6 +55,10 @@ export class PostsReplyModel {
 		});
 	}
 
+	/**
+	 * model: parentsPostReplyIndex 댓글 리스트 조회
+	 * @param parentsPostReplyIndex
+	 */
 	listChildPostsReply(parentsPostReplyIndex: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
@@ -78,7 +86,7 @@ export class PostsReplyModel {
 	}
 
 	/**
-	 * model : postsReply 댓글 page 리스트 조회
+	 * model: postsReply 댓글 page 리스트 조회
 	 * @param {number} postsIndex
 	 * @param {number} page
 	 * @param {number} count
@@ -116,6 +124,12 @@ export class PostsReplyModel {
 		});
 	}
 
+	/**
+	 * model: childPostsReply 댓글 page 리스트 조회
+	 * @param parentsPostReplyIndex
+	 * @param page
+	 * @param count
+	 */
 	pageListChildPostsReply(parentsPostReplyIndex: number, page: number, count: number): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
@@ -179,7 +193,7 @@ export class PostsReplyModel {
 	}
 
 	/**
-	 * model : postsReply 업데이트
+	 * model: postsReply 업데이트
 	 * @param {number} postsReplyIndex
 	 * @param postsReplyData
 	 * @returns {Promise<void>}
@@ -201,7 +215,7 @@ export class PostsReplyModel {
 	}
 
 	/**
-	 * model : postsReply status 업데이트
+	 * model: postsReply status 업데이트
 	 * @param {number} postsReplyIndex
 	 * @param {string} status
 	 * @returns {Promise<void>}
@@ -223,7 +237,7 @@ export class PostsReplyModel {
 	}
 
 	/**
-	 * model : postsReply 삭제
+	 * model: postsReply 삭제
 	 * @param {number} postsReplyIndex
 	 * @returns {Promise<void>}
 	 */
@@ -231,6 +245,25 @@ export class PostsReplyModel {
 		return new Promise(async (resolve, reject) => {
 			await pool.getConnection(async (err, connection) => {
 				await connection.query(`DELETE FROM postsReply WHERE postsReplyIndex = ?`, [postsReplyIndex], (err, data) => {
+					connection.release();
+					if (err) {
+						reject(err);
+					} else {
+						resolve(data);
+					}
+				});
+			});
+		});
+	}
+
+	/**
+	 * model: childPostsReply 삭제
+	 * @param parentsPostsReplyIndex
+	 */
+	deleteChildPostsReply(parentsPostsReplyIndex: number): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			await pool.getConnection(async (err, connection) => {
+				await connection.query(`DELETE FROM postsReply WHERE parentsPostsReplyIndex = ?`, [parentsPostsReplyIndex], (err, data) => {
 					connection.release();
 					if (err) {
 						reject(err);

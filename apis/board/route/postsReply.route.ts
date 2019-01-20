@@ -195,7 +195,8 @@ async function updatePostsReply(req, res) {
 async function deletePostsReply(req, res) {
 	let postsReplyIndex: number = req.params.postsReplyIndex;
 	try {
-		const result: any = await postsReply.deletePostsReply(postsReplyIndex);
+		const result: any = await postsReply.deletePostsReply(postsReplyIndex)
+		await postsReply.deleteChildPostsReply(postsReplyIndex);
 		res.send({
 			success: true,
 			statusCode: 200,
