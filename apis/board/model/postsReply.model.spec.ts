@@ -76,5 +76,11 @@ describe('postsReply 모델', () => {
 		const result: any = await postsReply.deletePostsReply(resultPostsReply[0].postsReplyIndex);
 		// console.log(result);
 		expect(result).to.instanceof(Object);
-	})
+	});
+
+	it('deleteChildPostsReply', async () => {
+		const result: any = await postsReply.deleteChildPostsReply(resultPostsReply[0].postsReplyIndex);
+		// console.log(result);
+		expect(result).to.instanceof(Object);
+	});
 });
