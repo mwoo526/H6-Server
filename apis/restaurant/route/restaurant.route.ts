@@ -1,11 +1,11 @@
 import * as express from 'express';
+import { auth } from '../../../packages/utils/auth.util';
 import { RestaurantResource } from '../../../resources/restaurant.resource';
 import { restaurant } from '../model/restaurant.model';
 import { restaurantImage } from '../model/restaurantImage.model';
 import { restaurantMenu } from '../model/restaurantMenu.model';
-import { restaurantTag } from '../model/restaurantTag.model';
 import { restaurantSubscriber } from '../model/restaurantSubscriber.model';
-import { auth } from '../../../packages/utils/auth.util';
+import { restaurantTag } from '../model/restaurantTag.model';
 
 export class RestaurantRoutes {
 	public restaurantRouter: express.Route = express.Router();
@@ -116,7 +116,7 @@ async function getRestaurant(req, res): Promise<void> {
 		result[0].resultRestaurantTag = resultRestaurantTag;
 		result[0].isGood = resultRestaurantSubscriber[0] ? resultRestaurantSubscriber[0].isGood : 0;
 
-		const location = result[0].locationUrl.split(",");
+		const location = result[0].locationUrl.split(',');
 		delete result[0].locationUrl;
 		result[0].latitude = location[0];
 		result[0].longitude = location[1];
