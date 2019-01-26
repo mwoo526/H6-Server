@@ -64,18 +64,22 @@ async function pageListRestaurant(req, res): Promise<void> {
 	let count: number = parseInt(req.query.count);
 	try {
 		const {tokenIndex} = auth(req);
-		const resultCount: any = await restaurant.listRestaurant(filter);
-		const result: any = await restaurant.pageListRestaurant(filter, orderBy, page, count);
+		const [resultCount, result] = await Promise.all([
+			restaurant.listRestaurant(filter), restaurant.pageListRestaurant(filter, orderBy, page, count)
+		]);
 		for (const row of result) {
-			const resultRestaurantImage = await restaurantImage.listRestaurantImagesByRestaurantIndex(row.restaurantIndex);
-			const resultPriorityMenus = await restaurantMenu.getRestaurantPriorityMenus(row.restaurantIndex);
-			const resultRestaurantTag = await restaurantTag.getRestaurantTag(row.restaurantIndex);
-			const resultRestaurantSubscriber = await restaurantSubscriber.getRestaurantSubscriber(tokenIndex, row.restaurantIndex)
+			const [resultRestaurantImage, resultPriorityMenus, resultRestaurantTag, resultRestaurantSubscriber] = await Promise.all([
+				restaurantImage.listRestaurantImagesByRestaurantIndex(row.restaurantIndex),
+				restaurantMenu.getRestaurantPriorityMenus(row.restaurantIndex),
+				restaurantTag.getRestaurantTag(row.restaurantIndex),
+				restaurantSubscriber.getRestaurantSubscriber(tokenIndex, row.restaurantIndex)
+			]);
 			row.restaurantImage = JSON.parse(resultRestaurantImage[0].url).mainImage;
 			row.restaurantPriorityMenus = resultPriorityMenus;
 			row.restaurantTag = resultRestaurantTag;
 			row.isGood = resultRestaurantSubscriber[0] ? resultRestaurantSubscriber[0].isGood : 0;
 		}
+
 		res.send({
 			success: true,
 			statusCode: 200,
@@ -106,10 +110,13 @@ async function getRestaurant(req, res): Promise<void> {
 	try {
 		const {tokenIndex} = auth(req);
 		const result: any = await restaurant.getRestaurant(restaurantIndex);
-		const resultRestaurantMenu = await restaurantMenu.listRestaurantMenusByRestaurantIndex(result[0].restaurantIndex);
-		const resultRestaurantImage = await restaurantImage.listRestaurantImagesByRestaurantIndex(result[0].restaurantIndex);
-		const resultRestaurantTag = await restaurantTag.getRestaurantTag(result[0].restaurantIndex);
-		const resultRestaurantSubscriber = await restaurantSubscriber.getRestaurantSubscriber(tokenIndex, restaurantIndex)
+
+		const [resultRestaurantMenu, resultRestaurantImage, resultRestaurantTag, resultRestaurantSubscriber] = await Promise.all([
+			restaurantMenu.listRestaurantMenusByRestaurantIndex(result[0].restaurantIndex),
+			restaurantImage.listRestaurantImagesByRestaurantIndex(result[0].restaurantIndex),
+			restaurantTag.getRestaurantTag(result[0].restaurantIndex),
+			restaurantSubscriber.getRestaurantSubscriber(tokenIndex, restaurantIndex)
+		]);
 
 		result[0].restaurantMenu = resultRestaurantMenu;
 		result[0].resultRestaurantImage = JSON.parse(resultRestaurantImage[0].url);
@@ -120,7 +127,6 @@ async function getRestaurant(req, res): Promise<void> {
 		delete result[0].locationUrl;
 		result[0].latitude = location[0];
 		result[0].longitude = location[1];
-
 		res.send({
 			success: true,
 			statusCode: 200,
