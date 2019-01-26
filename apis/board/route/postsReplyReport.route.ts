@@ -28,52 +28,50 @@ export class PostsReplyReportRoute {
  * @returns {Promise<void>}
  */
 async function createPostsReplyReport(req, res): Promise<void> {
-	const {postsReplyIndex, userId} = req.body;
+	const {userId, ...postReplyReportData} = req.body;
 	try {
 		const resultUser = await user.getUser(userId);
 		const {userIndex} = resultUser[0];
+		postReplyReportData.userIndex = userIndex;
 
-		delete req.body.userId;
-		req.body.userIndex = userIndex;
-
-		const postsReplyReportData: any = new PostsReplyReportResource(req.body);
-
-		const replyLimitCount = 3;
-		const checkResult: any = await postsReplyReport.checkPostsReplyReport(postsReplyIndex, userIndex);
+		const checkResult: any = await postsReplyReport.checkPostsReplyReport(postReplyReportData.postsReplyIndex, userIndex);
 		if (checkResult.length > 0) {
-			res.send({
-				success: false,
-				statusCode: 409,
-				result: checkResult,
-				message: 'createPostsReplyReport: 40901'
-			});
-			return;
+			throw 'report duplicated';
 		}
 
-		const result: any = await postsReplyReport.createPostsReplyReport(postsReplyReportData.getPostsReplyReport());
-		let countResult: any = await postsReplyReport.getPostsReplyReportCount(result['postsReplyIndex']);
-		countResult = JSON.parse(JSON.stringify(countResult));
+		await postsReplyReport.createPostsReplyReport(postReplyReportData);
+		let countResult: any = await postsReplyReport.getPostsReplyReportCount(postReplyReportData.postsReplyIndex);
 
+		const replyLimitCount = 5;
 		const reportCount = countResult[0]['reportCount'];
 		if (reportCount === replyLimitCount) {
 			const color = '#0013FF';
 			const field = {
 				'title': `Reply Report 알림`,
-				'value': `postsIndex=${result['postsIndex']}, postsReplyIndex=${result['postsReplyIndex']}, reportCount=${reportCount}`,
+				'value': `postsIndex=${postReplyReportData.postsIndex}, postsReplyIndex=${postReplyReportData.postsReplyIndex}, reportCount=${reportCount}\nContent: ${postReplyReportData.content}`,
 				'short': false
 			};
-			await postsReply.updatePostsReplyStatus(result['postsReplyIndex'], 'INACTIVE');
-			await slack.sendReportMessage('replyReport', field, color);
+			await Promise.all([
+				postsReply.updatePostsReplyStatus(postReplyReportData.postsReplyIndex, 'INACTIVE'),
+				slack.sendReportMessage('replyReport', field, color)
+			]);
 		}
 
 		res.send({
 			success: true,
 			statusCode: 200,
-			result: result,
+			result: postReplyReportData,
 			message: 'createPostsReplyReport: 200'
 		});
 	} catch (err) {
 		switch (err) {
+			case 'report duplicated':
+				res.send({
+					success: false,
+					statusCode: 409,
+					message: 'createPostsReplyReport: 40901'
+				});
+				break;
 			default:
 				res.send({
 					success: false,

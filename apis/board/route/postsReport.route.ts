@@ -29,52 +29,50 @@ export class PostsReportRoutes {
  * @returns {Promise<void>}
  */
 async function createPostsReport(req, res): Promise<void> {
-	const {postsIndex, userId} = req.body;
+	const {userId, ...postData} = req.body;
 	try {
 		const resultUser = await user.getUser(userId);
 		const {userIndex} = resultUser[0];
+		postData.userIndex = userIndex;
 
-		delete req.body.userId;
-		req.body.userIndex = userIndex;
-
-		let postsReportData: any = new PostsReportResource(req.body);
-
-		const alarmCount = 3;
-		const checkResult: any = await postsReport.checkPostsReport(postsIndex, userIndex);
+		const checkResult: any = await postsReport.checkPostsReport(postData.postsIndex, userIndex);
 		if (checkResult.length > 0) {
-			res.send({
-				success: false,
-				statusCode: 409,
-				result: checkResult,
-				message: 'createPostsReport: 40901'
-			});
-			return;
+			throw 'report duplicated';
 		}
 
-		const result: any = await postsReport.createPostsReport(postsReportData.getPostsReport());
-		let countResult: any = await postsReport.getPostsReportCount(result['postsIndex']);
-		countResult = JSON.parse(JSON.stringify(countResult));
+		await postsReport.createPostsReport(postData);
+		let countResult: any = await postsReport.getPostsReportCount(postData.postsIndex);
 
+		const alarmCount = 5;
 		const reportCount = countResult[0]['reportCount'];
 		if (reportCount === alarmCount) {
 			const color = '#E82C0C';
 			const field = {
 				'title': `Posts Report 알림`,
-				'value': `postsIndex=${result['postsIndex']}, reportCount=${reportCount} `,
+				'value': `postsIndex=${postData.postsIndex}, reportCount=${reportCount}\nContent: ${postData.content}`,
 				'short': false
 			};
-			await posts.updatePostsStatus(result['postsIndex'], 'INACTIVE');
-			await slack.sendReportMessage('report', field, color);
+			await Promise.all([
+				posts.updatePostsStatus(postData.postsIndex, 'INACTIVE'),
+				slack.sendReportMessage('report', field, color)
+			]);
 		}
 
 		res.send({
 			success: true,
 			statusCode: 200,
-			result: result,
+			result: postData,
 			message: 'createPostsReport: 200'
 		});
 	} catch (err) {
 		switch (err) {
+			case 'report duplicated':
+				res.send({
+					success: false,
+					statusCode: 409,
+					message: 'createPostsReport: 40901'
+				});
+				break;
 			default:
 				res.send({
 					success: false,
