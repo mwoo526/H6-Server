@@ -1,6 +1,7 @@
 import * as express from 'express';
 import { auth } from '../../../packages/utils/auth.util';
 import { postsReply } from '../model/postsReply.model';
+import { postsReplyReport } from '../model/postsReplyReport.model';
 
 export class PostsReplyRoutes {
 	public postsReplyRouter: express.Router = express.Router();
@@ -67,8 +68,21 @@ async function pageListPostsReply(req, res) {
 	let page: number = parseInt(req.query.page);
 	let count: number = parseInt(req.query.count);
 	try {
-		let resultCount: any = await postsReply.listPostsReply(postsIndex);
-		let result: any = await postsReply.pageListPostsReply(postsIndex, page, count);
+		const userData = auth(req);
+		const pResultCount: any = postsReply.listPostsReply(postsIndex);
+		const result: any = await postsReply.pageListPostsReply(postsIndex, page, count);
+		const pReportCheck = [];
+		for(const res of result) {
+			const a = postsReplyReport.checkPostsReplyReport(res.postsReplyIndex, userData.tokenIndex);
+			pReportCheck.push(a);
+		}
+
+		for(let i=0; i<pReportCheck.length; i++) {
+			const reported = await pReportCheck[i];
+			result[i].reported = !!reported[0];
+		}
+
+		const resultCount = await pResultCount;
 		res.send({
 			success: true,
 			statusCode: 200,
@@ -99,8 +113,22 @@ async function pageChildPostsReply(req, res) {
 	let page: number = parseInt(req.query.page);
 	let count: number = parseInt(req.query.count);
 	try {
-		let resultCount: any = await postsReply.listChildPostsReply(parentsPostsReplyIndex);
-		let result: any = await postsReply.pageListChildPostsReply(parentsPostsReplyIndex, page, count);
+		const userData = auth(req);
+		const pResultCount: any = postsReply.listChildPostsReply(parentsPostsReplyIndex);
+		const result: any = await postsReply.pageListChildPostsReply(parentsPostsReplyIndex, page, count);
+
+		const pReportCheck = [];
+		for(const res of result) {
+			const a = postsReplyReport.checkPostsReplyReport(res.postsReplyIndex, userData.tokenIndex);
+			pReportCheck.push(a);
+		}
+
+		for(let i=0; i<pReportCheck.length; i++) {
+			const reported = await pReportCheck[i];
+			result[i].reported = !!reported[0];
+		}
+
+		const resultCount = await pResultCount;
 		res.send({
 			success: true,
 			statusCode: 200,
@@ -129,7 +157,12 @@ async function pageChildPostsReply(req, res) {
 async function getPostsReply(req, res) {
 	let postsReplyIndex: number = req.params.postsReplyIndex;
 	try {
-		const result = await postsReply.getPostsReply(postsReplyIndex);
+		const userData = auth(req);
+		const [result, reported] = await Promise.all([
+			postsReply.getPostsReply(postsReplyIndex),
+			postsReplyReport.checkPostsReplyReport(postsReplyIndex, userData.tokenIndex)
+		]);
+		result[0].reported = !!reported[0];
 		res.send({
 			success: true,
 			statusCode: 200,
