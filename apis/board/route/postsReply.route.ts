@@ -72,12 +72,12 @@ async function pageListPostsReply(req, res) {
 		const pResultCount: any = postsReply.listPostsReply(postsIndex);
 		const result: any = await postsReply.pageListPostsReply(postsIndex, page, count);
 		const pReportCheck = [];
-		for(const res of result) {
+		for (const res of result) {
 			const a = postsReplyReport.checkPostsReplyReport(res.postsReplyIndex, userData.tokenIndex);
 			pReportCheck.push(a);
 		}
 
-		for(let i=0; i<pReportCheck.length; i++) {
+		for (let i = 0; i < pReportCheck.length; i++) {
 			const reported = await pReportCheck[i];
 			result[i].reported = !!reported[0];
 		}
@@ -118,12 +118,12 @@ async function pageChildPostsReply(req, res) {
 		const result: any = await postsReply.pageListChildPostsReply(parentsPostsReplyIndex, page, count);
 
 		const pReportCheck = [];
-		for(const res of result) {
+		for (const res of result) {
 			const a = postsReplyReport.checkPostsReplyReport(res.postsReplyIndex, userData.tokenIndex);
 			pReportCheck.push(a);
 		}
 
-		for(let i=0; i<pReportCheck.length; i++) {
+		for (let i = 0; i < pReportCheck.length; i++) {
 			const reported = await pReportCheck[i];
 			result[i].reported = !!reported[0];
 		}

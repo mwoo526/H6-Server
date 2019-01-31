@@ -1,8 +1,8 @@
 import * as express from 'express';
 import { auth } from '../../../packages/utils/auth.util';
 import { posts } from '../model/posts.model';
-import { postsSubscriber } from '../model/postsSubscriber.model';
 import { postsReport } from '../model/postsReport.model';
+import { postsSubscriber } from '../model/postsSubscriber.model';
 
 export class PostsRoutes {
 	public postsRouter: express.Router = express.Router();
