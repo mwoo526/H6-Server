@@ -2,6 +2,7 @@ import * as express from 'express';
 import { auth } from '../../../packages/utils/auth.util';
 import { posts } from '../model/posts.model';
 import { postsSubscriber } from '../model/postsSubscriber.model';
+import { postsReport } from '../model/postsReport.model';
 
 export class PostsRoutes {
 	public postsRouter: express.Router = express.Router();
@@ -180,21 +181,25 @@ async function pageListPostsByUserIndex(req, res) {
 async function getPosts(req, res): Promise<void> {
 	let postsIndex: number = req.params.postsIndex;
 	try {
-		let userData = auth(req);
-		let result: any = await posts.getPosts(postsIndex);
+		const userData = auth(req);
+		const [result, reportCheck, scrapData, unused] = await Promise.all([
+			posts.getPosts(postsIndex),
+			postsReport.checkPostsReport(postsIndex, userData.tokenIndex),
+			postsSubscriber.getPostsSubscriberByUserIndex(postsIndex, userData.tokenIndex),
+			posts.updatePostsByCount(postsIndex)
+		]);
 
-		let scrapData: any = await postsSubscriber.getPostsSubscriberByUserIndex(postsIndex, userData.tokenIndex);
-		if (scrapData.length !== 0) {
-			result[0].isGood = scrapData[0].isGood === 1 ? true : false;
-			result[0].isBad = scrapData[0].isBad === 1 ? true : false;
-			result[0].isScrap = scrapData[0].isScrap === 1 ? true : false;
+		if (scrapData[0]) {
+			result[0].isGood = !!scrapData[0].isGood;
+			result[0].isBad = !!scrapData[0].isBad;
+			result[0].isScrap = !!scrapData[0].isScrap;
 		} else {
 			result[0].isGood = false;
 			result[0].isBad = false;
 			result[0].isScrap = false;
 		}
+		result[0].reported = !!reportCheck[0];
 
-		await posts.updatePostsByCount(postsIndex);
 		res.send({
 			success: true,
 			statusCode: 200,
