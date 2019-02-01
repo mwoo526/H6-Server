@@ -190,6 +190,11 @@ export class Restaurant {
 					sortType = orderByObj.updatedAt;
 					sql = sql + `ORDER BY t1.updatedAt ${sortType} `;
 				}
+
+				if (orderByObj.hasOwnProperty('name')) {
+					sortType = orderByObj.name;
+					sql = sql + `ORDER BY t1.name ${sortType} `;
+				}
 			} else {
 				sql = sql + `ORDER BY t1.createdAt DESC `;
 			}
