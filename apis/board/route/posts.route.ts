@@ -136,6 +136,11 @@ async function pageListPostsByIsScrap(req, res) {
 	}
 }
 
+/**
+ * route: posts userIndex 리스트 조회
+ * @param req
+ * @param res
+ */
 async function pageListPostsByUserIndex(req, res) {
 	let filter: string = req.query.filter;
 	let orderBy: string = req.query.orderBy;

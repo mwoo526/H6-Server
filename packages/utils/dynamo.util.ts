@@ -37,7 +37,7 @@ export class Dynamo {
 			this.db.create(params, {overwrite: false}, (err, item) => {
 				if (err) {
 					if (err.code === 'ConditionalCheckFailedException') {
-						reject(new Error('DynamoDB item already exists')); // 이미 존재하는 항목
+						reject('DynamoDB item already exists'); // 이미 존재하는 항목
 					} else {
 						reject(err);
 					}
@@ -57,7 +57,7 @@ export class Dynamo {
 			this.db.create(params, {overwrite: false}, (err, items) => {
 				if (err) {
 					if (err.code === 'ConditionalCheckFailedException') {
-						reject(new Error('DynamoDB item already exists')); // 이미 존재하는 항목
+						reject('DynamoDB item already exists'); // 이미 존재하는 항목
 					} else {
 						reject(err);
 					}
@@ -89,7 +89,7 @@ export class Dynamo {
 				if (err) {
 					reject(err);
 				} else if (data === null) {
-					reject(new Error('DynamoDB item does not exist')); // 존재하지 않는 항목
+					reject('DynamoDB item does not exist'); // 존재하지 않는 항목
 				} else {
 					resolve(data.get());
 				}
@@ -123,14 +123,13 @@ export class Dynamo {
 		return new Promise((resolve, reject) => {
 			this.db.update(params, {expected: {[this.hashKey]: {Exists: true}}}, (err, item) => {
 				if (err) {
-					console.log(err);
 					switch (err.code) {
 						case 'ConditionalCheckFailedException':
 						case 'ResourceNotFoundException':
-							reject(new Error('DynamoDB item does not exist')); // 존재하지 않는 항목
+							reject('DynamoDB item does not exist'); // 존재하지 않는 항목
 							break;
 						case 'ValidationException':
-							reject(new Error('ValidationException')); // 존재하지 않는 항목
+							reject('ValidationException'); // 존재하지 않는 항목
 							break;
 						default:
 							reject(err);
@@ -153,7 +152,7 @@ export class Dynamo {
 				if (err) {
 					reject(err);
 				} else if (!item) {
-					reject(new Error('DynamoDB item does not exist')); // 존재하지 않는 항목
+					reject('DynamoDB item does not exist'); // 존재하지 않는 항목
 				} else {
 					resolve(item.attrs);
 				}

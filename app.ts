@@ -7,6 +7,7 @@ import { postsReplyRoutes } from './apis/board/route/postsReply.route';
 import { postsReplyReportRoutes } from './apis/board/route/postsReplyReport.route';
 import { postsReportRoutes } from './apis/board/route/postsReport.route';
 import { postsSubscriberRoutes } from './apis/board/route/postsSubscriber.route';
+import { hansungInfoRoutes } from './apis/credential/route/hansungInfo.route';
 import { fileRoutes } from './apis/file/route/file.route';
 import { lectureRoutes } from './apis/lecture/route/lecture.route';
 import { lectureInfoRoutes } from './apis/lecture/route/lectureInfo.route';
@@ -80,6 +81,7 @@ export class Server {
 		this.app.use(restaurantImageRoutes.restaurantImageRouter);
 		this.app.use(restaurantSubscriberRoutes.restaurantSubscriberRouter);
 		this.app.use(restaurantCategoryRoutes.restaurantCategoryRouter);
+		this.app.use(hansungInfoRoutes.hansungInfoRouter);
 		/** 라우터 오류 처리 */
 		this.app.use(notFoundError);
 		this.app.use(serverError);
