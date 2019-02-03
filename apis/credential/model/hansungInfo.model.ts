@@ -1,5 +1,5 @@
 import * as dynamo from  'dynamodb';
-import * as fs from "fs";
+import * as fs from 'fs';
 import * as Joi from 'joi';
 import { Dynamo } from '../../../packages/utils/dynamo.util';
 
