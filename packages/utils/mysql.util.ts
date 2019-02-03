@@ -14,6 +14,7 @@ export module mysqlUtil {
 		database: mysqlData.database,
 		timezone: mysqlData.timezone,
 		connectionLimit: mysqlData.connectionLimit,
-		waitForConnections: mysqlData.waitForConnections
+		waitForConnections: mysqlData.waitForConnections,
+		charset : mysqlData.charset
 	});
 }
