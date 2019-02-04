@@ -171,8 +171,6 @@ async function getBlockUserNickName(req, res): Promise<void> {
  */
 async function sendPasswordMail(req, res): Promise<void> {
 	try {
-		console.time("answer time");
-
 		let newPassword: any = String(getRandomInt());
 		let userId: string = req.params.userId;
 
@@ -190,20 +188,16 @@ async function sendPasswordMail(req, res): Promise<void> {
 
 
 		/** aws ses 비밀번호 재발급 메일 발송 */
-		sesUtil.smtpTransport.sendMail(sesUtil.mailOptions(userId, newPassword), function(err, info) {
-			(!err) ? console.log(info) : console.log(err);
+		sesUtil.ses.sendEmail(sesUtil.params(
+			'한담 비밀번호 재발급 메일',
+			`${userId} 님 안녕하세요.<br><br> 임시비밀번호는 ${newPassword} 입니다.<br><br>`,
+			userId
+		),(err, data) => {
+			if (err) throw err;
 		});
-		// sesUtil.ses.sendEmail(sesUtil.params(
-		// 	'한담 비밀번호 재발급 메일',
-		// 	`${userId} 님 안녕하세요.<br><br> 임시비밀번호는 ${newPassword} 입니다.<br><br>`,
-		// 	userId
-		// ),(err, data) => {
-		// 	if (err) throw err;
-		// });
 
 		/** 비밀번호 업데이트 */
 		await user.updateUserPassword(userId, newPassword);
-		console.timeEnd("answer time");
 
 		res.send({
 			success: true,
