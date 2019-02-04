@@ -11,6 +11,7 @@ export module s3Util {
 	awsconfig = JSON.parse(awsconfig);
 	let s3 = new aws.S3();
 
+
 	export const upload = (folder) => multer({
 		storage: multerS3({
 			s3: s3,
@@ -22,4 +23,36 @@ export module s3Util {
 			acl: awsconfig.acl,
 		})
 	});
+
+	export const noticeUpload = (folder) => multer({
+		storage: multerS3({
+			s3: s3,
+			bucket: `${awsconfig.bucket}/${folder}`,
+			key: function(req, file, cb) {
+				let extension = path.extname(file.originalname);
+				cb(null,  `${folder}_${req.params.noticeIndex}_image`+ extension)
+			},
+			acl: awsconfig.acl,
+		})
+	});
+
+	export const restaurantUpload = (folder, index: number = 0) => multer({
+		storage: multerS3({
+			s3: s3,
+			bucket: `${awsconfig.bucket}/${folder}`,
+			key: function(req, file, cb) {
+				let extension = path.extname(file.originalname);
+				(file.fieldname === 'sub_image') ?
+					cb(null,  `${folder}_${req.params.restaurantIndex}_${file.fieldname}_${index}`+ extension) :
+					cb(null,  `${folder}_${req.params.restaurantIndex}_${file.fieldname}`+ extension);
+				index++;
+			},
+			acl: awsconfig.acl,
+		})
+	});
+
+	const url = 'https://dv-handam.s3.ap-northeast-2.amazonaws.com/';
+
+	export const getS3URL = () => url;
+
 }

@@ -34,7 +34,7 @@ describe('restaurant 모델', async () => {
 
 	it('pageListRestaurant', async () => {
 		const result = await restaurant.pageListRestaurant(`restaurantCategoryIndex eq 1`, `createdAt ASC`, 1, 3);
-		//console.log(result);
+		console.log(result);
 		expect(result).to.instanceof(Array);
 	});
 

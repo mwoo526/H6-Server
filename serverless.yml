@@ -4,7 +4,12 @@ provider:
   name: aws
   runtime: nodejs8.10
   stage: dev
-  region: ap-northeast-2
+  region: us-west-2
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "ses:SendEmail"
+      Resource: "*"
 
 functions:
   app:

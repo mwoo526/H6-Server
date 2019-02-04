@@ -1,8 +1,7 @@
 import * as express from 'express';
 import { s3Util } from '../../../packages/utils/s3.util';
 import { notice } from '../model/notice.model';
-
-const upload = s3Util.upload('notice').single('notice');
+const upload = s3Util.noticeUpload('notice').single('notice');
 
 export class NoticeRoutes {
 	public noticeRouter: express.Router = express.Router();
@@ -12,15 +11,14 @@ export class NoticeRoutes {
 	}
 
 	public router() {
-		this.noticeRouter.post('/notice', upload, createNotice);
+		this.noticeRouter.post('/notice/:noticeIndex', createNotice);
 		this.noticeRouter.get('/notice', listNotice);
 		this.noticeRouter.get('/notice/img', listNoticeImg);
 	}
 }
 
 const createNotice = (req, res) => {
-	const {noticeUrl, noticeSubject} = req.body;
-
+	//const {noticeUrl, noticeSubject} = req.body;
 	upload(req, res, async (err) => {
 		if (err) {
 			if (err.message === 'The AWS Access Key Id you provided does not exist in our records.') {
@@ -41,11 +39,8 @@ const createNotice = (req, res) => {
 		try {
 			const file = req.file;
 			const result = await notice.createNotice({
-				noticeImg: file.location,
-				info: JSON.stringify({
-					noticeUrl: noticeUrl,
-					noticeSubject: noticeSubject
-				})
+                noticeIndex: req.params.noticeIndex,
+				noticeImg: s3Util.getS3URL() + `resized-${file.fieldname}/${file.key}`
 			});
 
 			res.send({

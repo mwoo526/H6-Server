@@ -3,6 +3,7 @@ import { getRandomInt } from '../../../packages/utils/randomInt.util';
 import { uuidV1 } from '../../../packages/utils/uuid.util';
 import { user } from '../../user/model/user.model';
 import { userValidation } from '../model/userValidation.model';
+import { sesUtil } from "../../../packages/utils/ses.util";
 
 export class UserValidationRoutes {
 	public userValidationRouter: express.Router = express.Router();
@@ -170,23 +171,39 @@ async function getBlockUserNickName(req, res): Promise<void> {
  */
 async function sendPasswordMail(req, res): Promise<void> {
 	try {
+		console.time("answer time");
+
 		let newPassword: any = String(getRandomInt());
 		let userId: string = req.params.userId;
-		let html: any = `${userId} 님 안녕하세요.<br><br> 임시비밀번호는 ${newPassword} 입니다.<br><br>`;
 
-		let mailOptions = {
-			to: userId,
-			subject: '한담 비밀번호 재발급 메일',
-			html: html
-		};
+		/** nodemailer 비밀번호 재발급 메일 발송 */
+		// let html: any = `${userId} 님 안녕하세요.<br><br> 임시비밀번호는 ${newPassword} 입니다.<br><br>`;
+		//
+		// let mailOptions = {
+		// 	to: userId,
+		// 	subject: '한담 비밀번호 재발급 메일',
+		// 	html: html
+		// };
+		//  await userValidation.sendPasswordMail(mailOptions).catch(err => {
+		// 	throw err;
+		// });
 
-		/** 비밀번호 재발급 메일 발송 */
-		await userValidation.sendPasswordMail(mailOptions).catch(err => {
-			throw err;
+
+		/** aws ses 비밀번호 재발급 메일 발송 */
+		sesUtil.smtpTransport.sendMail(sesUtil.mailOptions(userId, newPassword), function(err, info) {
+			(!err) ? console.log(info) : console.log(err);
 		});
+		// sesUtil.ses.sendEmail(sesUtil.params(
+		// 	'한담 비밀번호 재발급 메일',
+		// 	`${userId} 님 안녕하세요.<br><br> 임시비밀번호는 ${newPassword} 입니다.<br><br>`,
+		// 	userId
+		// ),(err, data) => {
+		// 	if (err) throw err;
+		// });
 
 		/** 비밀번호 업데이트 */
 		await user.updateUserPassword(userId, newPassword);
+		console.timeEnd("answer time");
 
 		res.send({
 			success: true,
